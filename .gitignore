@@ -1,0 +1,74 @@
+# General Gitignore File
+###############################################
+## Design: Sketch and Figma Files  ##
+###############################################
+*.sketch
+*.fig
+
+###############################################
+## Compiler / Precompiler Files ##
+###############################################
+*.xd
+*.map
+CSS/*.map
+styles/*.map
+/dist
+/tmp
+/out-tsc
+/bazel-out
+
+###############################################
+## Dependecy Managment / Task Runner  ##
+###############################################
+
+*.config
+node_modules/*
+npm-debug.log
+yarn-error.log
+
+###############################################
+## IDEs and editors  ##
+###############################################
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+###############################################
+## Visual Studio Code  ##
+###############################################
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+###############################################
+## Optional npm cache directory  ##
+###############################################
+.npm
+
+###############################################
+## Firebase ##
+###############################################
+
+###############################################
+## Others  ##
+###############################################
+.DS_Store
+.prettierignore
+*.doc
+*.tmp
+.DS_Store
+Thumbs.db
+/.angular/cache
+.sass-cache/
+/connect.lock
+/coverage
+/libpeerconnection.log
+testem.log
+/typings
