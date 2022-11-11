@@ -8,14 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
+  accounts: object[];
 
-
-  constructor(
-
-  ) {}
-
-
+  constructor() {
+    this.accounts = [{}, {}, {}, {}];
+  }
 
   ngOnInit(): void {}
-
 }

@@ -1,5 +1,73 @@
-<p>Hello Dashboard</p>
+<div class="container is-widescreen mt-5">
 
+  <!-- accounts -->
+  <div class="columns">
+    <div class="column" *ngFor="let account of accounts">
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title is-flex is-justify-content-space-between">
+            <span>
+              Account Name
+            </span>
+            <span class="tag">
+              <!-- shortName -->
+              SN
+            </span>
+          </p>
+        </header>
+        <div class="card-content">
+          <div class="content has-text-centered">
+            <p>Account Description</p>
+            <p class="title">Fr. XXXX.-</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <!-- graphs -->
+  <div class="card">
+    <header class="card-header">
+      <p class="card-header-title">
+        Graphs
+      </p>
+    </header>
+    <div class="card-content">
+      <!-- just spacers -->
+      <div class="mt-6"></div>
+      <br>
+      <div class="mt-6"></div>
+      <br>
+      <div class="mt-6"></div>
+      <br>
+      <div class="mt-6"></div>
+      <br>
+      <div class="mt-6"></div>
+    </div>
+  </div>
 
-<app-navigation></app-navigation>
+  <!-- transactions -->
+  <div class="card mt-5">
+    <header class="card-header">
+      <p class="card-header-title">
+        Transactions
+      </p>
+    </header>
+    <div class="card-content">
+      <table class="table is-fullwidth">
+        <thead></thead>
+        <tbody>
+          <tr><td><br></td></tr>
+          <tr><td><br></td></tr>
+          <tr><td><br></td></tr>
+          <tr><td><br></td></tr>
+          <tr><td><br></td></tr>
+          <tr><td><br></td></tr>
+          <tr><td><br></td></tr>
+          <tr><td><br></td></tr>
+          <tr><td><br></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

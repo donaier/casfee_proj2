@@ -1,1 +1,28 @@
-<p>Hello Login</p>
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-half is-offset-one-quarter">
+        <form class="box has-text-centered">
+          <h3 class="title">Finance Check</h3>
+          <div class="field">
+            <label class="label">Email / Username</label>
+            <div class="control">
+              <input class="input" type="email" #userName required>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Password</label>
+            <div class="control">
+              <input class="input" type="password" #userPassword required>
+            </div>
+          </div>
+          <a href="/">
+            <button class="button is-fullwidth mt-5" #signinButton routerLink="/dashboard">
+              login
+            </button>
+          </a>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
