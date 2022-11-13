@@ -1,1 +1,31 @@
-<p class="test">Navigation</p>
+<nav class="navbar is-light" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item" routerLink="/dashboard" routerLinkActive="active">
+        <img src="/assets/logo.svg" width="80px">
+      </a>
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" (click)="expandBurgerMenu($event)">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu" id="nav-menu">
+      <div class="navbar-start">
+      </div>
+      <div class="navbar-end">
+        <a class="navbar-item" routerLink="/configuration" routerLinkActive="active">
+          config
+        </a>
+        <div class="navbar-item">
+          <div class="buttons">
+            <a class="button is-dark is-rounded" routerLink="/login">
+              logout
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
