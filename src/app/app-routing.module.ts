@@ -7,24 +7,24 @@ import { ConfigurationComponent } from './components/configuration/configuration
 
 const routes: Routes = [
   {
-      path: 'login',
-      component: LoginComponent,
+    path: 'login',
+    component: LoginComponent,
     //  canActivate: [AuthGuard],
-   //   data: { role: 'login' },
+    //  data: { role: 'login' },
   },
   {
-      path: 'dashboard',
-       loadChildren: () => import('./components/dashboard/dashboard.module').then(m => m.DashboardModule),
-      component: DashboardComponent,
+    path: 'dashboard',
+    loadChildren: () => import('./components/dashboard/dashboard.module').then(m => m.DashboardModule),
+    component: DashboardComponent,
     //  canActivate: [AuthGuard],
     //  data: { role: 'dashboard' },
   },
   {
-      path: 'configuration',
-      loadChildren: () => import('./components/configuration/configuration.module').then(m => m.ConfigurationModule),
-      component: ConfigurationComponent,
+    path: 'configuration',
+    loadChildren: () => import('./components/configuration/configuration.module').then(m => m.ConfigurationModule),
+    component: ConfigurationComponent,
     //  canActivate: [AuthGuard],
-   //   data: { role: 'configuration' },
+    //  data: { role: 'configuration' },
   },
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 ]
@@ -33,4 +33,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule { }
