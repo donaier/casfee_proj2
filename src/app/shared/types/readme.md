@@ -10,6 +10,10 @@ Taufen wir das "set" doch um in "csvMask"
 
 Attribut "firstTransaction" habe ich mal weggelassen, kann aus den Transactions aggregiert werden. Ebenso der "current" value. Den rechnen wir doch live aus.
 
+#  currentValue macht eigentlich Sinn, weil denn muss man eigentlich nur rechnen bei einer neuen Ueberweisung. Sonst bei jedem reload zusaetzliche aktionen/berechnungen.  
+
+# Urspruenglich sind noch alle Transaktionen welche einem Account zugewiesen sind auch vorhanden hast du denn vergessen oder absichtlich geloescht ? Wie auch immer ich habe es mal mit implementiert. Also wenn ich das richtig verstehe habe wir ja die csvMask --> verschiedene Transaktionen. Ich denke am besten ist es wenn wir aus den csv's transaktionen generieren und alle in Transaktionen ablegen (inkl. manuelle Erfassungen).
+
 ```
 getDocs(collection(db, "accounts"));
 ```
@@ -36,7 +40,8 @@ interface csvMask {
 
 ### Transaction
 
-Wozu hier der "docName"?
+Wozu hier der "docName"? 
+ --> Bei einer neuen Transaction ist der DocumentName eine automatisch generierte ID, die ist dort abgelegt. 
 
 Das "method" für in/out transaction brauchen wir nicht. Der Wert kommt als positive oder negative Zahl.
 
