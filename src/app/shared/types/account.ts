@@ -7,7 +7,7 @@ export interface Account {
   initialValue: number,
   currentValue: number,
   color: string,
-  csv: csvMask[]
+  csv: csvMask,
   transactions: Transaction[] | null
 }
 
