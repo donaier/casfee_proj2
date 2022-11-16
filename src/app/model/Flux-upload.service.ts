@@ -18,10 +18,16 @@ export class Flux_UploadData {
             case FluxActionTypes.AddTransaction:
 
               break
+            case FluxActionTypes.UpdateTransaction:
+
+              break
             case FluxActionTypes.DeleteTransaction:
 
               break
             case FluxActionTypes.AddAccount:
+
+              break
+            case FluxActionTypes.UpdateAccount:
 
               break
             case FluxActionTypes.DeleteAccount:
@@ -37,6 +43,9 @@ export class Flux_UploadData {
 
               break
             case FluxActionTypes.AddCategory:
+
+              break
+            case FluxActionTypes.UpdateCategory:
 
               break
             case FluxActionTypes.DeleteCategory:

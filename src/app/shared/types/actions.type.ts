@@ -5,13 +5,16 @@ import { Account } from './account'
 export enum FluxActionTypes {
     Load,
     AddTransaction,
+    UpdateTransaction,
     DeleteTransaction,
     AddAccount,
+    UpdateAccount,
     DeleteAccount,
     AddCategoryGroup,
     UpdateCategoryGroup,
     DeleteCategoryGroup,
     AddCategory,
+    UpdateCategory,
     DeleteCategory,
 }
 
