@@ -8,7 +8,7 @@ export interface Account {
   currentValue: number,
   color: string,
   csv: csvMask,
-  transactions: Transaction[] | null
+  transactions?: Transaction[]
 }
 
 export interface csvMask {
