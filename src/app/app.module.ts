@@ -8,6 +8,19 @@ import { AppComponent } from './app.component';
 // Login
 import { LoginComponent } from './components/login/login.component';
 
+// Firestore
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+
+// Flux
+import { FLUX_CONFIG } from './shared/helpers/flux.configuration';
+import { FluxStore } from './shared/services/flux-store';
+import { Flux_UploadData } from './model/Flux-upload.service';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,8 +30,11 @@ import { LoginComponent } from './components/login/login.component';
     BrowserModule,
     AppRoutingModule,
     SharedModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
   ],
-  providers: [],
+  providers: [...FLUX_CONFIG, FluxStore, Flux_UploadData],
   bootstrap: [AppComponent]
 })
 

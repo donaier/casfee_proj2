@@ -8,7 +8,21 @@ Das "set" muss auf dem Account sein. Es beschreibt die Struktur des Imports (csv
 
 Taufen wir das "set" doch um in "csvMask"
 
-Attribut "firstTransaction" habe ich mal weggelassen, kann aus den Transactions aggregiert werden. Ebenso der "current" value. Den rechnen wir doch live aus.
+currentValue macht Sinn! und sollte nach jeder transaktions-Action (add, update, delete) aktualisiert werden.
+
+kay: Urspruenglich sind noch alle Transaktionen welche einem Account zugewiesen sind auch vorhanden hast du denn vergessen oder absichtlich geloescht ? Wie auch immer ich habe es mal mit implementiert. Also wenn ich das richtig verstehe habe wir ja die csvMask --> verschiedene Transaktionen. Ich denke am besten ist es wenn wir aus den csv's transaktionen generieren und alle in Transaktionen ablegen (inkl. manuelle Erfassungen).
+
+donat: Genau! das csv wird nur als input verwendet und nirgends gespeichert. Aus jeder Zeile des csv wird eine Transaktion erstellt (dies unterscheidet sich nicht von manuell erstellten). Die csv_mask bestimmt dabei, wo welche Werte sind.
+
+Als Beispiel hier ein "echtes" Beispiel:
+```
+29.08.2022;"KAUF/DIENSTLEISTUNG VOM 29.08.2022 KARTEN NR. XXXX9809 COOP-1243 SCHWANDEN SCHWANDEN SCHWEIZ ";;-34.65;29.08.2022;8403.93
+```
+die csv_mask dafür würde so aussehen:
+```
+date;description;;amount;;
+```
+so werden die Werte von den Positionen 1,2 und 4 in die Attribute 'date', 'description' und 'amount' der zu erstellenden Transaktion geschrieben. Die Zeile csv ist danach verarbeitet und kann verworfen werden.
 
 ```
 getDocs(collection(db, "accounts"));
@@ -37,6 +51,7 @@ interface csvMask {
 ### Transaction
 
 Wozu hier der "docName"?
+ --> Bei einer neuen Transaction ist der DocumentName eine automatisch generierte ID, die ist dort abgelegt.
 
 Das "method" für in/out transaction brauchen wir nicht. Der Wert kommt als positive oder negative Zahl.
 
