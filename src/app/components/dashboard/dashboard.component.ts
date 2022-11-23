@@ -13,9 +13,9 @@ import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
 
-  accounts: Account[] = [];
-  private subscription : Subscription[] = [];   // Alle Subscribers werden hier abgespeichert, wichtig fuers unsubscriben.
+  private subscription: Subscription[] = [];   // Alle Subscribers werden hier abgespeichert, wichtig fuers unsubscriben.
 
+  accounts: Account[] = [];
 
   constructor(
     @Inject(fluxDispatcherToken)

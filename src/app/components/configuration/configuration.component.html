@@ -1,3 +1,67 @@
 <div class="container is-widescreen mt-5">
-  <p>Hello Configuration</p>
+
+  <!-- account config -->
+  <div class="is-flex is-justify-content-space-between">
+    <h4 class="title is-4">
+      Registered Accounts:
+    </h4>
+    <a class="button" (click)="showAccountForm()">+ create new Account</a>
+  </div>
+  <div class="columns">
+    <div class="column" *ngFor="let account of accounts">
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title is-flex is-justify-content-space-between">
+            <span>
+              {{account.name}}
+            </span>
+            <span class="tag">
+              {{account.shortname}}
+            </span>
+          </p>
+        </header>
+        <div class="card-content">
+          <div class="content">
+            <small class="has-text-grey-light">description:</small>
+            <p>{{account.description}}</p>
+            <small class="has-text-grey-light">initial - current:</small>
+            <p class="is-flex is-justify-content-space-between">
+              Fr. {{account.initialValue}}
+              <span class="title is-4">Fr. {{account.currentValue}}</span>
+            </p>
+            <small class="has-text-grey-light">csv mask:</small>
+            <p>mask identifier from mask obj</p>
+          </div>
+        </div>
+        <footer class="card-footer">
+          <a class="card-footer-item" (click)="showAccountForm(account)">Edit</a>
+          <a class="card-footer-item has-text-danger" (click)="deleteAccount(account)">Delete</a>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <!-- categories & csv settings -->
+  <div class="columns">
+    <div class="column is-three-quarters">
+      <h4 class="title is-4">
+        Categories:
+      </h4>
+      <div class="card">
+        <div class="card-content">
+          here will be categories
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <h4 class="title is-4">
+        csv:
+      </h4>
+      <div class="card">
+        <div class="card-content">
+          here will be csv mask stuff
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
