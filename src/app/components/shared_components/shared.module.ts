@@ -1,17 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NavigationComponent } from './navigation/navigation.component';
 
 @NgModule({
   imports: [
-    RouterModule
+    RouterModule,
   ],
   declarations: [
     NavigationComponent
   ],
   exports: [
-    NavigationComponent
+    NavigationComponent,
+    ReactiveFormsModule,
   ]
 })
 

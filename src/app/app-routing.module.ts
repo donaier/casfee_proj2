@@ -5,28 +5,30 @@ import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component'
 import { ConfigurationComponent } from './components/configuration/configuration.component'
 
+import { AuthGuard } from './shared/helpers/auth.guard'
+
 const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
-    //  canActivate: [AuthGuard],
-    //  data: { role: 'login' },
+    canActivate: [AuthGuard],
+    data: {role: 'login'},
   },
   {
     path: 'dashboard',
     loadChildren: () => import('./components/dashboard/dashboard.module').then(m => m.DashboardModule),
     component: DashboardComponent,
-    //  canActivate: [AuthGuard],
-    //  data: { role: 'dashboard' },
+    canActivate: [AuthGuard],
+    data: {role: 'dashboard'},
   },
   {
     path: 'configuration',
     loadChildren: () => import('./components/configuration/configuration.module').then(m => m.ConfigurationModule),
     component: ConfigurationComponent,
-    //  canActivate: [AuthGuard],
-    //  data: { role: 'configuration' },
+    canActivate: [AuthGuard],
+    data: {role: 'configuration'},
   },
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  {path: '', redirectTo: 'login', pathMatch: 'full'},
 ]
 
 @NgModule({

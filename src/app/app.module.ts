@@ -21,6 +21,7 @@ import { Flux_UploadData } from './model/Flux-upload.service';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,

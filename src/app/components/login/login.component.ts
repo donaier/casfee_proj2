@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core'
+import { FormControl, FormGroup, Validators } from '@angular/forms'
+import { Router } from '@angular/router'
+import { AuthentificationService } from 'src/app/shared/services/authentification.service'
 
 @Component({
   selector: 'app-login',
@@ -7,7 +10,37 @@ import { Component, OnInit } from '@angular/core'
 })
 
 export class LoginComponent implements OnInit {
-  constructor() {}
+  @ViewChild('signinButton', { static: true }) signinButton!: ElementRef
 
-  ngOnInit(): void {}
+  login!: FormGroup
+  email!: FormControl
+  password!: FormControl
+
+  constructor(private AuthService: AuthentificationService,
+              private router: Router) {}
+
+  ngOnInit() {
+    this.login = new FormGroup({
+      email: this.email = new FormControl('', [
+        Validators.required,
+        Validators.pattern('[^ @]*@[^ @]*'),
+      ]),
+      password: this.password = new FormControl('', [
+        Validators.required,
+        Validators.minLength(6),
+      ])
+    })
+  }
+
+  async onSubmit(){
+    if(this.login.valid){
+      this.signinButton.nativeElement.classList.add('is-loading')
+      if(await this.AuthService.login_firebase(this.login.value)){
+        this.router.navigate(['/dashboard'])
+      }
+      this.signinButton.nativeElement.classList.remove('is-loading')
+      this.login.reset()
+    }
+  }
+
 }
