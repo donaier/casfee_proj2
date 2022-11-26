@@ -1,0 +1,42 @@
+$c0: #fff4e3;
+$c1: #ffe4ba;
+$c2: #ecb4aa;
+$c3: #a870ab;
+$c4: #413e9f;
+$c5: #041440;
+
+body {
+  min-height: 100vh;
+  background-color: $c1;
+  color: $c5;
+
+  small {
+    color: $c4;
+  }
+
+  .button, .button:hover {
+    background-color: $c0;
+    border-color: transparent;
+  }
+  .button:hover {
+    background-color: $c3;
+    color: $c1;
+  }
+
+  .title {
+    color: $c5;
+  }
+}
+
+.navbar {
+  background-color: $c2;
+
+  a.navbar-item:hover {
+    background-color: $c3;
+    color: $c1;
+  }
+}
+
+.card {
+  background-color: $c0;
+}
