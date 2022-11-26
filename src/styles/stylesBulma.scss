@@ -1,0 +1,25 @@
+@charset "utf-8";
+
+// $body-background-color: #413e9f;
+$family-primary: "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+$family-secondary: "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+
+$black: hsl(0, 0%, 100%);
+$black-bis: hsl(0, 0%, 98%);
+$black-ter: hsl(0, 0%, 96%);
+$grey-darker: hsl(0, 0%, 93%);
+$grey-dark: hsl(0, 0%, 86%);
+$grey: hsl(0, 0%, 71%);
+$grey-light: hsl(0, 0%, 48%);
+$grey-lighter: hsl(0, 0%, 29%);
+$grey-lightest: hsl(0, 0%, 21%);
+$white-ter: hsl(0, 0%, 14%);
+$white-bis: hsl(0, 0%, 7%);
+$white: hsl(0, 0%, 4%);
+
+$text: #ffe4ba;
+$text-light: #ffe4ba;
+$label-color: #ffe4ba;
+$text-strong: #ecb4aa;
+
+@import "../../node_modules/bulma/bulma.sass";
