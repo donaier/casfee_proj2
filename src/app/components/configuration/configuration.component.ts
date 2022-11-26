@@ -33,18 +33,6 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
     }))
   }
 
-  // this will be in its own component later on -> accountConfig
-  showAccountForm(account?: Account) {
-    if (account) {
-      console.log('account edit (fill form)')
-    } else {
-      console.log('account create (blank form)')
-    }
-  }
-  deleteAccount(account: Account) {
-    console.log('account delete')
-  }
-
   ngOnDestroy() {
     this.subscription.forEach((subscription) => {subscription.unsubscribe()})
   }
