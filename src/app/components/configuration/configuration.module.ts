@@ -7,6 +7,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AccountConfigComponent } from './account/account-config/account-config.component';
 import { CsvConfigComponent } from './account/csv-config/csv-config.component';
 import { CsvFormComponent } from './account/csv-form/csv-form.component';
+import { CategoryConfigComponent } from './category/category-config/category-config.component';
+import { CategoryFormComponent } from './category/category-form/category-form.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +17,8 @@ import { CsvFormComponent } from './account/csv-form/csv-form.component';
     AccountConfigComponent,
     CsvConfigComponent,
     CsvFormComponent,
+    CategoryConfigComponent,
+    CategoryFormComponent,
   ],
   imports: [
     CommonModule,

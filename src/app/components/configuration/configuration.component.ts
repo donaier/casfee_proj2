@@ -4,6 +4,7 @@ import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
 import { FluxStore } from 'src/app/shared/services/flux-store';
 import { Account, csvMask } from 'src/app/shared/types/account';
 import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
+import { CategoryGroup } from 'src/app/shared/types/category';
 
 
 @Component({
@@ -16,7 +17,8 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
   private subscription: Subscription[] = [];
 
   accounts: Account[] = [];
-  csvMasks: csvMask[] = []
+  csvMasks: csvMask[] = [];
+  categoryGroups: CategoryGroup[] = [];
 
   constructor(
     @Inject(fluxDispatcherToken)
@@ -29,7 +31,12 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
 
     this.subscription.push(this.store.Accounts.subscribe((data) => {
       if (data.length) {
-        this.accounts = data
+        this.accounts = data;
+      }
+    }))
+    this.subscription.push(this.store.CategoryGroups.subscribe((data) => {
+      if (data.length > 0) {
+        this.categoryGroups = data;
       }
     }))
 

@@ -1,19 +1,8 @@
 <div class="container is-widescreen mt-5">
-
   <app-account-config [accounts]="accounts"></app-account-config>
-
-  
-  <!-- categories & csv settings -->
   <div class="columns">
     <div class="column is-three-quarters">
-      <h4 class="title is-4">
-        Categories:
-      </h4>
-      <div class="card">
-        <div class="card-content">
-          here will be categories
-        </div>
-      </div>
+      <app-category-config [categoryGroups]="categoryGroups"></app-category-config>
     </div>
     <div class="column">
       <app-csv-config [csvMasks]="csvMasks"></app-csv-config>

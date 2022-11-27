@@ -1,0 +1,32 @@
+<div class="modal" id="category-form">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+
+    <header class="modal-card-head">
+    </header>
+
+    <form class="form" [formGroup]="categoryGroupForm" #formDirective="ngForm" (ngSubmit)="submitCategoryGroupForm($event, formDirective)">
+      <section class="modal-card-body">
+
+        <div class="columns mb-0">
+          <div class="column is-8">
+            <label class="label">name:</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="name" formControlName="name">
+            </div>
+          </div>
+          <div class="column">
+            <label class="label">color:</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="color" formControlName="color">
+            </div>
+          </div>
+        </div>
+      </section>
+      <footer class="modal-card-foot is-flex is-justify-content-center">
+        <button class="button is-success" type="submit">save</button>
+        <button class="button" (click)="hideModal()">cancel</button>
+      </footer>
+    </form>
+  </div>
+</div>
