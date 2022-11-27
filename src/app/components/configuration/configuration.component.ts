@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
 import { FluxStore } from 'src/app/shared/services/flux-store';
-import { Account } from 'src/app/shared/types/account';
+import { Account, csvMask } from 'src/app/shared/types/account';
 import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
 
 
@@ -16,6 +16,7 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
   private subscription: Subscription[] = [];
 
   accounts: Account[] = [];
+  csvMasks: csvMask[] = []
 
   constructor(
     @Inject(fluxDispatcherToken)
@@ -31,6 +32,20 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
         this.accounts = data
       }
     }))
+
+    // fake
+    this.csvMasks = [
+      {
+        name: 'postFinance',
+        delimiter: ';',
+        mask: ';date;;info;;;amount;'
+      },
+      {
+        name: 'kantonalbank',
+        delimiter: ';',
+        mask: ';date;;info;;;amount;'
+      }
+    ]
   }
 
   ngOnDestroy() {

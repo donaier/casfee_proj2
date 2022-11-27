@@ -28,7 +28,7 @@ export class AccountFormComponent implements OnChanges {
     console.log(this.accountForm)
 
     if (this.accountForm.valid && this.accountForm.dirty) {
-      
+
       // store or create
 
       form.resetForm();
@@ -45,5 +45,4 @@ export class AccountFormComponent implements OnChanges {
       this.modalTitle = 'edit'
     }
   }
-
 }

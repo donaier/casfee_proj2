@@ -34,3 +34,9 @@ export interface csvMask {
   delimiter: string,
   mask: string
 }
+
+export const CsvMaskForm = {
+  name: new FormControl('', [Validators.required]),
+  delimiter: new FormControl('', [Validators.required]),
+  mask: new FormControl('', [Validators.required]),
+};

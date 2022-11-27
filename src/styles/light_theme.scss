@@ -13,23 +13,23 @@ body {
   small {
     color: $c4;
   }
+}
 
-  .button, .button:hover {
-    background-color: $c0;
-    border-color: transparent;
+.button, .button:hover {
+  background-color: $c0;
+  border-color: transparent;
 
-    &.is-static {
-      background-color: $c1;
-    }
+  &.is-static {
+    background-color: $c1;
   }
-  .button:hover {
-    background-color: $c3;
-    color: $c1;
-  }
+}
+.button:hover {
+  background-color: $c3;
+  color: $c1;
+}
 
-  .title {
-    color: $c5;
-  }
+.title {
+  color: $c5;
 }
 
 .navbar {
@@ -54,5 +54,13 @@ body {
   }
   .modal-card-foot {
     background-color: $c1;
+  }
+}
+
+.tag:not(body) {
+  background-color: $c1;
+
+  &:after{
+    color: $c3;
   }
 }
