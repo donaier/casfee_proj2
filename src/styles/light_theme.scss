@@ -17,6 +17,10 @@ body {
   .button, .button:hover {
     background-color: $c0;
     border-color: transparent;
+
+    &.is-static {
+      background-color: $c1;
+    }
   }
   .button:hover {
     background-color: $c3;
@@ -39,4 +43,16 @@ body {
 
 .card {
   background-color: $c0;
+}
+
+.modal {
+  .modal-card-head {
+    background-color: $c1;
+  }
+  .modal-card-body {
+    background-color: $c0;
+  }
+  .modal-card-foot {
+    background-color: $c1;
+  }
 }
