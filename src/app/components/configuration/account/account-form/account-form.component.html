@@ -6,7 +6,7 @@
       <p class="modal-card-title">{{modalTitle}}</p>
       <button class="delete" aria-label="close" (click)="hideModal()"></button>
     </header>
-    
+
     <form class="form" [formGroup]="accountForm" #formDirective="ngForm" (ngSubmit)="submitAccountForm($event, formDirective)">
       <section class="modal-card-body">
         <!-- <input type="hidden" formControlName="id"> -->

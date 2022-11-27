@@ -1,4 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { FluxStore } from 'src/app/shared/services/flux-store';
 import { Category, CategoryGroup } from 'src/app/shared/types/category';
 
 @Component({
@@ -6,14 +8,22 @@ import { Category, CategoryGroup } from 'src/app/shared/types/category';
   templateUrl: './category-config.component.html',
   styleUrls: ['./category-config.component.scss']
 })
-export class CategoryConfigComponent {
+export class CategoryConfigComponent implements OnInit, OnDestroy {
 
-  @Input() categoryGroups: CategoryGroup[] = [];
+  categoryGroups: CategoryGroup[] = [];
+  categoryForForm?: Category;
+  categoryGroupForForm?: CategoryGroup;
+  private subscription : Subscription | undefined
 
-  public categoryForForm?: Category;
-  public categoryGroupForForm?: CategoryGroup;
+  constructor(public store: FluxStore) { }
 
-  constructor() { }
+  ngOnInit(){
+    this.subscription = this.store.CategoryGroups.subscribe((data) => {
+      if (data.length > 0) {
+        this.categoryGroups = data;
+      }
+    })
+  }
 
   createCategoryGroup() {
     this.categoryGroupForForm = undefined;
@@ -40,8 +50,12 @@ export class CategoryConfigComponent {
     document.getElementById('subcategory-form')?.classList.remove('is-hidden');
   }
 
-
   deleteCategory(category: Category) {
     console.log('delete Category (child)')
   }
+
+  ngOnDestroy(){
+    this.subscription?.unsubscribe()
+  }
+
 }
