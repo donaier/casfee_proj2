@@ -15,5 +15,10 @@ export interface Category{
 export const CategoryGroupForm = {
   name: new FormControl('', [Validators.required]),
   color: new FormControl(''),
-  categories: new FormControl(''),
+};
+
+export const CategoryForm = {
+  group: new FormControl('', [Validators.required]),
+  name: new FormControl('', [Validators.required]),
+  color: new FormControl(''),
 };

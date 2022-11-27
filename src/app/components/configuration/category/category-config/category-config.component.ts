@@ -18,16 +18,28 @@ export class CategoryConfigComponent {
   createCategoryGroup() {
     this.categoryGroupForForm = undefined;
     document.getElementById('category-form')?.classList.add('is-active');
+    document.getElementById('category-group-form')?.classList.remove('is-hidden');
   }
 
   editCategoryGroup(categoryGroup: CategoryGroup) {
     this.categoryGroupForForm = categoryGroup;
     document.getElementById('category-form')?.classList.add('is-active');
+    document.getElementById('category-group-form')?.classList.remove('is-hidden');
   }
 
   addCategory(categoryGroup: CategoryGroup) {
-    console.log('new child on ' + categoryGroup.name)
+    this.categoryGroupForForm = categoryGroup;
+    this.categoryForForm = undefined;
+    document.getElementById('category-form')?.classList.add('is-active');
+    document.getElementById('subcategory-form')?.classList.remove('is-hidden');
   }
+
+  editCategory(category: Category) {
+    this.categoryForForm = category;
+    document.getElementById('category-form')?.classList.add('is-active');
+    document.getElementById('subcategory-form')?.classList.remove('is-hidden');
+  }
+
 
   deleteCategory(category: Category) {
     console.log('delete Category (child)')
