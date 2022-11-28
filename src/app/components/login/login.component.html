@@ -2,23 +2,54 @@
   <div class="container">
     <div class="columns">
       <div class="column is-half is-offset-one-quarter">
-        <form class="box has-text-centered">
+        <form class="box has-text-centered"
+        [formGroup]="login"
+        (ngSubmit)="onSubmit()"
+        novalidate>
           <h3 class="title">Finance Check</h3>
           <div class="field">
-            <label class="label">Email / Username</label>
-            <div class="control">
-              <input class="input" type="email" #userName required>
+            <label class="label label_email">Email / Username</label>
+            <div class="control  has-icons-left has-icons-right">
+              <input class="input" type="email"
+              data-cy="Email"
+              placeholder="Email"
+              [ngClass]="{
+                'has-danger': email.invalid && (email.dirty || email.touched),
+                'has-success': email.valid && (email.dirty || email.touched)
+              }"
+              formControlName="email"
+              #userName
+              required>
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
             </div>
           </div>
           <div class="field">
-            <label class="label">Password</label>
-            <div class="control">
-              <input class="input" type="password" #userPassword required>
+            <label class="label label_password">Password</label>
+            <div class="control has-icons-left">
+              <input class="input" type="password"
+              data-cy="Password"
+              placeholder="Password"
+              [ngClass]="{
+                'has-danger': password.invalid && (password.dirty || password.touched),
+                'has-success': password.valid && (password.dirty || password.touched)
+              }"
+              formControlName="password"
+              #userPassword
+              required>
+              <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+              </span>
             </div>
           </div>
           <a href="/">
-            <button class="button is-fullwidth mt-5" #signinButton routerLink="/dashboard">
-              login
+            <button class="button is-fullwidth mt-5 has-text-black"
+            type="submit"
+            #signinButton
+            [disabled]="login.invalid"
+            >
+              Login
             </button>
           </a>
         </form>
@@ -26,3 +57,7 @@
     </div>
   </div>
 </section>
+
+
+
+<!--  routerLink="/dashboard"  -->

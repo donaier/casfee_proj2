@@ -41,7 +41,7 @@ export class FluxStore {
             querySnapshot.forEach((doc) => {
               this.Accounts_all.push({
                 name: doc.data()['name'],
-                shortname: doc.data()['short'],
+                shortname: doc.data()['shortname'],
                 description: doc.data()['description'],
                 initialValue: doc.data()['initialValue'],
                 currentValue: doc.data()['currentValue'],
