@@ -12,9 +12,7 @@ import { CategoryGroup } from 'src/app/shared/types/category';
   templateUrl: './configuration.component.html',
   styleUrls: ['./configuration.component.scss'],
 })
-export class ConfigurationComponent implements OnInit, OnDestroy {
-
-  private subscription: Subscription[] = [];
+export class ConfigurationComponent implements OnInit {
 
   accounts: Account[] = [];
   csvMasks: csvMask[] = [];
@@ -23,22 +21,10 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
   constructor(
     @Inject(fluxDispatcherToken)
     private dispatcher: Subject<FluxAction>,
-    public store: FluxStore
   ) {}
 
   ngOnInit() {
     this.dispatcher.next(new FluxAction(FluxActionTypes.Load))
-
-    this.subscription.push(this.store.Accounts.subscribe((data) => {
-      if (data.length) {
-        this.accounts = data;
-      }
-    }))
-    this.subscription.push(this.store.CategoryGroups.subscribe((data) => {
-      if (data.length > 0) {
-        this.categoryGroups = data;
-      }
-    }))
 
     // fake
     this.csvMasks = [
@@ -55,7 +41,4 @@ export class ConfigurationComponent implements OnInit, OnDestroy {
     ]
   }
 
-  ngOnDestroy() {
-    this.subscription.forEach((subscription) => {subscription.unsubscribe()})
-  }
 }
