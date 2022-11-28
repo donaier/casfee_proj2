@@ -1,14 +1,25 @@
 
 .has-danger{
-  border: 2px red solid !important;
+  border: 1.5px red solid !important;
 }
 
 .has-success{
-  border: 2px green solid !important;
+  border: 1.5px rgb(53, 179, 53) solid !important;
 }
 
+.input:focus{
+  outline: 0;
+  box-shadow: none;
+  border-color: #ff0000;
+}
 
-input:focus{
-  outline:none;
-  border: none;
+.section{
+  position: absolute;
+  display: inline-block;
+  min-width: 100vw;
+  min-height: 100vh;
+  background-image: url('../../../assets/stars_background_compressed.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
 }

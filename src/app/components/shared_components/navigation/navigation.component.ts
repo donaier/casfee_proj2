@@ -1,4 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core'
+import { AuthentificationService } from 'src/app/shared/services/authentification.service';
 
 @Component({
   selector: 'app-navigation',
@@ -7,11 +8,16 @@ import { Component, ElementRef, ViewChild } from '@angular/core'
 })
 
 export class NavigationComponent {
-  constructor() {}
+  constructor(private AuthService: AuthentificationService) {}
 
   expandBurgerMenu(e: Event) {
     const btn = <HTMLElement>e.target;
     btn.classList.toggle('is-active');
     document.getElementById('nav-menu')?.classList.toggle('is-active')
   }
+
+  logout(){
+    this.AuthService.logout()
+  }
+
 }
