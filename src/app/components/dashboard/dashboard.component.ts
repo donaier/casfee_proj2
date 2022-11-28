@@ -2,6 +2,7 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
 import { FluxStore } from 'src/app/shared/services/flux-store';
+import { Account } from 'src/app/shared/types/account';
 import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
 
 
@@ -12,20 +13,21 @@ import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
 
-  accounts: object[];
-  private subscription : Subscription[] = [];   // Alle Subscribers werden hier abgespeichert, wichtig fuers unsubscriben.
+  private subscription: Subscription[] = [];   // Alle Subscribers werden hier abgespeichert, wichtig fuers unsubscriben.
 
+  accounts: Account[] = [];
 
-  constructor(@Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>, public store: FluxStore,) {
-    this.accounts = [{}, {}, {}, {}];
-  }
+  constructor(
+    @Inject(fluxDispatcherToken)
+    private dispatcher: Subject<FluxAction>,
+    public store: FluxStore
+  ) {}
 
   ngOnInit() {
     this.dispatcher.next(new FluxAction(FluxActionTypes.Load))     // Hier wird eigentlich der Store initialisiert -> mit load werden die Accounts , Transactions und Categorien von der Datenbank auf die Observables geladen.
     this.subscription.push(this.store.Accounts.subscribe((data) => {  // Fuer Testversuche habe ich eine regristrierung auf den Account_Bus gemacht
-      if (data.length > 0) {
-        //  this.accounts = data
-          console.log(data)
+      if (data.length) {
+        this.accounts = data
       }
     }))
     this.subscription.push(this.store.Transactions.subscribe((data) => {
@@ -43,9 +45,4 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscription.forEach((subscription) => {subscription.unsubscribe()})
   }
-
-
-
-
-
 }

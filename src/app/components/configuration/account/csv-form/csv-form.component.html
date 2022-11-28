@@ -1,0 +1,40 @@
+<div class="modal" id="csv-mask-form">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+
+    <header class="modal-card-head">
+      <p class="modal-card-title">{{modalTitle}}</p>
+      <button class="delete" aria-label="close" (click)="hideModal()"></button>
+    </header>
+
+    <form class="form" [formGroup]="csvForm" #formDirective="ngForm" (ngSubmit)="submitCsvForm($event, formDirective)">
+      <section class="modal-card-body">
+
+        <div class="columns mb-0">
+          <div class="column is-8">
+            <label class="label">name:</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="name" formControlName="name">
+            </div>
+          </div>
+          <div class="column">
+            <label class="label">delimiter:</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="delimiter" formControlName="delimiter">
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">mask:</label>
+          <div class="control">
+            <input class="input" type="text" placeholder=";date;info;amount;" formControlName="mask">
+          </div>
+        </div>
+      </section>
+      <footer class="modal-card-foot is-flex is-justify-content-center">
+        <button class="button is-success" type="submit">save</button>
+        <button class="button" type="button" (click)="hideModal()">cancel</button>
+      </footer>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<div class="is-flex is-justify-content-space-between">
+  <h4 class="title is-4">
+    csv:
+  </h4>
+  <a class="button" (click)="createCsv()">+ new</a>
+</div>
+<div class="card">
+  <div class="card-content">
+    <span class="tag is-medium mb-2" *ngFor="let csvMask of csvMasks" (click)="editCsv(csvMask)">{{csvMask.name}}</span>
+  </div>
+</div>
+
+<app-csv-form [csv]="csvForForm"></app-csv-form>

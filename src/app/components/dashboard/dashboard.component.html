@@ -7,18 +7,17 @@
         <header class="card-header">
           <p class="card-header-title is-flex is-justify-content-space-between">
             <span>
-              Account Name
+              {{account.name}}
             </span>
             <span class="tag">
-              <!-- shortName -->
-              SN
+              {{account.shortname}}
             </span>
           </p>
         </header>
         <div class="card-content">
           <div class="content has-text-centered">
-            <p>Account Description</p>
-            <p class="title">Fr. XXXX.-</p>
+            <p>{{account.description}}</p>
+            <p class="title">Fr. {{account.currentValue}}</p>
           </div>
         </div>
       </div>

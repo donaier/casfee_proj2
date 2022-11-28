@@ -1,4 +1,8 @@
-Supi Vorschlag! Hier meine Adaption:
+## Subscriptions
+
+Habe gerade für die config seite + dashboard die accounts angezeigt und dafür den code vom store/subscriptions dupliziert. Das ist halt nicht so gut :P denke logisch wäre, wenn die app.component die subscriptions hält und die daten dann an dashboard/config weitergibt (und da werden sie gegebenenfalls an weitere components weitergegeben). Die subscriptions müssten nach meiner Meinung beim Login erstellt und beim logout destroyed werden.
+
+meinung/inputs?
 
 ### Accounts
 

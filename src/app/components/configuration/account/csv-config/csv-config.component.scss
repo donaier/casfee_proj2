@@ -1,0 +1,16 @@
+.tag {
+  width: 100%;
+  cursor: pointer;
+  justify-content: space-between;
+
+  &:after {
+    content: 'edit';
+    opacity: 0;
+  }
+
+  &:hover {
+    &:after {
+      opacity: 1;
+    }
+  }
+}

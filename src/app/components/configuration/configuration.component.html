@@ -1,5 +1,13 @@
 <div class="container is-widescreen mt-5">
-  <p>Hello Configuration</p>
+  <app-account-config></app-account-config>
+  <div class="columns">
+    <div class="column is-three-quarters">
+      <app-category-config></app-category-config>
+    </div>
+    <div class="column">
+      <app-csv-config [csvMasks]="csvMasks"></app-csv-config>
+    </div>
+  </div>
 </div>
 
 
