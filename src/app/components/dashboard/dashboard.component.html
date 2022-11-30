@@ -1,28 +1,6 @@
 <div class="container is-widescreen mt-5">
 
-  <!-- accounts -->
-  <div class="columns">
-    <div class="column" *ngFor="let account of accounts">
-      <div class="card">
-        <header class="card-header">
-          <p class="card-header-title is-flex is-justify-content-space-between">
-            <span>
-              {{account.name}}
-            </span>
-            <span class="tag">
-              {{account.shortname}}
-            </span>
-          </p>
-        </header>
-        <div class="card-content">
-          <div class="content has-text-centered">
-            <p>{{account.description}}</p>
-            <p class="title">Fr. {{account.currentValue}}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <app-account></app-account>
 
   <!-- graphs -->
   <div class="card">

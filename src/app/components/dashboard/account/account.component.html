@@ -1,0 +1,28 @@
+<div class="columns mb-3">
+  <div class="column" *ngFor="let account of accounts">
+    <div class="card">
+      <header class="card-header">
+        <p class="card-header-title is-flex is-justify-content-space-between">
+          <span>
+            {{account.name}}
+          </span>
+          <span class="tag">
+            {{account.shortname}}
+          </span>
+        </p>
+      </header>
+      <div class="card-content">
+        <div class="content has-text-centered">
+          <p>{{account.description}}</p>
+          <p class="title">Fr. {{account.currentValue}}</p>
+        </div>
+      </div>
+      <footer class="card-footer">
+        <a class="card-footer-item">+ csv Transactions</a>
+        <a class="card-footer-item" (click)="openManualTransactionModal(account)">+ single Transaction</a>
+      </footer>
+    </div>
+  </div>
+</div>
+
+<app-manual-transaction-form [account]="selectedAccount"></app-manual-transaction-form>
