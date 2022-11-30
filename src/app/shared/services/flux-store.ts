@@ -45,7 +45,7 @@ export class FluxStore {
                 description: doc.data()['description'],
                 initialValue: doc.data()['initialValue'],
                 currentValue: doc.data()['currentValue'],
-                color: doc.data()['currentValue'],
+                color: doc.data()['color'],
                 csv: doc.data()['csvMask'],
                 transactions: doc.data()['transactions'],
               })
