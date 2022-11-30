@@ -17,9 +17,7 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 // Flux
 import { FLUX_CONFIG } from './shared/helpers/flux.configuration';
 import { FluxStore } from './shared/services/flux-store';
-import { Flux_UploadData } from './model/Flux-upload.service';
-
-
+import { UploadService } from './model/upload.service';
 
 
 @NgModule({
@@ -35,7 +33,7 @@ import { Flux_UploadData } from './model/Flux-upload.service';
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
   ],
-  providers: [...FLUX_CONFIG, FluxStore, Flux_UploadData],
+  providers: [...FLUX_CONFIG, FluxStore, UploadService],
   bootstrap: [AppComponent]
 })
 

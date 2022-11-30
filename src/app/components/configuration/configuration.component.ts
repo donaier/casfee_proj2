@@ -14,10 +14,6 @@ import { CategoryGroup } from 'src/app/shared/types/category';
 })
 export class ConfigurationComponent implements OnInit {
 
-  accounts: Account[] = [];
-  csvMasks: csvMask[] = [];
-  categoryGroups: CategoryGroup[] = [];
-
   constructor(
     @Inject(fluxDispatcherToken)
     private dispatcher: Subject<FluxAction>,
@@ -25,20 +21,6 @@ export class ConfigurationComponent implements OnInit {
 
   ngOnInit() {
     this.dispatcher.next(new FluxAction(FluxActionTypes.Load))
-
-    // fake
-    this.csvMasks = [
-      {
-        name: 'postFinance',
-        delimiter: ';',
-        mask: ';date;;info;;;amount;'
-      },
-      {
-        name: 'kantonalbank',
-        delimiter: ';',
-        mask: ';date;;info;;;amount;'
-      }
-    ]
   }
 
 }
