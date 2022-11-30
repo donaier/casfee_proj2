@@ -6,7 +6,7 @@
 </div>
 <div class="card">
   <div class="card-content">
-    <div class="box" *ngFor="let categoryGroup of categoryGroups">
+    <div class="box" *ngFor="let categoryGroup of categoryGroups" [ngStyle]="{borderColor: categoryGroup.color}">
       <p class="is-flex is-justify-content-space-between">
         <strong class="pb-3">{{categoryGroup.name}}</strong>
         <span>
