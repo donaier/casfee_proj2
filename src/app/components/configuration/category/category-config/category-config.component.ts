@@ -57,5 +57,4 @@ export class CategoryConfigComponent implements OnInit, OnDestroy {
   ngOnDestroy(){
     this.subscription?.unsubscribe()
   }
-
 }

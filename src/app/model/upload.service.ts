@@ -11,7 +11,7 @@ import { Category } from 'src/app/shared/types/category'
 
 @Injectable()
 
-export class Flux_UploadData {
+export class UploadService {
     constructor(@Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>, private firestore: Firestore) {
       this.dispatcher.subscribe(async (action: FluxAction) => {
         switch (action.type) {
@@ -43,7 +43,7 @@ export class Flux_UploadData {
 
               break
             case FluxActionTypes.AddCategory:
-
+              console.log('store to firestore');
               break
             case FluxActionTypes.UpdateCategory:
 
