@@ -18,7 +18,7 @@ import { CategoryFormComponent } from './category/category-form/category-form.co
     CsvConfigComponent,
     CsvFormComponent,
     CategoryConfigComponent,
-    CategoryFormComponent,
+    CategoryFormComponent
   ],
   imports: [
     CommonModule,

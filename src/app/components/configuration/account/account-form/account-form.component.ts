@@ -35,7 +35,7 @@ export class AccountFormComponent implements OnInit, OnChanges {
     name: this.name = new FormControl(''),
     shortname: this.shortname = new FormControl(''),
     description: this.description = new FormControl(''),
-    initialValue: this.initialValue = new FormControl('', [Validators.required, Validators.pattern('/^[0-9]\d*$/')]),
+    initialValue: this.initialValue = new FormControl(''),
     color: this.color = new FormControl(''),
     csv: this.csv = new FormControl(''),
    })
@@ -48,15 +48,13 @@ export class AccountFormComponent implements OnInit, OnChanges {
 
   submitAccountForm(e: Event, form: FormGroupDirective) {
     e.preventDefault();
-    console.log(this.accountForm.value)
-
-   // this.dispatcher.next(new FluxAction(FluxActionTypes.AddAccount, null, null, null))
 
     if(this.accountForm.valid) {
     //  this.accountForm.value.currentValue = this.accountForm.value.initialValue
       console.log(this.accountForm.value)
-      // store or create
-     //
+
+      this.dispatcher.next(new FluxAction(FluxActionTypes.AddAccount, null, null, null, this.accountForm.value))
+
       form.resetForm();
       this.accountForm.reset();
       this.accountForm.markAsUntouched();

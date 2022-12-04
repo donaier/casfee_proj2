@@ -95,6 +95,45 @@ export class FluxStore {
             this.CsvMasks.next(this.CsvMasks_all)
           })
           break
+          case FluxActionTypes.AddTransaction:
+
+            break
+          case FluxActionTypes.UpdateTransaction:
+
+            break
+          case FluxActionTypes.DeleteTransaction:
+
+            break
+          case FluxActionTypes.AddAccount:
+            console.log(action.account)
+
+
+            break
+          case FluxActionTypes.UpdateAccount:
+
+            break
+          case FluxActionTypes.DeleteAccount:
+
+            break
+          case FluxActionTypes.AddCategoryGroup:
+
+            break
+          case FluxActionTypes.UpdateCategoryGroup:
+
+            break
+          case FluxActionTypes.DeleteCategoryGroup:
+
+            break
+          case FluxActionTypes.AddCategory:
+
+
+            break
+          case FluxActionTypes.UpdateCategory:
+
+            break
+          case FluxActionTypes.DeleteCategory:
+
+            break
         default:
           throw new Error('operation unknown')
       }

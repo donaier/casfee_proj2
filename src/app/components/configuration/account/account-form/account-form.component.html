@@ -42,9 +42,11 @@
             </div>
           </div>
           <div class="column">
-            <label class="label">color</label>
+            <label class="label" for="colorSelect">color</label>
             <div class="select">
-              <select id="colorSelect"
+              <select
+              class="input__select"
+              id="colorSelect"
               formControlName="color"
               [ngClass]="{
                 'has-danger': color.invalid && (color.dirty || color.touched),
@@ -92,9 +94,11 @@
           </div>
         </div>
         <div class="field">
-          <label class="label">csv Mask:</label>
-          <div class="control">
-            <select id="csvMaskSelect"
+          <label class="label" for="csvMaskSelect">csv Mask:</label>
+          <div class="select">
+            <select
+              class="input__select"
+              id="csvMaskSelect"
               formControlName="csv"
               [ngClass]="{
                 'has-danger':csv.invalid && (csv.dirty || csv.touched),
