@@ -1,0 +1,57 @@
+<div class="modal" id="manual-transaction-form">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+
+    <header class="modal-card-head">
+      <p class="modal-card-title">new Transaction on {{account?.name}}</p>
+      <button class="delete" aria-label="close" (click)="hideModal()"></button>
+    </header>
+
+    <form class="form" [formGroup]="transactionForm" #formDirective="ngForm" (ngSubmit)="submitTransactionForm($event, formDirective)">
+      <section class="modal-card-body">
+
+        <div class="columns mb-0">
+          <div class="column is-8">
+            <label class="label">amount:</label>
+            <div class="control">
+              <input class="input" type="number" placeholder="amount" formControlName="amount">
+            </div>
+
+          </div>
+          <div class="column">
+            <label class="label">date:</label>
+            <div class="control">
+              <input class="input" type="date" placeholder="date" formControlName="date">
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">description:</label>
+          <div class="control">
+            <input class="input" type="text" placeholder="description" formControlName="description">
+          </div>
+        </div>
+
+        <input id="category-manualTransaction" type="hidden" formControlName="category">
+        <div class="box" *ngFor="let categoryGroup of categoryGroups">
+          <p class="is-flex is-justify-content-space-between">
+            <strong class="pb-3">{{categoryGroup.name}}</strong>
+            <span>
+              <a class="tag" (click)="addCategory(categoryGroup)">+</a>
+            </span>
+          </p>
+          <div class="field is-grouped is-grouped-multiline">
+            <div class="control" *ngFor="let category of categoryGroup.categories">
+              <span class="tag selectable-tag" (click)="setCategory($event, category)">{{category.name}}</span>
+            </div>
+          </div>
+        </div>
+
+      </section>
+      <footer class="modal-card-foot is-flex is-justify-content-center">
+        <button class="button is-success" type="submit">save</button>
+        <button class="button" type="button" (click)="hideModal()">cancel</button>
+      </footer>
+    </form>
+  </div>
+</div>
