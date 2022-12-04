@@ -4,7 +4,7 @@ import { fluxDispatcherToken } from '../helpers/flux.configuration'
 
 
 // types
-import { Account } from '../types/account'
+import { Account, csvMask } from '../types/account'
 import { CategoryGroup } from '../types/category'
 import { Transaction } from '../types/transaction'
 import { FluxAction, FluxActionTypes } from '../types/actions.type'
@@ -21,10 +21,12 @@ export class FluxStore {
   Transactions_all: Transaction[] = []
   Accounts_all: Account[] = []
   CategoryGroups_all: CategoryGroup[] = []
+  CsvMasks_all: csvMask[] = []
 
   Accounts: BehaviorSubject<Account[]> = new BehaviorSubject<Account[] | any>({})
   Transactions: BehaviorSubject<Transaction[]> = new BehaviorSubject<Transaction[] | any>({})
   CategoryGroups: BehaviorSubject<CategoryGroup[]> = new BehaviorSubject<CategoryGroup[] | any>({})
+  CsvMasks: BehaviorSubject<csvMask[]> = new BehaviorSubject<csvMask[] | any>({})
 
   constructor(@Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>, private firestore: Firestore) {
     this.dispatcher.subscribe(async (action: FluxAction) => {
@@ -41,11 +43,11 @@ export class FluxStore {
             querySnapshot.forEach((doc) => {
               this.Accounts_all.push({
                 name: doc.data()['name'],
-                shortname: doc.data()['shortname'],
+                shortName: doc.data()['shortName'],
                 description: doc.data()['description'],
                 initialValue: doc.data()['initialValue'],
                 currentValue: doc.data()['currentValue'],
-                color: doc.data()['currentValue'],
+                color: doc.data()['color'],
                 csv: doc.data()['csvMask'],
                 transactions: doc.data()['transactions'],
               })
@@ -80,8 +82,22 @@ export class FluxStore {
                 category: doc.data()['category']
               })
             })
-          this.CategoryGroups.next(this.CategoryGroups_all)
+            this.CategoryGroups.next(this.CategoryGroups_all)
           })
+
+          const q_csvMasks = query(collection(this.firestore, 'csvMasks'))
+          const listener_csvMasks = onSnapshot(q_csvMasks, (querySnapshot) => {
+            this.CsvMasks_all = []
+            querySnapshot.forEach((doc) => {
+              this.CsvMasks_all.push({
+                name: doc.data()['name'],
+                delimiter: doc.data()['delimiter'],
+                mask: doc.data()['mask'],
+              })
+            })
+            this.CsvMasks.next(this.CsvMasks_all)
+          })
+
           break
         default:
           throw new Error('operation unknown')

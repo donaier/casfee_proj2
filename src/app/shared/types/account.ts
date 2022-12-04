@@ -3,7 +3,7 @@ import { Transaction } from './transaction'
 
 export interface Account {
   name: string,
-  shortname: string,
+  shortName: string,
   description: string,
   initialValue: number,
   currentValue: number,
@@ -14,7 +14,7 @@ export interface Account {
 
 export const AccountForm = {
   name: new FormControl('', [Validators.required]),
-  shortname: new FormControl(''),
+  shortName: new FormControl(''),
   description: new FormControl(''),
   initialValue: new FormControl(''),
   color: new FormControl(''),
