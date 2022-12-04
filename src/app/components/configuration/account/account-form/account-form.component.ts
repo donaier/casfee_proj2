@@ -47,31 +47,36 @@ export class AccountFormComponent implements OnInit, OnChanges {
     this.accountForm.reset();
   }
 
-  submitAccountForm(e: Event, form: FormGroupDirective) {
+  submitAccountForm(e: Event) {
     e.preventDefault();
     if(this.accountForm.valid) {
       let account = this.accountForm.value
       account.currentValue = this.initialValue.value
       this.dispatcher.next(new FluxAction(FluxActionTypes.AddAccount, null, null, null, account))
-      form.resetForm();
       this.accountForm.reset();
-      this.accountForm.markAsUntouched();
       this.hideModal();
     }
   }
 
   deleteAccount(){
-    console.log("delete it")
+    this.dispatcher.next(new FluxAction(FluxActionTypes.DeleteAccount, null, null, null, this.account))
+    this.hideModal();
   }
 
   editAccount(){
-    console.log("update it")
+    if(this.accountForm.valid) {
+      let account = this.accountForm.value
+      account.currentValue = this.initialValue.value
+      this.dispatcher.next(new FluxAction(FluxActionTypes.AddAccount, null, null, null, account))
+      this.accountForm.reset();
+    }
+
+    this.hideModal();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['account']?.currentValue?.name) {
       this.accountForm.patchValue(changes['account'].currentValue)
-     //  this.modalTitle = 'edit'
     }
   }
 }

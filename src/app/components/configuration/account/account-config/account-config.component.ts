@@ -45,6 +45,7 @@ export class AccountConfigComponent implements OnInit, OnDestroy {
 
   deleteAccount(account: Account) {
     this.selector = "delete"
+    this.accountForForm = account
     document.getElementById('bank-account-form')?.classList.add('is-active');
   }
 
