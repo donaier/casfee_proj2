@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormGroupDirective } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { FluxStore } from 'src/app/shared/services/flux-store';
@@ -11,23 +11,23 @@ import { TransactionForm } from 'src/app/shared/types/transaction';
   templateUrl: './manual-transaction-form.component.html',
   styleUrls: ['./manual-transaction-form.component.scss']
 })
-export class ManualTransactionFormComponent implements OnInit {
+export class ManualTransactionFormComponent implements OnInit, OnDestroy {
 
   @Input() account?: Account;
   public transactionForm: FormGroup = new FormGroup(TransactionForm);
   private categoryInput: HTMLInputElement | null = null
 
-  private subscription : Subscription | undefined
+  private subscription : Subscription[] = []
   categoryGroups: CategoryGroup[] = [];
 
   constructor(public store: FluxStore) {}
 
   ngOnInit(){
-    this.subscription = this.store.CategoryGroups.subscribe((data) => {
+    this.subscription.push(this.store.CategoryGroups.subscribe((data) => {
       if (data.length > 0) {
         this.categoryGroups = data;
       }
-    })
+    }))
 
     this.categoryInput = document.querySelector('#category-manualTransaction')
   }
@@ -38,7 +38,7 @@ export class ManualTransactionFormComponent implements OnInit {
   }
 
   addCategory(category: CategoryGroup) {
-
+    // here is subcategory creation on the fly
   }
 
   setCategory(e: Event, category: Category) {
@@ -51,6 +51,23 @@ export class ManualTransactionFormComponent implements OnInit {
   }
 
   submitTransactionForm(e: Event, form: FormGroupDirective) {
+    e.preventDefault();
 
+    console.log(this.transactionForm)
+
+    if (this.transactionForm.valid && this.transactionForm.dirty) {
+
+      // store or create
+
+      form.resetForm();
+      this.transactionForm.reset();
+      this.transactionForm.markAsUntouched();
+
+      this.hideModal();
+    }
+  }
+
+  ngOnDestroy() {
+    this.subscription?.forEach((subscription) => {subscription.unsubscribe()})
   }
 }
