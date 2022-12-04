@@ -5,6 +5,15 @@ $c3: #a870ab;
 $c4: #413e9f;
 $c5: #041440;
 
+:root {
+  --color-0: #{$c0};
+  --color-1: #{$c1};
+  --color-2: #{$c2};
+  --color-3: #{$c3};
+  --color-4: #{$c4};
+  --color-5: #{$c5};
+}
+
 body {
   min-height: 100vh;
   background-color: $c1;

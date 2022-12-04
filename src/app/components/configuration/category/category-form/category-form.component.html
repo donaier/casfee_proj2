@@ -17,8 +17,11 @@
           </div>
           <div class="column">
             <label class="label">color:</label>
-            <div class="control">
-              <input class="input" type="text" placeholder="color" formControlName="color">
+            <div class="select">
+              <select name="color" formControlName="color">
+                <option *ngFor="let color of categoryColors" value={{color.value}}>{{color.name}}</option>
+              </select>
+              <!-- <input class="input" type="text" placeholder="color" formControlName="color"> -->
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormGroup, FormGroupDirective } from '@angular/forms';
-import { Category, CategoryGroupForm, CategoryGroup, CategoryForm } from 'src/app/shared/types/category';
+import { Category, CategoryGroupForm, CategoryGroup, CategoryForm, CategoryGroupColors } from 'src/app/shared/types/category';
 
 @Component({
   selector: 'app-category-form',
@@ -14,6 +14,7 @@ export class CategoryFormComponent implements OnChanges {
 
   public categoryGroupForm: FormGroup = new FormGroup(CategoryGroupForm);
   public categoryForm: FormGroup = new FormGroup(CategoryForm);
+  public categoryColors = CategoryGroupColors;
 
   constructor() { }
 
