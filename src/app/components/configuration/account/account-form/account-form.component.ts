@@ -12,13 +12,14 @@ import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
 })
 export class AccountFormComponent implements OnInit, OnChanges {
   @ViewChild('modal', { static: false }) modal!: ElementRef
-  @Input() account?: Account
-  @Input() csvMasks?: csvMask[]
+  @Input() account: Account | undefined
+  @Input() csvMasks: csvMask[] | undefined
+  @Input() selector: string | undefined
 
-//  accountForm: FormGroup = new FormGroup(AccountForm);
+ // accountForm: FormGroup = new FormGroup(AccountForm);
 
   accountColors = AccountColors
-  modalTitle: string = 'create new Account'
+ // modalTitle: string = 'create new Account'
 
   accountForm!: FormGroup
   name!: FormControl
@@ -48,24 +49,29 @@ export class AccountFormComponent implements OnInit, OnChanges {
 
   submitAccountForm(e: Event, form: FormGroupDirective) {
     e.preventDefault();
-
     if(this.accountForm.valid) {
-    //  this.accountForm.value.currentValue = this.accountForm.value.initialValue
-      console.log(this.accountForm.value)
-
-      this.dispatcher.next(new FluxAction(FluxActionTypes.AddAccount, null, null, null, this.accountForm.value))
-
+      let account = this.accountForm.value
+      account.currentValue = this.initialValue.value
+      this.dispatcher.next(new FluxAction(FluxActionTypes.AddAccount, null, null, null, account))
       form.resetForm();
       this.accountForm.reset();
       this.accountForm.markAsUntouched();
-   //   this.hideModal();
+      this.hideModal();
     }
+  }
+
+  deleteAccount(){
+    console.log("delete it")
+  }
+
+  editAccount(){
+    console.log("update it")
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['account']?.currentValue?.name) {
       this.accountForm.patchValue(changes['account'].currentValue)
-      this.modalTitle = 'edit'
+     //  this.modalTitle = 'edit'
     }
   }
 }

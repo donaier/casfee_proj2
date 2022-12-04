@@ -6,7 +6,7 @@
   border: 1.5px rgb(53, 179, 53) solid !important;
 }
 
-.input:focus, .input__select:focus{
+.input:focus, .input--select:focus{
   outline: 0;
   box-shadow: none;
   border-color: #ff0000;

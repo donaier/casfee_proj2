@@ -14,6 +14,7 @@ export class AccountConfigComponent implements OnInit, OnDestroy {
   subscriptions : Subscription[] = []
   csvMasks : csvMask[] = []
   accountForForm?: Account
+  selector : string | undefined
 
   constructor(public store: FluxStore) {}
 
@@ -32,16 +33,19 @@ export class AccountConfigComponent implements OnInit, OnDestroy {
 
   createAccount() {
     this.accountForForm = undefined
+    this.selector = "create"
     document.getElementById('bank-account-form')?.classList.add('is-active');
   }
 
   editAccount(account: Account) {
     this.accountForForm = account
+    this.selector = "edit"
     document.getElementById('bank-account-form')?.classList.add('is-active');
   }
 
   deleteAccount(account: Account) {
-    console.log('account delete')
+    this.selector = "delete"
+    document.getElementById('bank-account-form')?.classList.add('is-active');
   }
 
   ngOnDestroy(){

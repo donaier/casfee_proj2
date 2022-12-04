@@ -10,7 +10,7 @@ import { Transaction } from '../types/transaction'
 import { FluxAction, FluxActionTypes } from '../types/actions.type'
 
 // Firestore
-import { Firestore, onSnapshot, query } from '@angular/fire/firestore'
+import { doc, Firestore, onSnapshot, query, setDoc } from '@angular/fire/firestore'
 import { collection } from '@firebase/firestore'
 
 
@@ -105,9 +105,8 @@ export class FluxStore {
 
             break
           case FluxActionTypes.AddAccount:
-            console.log(action.account)
-
-
+            const docRef = doc(this.firestore, 'accounts', action.account!.name)
+            await setDoc(docRef, action.account)
             break
           case FluxActionTypes.UpdateAccount:
 
