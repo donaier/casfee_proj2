@@ -12,7 +12,7 @@
           <span>
             {{account.name}}
           </span>
-          <span class="tag" [ngStyle]="{backgroundColor: account.color}">
+          <span class="tag">
             {{account.shortName}}
           </span>
         </p>
@@ -38,4 +38,4 @@
   </div>
 </div>
 
-<app-account-form [account]="accountForForm"></app-account-form>
+<app-account-form [account]="accountForForm" [csvMasks]="csvMasks"></app-account-form>

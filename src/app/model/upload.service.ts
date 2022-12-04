@@ -2,9 +2,12 @@ import { Inject, Injectable } from '@angular/core'
 import { fluxDispatcherToken } from '../shared/helpers/flux.configuration'
 import { Subject } from 'rxjs'
 import { FluxAction, FluxActionTypes } from '../shared/types/actions.type'
-import { Firestore } from '@angular/fire/firestore'
+
+
+import { doc, Firestore, setDoc } from '@angular/fire/firestore'
 
 // Types
+
 import { Transaction } from 'src/app/shared/types/transaction'
 import { Account } from 'src/app/shared/types/account'
 import { Category } from 'src/app/shared/types/category'
@@ -25,6 +28,17 @@ export class UploadService {
 
               break
             case FluxActionTypes.AddAccount:
+
+              /*
+              const docRef = doc(this.firestore, 'Kontos', data.Name)
+              await setDoc(docRef, data)
+              .then(() => {
+                console.log("its oke");
+              })
+              .catch(error => {
+              console.log(error);
+              })
+              */
 
               break
             case FluxActionTypes.UpdateAccount:

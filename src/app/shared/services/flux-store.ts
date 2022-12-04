@@ -54,7 +54,6 @@ export class FluxStore {
             })
             this.Accounts.next(this.Accounts_all)
           })
-
           const q_categories = query(collection(this.firestore, 'categories'))
           const listener_categories = onSnapshot(q_categories, (querySnapshot) => {
             this.CategoryGroups_all = []
@@ -67,7 +66,6 @@ export class FluxStore {
             })
             this.CategoryGroups.next(this.CategoryGroups_all)
           })
-
           const q_transactions = query(collection(this.firestore, 'transactions'))
           const listener_transactions = onSnapshot(q_transactions, (querySnapshot) => {
             this.Transactions_all = []
@@ -84,7 +82,6 @@ export class FluxStore {
             })
             this.CategoryGroups.next(this.CategoryGroups_all)
           })
-
           const q_csvMasks = query(collection(this.firestore, 'csvMasks'))
           const listener_csvMasks = onSnapshot(q_csvMasks, (querySnapshot) => {
             this.CsvMasks_all = []
@@ -97,7 +94,6 @@ export class FluxStore {
             })
             this.CsvMasks.next(this.CsvMasks_all)
           })
-
           break
         default:
           throw new Error('operation unknown')

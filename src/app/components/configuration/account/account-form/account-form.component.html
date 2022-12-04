@@ -1,4 +1,4 @@
-<div class="modal" id="bank-account-form">
+<div class="modal" id="bank-account-form" #modal>
   <div class="modal-background"></div>
   <div class="modal-card">
 
@@ -7,27 +7,50 @@
       <button class="delete" aria-label="close" (click)="hideModal()"></button>
     </header>
 
-    <form class="form" [formGroup]="accountForm" #formDirective="ngForm" (ngSubmit)="submitAccountForm($event, formDirective)">
+    <form class="form" [formGroup]="accountForm" #formDirective="ngForm" (ngSubmit)="submitAccountForm($event, formDirective)" novalidate>
       <section class="modal-card-body">
         <!-- <input type="hidden" formControlName="id"> -->
 
         <div class="columns mb-0">
           <div class="column is-6">
-            <label class="label">name:</label>
+            <label for="input-name" class="label">name:</label>
             <div class="control">
-              <input class="input" type="text" placeholder="name" formControlName="name">
+              <input class="input"
+                id="input-name"
+                type="text"
+                placeholder="name"
+                formControlName="name"
+                [ngClass]="{
+                  'has-danger': name.invalid && (name.dirty || name.touched),
+                  'has-success': name.valid && (name.dirty || name.touched)
+                }"
+                required>
             </div>
           </div>
           <div class="column">
             <label class="label">short:</label>
             <div class="control">
-              <input class="input" type="text" placeholder="short" formControlName="shortName">
+              <input class="input"
+                type="text"
+                placeholder="short"
+                formControlName="shortname"
+                [ngClass]="{
+                  'has-danger': shortname.invalid && (shortname.dirty || shortname.touched),
+                  'has-success': shortname.valid && (shortname.dirty || shortname.touched)
+                }"
+                required>
             </div>
           </div>
           <div class="column">
             <label class="label">color</label>
             <div class="select">
-              <select id="colorSelect" formControlName="color">
+              <select id="colorSelect"
+              formControlName="color"
+              [ngClass]="{
+                'has-danger': color.invalid && (color.dirty || color.touched),
+                'has-success': color.valid && (color.dirty || color.touched)
+              }"
+              required>
                 <option *ngFor="let color of accountColors" value={{color.value}}>{{color.name}}</option>
               </select>
             </div>
@@ -36,14 +59,30 @@
         <div class="field">
           <label class="label">description:</label>
           <div class="control">
-            <input class="input" type="text" placeholder="description" formControlName="description">
+            <input class="input"
+              type="text"
+              placeholder="description"
+              formControlName="description"
+              [ngClass]="{
+                'has-danger': description.invalid && (description.dirty || description.touched),
+                'has-success': description.valid && (description.dirty || description.touched)
+              }"
+              required>
           </div>
         </div>
         <div class="field">
           <label class="label">initial Balance:</label>
           <div class="field has-addons">
             <p class="control is-expanded">
-              <input class="input" type="number" placeholder="mulah..." formControlName="initialValue">
+              <input class="input"
+                type="number"
+                placeholder="mulah..."
+                formControlName="initialValue"
+                [ngClass]="{
+                  'has-danger': initialValue.invalid && (initialValue.dirty || initialValue.touched),
+                  'has-success': initialValue.valid && (initialValue.dirty || initialValue.touched)
+                }"
+                required>
             </p>
             <p class="control">
               <a class="button is-static is-outlined">
@@ -55,7 +94,15 @@
         <div class="field">
           <label class="label">csv Mask:</label>
           <div class="control">
-            <!-- csv mask select -->
+            <select id="csvMaskSelect"
+              formControlName="csv"
+              [ngClass]="{
+                'has-danger':csv.invalid && (csv.dirty || csv.touched),
+                'has-success': csv.valid && (csv.dirty || csv.touched)
+              }"
+              required>
+                <option *ngFor="let csvMask of csvMasks" value={{csvMask.name}}>{{csvMask.name}}</option>
+            </select>
           </div>
         </div>
       </section>
