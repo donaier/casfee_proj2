@@ -4,7 +4,7 @@ import { Subject } from 'rxjs'
 import { FluxAction, FluxActionTypes } from '../shared/types/actions.type'
 
 
-import { deleteDoc, doc, Firestore, setDoc } from '@angular/fire/firestore'
+import { deleteDoc, doc, Firestore, setDoc, updateDoc } from '@angular/fire/firestore'
 
 // Types
 
@@ -24,9 +24,12 @@ export class UploadService {
               await setDoc(docRef_add, action.account)
             }
             if(action.selector ==='categoryGroup'){
-
+              const docRef_add = doc(this.firestore, 'categories', action.categoryGroup!.name)
+              await setDoc(docRef_add, action.categoryGroup)
             }
             if(action.selector ==='category'){
+
+
 
             }
             if(action.selector ==='transaction'){
@@ -43,9 +46,13 @@ export class UploadService {
               await setDoc(docRef_update, action.account)
             }
             if(action.selector ==='categoryGroup'){
-
+              const docRef_add = doc(this.firestore, 'categories', action.categoryGroup!.name)
+              await setDoc(docRef_add, action.categoryGroup)
             }
             if(action.selector ==='category'){
+        //      const docRef = doc(this.firestore, 'categories', action.categoryGroup!.name)
+        //      await updateDoc(docRef, { name: action.categoryGroup!.categories })
+
 
             }
             if(action.selector ==='transaction'){
@@ -61,7 +68,7 @@ export class UploadService {
               await deleteDoc(doc(this.firestore, 'accounts', action.account!.name))
             }
             if(action.selector ==='categoryGroup'){
-
+              await deleteDoc(doc(this.firestore, 'categories', action.categoryGroup!.name))
             }
             if(action.selector ==='category'){
 

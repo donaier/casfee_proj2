@@ -15,8 +15,6 @@ export class ConfigurationComponent implements OnInit {
 
   constructor(@Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>) {}
 
-  ngOnInit() {
-    this.dispatcher.next(new FluxAction(FluxActionTypes.Load))
-  }
+  ngOnInit() {this.dispatcher.next(new FluxAction(FluxActionTypes.Load))}
 
 }

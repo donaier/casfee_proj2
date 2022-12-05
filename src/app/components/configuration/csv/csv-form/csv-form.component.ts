@@ -2,7 +2,7 @@ import { Component, ElementRef, Inject, Input, OnChanges, SimpleChanges, ViewChi
 import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
-import { csvMask, CsvMaskForm } from 'src/app/shared/types/account';
+import { csvMask } from 'src/app/shared/types/account';
 import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
 
 import { UploadService } from 'src/app/model/upload.service';
@@ -35,12 +35,11 @@ export class CsvFormComponent implements OnChanges {
     this.csvForm.reset();
   }
 
-  submitCsvForm(e: Event, form: FormGroupDirective) {
+  submitCsvForm(e: Event) {
     e.preventDefault();
     if(this.csvForm.valid && this.csvForm.dirty) {
       this.dispatcher.next(new FluxAction(FluxActionTypes.Create,'csvMask', null, null, null, null, this.csvForm.value))
-      this.csvForm.reset();
-      this.hideModal();
+      this.hideModal()
     }
   }
 
@@ -49,10 +48,13 @@ export class CsvFormComponent implements OnChanges {
       this.dispatcher.next(new FluxAction(FluxActionTypes.Delete,'csvMask', null, null, null, null, this.csv))
       this.dispatcher.next(new FluxAction(FluxActionTypes.Create,'csvMask', null, null, null, null, this.csvForm.value))
     }
-    this.csvForm.reset();
-    this.hideModal();
+    this.hideModal()
   }
 
+  DeleteCsv(){
+    this.dispatcher.next(new FluxAction(FluxActionTypes.Delete,'csvMask', null, null, null, null, this.csv))
+    this.hideModal()
+  }
 
   ngOnChanges(changes: SimpleChanges){
     if (changes['csv']?.currentValue?.name) {

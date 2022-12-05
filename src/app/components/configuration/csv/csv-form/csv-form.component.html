@@ -9,7 +9,11 @@
       <button class="delete" aria-label="close" (click)="hideModal()"></button>
     </header>
 
-    <form class="form" [formGroup]="csvForm" #formDirective="ngForm" (ngSubmit)="submitCsvForm($event, formDirective)" novalidate>
+    <form class="form"
+    [formGroup]="csvForm"
+    #formDirective="ngForm"
+    *ngIf="selector ==='create' || selector === 'edit'"
+    novalidate>
       <section class="modal-card-body">
         <div class="columns mb-0">
           <div class="column is-8">
@@ -59,18 +63,25 @@
           </div>
         </div>
       </section>
-      <footer class="modal-card-foot is-flex is-justify-content-center">
-        <button class="button is-success"
-         type="button"
-         (click)="UpdateCsv()"
-         [disabled]="csvForm.invalid"
-         *ngIf="selector ==='edit'">save</button>
-        <button class="button is-success"
-        type="submit"
-        [disabled]="csvForm.invalid"
-        *ngIf="selector==='create' || selector==='delete'">save</button>
-        <button class="button" type="button" (click)="hideModal()">cancel</button>
-      </footer>
     </form>
+
+    <div class="modal-card-body" *ngIf="selector ==='delete'">
+      Are you sure to Delete CsvMask: {{csv!.name}}
+    </div>
+
+    <footer class="modal-card-foot is-flex is-justify-content-center">
+      <button class="button is-success"
+       type="button"
+       (click)="UpdateCsv()"
+       [disabled]="csvForm.invalid"
+       *ngIf="selector ==='edit'">save</button>
+      <button class="button is-success"
+      type="button"
+      (click)="submitCsvForm($event)"
+      [disabled]="csvForm.invalid"
+      *ngIf="selector==='create' || selector==='delete'">save</button>
+      <button class="button" type="button" (click)="hideModal()">cancel</button>
+    </footer>
+
   </div>
 </div>

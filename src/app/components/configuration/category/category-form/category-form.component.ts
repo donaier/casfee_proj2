@@ -1,5 +1,8 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { FormGroup, FormGroupDirective } from '@angular/forms';
+import { Component, Inject, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { FormControl, FormGroup, FormGroupDirective } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
+import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
 import { Category, CategoryGroupForm, CategoryGroup, CategoryForm, CategoryGroupColors } from 'src/app/shared/types/category';
 
 @Component({
@@ -7,72 +10,104 @@ import { Category, CategoryGroupForm, CategoryGroup, CategoryForm, CategoryGroup
   templateUrl: './category-form.component.html',
   styleUrls: ['./category-form.component.scss']
 })
-export class CategoryFormComponent implements OnChanges {
+export class CategoryFormComponent implements OnChanges, OnInit {
 
-  @Input() category?: Category;
-  @Input() categoryGroup?: CategoryGroup;
+  @Input() category?: Category
+  @Input() categoryGroup?: CategoryGroup
+  @Input() selector?: string
 
-  public categoryGroupForm: FormGroup = new FormGroup(CategoryGroupForm);
-  public categoryForm: FormGroup = new FormGroup(CategoryForm);
-  public categoryColors = CategoryGroupColors;
+//  categoryGroupForm: FormGroup = new FormGroup(CategoryGroupForm);
+  categoryGroupForm!: FormGroup
+  group!: FormControl
+  name!: FormControl
+  color!: FormControl
 
-  constructor() { }
+  categoryForm!: FormGroup
+  name_category!: FormControl
+  color_category!: FormControl
 
-  hideModal() {
-    document.getElementById('category-form')?.classList.remove('is-active');
-    this.categoryGroupForm.reset();
-    this.categoryForm.reset();
+  /*
+  categoryForm!: FormGroup
+  name!: FormControl
+  color!: FormControl
 
-    document.getElementById('category-group-form')?.classList.add('is-hidden');
-    document.getElementById('subcategory-form')?.classList.add('is-hidden');
+  group: new FormControl('', [Validators.required]),
+  name: new FormControl('', [Validators.required]),
+  color: new FormControl(''),
 
-  }
+  name: new FormControl('', [Validators.required]),
+  color: new FormControl(''), */
 
-  deleteCategoryGroup(categoryGroup?: CategoryGroup) {
-    if (categoryGroup) {
-      console.log('categoryGroup delete');
-    }
-  }
+  categoryColors = CategoryGroupColors;
 
-  deleteCategory(category?: Category) {
-    if (category) {
-      console.log('subcategory delete');
-    }
+  constructor(@Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>) { }
+
+
+  ngOnInit(){
+    this.categoryGroupForm = new FormGroup({
+      name: this.name = new FormControl(''),
+      group: this.group = new FormControl(''),
+      color: this.color = new FormControl(''),
+     })
+     this.categoryForm = new FormGroup({
+      name_category: this.name_category = new FormControl(''),
+      color_category: this.color_category = new FormControl(''),
+     })
   }
 
   submitCategoryGroupForm(e: Event, form: FormGroupDirective) {
     e.preventDefault();
-
-    console.log(this.categoryGroupForm);
-
     if (this.categoryGroupForm.valid && this.categoryGroupForm.dirty) {
+      let categoryGroup = this.categoryGroupForm.value
+      categoryGroup.categories = []
+      this.dispatcher.next(new FluxAction(FluxActionTypes.Create,'categoryGroup', null, categoryGroup))
+      this.hideModal();
+    }
+  }
 
-      // store or create
-
-      form.resetForm();
-      this.categoryGroupForm.reset();
-      this.categoryGroupForm.markAsUntouched();
-
+  editCategoryGroup(){
+    if (this.categoryGroupForm.valid && this.categoryGroupForm.dirty) {
+      this.dispatcher.next(new FluxAction(FluxActionTypes.Delete,'categoryGroup', null, this.categoryGroup))
+      this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'categoryGroup', null, this.categoryGroupForm.value))
       this.hideModal();
     }
   }
 
   submitCategoryForm(e: Event, form: FormGroupDirective) {
     e.preventDefault();
-
-    console.log(this.categoryForm);
-
     if (this.categoryForm.valid && this.categoryForm.dirty) {
-
-      // store or create
-
-      form.resetForm();
-      this.categoryForm.reset();
-      this.categoryForm.markAsUntouched();
-
+      let categoryGroup = this.categoryGroup
+      categoryGroup!.categories = this.categoryForm.value
+      this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'category', null, categoryGroup))
       this.hideModal();
     }
   }
+
+  deleteCategoryGroup() {
+    this.dispatcher.next(new FluxAction(FluxActionTypes.Delete,'categoryGroup', null, this.categoryGroup))
+    this.hideModal();
+  }
+
+  hideModal() {
+    document.getElementById('category-form')?.classList.remove('is-active');
+    this.categoryGroupForm.reset();
+    this.categoryForm.reset();
+    document.getElementById('category-group-form')?.classList.add('is-hidden');
+    document.getElementById('subcategory-form')?.classList.add('is-hidden');
+  }
+
+
+
+  deleteCategory() {
+    if (true) {
+      console.log('subcategory delete');
+    }
+  }
+
+
+
+
+
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['categoryGroup']?.currentValue?.name) {
