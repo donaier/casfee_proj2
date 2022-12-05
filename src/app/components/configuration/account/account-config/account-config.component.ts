@@ -40,6 +40,7 @@ export class AccountConfigComponent implements OnInit, OnDestroy {
   editAccount(account: Account) {
     this.accountForForm = account
     this.selector = "edit"
+    console.log(account);
     document.getElementById('bank-account-form')?.classList.add('is-active');
   }
 

@@ -4,7 +4,7 @@ import { Subject } from 'rxjs'
 import { FluxAction, FluxActionTypes } from '../shared/types/actions.type'
 
 
-import { doc, Firestore, setDoc } from '@angular/fire/firestore'
+import { deleteDoc, doc, Firestore, setDoc } from '@angular/fire/firestore'
 
 // Types
 
@@ -18,55 +18,61 @@ export class UploadService {
     constructor(@Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>, private firestore: Firestore) {
       this.dispatcher.subscribe(async (action: FluxAction) => {
         switch (action.type) {
-            case FluxActionTypes.AddTransaction:
+          case FluxActionTypes.Create:
+            if(action.selector ==='account'){
+              const docRef_add = doc(this.firestore, 'accounts', action.account!.name)
+              await setDoc(docRef_add, action.account)
+            }
+            if(action.selector ==='categoryGroup'){
 
-              break
-            case FluxActionTypes.UpdateTransaction:
+            }
+            if(action.selector ==='category'){
 
-              break
-            case FluxActionTypes.DeleteTransaction:
+            }
+            if(action.selector ==='transaction'){
 
-              break
-            case FluxActionTypes.AddAccount:
+            }
+            if(action.selector ==='csvMask'){
+              const docRef_add = doc(this.firestore, 'csvMasks', action.csvMask!.name)
+              await setDoc(docRef_add, action.csvMask)
+            }
+            break
+          case FluxActionTypes.Update:
+            if(action.selector ==='account'){
+              const docRef_update = doc(this.firestore, 'accounts', action.account!.name)
+              await setDoc(docRef_update, action.account)
+            }
+            if(action.selector ==='categoryGroup'){
 
-              /*
-              const docRef = doc(this.firestore, 'Kontos', data.Name)
-              await setDoc(docRef, data)
-              .then(() => {
-                console.log("its oke");
-              })
-              .catch(error => {
-              console.log(error);
-              })
-              */
+            }
+            if(action.selector ==='category'){
 
-              break
-            case FluxActionTypes.UpdateAccount:
+            }
+            if(action.selector ==='transaction'){
 
-              break
-            case FluxActionTypes.DeleteAccount:
+            }
+            if(action.selector ==='csvMask'){
+              const docRef_update = doc(this.firestore, 'csvMasks', action.csvMask!.name)
+              await setDoc(docRef_update, action.csvMask)
+            }
+            break
+          case FluxActionTypes.Delete:
+            if(action.selector ==='account'){
+              await deleteDoc(doc(this.firestore, 'accounts', action.account!.name))
+            }
+            if(action.selector ==='categoryGroup'){
 
-              break
-            case FluxActionTypes.AddCategoryGroup:
+            }
+            if(action.selector ==='category'){
 
-              break
-            case FluxActionTypes.UpdateCategoryGroup:
+            }
+            if(action.selector ==='transaction'){
 
-              break
-            case FluxActionTypes.DeleteCategoryGroup:
-
-              break
-            case FluxActionTypes.AddCategory:
-              console.log('store to firestore');
-              break
-            case FluxActionTypes.UpdateCategory:
-
-              break
-            case FluxActionTypes.DeleteCategory:
-
-              break
-            default:
-              throw new Error('operation unknown')
+            }
+            if(action.selector ==='csvMask'){
+              await deleteDoc(doc(this.firestore, 'csvMasks', action.csvMask!.name))
+            }
+            break
         }
       })
     }

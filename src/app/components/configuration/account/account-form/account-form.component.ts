@@ -16,14 +16,10 @@ export class AccountFormComponent implements OnInit, OnChanges {
   @Input() csvMasks: csvMask[] | undefined
   @Input() selector: string | undefined
 
- // accountForm: FormGroup = new FormGroup(AccountForm);
-
   accountColors = AccountColors
- // modalTitle: string = 'create new Account'
-
   accountForm!: FormGroup
   name!: FormControl
-  shortname!: FormControl
+  shortName!: FormControl
   description!: FormControl
   initialValue!: FormControl
   color!: FormControl
@@ -34,7 +30,7 @@ export class AccountFormComponent implements OnInit, OnChanges {
   ngOnInit(){
    this.accountForm = new FormGroup({
     name: this.name = new FormControl(''),
-    shortname: this.shortname = new FormControl(''),
+    shortName: this.shortName = new FormControl(''),
     description: this.description = new FormControl(''),
     initialValue: this.initialValue = new FormControl(''),
     color: this.color = new FormControl(''),
@@ -52,31 +48,39 @@ export class AccountFormComponent implements OnInit, OnChanges {
     if(this.accountForm.valid) {
       let account = this.accountForm.value
       account.currentValue = this.initialValue.value
-      this.dispatcher.next(new FluxAction(FluxActionTypes.AddAccount, null, null, null, account))
+      this.dispatcher.next(new FluxAction(FluxActionTypes.Create,'account', null, null, null, account))
       this.accountForm.reset();
       this.hideModal();
     }
   }
 
   deleteAccount(){
-    this.dispatcher.next(new FluxAction(FluxActionTypes.DeleteAccount, null, null, null, this.account))
+    this.dispatcher.next(new FluxAction(FluxActionTypes.Delete,'account', null, null, null, this.account))
     this.hideModal();
   }
 
   editAccount(){
     if(this.accountForm.valid) {
+      this.deleteAccount()
       let account = this.accountForm.value
-      account.currentValue = this.initialValue.value
-      this.dispatcher.next(new FluxAction(FluxActionTypes.AddAccount, null, null, null, account))
-      this.accountForm.reset();
+      account.currentValue = this.account?.currentValue
+      this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'account', null, null, null, account))
     }
-
+    this.accountForm.reset();
     this.hideModal();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['account']?.currentValue?.name) {
-      this.accountForm.patchValue(changes['account'].currentValue)
+    if(changes['account']?.currentValue?.name) {
+      this.accountForm.patchValue(this.account!)
     }
-  }
+   }
+
+
+// Refactoring : Edit: Color & csv Mask wird nicht angezeigt.
+// Edit Account initial Value / current value sperren.
+// Accounts Csv Masks noch undefined & Initial & CurrentValue anzeige unschoen.
+
+// Layout : Feste Groesse der Account Container
+
 }

@@ -10,7 +10,7 @@ import { Transaction } from '../types/transaction'
 import { FluxAction, FluxActionTypes } from '../types/actions.type'
 
 // Firestore
-import { deleteDoc, doc, Firestore, onSnapshot, query, setDoc, updateDoc } from '@angular/fire/firestore'
+import { Firestore, onSnapshot, query } from '@angular/fire/firestore'
 import { collection } from '@firebase/firestore'
 
 
@@ -95,50 +95,6 @@ export class FluxStore {
             this.CsvMasks.next(this.CsvMasks_all)
           })
           break
-          case FluxActionTypes.AddTransaction:
-
-            break
-          case FluxActionTypes.UpdateTransaction:
-
-            break
-          case FluxActionTypes.DeleteTransaction:
-
-            break
-          case FluxActionTypes.AddAccount:
-            const docRef_add = doc(this.firestore, 'accounts', action.account!.name)
-            await setDoc(docRef_add, action.account)
-            break
-          case FluxActionTypes.UpdateAccount:
-            const docRef_update = doc(this.firestore, 'accounts', action.account!.name)
-
-
-
-
-            break
-          case FluxActionTypes.DeleteAccount:
-            await deleteDoc(doc(this.firestore, 'accounts', action.account!.name))
-            break
-          case FluxActionTypes.AddCategoryGroup:
-
-            break
-          case FluxActionTypes.UpdateCategoryGroup:
-
-            break
-          case FluxActionTypes.DeleteCategoryGroup:
-
-            break
-          case FluxActionTypes.AddCategory:
-
-
-            break
-          case FluxActionTypes.UpdateCategory:
-
-            break
-          case FluxActionTypes.DeleteCategory:
-
-            break
-        default:
-          throw new Error('operation unknown')
       }
     })
   }
