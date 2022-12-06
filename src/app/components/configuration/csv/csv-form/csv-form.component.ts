@@ -51,7 +51,7 @@ export class CsvFormComponent implements OnChanges {
     this.hideModal()
   }
 
-  DeleteCsv(){
+  deleteCsvMask(){
     this.dispatcher.next(new FluxAction(FluxActionTypes.Delete,'csvMask', null, null, null, null, this.csv))
     this.hideModal()
   }

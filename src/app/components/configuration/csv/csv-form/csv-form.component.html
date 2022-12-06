@@ -76,11 +76,15 @@
        [disabled]="csvForm.invalid"
        *ngIf="selector ==='edit'">save</button>
       <button class="button is-success"
-      type="button"
-      (click)="submitCsvForm($event)"
-      [disabled]="csvForm.invalid"
-      *ngIf="selector==='create' || selector==='delete'">save</button>
+       type="button"
+       (click)="submitCsvForm($event)"
+       [disabled]="csvForm.invalid"
+       *ngIf="selector==='create' || selector==='delete'">save</button>
       <button class="button" type="button" (click)="hideModal()">cancel</button>
+      <button class="button is-danger"
+       type="button"
+       (click)="deleteCsvMask()"
+       *ngIf="selector ==='edit'">delete</button>
     </footer>
 
   </div>

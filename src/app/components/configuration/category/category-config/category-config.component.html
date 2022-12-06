@@ -18,7 +18,7 @@
         <div class="control" *ngFor="let category of categoryGroup.categories">
           <div class="tags has-addons">
             <span class="tag">{{category.name}}</span>
-            <a class="tag is-delete" (click)="deleteCategory(category)"></a>
+            <a class="tag is-delete" (click)="deleteCategory(category, categoryGroup)"></a>
           </div>
         </div>
       </div>

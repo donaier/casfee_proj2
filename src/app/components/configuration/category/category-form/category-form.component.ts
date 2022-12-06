@@ -2,6 +2,7 @@ import { Component, Inject, Input, OnChanges, OnInit, SimpleChanges } from '@ang
 import { FormControl, FormGroup, FormGroupDirective } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
+import { FluxStore } from 'src/app/shared/services/flux-store';
 import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
 import { Category, CategoryGroupForm, CategoryGroup, CategoryForm, CategoryGroupColors } from 'src/app/shared/types/category';
 
@@ -40,8 +41,7 @@ export class CategoryFormComponent implements OnChanges, OnInit {
 
   categoryColors = CategoryGroupColors;
 
-  constructor(@Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>) { }
-
+  constructor(@Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>, public store: FluxStore) { }
 
   ngOnInit(){
     this.categoryGroupForm = new FormGroup({
@@ -55,18 +55,31 @@ export class CategoryFormComponent implements OnChanges, OnInit {
      })
   }
 
-  submitCategoryGroupForm(e: Event, form: FormGroupDirective) {
-    e.preventDefault();
+  checkForm(){
     if (this.categoryGroupForm.valid && this.categoryGroupForm.dirty) {
       let categoryGroup = this.categoryGroupForm.value
       categoryGroup.categories = []
       this.dispatcher.next(new FluxAction(FluxActionTypes.Create,'categoryGroup', null, categoryGroup))
-      this.hideModal();
     }
+  }
+
+  submitCategoryGroupForm(e: Event, form: FormGroupDirective) {
+    e.preventDefault();
+    if(this.store.CategoryGroups_all.length === 0){
+      this.checkForm()
+    }
+    this.store.CategoryGroups_all.forEach(group => {
+      if(group.name !== this.categoryGroupForm.value.name){
+        this.checkForm()
+      }
+    })
+    this.hideModal();
   }
 
   editCategoryGroup(){
     if (this.categoryGroupForm.valid && this.categoryGroupForm.dirty) {
+      let categoryGroup_new = this.categoryGroupForm.value
+      categoryGroup_new.categories = this.categoryGroup!.categories
       this.dispatcher.next(new FluxAction(FluxActionTypes.Delete,'categoryGroup', null, this.categoryGroup))
       this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'categoryGroup', null, this.categoryGroupForm.value))
       this.hideModal();
@@ -76,8 +89,8 @@ export class CategoryFormComponent implements OnChanges, OnInit {
   submitCategoryForm(e: Event, form: FormGroupDirective) {
     e.preventDefault();
     if (this.categoryForm.valid && this.categoryForm.dirty) {
-      let categoryGroup = this.categoryGroup
-      categoryGroup!.categories = this.categoryForm.value
+      let categoryGroup = Object.assign(this.categoryGroup!)
+      categoryGroup.categories.push({name : this.categoryForm.value.name_category})
       this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'category', null, categoryGroup))
       this.hideModal();
     }
@@ -96,22 +109,10 @@ export class CategoryFormComponent implements OnChanges, OnInit {
     document.getElementById('subcategory-form')?.classList.add('is-hidden');
   }
 
-
-
-  deleteCategory() {
-    if (true) {
-      console.log('subcategory delete');
-    }
-  }
-
-
-
-
-
-
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['categoryGroup']?.currentValue?.name) {
       this.categoryGroupForm.patchValue(changes['categoryGroup'].currentValue);
     }
   }
+
 }

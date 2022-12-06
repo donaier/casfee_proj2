@@ -10,8 +10,16 @@ describe('basic tests for todo app', () => {
   });
 
   it('first todo item is "Go shopping"', () => {
-    page.getFirstTodo().should('contain.text', 'Go shopping');
+
   });
+
+  // Maximale Anzahl Accounts / Categorien
+  // Keine Eintraege vorhanden
+  // Updates erfolgreich durchfuehren - keine Aenderungen an Subklassen
+
+  // Firestore ist nicht verfuegbar --> was nun ???
+
+  // formulare ein neuer eintrag mitselbem namen -> evtl. mit validator loesen
 
 
 });
