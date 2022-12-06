@@ -64,10 +64,6 @@ export class FluxStore {
                 categories: doc.data()['categories']
               })
             })
-            if(this.CategoryGroups_all.length === 0){
-              console.log("hello")
-               //window.location.reload()
-            }
             this.CategoryGroups.next(this.CategoryGroups_all)
           })
           const q_transactions = query(collection(this.firestore, 'transactions'))

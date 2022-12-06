@@ -23,10 +23,16 @@ export class AccountConfigComponent implements OnInit, OnDestroy {
       if (data.length) {
         this.accounts = data;
       }
+      if(data.length === 0){
+        this.accounts = []
+      }
     }))
     this.subscriptions.push(this.store.CsvMasks.subscribe((data) => {
       if (data.length) {
         this.csvMasks = data;
+      }
+      if(data.length === 0){
+        this.csvMasks = []
       }
     }))
   }
