@@ -48,9 +48,10 @@ export class AccountFormComponent implements OnInit, OnChanges {
     if(this.accountForm.valid) {
       let account = this.accountForm.value
       account.currentValue = this.initialValue.value
+      account.csv = this.csvMasks?.find(mask => mask.name == account.csv)
       this.dispatcher.next(new FluxAction(FluxActionTypes.Create,'account', null, null, null, account))
-      this.accountForm.reset();
-      this.hideModal();
+      this.accountForm.reset()
+      this.hideModal()
     }
   }
 
@@ -75,12 +76,4 @@ export class AccountFormComponent implements OnInit, OnChanges {
       this.accountForm.patchValue(this.account!)
     }
    }
-
-
-// Refactoring : Edit: Color & csv Mask wird nicht angezeigt.
-// Edit Account initial Value / current value sperren.
-// Accounts Csv Masks noch undefined & Initial & CurrentValue anzeige unschoen.
-
-// Layout : Feste Groesse der Account Container
-
 }

@@ -10,7 +10,7 @@ Attribut "short" habe ich als platzsparenden Identifikator verwendet (Emojis). M
 
 Das "set" muss auf dem Account sein. Es beschreibt die Struktur des Imports (csv) um daraus normierte "Transactions" zu erstellen. (Hoffe, ich kann mich gut ausdrücken. Die Daten kommen als csv, die Werte können aber an versch. Positionen sein - Reihenfolge im csv ist bei den Banken unterschiedlich. Zusätzlich der Delimiter des csv - meist ';' oder ','.)
 
-Taufen wir das "set" doch um in "csvMask"
+Taufen wir das "set" doch um in "csvMask" (jetzt 'csv')
 
 currentValue macht Sinn! und sollte nach jeder transaktions-Action (add, update, delete) aktualisiert werden.
 
@@ -149,3 +149,28 @@ interface category {
   color: string,
   item : string,
 }
+
+
+## dran denken + refactoring
+
+// Maximale Anzahl Accounts / Categorien ?
+
+// Keine Eintraege vorhanden ? was anzeigen
+
+// Updates erfolgreich durchfuehren - keine Aenderungen an Subklassen
+
+// Firestore ist nicht verfuegbar --> was nun ???
+
+// formulare ein neuer eintrag mitselbem namen -> evtl. mit validator loesen
+
+account:
+// Refactoring : Edit: Color & csv Mask wird nicht angezeigt.
+// Edit Account initial Value / current value sperren.
+// Accounts Csv Masks noch undefined & Initial & CurrentValue anzeige unschoen.
+
+// Layout : Feste Groesse der Account Container
+
+
+donat:
+- form validation mit bulma klassen machen, dann können einige repetitive stylesheets gespart werden. was dann noch sein muss, auf einem übergeordneten, nicht pro komponente dasselbe
+- queryselektoren im csv-config-component ersetzen mit viewChild
