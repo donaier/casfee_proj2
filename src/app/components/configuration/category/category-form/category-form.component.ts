@@ -27,18 +27,6 @@ export class CategoryFormComponent implements OnChanges, OnInit {
   name_category!: FormControl
   color_category!: FormControl
 
-  /*
-  categoryForm!: FormGroup
-  name!: FormControl
-  color!: FormControl
-
-  group: new FormControl('', [Validators.required]),
-  name: new FormControl('', [Validators.required]),
-  color: new FormControl(''),
-
-  name: new FormControl('', [Validators.required]),
-  color: new FormControl(''), */
-
   categoryColors = CategoryGroupColors;
 
   constructor(@Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>, public store: FluxStore) { }

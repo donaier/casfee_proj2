@@ -15,7 +15,6 @@
      *ngIf="selector ==='create' || selector === 'edit'"
      novalidate>
       <section class="modal-card-body">
-        <!-- <input type="hidden" formControlName="id"> -->
         <div class="columns mb-0">
           <div class="column is-6">
             <label for="input-name" class="label">name:</label>
@@ -58,7 +57,7 @@
                 'has-success': color.valid && (color.dirty || color.touched)
               }"
               required>
-                <option *ngFor="let color of accountColors" value={{color.value}}>{{color.name}}</option>
+                <option *ngFor="let color of accountColors" value={{color.value}} [selected]="account?.color === color.value">{{color.name}}</option>
               </select>
             </div>
           </div>
@@ -111,7 +110,7 @@
               }"
               required>
                 <option  value="no_csvMask">No CsvMask</option>
-                <option *ngFor="let csvMask of csvMasks" value={{csvMask.name}}>{{csvMask.name}}</option>
+                <option *ngFor="let csvMask of csvMasks" value={{csvMask.name}} [selected]="account?.csv?.name === csvMask.name">{{csvMask.name}}</option>
             </select>
           </div>
         </div>

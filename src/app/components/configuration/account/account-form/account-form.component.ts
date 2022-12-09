@@ -12,6 +12,7 @@ import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
 })
 export class AccountFormComponent implements OnInit, OnChanges {
   @ViewChild('modal', { static: false }) modal!: ElementRef
+
   @Input() account: Account | undefined
   @Input() csvMasks: csvMask[] | undefined
   @Input() selector: string | undefined
@@ -40,7 +41,6 @@ export class AccountFormComponent implements OnInit, OnChanges {
 
   hideModal() {
     this.modal.nativeElement.classList.remove('is-active');
-    this.accountForm.reset();
   }
 
   submitAccountForm(e: Event) {
@@ -71,9 +71,11 @@ export class AccountFormComponent implements OnInit, OnChanges {
     this.hideModal();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if(changes['account']?.currentValue?.name) {
-      this.accountForm.patchValue(this.account!)
+  ngOnChanges(): void {
+    if (this.account) {
+      this.accountForm?.patchValue(this.account!)
+    } else {
+      this.accountForm?.reset()
     }
    }
 }
