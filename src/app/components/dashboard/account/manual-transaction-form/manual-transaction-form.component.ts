@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormGroupDirective } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { FluxStore } from 'src/app/shared/services/flux-store';
@@ -12,6 +12,7 @@ import { TransactionForm } from 'src/app/shared/types/transaction';
   styleUrls: ['./manual-transaction-form.component.scss']
 })
 export class ManualTransactionFormComponent implements OnInit, OnDestroy {
+  @ViewChild('modal') modal!: ElementRef
 
   @Input() account?: Account;
   public transactionForm: FormGroup = new FormGroup(TransactionForm);
@@ -33,7 +34,7 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
   }
 
   hideModal() {
-    document.getElementById('manual-transaction-form')?.classList.remove('is-active');
+    this.modal.nativeElement.classList.remove('is-active')
     this.transactionForm.reset();
   }
 

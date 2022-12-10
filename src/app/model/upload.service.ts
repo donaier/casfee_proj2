@@ -21,8 +21,6 @@ export class UploadService {
               const docRef_add = doc(this.firestore, 'categories', action.categoryGroup!.name)
               await setDoc(docRef_add, action.categoryGroup)
             }
-            // if(action.selector ==='category'){
-            // }
             if(action.selector ==='transaction'){
 
             }
@@ -31,6 +29,7 @@ export class UploadService {
               await setDoc(docRef_add, action.csvMask)
             }
             break
+
           case FluxActionTypes.Update:
             if(action.selector ==='account'){
               const docRef_update = doc(this.firestore, 'accounts', action.account!.name)
@@ -52,15 +51,13 @@ export class UploadService {
               await setDoc(docRef_update, action.csvMask)
             }
             break
+
           case FluxActionTypes.Delete:
             if(action.selector ==='account'){
               await deleteDoc(doc(this.firestore, 'accounts', action.account!.name))
             }
             if(action.selector ==='categoryGroup'){
               await deleteDoc(doc(this.firestore, 'categories', action.categoryGroup!.name))
-            }
-            if(action.selector ==='category'){
-
             }
             if(action.selector ==='transaction'){
 

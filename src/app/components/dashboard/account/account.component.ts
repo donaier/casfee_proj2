@@ -1,9 +1,10 @@
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
 import { FluxStore } from 'src/app/shared/services/flux-store';
 import { Account } from 'src/app/shared/types/account';
 import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
+import { ManualTransactionFormComponent } from './manual-transaction-form/manual-transaction-form.component';
 
 @Component({
   selector: 'app-account',
@@ -11,6 +12,7 @@ import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
   styleUrls: ['./account.component.scss']
 })
 export class AccountComponent implements OnInit, OnDestroy {
+  @ViewChild('manualTransactionModal') manualTransactionModal!: ManualTransactionFormComponent
 
   public accounts: Account[] = [];
   public selectedAccount?: Account;
@@ -34,7 +36,7 @@ export class AccountComponent implements OnInit, OnDestroy {
 
   openManualTransactionModal(account: Account) {
     this.selectedAccount = account;
-    document.getElementById('manual-transaction-form')?.classList.add('is-active');
+    this.manualTransactionModal.modal.nativeElement.classList.add('is-active')
   }
 
   ngOnDestroy() {
