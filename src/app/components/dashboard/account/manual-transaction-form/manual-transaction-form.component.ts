@@ -3,7 +3,7 @@ import { FormGroup, FormGroupDirective } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
 import { FluxStore } from 'src/app/shared/services/flux-store';
-import { Account } from 'src/app/shared/types/account';
+import { Account, calculateCurrentValue } from 'src/app/shared/types/account';
 import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
 import { Category, CategoryGroup } from 'src/app/shared/types/category';
 import { TransactionForm } from 'src/app/shared/types/transaction';
@@ -55,6 +55,8 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
     if(this.transactionForm.valid && this.transactionForm.dirty) {
       let account = Object.assign(this.account!)
       account.transactions.push(this.transactionForm.value)
+      account.currentValue = calculateCurrentValue(account)
+
       this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'account', null, null, null, account))
 
       this.hideModal()
