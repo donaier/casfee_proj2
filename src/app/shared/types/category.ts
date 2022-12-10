@@ -7,9 +7,9 @@ export interface CategoryGroup{
 }
 
 export interface Category{
-  group: string,
+  group?: string,
   name: string,
-  color: string
+  color?: string
 }
 
 export const CategoryGroupColors = [

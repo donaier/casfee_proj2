@@ -1,24 +1,44 @@
-<div class="modal" id="category-form">
+<div class="modal" id="category-form" #modal>
   <div class="modal-background"></div>
   <div class="modal-card">
 
     <header class="modal-card-head">
+      <p class="modal-card-title" *ngIf="selector ==='edit'">Edit: {{categoryGroup!.name}}</p>
+      <p class="modal-card-title" *ngIf="selector ==='create'">New CategoryGroup</p>
+      <p class="modal-card-title" *ngIf="selector ==='addCategory'">Add Category Item</p>
     </header>
 
     <!-- category Group -->
-    <form id="category-group-form" class="form is-hidden" [formGroup]="categoryGroupForm" #formDirective="ngForm" (ngSubmit)="submitCategoryGroupForm($event, formDirective)">
+    <form id="category-group-form" #modalCategoryGroupForm class="form is-hidden" [formGroup]="categoryGroupForm" #formDirective="ngForm" (ngSubmit)="submitCategoryGroupForm($event, formDirective)" novalidate>
       <section class="modal-card-body">
         <div class="columns mb-0">
           <div class="column is-8">
-            <label class="label">name:</label>
+            <label class="label" for="input-name">name:</label>
             <div class="control">
-              <input class="input" type="text" placeholder="name" formControlName="name">
+              <input class="input"
+               id="input-name"
+               type="text"
+               placeholder="name"
+               formControlName="name"
+               [ngClass]="{
+                'is-danger': name.invalid && (name.dirty || name.touched),
+                'is-success': name.valid && (name.dirty || name.touched)
+               }"
+               required>
             </div>
           </div>
           <div class="column">
-            <label class="label">color:</label>
+            <label class="label" for="select-color">color:</label>
             <div class="select">
-              <select name="color" formControlName="color">
+              <select name="color"
+               class="input--select input"
+               id="select-color"
+               formControlName="color"
+               [ngClass]="{
+                'is-danger': color.invalid && (color.dirty || color.touched),
+                'is-success': color.valid && (color.dirty || color.touched)
+               }"
+               required>
                 <option *ngFor="let color of categoryColors" value={{color.value}}>{{color.name}}</option>
               </select>
               <!-- <input class="input" type="text" placeholder="color" formControlName="color"> -->
@@ -27,20 +47,40 @@
         </div>
       </section>
       <footer class="modal-card-foot is-flex is-justify-content-center">
-        <button class="button is-success" type="submit">save</button>
+        <button class="button is-success"
+         type="submit"
+         [disabled]="categoryGroupForm.invalid"
+         *ngIf="selector ==='create'">save</button>
+         <button class="button is-success"
+         type="button"
+         [disabled]="categoryGroupForm.invalid"
+         *ngIf="selector ==='edit'"
+         (click)="editCategoryGroup()">save</button>
         <button class="button" type="button" (click)="hideModal()">cancel</button>
-        <button class="button is-danger" type="button" (click)="deleteCategoryGroup(categoryGroup)">delete</button>
+        <button class="button is-danger"
+         type="button"
+         (click)="deleteCategoryGroup()"
+         *ngIf="selector ==='edit'">delete</button>
       </footer>
     </form>
 
     <!-- sub-category -->
-    <form id="subcategory-form" class="form is-hidden" [formGroup]="categoryForm" #formDirective="ngForm" (ngSubmit)="submitCategoryForm($event, formDirective)">
+    <form id="subcategory-form" #modalCategoryForm class="form is-hidden" [formGroup]="categoryForm" #formDirective="ngForm" (ngSubmit)="submitCategoryForm($event, formDirective)" novalidate>
       <section class="modal-card-body">
         <div class="columns mb-0">
           <div class="column">
-            <label class="label">name:</label>
+            <label class="label" for="input-name-subcategory">name:</label>
             <div class="control">
-              <input class="input" type="text" placeholder="name" formControlName="name">
+              <input class="input"
+               id="input-name-subcategory"
+               type="text"
+               placeholder="name"
+               formControlName="name_category"
+               [ngClass]="{
+                'is-danger': name_category.invalid && (name_category.dirty || name_category.touched),
+                'is-success': name_category.valid && (name_category.dirty || name_category.touched)
+              }"
+               required>
             </div>
           </div>
         </div>
@@ -51,10 +91,12 @@
         </div>
       </section>
       <footer class="modal-card-foot is-flex is-justify-content-center">
-        <button class="button is-success" type="submit">save</button>
+        <button class="button is-success" type="submit" [disabled]="categoryForm.invalid">save</button>
         <button class="button" type="button" (click)="hideModal()">cancel</button>
-        <button class="button is-danger" type="button" (click)="deleteCategory(category)">delete</button>
       </footer>
     </form>
   </div>
+
+
+
 </div>

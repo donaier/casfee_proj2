@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component } from '@angular/core'
 import { Router } from '@angular/router'
+import { UploadService } from 'src/app/model/upload.service';
 
 @Component({
   selector: 'app-root',
@@ -10,5 +11,5 @@ import { Router } from '@angular/router'
 export class AppComponent {
   title = 'FinanceApp';
 
-  constructor(public router: Router) {}
+  constructor(public router: Router, private UploadService: UploadService) {}
 }

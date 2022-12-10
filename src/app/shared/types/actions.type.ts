@@ -1,29 +1,22 @@
 import { Transaction } from './transaction'
 import { Category, CategoryGroup } from './category'
-import { Account } from './account'
+import { Account, csvMask } from './account'
 
 export enum FluxActionTypes {
     Load,
-    AddTransaction,
-    UpdateTransaction,
-    DeleteTransaction,
-    AddAccount,
-    UpdateAccount,
-    DeleteAccount,
-    AddCategoryGroup,
-    UpdateCategoryGroup,
-    DeleteCategoryGroup,
-    AddCategory,
-    UpdateCategory,
-    DeleteCategory,
+    Create,
+    Update,
+    Delete
 }
 
 export class FluxAction {
     constructor(
         public type: FluxActionTypes,
+        public selector?: string | null,
         public transaction?: Transaction | null,
         public categoryGroup?: CategoryGroup | null,
         public category?: Category | null,
-        public account?: Account
+        public account?: Account | null,
+        public csvMask?: csvMask
     ) {}
 }

@@ -12,7 +12,7 @@
           <span>
             {{account.name}}
           </span>
-          <span class="tag" [ngStyle]="{backgroundColor: account.color}">
+          <span class="tag">
             {{account.shortName}}
           </span>
         </p>
@@ -27,7 +27,7 @@
             <span class="title is-4">Fr. {{account.currentValue}}</span>
           </p>
           <small>Csv mask:</small>
-          <p>mask identifier from mask obj</p>
+          <p>{{account.csv || 'no csv mask selected'}}</p>
         </div>
       </div>
       <footer class="card-footer">
@@ -38,4 +38,4 @@
   </div>
 </div>
 
-<app-account-form [account]="accountForForm"></app-account-form>
+<app-account-form #accountModal [account]="accountForForm" [csvMasks]="csvMasks" [selector]="selector"></app-account-form>

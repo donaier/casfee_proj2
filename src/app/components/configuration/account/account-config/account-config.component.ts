@@ -1,7 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { FluxStore } from 'src/app/shared/services/flux-store';
-import { Account } from 'src/app/shared/types/account';
+import { Account, csvMask } from 'src/app/shared/types/account';
+import { AccountFormComponent } from '../account-form/account-form.component';
 
 @Component({
   selector: 'app-account-config',
@@ -9,41 +10,54 @@ import { Account } from 'src/app/shared/types/account';
   styleUrls: ['./account-config.component.scss']
 })
 export class AccountConfigComponent implements OnInit, OnDestroy {
+  @ViewChild('accountModal') accountModal!: AccountFormComponent
 
   accounts: Account[] = []
-  subscription : Subscription | undefined
-  public accountForForm?: Account
+  subscriptions : Subscription[] = []
+  csvMasks : csvMask[] = []
+  accountForForm?: Account
+  selector : string | undefined
 
   constructor(public store: FluxStore) {}
 
   ngOnInit() {
-    this.subscription = this.store.Accounts.subscribe((data) => {
+    this.subscriptions.push(this.store.Accounts.subscribe((data) => {
       if (data.length) {
         this.accounts = data;
       }
-    })
+      if(data.length === 0){
+        this.accounts = []
+      }
+    }))
+    this.subscriptions.push(this.store.CsvMasks.subscribe((data) => {
+      if (data.length) {
+        this.csvMasks = data;
+      }
+      if(data.length === 0){
+        this.csvMasks = []
+      }
+    }))
   }
 
   createAccount() {
     this.accountForForm = undefined
-    document.getElementById('bank-account-form')?.classList.add('is-active');
+    this.selector = "create"
+    this.accountModal.modal.nativeElement.classList.add('is-active')
   }
 
   editAccount(account: Account) {
     this.accountForForm = account
-    document.getElementById('bank-account-form')?.classList.add('is-active');
+    this.selector = "edit"
+    this.accountModal.modal.nativeElement.classList.add('is-active')
   }
 
   deleteAccount(account: Account) {
-    console.log('account delete')
+    this.selector = "delete"
+    this.accountForForm = account
+    this.accountModal.modal.nativeElement.classList.add('is-active')
   }
 
   ngOnDestroy(){
-    this.subscription?.unsubscribe()
+    this.subscriptions.forEach(subscription => subscription.unsubscribe())
   }
-
-
-
-
-
 }

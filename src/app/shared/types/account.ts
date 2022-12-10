@@ -1,4 +1,4 @@
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { Transaction } from './transaction'
 
 export interface Account {
@@ -8,7 +8,7 @@ export interface Account {
   initialValue: number,
   currentValue: number,
   color: string,
-  csv: csvMask,
+  csv: string,
   transactions?: Transaction[]
 }
 
