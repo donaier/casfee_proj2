@@ -8,12 +8,13 @@ import { AuthentificationService } from 'src/app/shared/services/authentificatio
 })
 
 export class NavigationComponent {
+  @ViewChild('navMenu') navMenu!: ElementRef
   constructor(private AuthService: AuthentificationService) {}
 
   expandBurgerMenu(e: Event) {
     const btn = <HTMLElement>e.target;
     btn.classList.toggle('is-active');
-    document.getElementById('nav-menu')?.classList.toggle('is-active')
+    this.navMenu.nativeElement.classList.toggle('is-active')
   }
 
   logout(){
