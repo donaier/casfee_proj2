@@ -27,7 +27,7 @@
             <span class="title is-4">Fr. {{account.currentValue}}</span>
           </p>
           <small>Csv mask:</small>
-          <p>{{account.csv ? account.csv.name : 'no csv mask selected'}}</p>
+          <p>{{account.csv.name || 'no csv mask selected'}}</p>
         </div>
       </div>
       <footer class="card-footer">
