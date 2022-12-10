@@ -153,24 +153,20 @@ interface category {
 
 ## dran denken + refactoring
 
-// Maximale Anzahl Accounts / Categorien ?
-
-// Keine Eintraege vorhanden ? was anzeigen
-
-// Updates erfolgreich durchfuehren - keine Aenderungen an Subklassen
-
-// Firestore ist nicht verfuegbar --> was nun ???
-
-// formulare ein neuer eintrag mitselbem namen -> evtl. mit validator loesen
+- Maximale Anzahl Accounts / Categorien ?
+- Keine Eintraege vorhanden ? was anzeigen
+- Updates erfolgreich durchfuehren - keine Aenderungen an Subklassen
+- Firestore ist nicht verfuegbar --> was nun ???
+- formulare ein neuer eintrag mitselbem namen -> evtl. mit validator loesen
 
 account:
-// Refactoring : Edit: Color & csv Mask wird nicht angezeigt. -> color habe ich gemacht, csv verhält sich komisch. wir könnten hier nur den "name" als identifier speichern und das csvMask objekt dann holen wenns benötigt wird (beim csv upload)
-// Edit Account initial Value / current value sperren.
-// Accounts Csv Masks noch undefined & Initial & CurrentValue anzeige unschoen.
+- ~~Refactoring : Edit: Color & csv Mask wird nicht angezeigt. -> color habe ich gemacht, csv verhält sich komisch. wir könnten hier nur den "name" als identifier speichern und das csvMask objekt dann holen wenns benötigt wird (beim csv upload)~~
+- Edit Account initial Value / current value sperren.
+- Accounts Csv Masks noch undefined & Initial & CurrentValue anzeige unschoen.
 
 // Layout : Feste Groesse der Account Container
 
 
 donat:
-- form validation mit bulma klassen machen, dann können einige repetitive stylesheets gespart werden. was dann noch sein muss, auf einem übergeordneten, nicht pro komponente dasselbe
-- queryselektoren im csv-config-component ersetzen mit viewChild
+- ~~form validation mit bulma klassen machen, dann können einige repetitive stylesheets gespart werden. was dann noch sein muss, auf einem übergeordneten, nicht pro komponente dasselbe~~
+- ~~queryselektoren im csv-config-component ersetzen mit viewChild~~
