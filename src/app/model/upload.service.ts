@@ -21,9 +21,8 @@ export class UploadService {
               const docRef_add = doc(this.firestore, 'categories', action.categoryGroup!.name)
               await setDoc(docRef_add, action.categoryGroup)
             }
-            if(action.selector ==='category'){
-
-            }
+            // if(action.selector ==='category'){
+            // }
             if(action.selector ==='transaction'){
 
             }

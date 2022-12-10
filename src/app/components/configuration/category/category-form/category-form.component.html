@@ -1,4 +1,4 @@
-<div class="modal" id="category-form">
+<div class="modal" id="category-form" #modal>
   <div class="modal-background"></div>
   <div class="modal-card">
 
@@ -9,7 +9,7 @@
     </header>
 
     <!-- category Group -->
-    <form id="category-group-form" class="form is-hidden" [formGroup]="categoryGroupForm" #formDirective="ngForm" (ngSubmit)="submitCategoryGroupForm($event, formDirective)" novalidate>
+    <form id="category-group-form" #modalCategoryGroupForm class="form is-hidden" [formGroup]="categoryGroupForm" #formDirective="ngForm" (ngSubmit)="submitCategoryGroupForm($event, formDirective)" novalidate>
       <section class="modal-card-body">
         <div class="columns mb-0">
           <div class="column is-8">
@@ -65,7 +65,7 @@
     </form>
 
     <!-- sub-category -->
-    <form id="subcategory-form" class="form is-hidden" [formGroup]="categoryForm" #formDirective="ngForm" (ngSubmit)="submitCategoryForm($event, formDirective)" novalidate>
+    <form id="subcategory-form" #modalCategoryForm class="form is-hidden" [formGroup]="categoryForm" #formDirective="ngForm" (ngSubmit)="submitCategoryForm($event, formDirective)" novalidate>
       <section class="modal-card-body">
         <div class="columns mb-0">
           <div class="column">
