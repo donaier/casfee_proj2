@@ -21,8 +21,8 @@
                placeholder="name"
                formControlName="name"
                [ngClass]="{
-                'has-danger': name.invalid && (name.dirty || name.touched),
-                'has-success': name.valid && (name.dirty || name.touched)
+                'is-danger': name.invalid && (name.dirty || name.touched),
+                'is-success': name.valid && (name.dirty || name.touched)
                }"
                required>
             </div>
@@ -31,12 +31,12 @@
             <label class="label" for="select-color">color:</label>
             <div class="select">
               <select name="color"
-               class="input--select"
+               class="input--select input"
                id="select-color"
                formControlName="color"
                [ngClass]="{
-                'has-danger': color.invalid && (color.dirty || color.touched),
-                'has-success': color.valid && (color.dirty || color.touched)
+                'is-danger': color.invalid && (color.dirty || color.touched),
+                'is-success': color.valid && (color.dirty || color.touched)
                }"
                required>
                 <option *ngFor="let color of categoryColors" value={{color.value}}>{{color.name}}</option>
@@ -77,8 +77,8 @@
                placeholder="name"
                formControlName="name_category"
                [ngClass]="{
-                'has-danger': name_category.invalid && (name_category.dirty || name_category.touched),
-                'has-success': name_category.valid && (name_category.dirty || name_category.touched)
+                'is-danger': name_category.invalid && (name_category.dirty || name_category.touched),
+                'is-success': name_category.valid && (name_category.dirty || name_category.touched)
               }"
                required>
             </div>

@@ -25,8 +25,8 @@
                placeholder="name"
                formControlName="name"
                [ngClass]="{
-                'has-danger': name.invalid && (name.dirty || name.touched),
-                'has-success': name.valid && (name.dirty || name.touched)
+                'is-danger': name.invalid && (name.dirty || name.touched),
+                'is-success': name.valid && (name.dirty || name.touched)
               }"
               required>
             </div>
@@ -40,8 +40,8 @@
                placeholder="delimiter"
                formControlName="delimiter"
                [ngClass]="{
-                'has-danger': delimiter.invalid && (delimiter.dirty || delimiter.touched),
-                'has-success': delimiter.valid && (delimiter.dirty || delimiter.touched)
+                'is-danger': delimiter.invalid && (delimiter.dirty || delimiter.touched),
+                'is-success': delimiter.valid && (delimiter.dirty || delimiter.touched)
                }"
                required>
             </div>
@@ -56,8 +56,8 @@
              placeholder=";date;info;amount;"
              formControlName="mask"
              [ngClass]="{
-              'has-danger': mask.invalid && (mask.dirty || mask.touched),
-              'has-success': mask.valid && (mask.dirty || mask.touched)
+              'is-danger': mask.invalid && (mask.dirty || mask.touched),
+              'is-success': mask.valid && (mask.dirty || mask.touched)
              }"
              required>
           </div>
