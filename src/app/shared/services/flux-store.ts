@@ -66,22 +66,21 @@ export class FluxStore {
             })
             this.CategoryGroups.next(this.CategoryGroups_all)
           })
-          const q_transactions = query(collection(this.firestore, 'transactions'))
-          const listener_transactions = onSnapshot(q_transactions, (querySnapshot) => {
-            this.Transactions_all = []
-            querySnapshot.forEach((doc) => {
-              this.Transactions_all.push({
-                docName: doc.id,
-                description: doc.data()['description'],
-                forAccount: doc.data()['forAccount'],
-                fromAccount: doc.data()['fromAccount'],
-                amount: doc.data()['amount'],
-                date: doc.data()['date'],
-                category: doc.data()['category']
-              })
-            })
-            this.CategoryGroups.next(this.CategoryGroups_all)
-          })
+          // const q_transactions = query(collection(this.firestore, 'transactions'))
+          // const listener_transactions = onSnapshot(q_transactions, (querySnapshot) => {
+          //   this.Transactions_all = []
+          //   querySnapshot.forEach((doc) => {
+          //     this.Transactions_all.push({
+          //       docName: doc.id,
+          //       description: doc.data()['description'],
+          //       fromAccount: doc.data()['fromAccount'],
+          //       amount: doc.data()['amount'],
+          //       date: doc.data()['date'],
+          //       category: doc.data()['category']
+          //     })
+          //   })
+          //   this.CategoryGroups.next(this.CategoryGroups_all)
+          // })
           const q_csvMasks = query(collection(this.firestore, 'csvMasks'))
           const listener_csvMasks = onSnapshot(q_csvMasks, (querySnapshot) => {
             this.CsvMasks_all = []

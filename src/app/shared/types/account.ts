@@ -9,7 +9,7 @@ export interface Account {
   currentValue: number,
   color: string,
   csv: string,
-  transactions?: Transaction[]
+  transactions: Transaction[]
 }
 
 export const AccountForm = {

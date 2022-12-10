@@ -21,9 +21,6 @@ export class UploadService {
               const docRef_add = doc(this.firestore, 'categories', action.categoryGroup!.name)
               await setDoc(docRef_add, action.categoryGroup)
             }
-            if(action.selector ==='transaction'){
-
-            }
             if(action.selector ==='csvMask'){
               const docRef_add = doc(this.firestore, 'csvMasks', action.csvMask!.name)
               await setDoc(docRef_add, action.csvMask)
@@ -42,9 +39,6 @@ export class UploadService {
             if(action.selector ==='category'){
               const docRef = doc(this.firestore, 'categories', action.categoryGroup!.name)
               await updateDoc(docRef, {categories: action.categoryGroup!.categories} )
-            }
-            if(action.selector ==='transaction'){
-
             }
             if(action.selector ==='csvMask'){
               const docRef_update = doc(this.firestore, 'csvMasks', action.csvMask!.name)

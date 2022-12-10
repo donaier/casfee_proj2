@@ -47,7 +47,17 @@ export class AccountFormComponent implements OnInit, OnChanges {
     e.preventDefault();
     if(this.accountForm.valid) {
       let account = this.accountForm.value
-      account.currentValue = this.initialValue.value
+
+      if (this.account) {
+        // edit
+        account.transactions = this.account.transactions || []
+        // todo account.currentValue ausrechnen
+        account.currentValue = 0
+      } else {
+        // create
+        account.currentValue = this.initialValue.value
+        account.transactions = []
+      }
       this.dispatcher.next(new FluxAction(FluxActionTypes.Create,'account', null, null, null, account))
       this.hideModal()
     }
