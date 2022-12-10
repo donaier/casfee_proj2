@@ -109,8 +109,8 @@
                 'has-success': csv.valid && (csv.dirty || csv.touched)
               }"
               required>
-                <option  value="no_csvMask">No CsvMask</option>
-                <option *ngFor="let csvMask of csvMasks" value={{csvMask.name}} [selected]="account?.csv?.name === csvMask.name">{{csvMask.name}}</option>
+                <option  value="no csv mask selected">No CsvMask</option>
+                <option *ngFor="let csvMask of csvMasks" value={{csvMask.name}} [selected]="account?.csv === csvMask.name">{{csvMask.name}}</option>
             </select>
           </div>
         </div>

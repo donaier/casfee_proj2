@@ -48,11 +48,7 @@ export class AccountFormComponent implements OnInit, OnChanges {
     if(this.accountForm.valid) {
       let account = this.accountForm.value
       account.currentValue = this.initialValue.value
-      if (this.csvMasks?.find(mask => mask.name == account.csv)) {
-        account.csv = this.csvMasks?.find(mask => mask.name == account.csv)
-      }
       this.dispatcher.next(new FluxAction(FluxActionTypes.Create,'account', null, null, null, account))
-      this.accountForm.reset()
       this.hideModal()
     }
   }
@@ -62,16 +58,16 @@ export class AccountFormComponent implements OnInit, OnChanges {
     this.hideModal();
   }
 
-  editAccount(){
-    if(this.accountForm.valid) {
-      this.deleteAccount()
-      let account = this.accountForm.value
-      account.currentValue = this.account?.currentValue
-      this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'account', null, null, null, account))
-    }
-    this.accountForm.reset();
-    this.hideModal();
-  }
+  // editAccount(){
+  //   if(this.accountForm.valid) {
+  //     this.deleteAccount()
+  //     let account = this.accountForm.value
+  //     account.currentValue = this.account?.currentValue
+  //     this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'account', null, null, null, account))
+  //   }
+  //   this.accountForm.reset();
+  //   this.hideModal();
+  // }
 
   ngOnChanges(): void {
     if (this.account) {
@@ -79,5 +75,5 @@ export class AccountFormComponent implements OnInit, OnChanges {
     } else {
       this.accountForm?.reset()
     }
-   }
+  }
 }

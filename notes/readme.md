@@ -164,7 +164,7 @@ interface category {
 // formulare ein neuer eintrag mitselbem namen -> evtl. mit validator loesen
 
 account:
-// Refactoring : Edit: Color & csv Mask wird nicht angezeigt.
+// Refactoring : Edit: Color & csv Mask wird nicht angezeigt. -> color habe ich gemacht, csv verhält sich komisch. wir könnten hier nur den "name" als identifier speichern und das csvMask objekt dann holen wenns benötigt wird (beim csv upload)
 // Edit Account initial Value / current value sperren.
 // Accounts Csv Masks noch undefined & Initial & CurrentValue anzeige unschoen.
 
