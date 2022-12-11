@@ -1,4 +1,4 @@
-<div class="modal" id="category-form">
+<div class="modal" id="category-form" #modal>
   <div class="modal-background"></div>
   <div class="modal-card">
 
@@ -9,7 +9,7 @@
     </header>
 
     <!-- category Group -->
-    <form id="category-group-form" class="form is-hidden" [formGroup]="categoryGroupForm" #formDirective="ngForm" (ngSubmit)="submitCategoryGroupForm($event, formDirective)" novalidate>
+    <form id="category-group-form" #modalCategoryGroupForm class="form is-hidden" [formGroup]="categoryGroupForm" #formDirective="ngForm" (ngSubmit)="submitCategoryGroupForm($event, formDirective)" novalidate>
       <section class="modal-card-body">
         <div class="columns mb-0">
           <div class="column is-8">
@@ -21,8 +21,8 @@
                placeholder="name"
                formControlName="name"
                [ngClass]="{
-                'has-danger': name.invalid && (name.dirty || name.touched),
-                'has-success': name.valid && (name.dirty || name.touched)
+                'is-danger': name.invalid && (name.dirty || name.touched),
+                'is-success': name.valid && (name.dirty || name.touched)
                }"
                required>
             </div>
@@ -31,12 +31,12 @@
             <label class="label" for="select-color">color:</label>
             <div class="select">
               <select name="color"
-               class="input--select"
+               class="input--select input"
                id="select-color"
                formControlName="color"
                [ngClass]="{
-                'has-danger': color.invalid && (color.dirty || color.touched),
-                'has-success': color.valid && (color.dirty || color.touched)
+                'is-danger': color.invalid && (color.dirty || color.touched),
+                'is-success': color.valid && (color.dirty || color.touched)
                }"
                required>
                 <option *ngFor="let color of categoryColors" value={{color.value}}>{{color.name}}</option>
@@ -65,7 +65,7 @@
     </form>
 
     <!-- sub-category -->
-    <form id="subcategory-form" class="form is-hidden" [formGroup]="categoryForm" #formDirective="ngForm" (ngSubmit)="submitCategoryForm($event, formDirective)" novalidate>
+    <form id="subcategory-form" #modalCategoryForm class="form is-hidden" [formGroup]="categoryForm" #formDirective="ngForm" (ngSubmit)="submitCategoryForm($event, formDirective)" novalidate>
       <section class="modal-card-body">
         <div class="columns mb-0">
           <div class="column">
@@ -77,8 +77,8 @@
                placeholder="name"
                formControlName="name_category"
                [ngClass]="{
-                'has-danger': name_category.invalid && (name_category.dirty || name_category.touched),
-                'has-success': name_category.valid && (name_category.dirty || name_category.touched)
+                'is-danger': name_category.invalid && (name_category.dirty || name_category.touched),
+                'is-success': name_category.valid && (name_category.dirty || name_category.touched)
               }"
                required>
             </div>

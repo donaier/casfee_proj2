@@ -14,8 +14,8 @@
               data-cy="Email"
               placeholder="Email"
               [ngClass]="{
-                'has-danger': email.invalid && (email.dirty || email.touched),
-                'has-success': email.valid && (email.dirty || email.touched)
+                'is-danger': email.invalid && (email.dirty || email.touched),
+                'is-success': email.valid && (email.dirty || email.touched)
               }"
               formControlName="email"
               #userName
@@ -32,8 +32,8 @@
               data-cy="Password"
               placeholder="Password"
               [ngClass]="{
-                'has-danger': password.invalid && (password.dirty || password.touched),
-                'has-success': password.valid && (password.dirty || password.touched)
+                'is-danger': password.invalid && (password.dirty || password.touched),
+                'is-success': password.valid && (password.dirty || password.touched)
               }"
               formControlName="password"
               #userPassword
@@ -57,7 +57,5 @@
     </div>
   </div>
 </section>
-
-
 
 <!--  routerLink="/dashboard"  -->

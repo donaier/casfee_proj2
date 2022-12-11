@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, Inject, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormGroupDirective } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
@@ -13,6 +13,10 @@ import { Category, CategoryGroupForm, CategoryGroup, CategoryForm, CategoryGroup
 })
 export class CategoryFormComponent implements OnChanges, OnInit {
 
+  @ViewChild('modal', { static: false }) modal!: ElementRef
+  @ViewChild('modalCategoryGroupForm', { static: false }) modalCategoryGroupForm!: ElementRef
+  @ViewChild('modalCategoryForm', { static: false }) modalCategoryForm!: ElementRef
+
   @Input() category?: Category
   @Input() categoryGroup?: CategoryGroup
   @Input() selector?: string
@@ -26,18 +30,6 @@ export class CategoryFormComponent implements OnChanges, OnInit {
   categoryForm!: FormGroup
   name_category!: FormControl
   color_category!: FormControl
-
-  /*
-  categoryForm!: FormGroup
-  name!: FormControl
-  color!: FormControl
-
-  group: new FormControl('', [Validators.required]),
-  name: new FormControl('', [Validators.required]),
-  color: new FormControl(''),
-
-  name: new FormControl('', [Validators.required]),
-  color: new FormControl(''), */
 
   categoryColors = CategoryGroupColors;
 
@@ -102,11 +94,11 @@ export class CategoryFormComponent implements OnChanges, OnInit {
   }
 
   hideModal() {
-    document.getElementById('category-form')?.classList.remove('is-active');
+    this.modal.nativeElement.classList.remove('is-active')
     this.categoryGroupForm.reset();
     this.categoryForm.reset();
-    document.getElementById('category-group-form')?.classList.add('is-hidden');
-    document.getElementById('subcategory-form')?.classList.add('is-hidden');
+    this.modalCategoryGroupForm.nativeElement.classList.add('is-hidden')
+    this.modalCategoryForm.nativeElement.classList.add('is-hidden')
   }
 
   ngOnChanges(changes: SimpleChanges): void {

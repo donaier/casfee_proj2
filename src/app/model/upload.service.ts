@@ -6,12 +6,6 @@ import { FluxAction, FluxActionTypes } from '../shared/types/actions.type'
 
 import { deleteDoc, doc, Firestore, setDoc, updateDoc } from '@angular/fire/firestore'
 
-// Types
-
-import { Transaction } from 'src/app/shared/types/transaction'
-import { Account } from 'src/app/shared/types/account'
-import { Category } from 'src/app/shared/types/category'
-
 @Injectable()
 
 export class UploadService {
@@ -27,11 +21,8 @@ export class UploadService {
               const docRef_add = doc(this.firestore, 'categories', action.categoryGroup!.name)
               await setDoc(docRef_add, action.categoryGroup)
             }
-            if(action.selector ==='category'){
-
-
-
-            }
+            // if(action.selector ==='category'){
+            // }
             if(action.selector ==='transaction'){
 
             }

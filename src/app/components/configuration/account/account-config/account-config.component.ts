@@ -1,7 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { FluxStore } from 'src/app/shared/services/flux-store';
 import { Account, csvMask } from 'src/app/shared/types/account';
+import { AccountFormComponent } from '../account-form/account-form.component';
 
 @Component({
   selector: 'app-account-config',
@@ -9,6 +10,7 @@ import { Account, csvMask } from 'src/app/shared/types/account';
   styleUrls: ['./account-config.component.scss']
 })
 export class AccountConfigComponent implements OnInit, OnDestroy {
+  @ViewChild('accountModal') accountModal!: AccountFormComponent
 
   accounts: Account[] = []
   subscriptions : Subscription[] = []
@@ -40,24 +42,22 @@ export class AccountConfigComponent implements OnInit, OnDestroy {
   createAccount() {
     this.accountForForm = undefined
     this.selector = "create"
-    document.getElementById('bank-account-form')?.classList.add('is-active');
+    this.accountModal.modal.nativeElement.classList.add('is-active')
   }
 
   editAccount(account: Account) {
     this.accountForForm = account
     this.selector = "edit"
-    console.log(account);
-    document.getElementById('bank-account-form')?.classList.add('is-active');
+    this.accountModal.modal.nativeElement.classList.add('is-active')
   }
 
   deleteAccount(account: Account) {
     this.selector = "delete"
     this.accountForForm = account
-    document.getElementById('bank-account-form')?.classList.add('is-active');
+    this.accountModal.modal.nativeElement.classList.add('is-active')
   }
 
   ngOnDestroy(){
     this.subscriptions.forEach(subscription => subscription.unsubscribe())
   }
-
 }

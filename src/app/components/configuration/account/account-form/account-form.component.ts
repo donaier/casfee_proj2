@@ -12,6 +12,7 @@ import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
 })
 export class AccountFormComponent implements OnInit, OnChanges {
   @ViewChild('modal', { static: false }) modal!: ElementRef
+
   @Input() account: Account | undefined
   @Input() csvMasks: csvMask[] | undefined
   @Input() selector: string | undefined
@@ -40,7 +41,6 @@ export class AccountFormComponent implements OnInit, OnChanges {
 
   hideModal() {
     this.modal.nativeElement.classList.remove('is-active');
-    this.accountForm.reset();
   }
 
   submitAccountForm(e: Event) {
@@ -49,8 +49,7 @@ export class AccountFormComponent implements OnInit, OnChanges {
       let account = this.accountForm.value
       account.currentValue = this.initialValue.value
       this.dispatcher.next(new FluxAction(FluxActionTypes.Create,'account', null, null, null, account))
-      this.accountForm.reset();
-      this.hideModal();
+      this.hideModal()
     }
   }
 
@@ -59,28 +58,22 @@ export class AccountFormComponent implements OnInit, OnChanges {
     this.hideModal();
   }
 
-  editAccount(){
-    if(this.accountForm.valid) {
-      this.deleteAccount()
-      let account = this.accountForm.value
-      account.currentValue = this.account?.currentValue
-      this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'account', null, null, null, account))
+  // editAccount(){
+  //   if(this.accountForm.valid) {
+  //     this.deleteAccount()
+  //     let account = this.accountForm.value
+  //     account.currentValue = this.account?.currentValue
+  //     this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'account', null, null, null, account))
+  //   }
+  //   this.accountForm.reset();
+  //   this.hideModal();
+  // }
+
+  ngOnChanges(): void {
+    if (this.account) {
+      this.accountForm?.patchValue(this.account!)
+    } else {
+      this.accountForm?.reset()
     }
-    this.accountForm.reset();
-    this.hideModal();
   }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if(changes['account']?.currentValue?.name) {
-      this.accountForm.patchValue(this.account!)
-    }
-   }
-
-
-// Refactoring : Edit: Color & csv Mask wird nicht angezeigt.
-// Edit Account initial Value / current value sperren.
-// Accounts Csv Masks noch undefined & Initial & CurrentValue anzeige unschoen.
-
-// Layout : Feste Groesse der Account Container
-
 }

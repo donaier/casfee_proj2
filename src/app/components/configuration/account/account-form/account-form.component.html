@@ -15,7 +15,6 @@
      *ngIf="selector ==='create' || selector === 'edit'"
      novalidate>
       <section class="modal-card-body">
-        <!-- <input type="hidden" formControlName="id"> -->
         <div class="columns mb-0">
           <div class="column is-6">
             <label for="input-name" class="label">name:</label>
@@ -26,8 +25,8 @@
                 placeholder="name"
                 formControlName="name"
                 [ngClass]="{
-                  'has-danger': name.invalid && (name.dirty || name.touched),
-                  'has-success': name.valid && (name.dirty || name.touched)
+                  'is-danger': name.invalid && (name.dirty || name.touched),
+                  'is-success': name.valid && (name.dirty || name.touched)
                 }"
                 required>
             </div>
@@ -40,8 +39,8 @@
                 placeholder="short"
                 formControlName="shortName"
                 [ngClass]="{
-                  'has-danger': shortName.invalid && (shortName.dirty || shortName.touched),
-                  'has-success': shortName.valid && (shortName.dirty || shortName.touched)
+                  'is-danger': shortName.invalid && (shortName.dirty || shortName.touched),
+                  'is-success': shortName.valid && (shortName.dirty || shortName.touched)
                 }"
                 required>
             </div>
@@ -54,11 +53,11 @@
               id="colorSelect"
               formControlName="color"
               [ngClass]="{
-                'has-danger': color.invalid && (color.dirty || color.touched),
-                'has-success': color.valid && (color.dirty || color.touched)
+                'is-danger': color.invalid && (color.dirty || color.touched),
+                'is-success': color.valid && (color.dirty || color.touched)
               }"
               required>
-                <option *ngFor="let color of accountColors" value={{color.value}}>{{color.name}}</option>
+                <option *ngFor="let color of accountColors" value={{color.value}} [selected]="account?.color === color.value">{{color.name}}</option>
               </select>
             </div>
           </div>
@@ -71,8 +70,8 @@
               placeholder="description"
               formControlName="description"
               [ngClass]="{
-                'has-danger': description.invalid && (description.dirty || description.touched),
-                'has-success': description.valid && (description.dirty || description.touched)
+                'is-danger': description.invalid && (description.dirty || description.touched),
+                'is-success': description.valid && (description.dirty || description.touched)
               }"
               required>
           </div>
@@ -86,8 +85,8 @@
                 placeholder="mulah..."
                 formControlName="initialValue"
                 [ngClass]="{
-                  'has-danger': initialValue.invalid && (initialValue.dirty || initialValue.touched),
-                  'has-success': initialValue.valid && (initialValue.dirty || initialValue.touched)
+                  'is-danger': initialValue.invalid && (initialValue.dirty || initialValue.touched),
+                  'is-success': initialValue.valid && (initialValue.dirty || initialValue.touched)
                 }"
                 required>
             </p>
@@ -102,16 +101,16 @@
           <label class="label" for="csvMaskSelect">csv Mask:</label>
           <div class="select">
             <select
-              class="input--select"
+              class="input--select input"
               id="csvMaskSelect"
               formControlName="csv"
               [ngClass]="{
-                'has-danger': csv.invalid && (csv.dirty || csv.touched),
-                'has-success': csv.valid && (csv.dirty || csv.touched)
+                'is-danger': csv.invalid && (csv.dirty || csv.touched),
+                'is-success': csv.valid && (csv.dirty || csv.touched)
               }"
               required>
-                <option  value="no_csvMask">No CsvMask</option>
-                <option *ngFor="let csvMask of csvMasks" value={{csvMask.name}}>{{csvMask.name}}</option>
+                <option  value="no csv mask selected">No CsvMask</option>
+                <option *ngFor="let csvMask of csvMasks" value={{csvMask.name}} [selected]="account?.csv === csvMask.name">{{csvMask.name}}</option>
             </select>
           </div>
         </div>
