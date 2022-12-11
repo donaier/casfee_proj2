@@ -4,7 +4,7 @@ import { Subject } from 'rxjs'
 import { FluxAction, FluxActionTypes } from '../shared/types/actions.type'
 
 
-import { deleteDoc, doc, Firestore, setDoc, updateDoc } from '@angular/fire/firestore'
+import { collection, deleteDoc, doc, Firestore, setDoc, updateDoc } from '@angular/fire/firestore'
 
 @Injectable()
 
@@ -21,10 +21,9 @@ export class UploadService {
               const docRef_add = doc(this.firestore, 'categories', action.categoryGroup!.name)
               await setDoc(docRef_add, action.categoryGroup)
             }
-            // if(action.selector ==='category'){
-            // }
             if(action.selector ==='transaction'){
-
+             const docRef_add = doc(collection(this.firestore, 'transactions'))
+             await setDoc(docRef_add, action.transaction)
             }
             if(action.selector ==='csvMask'){
               const docRef_add = doc(this.firestore, 'csvMasks', action.csvMask!.name)

@@ -1,4 +1,11 @@
-<div class="columns mb-3">
+
+ <section class="hero" *ngIf="!data">
+  <div class="has-text-centered">
+    <button class="button is-primary is-loading m-6">Loading</button>
+  </div>
+</section>
+
+<div class="columns mb-3" *ngIf="data">
   <div class="column" *ngFor="let account of accounts">
     <div class="card">
       <header class="card-header">

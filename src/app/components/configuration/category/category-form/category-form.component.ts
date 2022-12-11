@@ -21,7 +21,6 @@ export class CategoryFormComponent implements OnChanges, OnInit {
   @Input() categoryGroup?: CategoryGroup
   @Input() selector?: string
 
-//  categoryGroupForm: FormGroup = new FormGroup(CategoryGroupForm);
   categoryGroupForm!: FormGroup
   group!: FormControl
   name!: FormControl
@@ -32,6 +31,7 @@ export class CategoryFormComponent implements OnChanges, OnInit {
   color_category!: FormControl
 
   categoryColors = CategoryGroupColors;
+  equality_flag : boolean = false
 
   constructor(@Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>, public store: FluxStore) { }
 
@@ -56,15 +56,15 @@ export class CategoryFormComponent implements OnChanges, OnInit {
   }
 
   submitCategoryGroupForm(e: Event, form: FormGroupDirective) {
-    e.preventDefault();
-    if(this.store.CategoryGroups_all.length === 0){
-      this.checkForm()
-    }
-    this.store.CategoryGroups_all.forEach(group => {
-      if(group.name !== this.categoryGroupForm.value.name){
-        this.checkForm()
+    e.preventDefault()
+    this.store.CategoryGroups.getValue().forEach(group => {
+      if(group.name == this.categoryGroupForm.value.name){
+        this.equality_flag = true
       }
     })
+    if(!this.equality_flag){
+      this.checkForm()
+    }
     this.hideModal();
   }
 

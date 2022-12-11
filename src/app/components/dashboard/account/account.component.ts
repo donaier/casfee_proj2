@@ -12,22 +12,27 @@ import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
 })
 export class AccountComponent implements OnInit, OnDestroy {
 
-  public accounts: Account[] = [];
-  public selectedAccount?: Account;
-
+  accounts: Account[] = [];
+  selectedAccount?: Account;
+  data : boolean = false
   private subscription: Subscription[] = [];
 
-  constructor(
-    @Inject(fluxDispatcherToken)
-    private dispatcher: Subject<FluxAction>,
-    public store: FluxStore
-  ) { }
+  constructor(@Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>, public store: FluxStore){}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.dispatcher.next(new FluxAction(FluxActionTypes.Load))
     this.subscription.push(this.store.Accounts.subscribe((data) => {
-      if (data.length) {
+      if (data.length > 0) {
+        this.data = true
         this.accounts = data;
+      }
+      if (data.length === undefined) {
+        // is loading
+      }
+      if (data.length === 0) {
+        // no accounts available
+        this.data = false
+        this.accounts = [];
       }
     }))
   }

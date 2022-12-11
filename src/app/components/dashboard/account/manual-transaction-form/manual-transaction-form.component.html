@@ -1,4 +1,4 @@
-<div class="modal" id="manual-transaction-form">
+<div class="modal" id="manual-transaction-form" #manualtransactionform>
   <div class="modal-background"></div>
   <div class="modal-card">
 
@@ -7,49 +7,76 @@
       <button class="delete" aria-label="close" (click)="hideModal()"></button>
     </header>
 
-    <form class="form" [formGroup]="transactionForm" #formDirective="ngForm" (ngSubmit)="submitTransactionForm($event, formDirective)">
+    <form class="form" [formGroup]="transactionForm" #formDirective="ngForm" (ngSubmit)="submitTransactionForm($event)">
       <section class="modal-card-body">
 
         <div class="columns mb-0">
           <div class="column is-8">
             <label class="label" for="input-amount">amount:</label>
             <div class="control">
-              <input class="input" id="input-amount" type="number" placeholder="amount" formControlName="amount">
+              <input class="input"
+               id="input-amount"
+               type="number"
+               placeholder="amount"
+               formControlName="amount"
+               [ngClass]="{
+                'is-danger': amount.invalid && (amount.dirty || amount.touched),
+                'is-success': amount.valid && (amount.dirty || amount.touched)
+                }"
+                required>
             </div>
-
           </div>
           <div class="column">
             <label class="label" for="input-date">date:</label>
             <div class="control">
-              <input class="input" id="input-date" type="date" placeholder="date" formControlName="date">
+              <input class="input"
+              id="input-date"
+              type="date"
+              placeholder="date"
+              formControlName="date"
+              [ngClass]="{
+                'is-danger': date.invalid && (date.dirty || date.touched),
+                'is-success': date.valid && (date.dirty || date.touched)
+                }"
+                required>
             </div>
           </div>
         </div>
         <div class="field">
           <label class="label" for="input-description">description:</label>
           <div class="control">
-            <input class="input" id="input-description" type="text" placeholder="description" formControlName="description">
+            <input class="input"
+            id="input-description"
+            type="text"
+            placeholder="description"
+            formControlName="description"
+            [ngClass]="{
+              'is-danger': description.invalid && (description.dirty || description.touched),
+              'is-success': description.valid && (description.dirty || description.touched)
+              }"
+              required>
           </div>
         </div>
-
-        <input id="category-manualTransaction" type="hidden" formControlName="category">
+        <!--
+        <input id="category-manualTransaction" type="hidden" formControlName="category" #categorymanualTransaction> -->
         <div class="box" *ngFor="let categoryGroup of categoryGroups">
           <p class="is-flex is-justify-content-space-between">
             <strong class="pb-3">{{categoryGroup.name}}</strong>
+            <!--
             <span>
               <a class="tag" (click)="addCategory(categoryGroup)">+</a>
-            </span>
+            </span> -->
           </p>
           <div class="field is-grouped is-grouped-multiline">
             <div class="control" *ngFor="let category of categoryGroup.categories">
-              <span class="tag selectable-tag" (click)="setCategory($event, category)">{{category.name}}</span>
+              <span class="tag selectable-tag" (click)="setCategory($event, category, categoryGroup)" #selectabletag>{{category.name}}</span>
             </div>
           </div>
         </div>
 
       </section>
       <footer class="modal-card-foot is-flex is-justify-content-center">
-        <button class="button is-success" type="submit">save</button>
+        <button class="button is-success" type="submit" [disabled]="transactionForm.invalid">save</button>
         <button class="button" type="button" (click)="hideModal()">cancel</button>
       </footer>
     </form>
