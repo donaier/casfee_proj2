@@ -31,7 +31,6 @@ export function cookTransactions(transactions: [], csvMask: csvMask) {
         // mask can have multiple 'amount' fields for pos/neg values, usually only one contains data
         setPositions?.amountPos.forEach(ap => {
           if (ap && tArray[ap] != '' && !isNaN(parseFloat(tArray[ap]))) {
-            console.log(tArray)
             readyTransactions.push({
               description: setPositions?.descriptionPos ? tArray[setPositions.descriptionPos].replace(/\"/gi, '').trim() : 'error',
               fromAccount: '',

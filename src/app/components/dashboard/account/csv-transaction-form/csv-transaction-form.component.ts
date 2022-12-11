@@ -16,6 +16,7 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
   @ViewChild('modal') modal!: ElementRef
   @ViewChild('csvInput') csvInput!: ElementRef
   @ViewChild('csvInputControl') csvInputControl!: ElementRef
+  @ViewChild('categoryColumns') categoryColumns!: ElementRef
   @ViewChild('csvInfo') csvInfo!: ElementRef
   @ViewChild('csvReset') csvReset!: ElementRef
 
@@ -47,7 +48,6 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
 
   hideModal() {
     this.modal.nativeElement.classList.remove('is-active')
-
     this.resetForm()
   }
 
@@ -58,6 +58,7 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
     this.csvInputControl.nativeElement.classList.remove('is-loading')
     this.csvInputControl.nativeElement.classList.remove('is-hidden')
     this.csvReset.nativeElement.classList.add('is-hidden')
+    this.categoryColumns.nativeElement.classList.add('is-hidden')
   }
 
   computeCsvData(e: Event) {
@@ -73,9 +74,10 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
       this.csvInfo.nativeElement.innerHTML = this.transactionsToCategorize.length + ' transactions found to categorize'
       this.csvInfo.nativeElement.innerHTML += '<br>(' + transactions.length + ' lines in the csv)'
       this.csvInputControl.nativeElement.classList.add('is-hidden')
+      this.categoryColumns.nativeElement.classList.remove('is-hidden')
 
       console.log(this.transactionsToCategorize)
-      // edvance to next step
+      // advance to next step
     } else {
       this.csvInfo.nativeElement.innerHTML = 'no usable transactions found'
       this.csvReset.nativeElement.classList.remove('is-hidden')
