@@ -25,17 +25,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.dispatcher.next(new FluxAction(FluxActionTypes.Load))     // Hier wird eigentlich der Store initialisiert -> mit load werden die Accounts , Transactions und Categorien von der Datenbank auf die Observables geladen.
     this.subscription.push(this.store.Accounts.subscribe((data) => {  // Fuer Testversuche habe ich eine regristrierung auf den Account_Bus gemacht
       if (data.length) {
-        console.log(data)
+       // console.log(data)
       }
     }))
     this.subscription.push(this.store.Transactions.subscribe((data) => {
       if (data.length > 0) {
-        console.log(data)
+     //   console.log(data)
       }
     }))
     this.subscription.push(this.store.CategoryGroups.subscribe((data) => {
       if (data.length > 0) {
-        console.log(data)
+    //    console.log(data)
       }
     }))
   }

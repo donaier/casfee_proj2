@@ -89,7 +89,7 @@ export class CategoryFormComponent implements OnChanges, OnInit {
   submitCategoryForm(e: Event, form: FormGroupDirective) {
     e.preventDefault();
     if (this.categoryForm.valid && this.categoryForm.dirty) {
-      let categoryGroup = Object.assign(this.categoryGroup!)
+      let categoryGroup = Object.assign(this.categoryGroup!) // Ist glaube ich nicht noetig mal schauen was e2e bringt
       categoryGroup.categories.push({name : this.categoryForm.value.name_category})
       this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'category', null, categoryGroup))
       this.hideModal();

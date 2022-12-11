@@ -14,7 +14,22 @@ import { TransactionForm } from 'src/app/shared/types/transaction';
 export class ManualTransactionFormComponent implements OnInit, OnDestroy {
 
   @Input() account?: Account;
+
   public transactionForm: FormGroup = new FormGroup(TransactionForm);
+
+  /*
+  description: new FormControl('', [Validators.required]),
+  forAccount: new FormControl('', [Validators.required]),
+  fromAccount: new FormControl('', [Validators.required]),
+  amount: new FormControl('', [Validators.required]),
+  date: new FormControl('', [Validators.required]),
+  category: new FormControl('', [Validators.required]),
+*/
+
+
+
+
+
   private categoryInput: HTMLInputElement | null = null
 
   private subscription : Subscription[] = []
@@ -26,6 +41,9 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
     this.subscription.push(this.store.CategoryGroups.subscribe((data) => {
       if (data.length > 0) {
         this.categoryGroups = data;
+      }
+      if(data.length === 0){
+        this.categoryGroups = []
       }
     }))
 
@@ -53,7 +71,7 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
   submitTransactionForm(e: Event, form: FormGroupDirective) {
     e.preventDefault();
 
-    console.log(this.transactionForm)
+    console.log(this.transactionForm.value)
 
     if (this.transactionForm.valid && this.transactionForm.dirty) {
 
@@ -66,6 +84,8 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
       this.hideModal();
     }
   }
+
+
 
   ngOnDestroy() {
     this.subscription?.forEach((subscription) => {subscription.unsubscribe()})
