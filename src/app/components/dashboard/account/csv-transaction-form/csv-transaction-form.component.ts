@@ -5,7 +5,8 @@ import { FluxStore } from 'src/app/shared/services/flux-store';
 import { Account, csvMask } from 'src/app/shared/types/account';
 import { FluxAction } from 'src/app/shared/types/actions.type';
 import { CategoryGroup } from 'src/app/shared/types/category';
-import { cookTransactions, resolveCsvMask, Transaction } from 'src/app/shared/types/transaction';
+import { Transaction } from 'src/app/shared/types/transaction';
+import { TransactionService } from 'src/app/shared/helpers/transaction.service';
 
 @Component({
   selector: 'app-csv-transaction-form',
@@ -31,7 +32,11 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
   activeCsvMask: csvMask | undefined
   transactionsToCategorize: Transaction[] = []
 
-  constructor(@Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>, public store: FluxStore) {}
+  constructor(
+    @Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>,
+    private transactionService: TransactionService,
+    public store: FluxStore
+  ) {}
 
   ngOnInit(){
     this.subscription.push(this.store.CategoryGroups.subscribe((data) => {
@@ -52,9 +57,9 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
   }
 
   resetForm() {
+    this.csvInput.nativeElement.removeAttribute('disabled')
     this.csvInput.nativeElement.value = ''
     this.csvInfo.nativeElement.innerHTML = ''
-    this.csvInput.nativeElement.removeAttribute('disabled')
     this.csvInputControl.nativeElement.classList.remove('is-loading')
     this.csvInputControl.nativeElement.classList.remove('is-hidden')
     this.csvReset.nativeElement.classList.add('is-hidden')
@@ -68,7 +73,7 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
     this.csvInputControl.nativeElement.classList.add('is-loading')
     this.csvInput.nativeElement.setAttribute('disabled', 'disabled')
 
-    this.transactionsToCategorize = cookTransactions(transactions, this.activeCsvMask!)
+    this.transactionsToCategorize = this.transactionService.cookTransactions(transactions, this.activeCsvMask!)
 
     if (this.transactionsToCategorize.length) {
       this.csvInfo.nativeElement.innerHTML = this.transactionsToCategorize.length + ' transactions found to categorize'
@@ -92,7 +97,7 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
     if (changes['account'].currentValue) {
       this.activeCsvMask = this.csvMasks.find(m => m.name === this.account?.csv)
   
-      if(this.activeCsvMask !== undefined && resolveCsvMask(this.activeCsvMask!)) {
+      if(this.activeCsvMask !== undefined && this.transactionService.resolveCsvMask(this.activeCsvMask!)) {
         this.accountIsReadyElement.nativeElement.classList.remove('is-hidden')
         this.accountNotReadyElement.nativeElement.classList.add('is-hidden')
       } else {
