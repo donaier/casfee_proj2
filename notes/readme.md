@@ -170,6 +170,7 @@ account:
 donat:
 - ~~form validation mit bulma klassen machen, dann können einige repetitive stylesheets gespart werden. was dann noch sein muss, auf einem übergeordneten, nicht pro komponente dasselbe~~
 - ~~queryselektoren im csv-config-component ersetzen mit viewChild~~
+- csvMask mit datumsformatstring ergänzen (pf: dd.mm.yyyy)
 
 ### upload service:
 
