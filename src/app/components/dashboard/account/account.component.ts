@@ -14,7 +14,7 @@ export class AccountComponent implements OnInit, OnDestroy {
 
   accounts: Account[] = [];
   selectedAccount?: Account;
-  data : boolean = false
+  data : string = 'noentry'
   private subscription: Subscription[] = [];
 
   constructor(@Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>, public store: FluxStore){}
@@ -23,15 +23,14 @@ export class AccountComponent implements OnInit, OnDestroy {
     this.dispatcher.next(new FluxAction(FluxActionTypes.Load))
     this.subscription.push(this.store.Accounts.subscribe((data) => {
       if (data.length > 0) {
-        this.data = true
+        this.data = 'data'
         this.accounts = data;
       }
       if (data.length === undefined) {
-        // is loading
+        this.data = 'isloading'
       }
       if (data.length === 0) {
-        // no accounts available
-        this.data = false
+        this.data = 'nodata'
         this.accounts = [];
       }
     }))

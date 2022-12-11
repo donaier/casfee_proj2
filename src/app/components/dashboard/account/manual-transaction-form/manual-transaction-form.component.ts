@@ -38,6 +38,9 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
       if (data.length > 0) {
         this.categoryGroups = data;
       }
+      if (data.length === undefined) {
+       // this.data = 'isloading'
+      }
       if(data.length === 0){
         this.categoryGroups = []
       }

@@ -2,7 +2,6 @@ import { Inject, Injectable } from '@angular/core'
 import { BehaviorSubject, Subject } from 'rxjs'
 import { fluxDispatcherToken } from '../helpers/flux.configuration'
 
-
 // types
 import { Account, csvMask } from '../types/account'
 import { CategoryGroup } from '../types/category'
