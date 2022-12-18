@@ -42,7 +42,7 @@ export class AccountComponent implements OnInit, OnDestroy {
 
   openManualTransactionModal(account: Account) {
     this.selectedAccount = account
-    this.manualTransactionModal.modal.nativeElement.classList.add('is-active')
+    this.manualTransactionModal.manualtransactionform.nativeElement.classList.add('is-active')
   }
 
   openCsvTransactionModal(account: Account) {
