@@ -18,6 +18,7 @@ export class CategoryConfigComponent implements OnInit, OnDestroy {
   categoryGroups: CategoryGroup[] = [];
   categoryForForm?: Category;
   categoryGroupForForm?: CategoryGroup;
+  data: string = "isloading"
   private subscription : Subscription | undefined
 
   constructor(public store: FluxStore, @Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>) { }
@@ -25,9 +26,14 @@ export class CategoryConfigComponent implements OnInit, OnDestroy {
   ngOnInit(){
     this.subscription = this.store.CategoryGroups.subscribe((data) => {
       if (data.length > 0) {
+        this.data = "data"
         this.categoryGroups = data;
       }
+      if (data.length === undefined) {
+        this.data = 'isloading'
+      }
       if(data.length === 0){
+        this.data = "nodata"
         this.categoryGroups = []
       }
     })

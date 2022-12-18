@@ -1,12 +1,12 @@
-import { Component, ElementRef, Inject, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
-import { FormGroup, FormGroupDirective } from '@angular/forms';
+import { Component, ElementRef, Inject, Input, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { FormControl, FormGroup, FormGroupDirective } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
 import { FluxStore } from 'src/app/shared/services/flux-store';
 import { Account, calculateCurrentValue } from 'src/app/shared/types/account';
 import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
 import { Category, CategoryGroup } from 'src/app/shared/types/category';
-import { TransactionForm } from 'src/app/shared/types/transaction';
+import { Transaction } from 'src/app/shared/types/transaction';
 
 @Component({
   selector: 'app-manual-transaction-form',
@@ -16,40 +16,64 @@ import { TransactionForm } from 'src/app/shared/types/transaction';
 export class ManualTransactionFormComponent implements OnInit, OnDestroy {
   @ViewChild('modal') modal!: ElementRef
 
+  @ViewChild('manualtransactionform', { static: false }) manualtransactionform!: ElementRef
+  @ViewChildren('selectabletag') selectabletags!: QueryList<ElementRef>
   @Input() account?: Account;
-  transactionForm: FormGroup = new FormGroup(TransactionForm);
 
-  private subscription : Subscription[] = []
-  categoryGroups: CategoryGroup[] = [];
+  transactionForm!: FormGroup
+  description!: FormControl
+  forAccount!: FormControl
+  fromAccount!: FormControl
+  amount!: FormControl
+  date!: FormControl
+  categoryGroups: CategoryGroup[] = []
+  category : Category | undefined
+  newTransaction : Transaction | undefined
+  private subscription : Subscription | undefined
 
-  constructor(@Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>, public store: FluxStore) {}
+
+  constructor(public store: FluxStore, @Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>) {}
 
   ngOnInit(){
-    this.subscription.push(this.store.CategoryGroups.subscribe((data) => {
+    this.subscription = this.store.CategoryGroups.subscribe((data) => {
       if (data.length > 0) {
         this.categoryGroups = data;
       }
-    }))
+      if (data.length === undefined) {
+       // this.data = 'isloading'
+      }
+      if(data.length === 0){
+        this.categoryGroups = []
+      }
+    })
+    this.transactionForm = new FormGroup({
+      description: this.description = new FormControl(''),
+      forAccount: this.forAccount = new FormControl(''),
+      fromAccount: this.fromAccount = new FormControl(''),
+      amount: this.amount = new FormControl(''),
+      date: this.date = new FormControl(''),
+    })
   }
 
   hideModal() {
-    this.modal.nativeElement.classList.remove('is-active')
-    document.querySelectorAll('.selectable-tag').forEach(tag => { tag.classList.remove('selected')});
+    this.manualtransactionform.nativeElement.classList.remove('is-active');
     this.transactionForm.reset();
   }
 
   addCategory(category: CategoryGroup) {
-    // here is subcategory creation on the fly
+    // Finde ich ein bisschen Overhead hier noch ein Modal zu oeffnen und items adden.
   }
 
-  setCategory(e: Event, category: Category) {
-    this.transactionForm.controls['category'].setValue(category.name);
-
-    document.querySelectorAll('.selectable-tag').forEach(tag => { tag.classList.remove('selected')});
+  setCategory(e: Event, category: Category, categoryGroup: CategoryGroup) {
+    this.category = {
+      name : category.name,
+      group : categoryGroup.name
+    }
+    this.selectabletags.forEach(tag => { tag.nativeElement.classList.remove('selected')});
     (<HTMLElement>e.target).classList.add('selected')
   }
 
-  submitTransactionForm(e: Event, form: FormGroupDirective) {
+  submitTransactionForm(e: Event) {
     e.preventDefault();
 
     if(this.transactionForm.valid && this.transactionForm.dirty) {
@@ -61,13 +85,12 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
 
       this.hideModal()
 
-      form.resetForm();
       this.transactionForm.reset();
       this.transactionForm.markAsUntouched();
     }
   }
 
   ngOnDestroy() {
-    this.subscription?.forEach((subscription) => {subscription.unsubscribe()})
+    this.subscription?.unsubscribe()
   }
 }

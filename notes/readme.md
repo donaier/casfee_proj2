@@ -158,6 +158,7 @@ interface category {
 - Updates erfolgreich durchfuehren - keine Aenderungen an Subklassen
 - Firestore ist nicht verfuegbar --> was nun ???
 - formulare ein neuer eintrag mitselbem namen -> evtl. mit validator loesen
+- Anzeige wenn maximale Eintraege gemacht wurden z.B max categorien -> zuerst eine loeschen bevor neue erstellt werden kann.
 
 account:
 - ~~Refactoring : Edit: Color & csv Mask wird nicht angezeigt. -> color habe ich gemacht, csv verhält sich komisch. wir könnten hier nur den "name" als identifier speichern und das csvMask objekt dann holen wenns benötigt wird (beim csv upload)~~

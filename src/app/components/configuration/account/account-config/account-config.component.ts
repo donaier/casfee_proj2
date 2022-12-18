@@ -13,30 +13,27 @@ export class AccountConfigComponent implements OnInit, OnDestroy {
   @ViewChild('accountModal') accountModal!: AccountFormComponent
 
   accounts: Account[] = []
-  subscriptions : Subscription[] = []
-  csvMasks : csvMask[] = []
+  subscriptions : Subscription | undefined
   accountForForm?: Account
   selector : string | undefined
+  data : string = 'isloading'
 
   constructor(public store: FluxStore) {}
 
   ngOnInit() {
-    this.subscriptions.push(this.store.Accounts.subscribe((data) => {
+    this.subscriptions = this.store.Accounts.subscribe((data) => {
       if (data.length) {
         this.accounts = data;
+        this.data = 'data'
+      }
+      if (data.length === undefined) {
+        this.data = 'isloading'
       }
       if(data.length === 0){
+        this.data = 'nodata'
         this.accounts = []
       }
-    }))
-    this.subscriptions.push(this.store.CsvMasks.subscribe((data) => {
-      if (data.length) {
-        this.csvMasks = data;
-      }
-      if(data.length === 0){
-        this.csvMasks = []
-      }
-    }))
+    })
   }
 
   createAccount() {
@@ -58,6 +55,6 @@ export class AccountConfigComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(){
-    this.subscriptions.forEach(subscription => subscription.unsubscribe())
+    this.subscriptions?.unsubscribe()
   }
 }

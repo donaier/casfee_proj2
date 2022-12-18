@@ -1,4 +1,18 @@
-<div class="columns mb-3">
+
+ <section class="hero" *ngIf='data ==="isloading"'>
+  <div class="has-text-centered">
+    <button class="button is-primary is-loading m-6">Loading</button>
+  </div>
+</section>
+
+<section class="hero is-warning m-6" *ngIf='data ==="nodata"'>
+  <div class="hero-body">
+    <p class="title">Accounts</p>
+    <p class="subtitle">No registered Account</p>
+  </div>
+</section>
+
+<div class="columns mb-3" *ngIf='data ==="data"'>
   <div class="column" *ngFor="let account of accounts">
     <div class="card">
       <header class="card-header">
