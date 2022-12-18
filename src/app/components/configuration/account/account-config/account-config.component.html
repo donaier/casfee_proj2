@@ -1,41 +1,59 @@
-<div class="is-flex is-justify-content-space-between">
-  <h4 class="title is-4">
-    Registered Accounts:
-  </h4>
-  <a class="button" (click)="createAccount()">+ create new Account</a>
-</div>
-<div class="columns">
-  <div class="column" *ngFor="let account of accounts">
-    <div class="card">
-      <header class="card-header">
-        <p class="card-header-title is-flex is-justify-content-space-between">
-          <span>
-            {{account.name}}
-          </span>
-          <span class="tag">
-            {{account.shortName}}
-          </span>
-        </p>
-      </header>
-      <div class="card-content">
-        <div class="content">
-          <small>Description:</small>
-          <p>{{account.description}}</p>
-          <small>Initial - Amount:</small>
-          <p class="is-flex is-justify-content-space-between">
-            Fr. {{account.initialValue}}
-            <span class="title is-4">Fr. {{account.currentValue}}</span>
+
+
+<section>
+  <div class="is-flex is-justify-content-space-between">
+    <h4 class="title is-4">
+      Registered Accounts:
+    </h4>
+    <a class="button" (click)="createAccount()" *ngIf='data ==="data"'>+ create new Account</a>
+  </div>
+
+  <article class="hero" *ngIf='data ==="isloading"'>
+    <div class="has-text-centered">
+      <button class="button is-primary is-loading m-6">Loading</button>
+    </div>
+  </article>
+
+  <article class="hero is-warning m-6" *ngIf='data ==="nodata"'>
+    <div class="hero-body">
+      <p class="title">Please create Account to Start</p>
+      <a class="button" (click)="createAccount()">+ create new Account</a>
+    </div>
+  </article>
+
+  <div class="columns" *ngIf='data ==="data"'>
+    <div class="column" *ngFor="let account of accounts">
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title is-flex is-justify-content-space-between">
+            <span>
+              {{account.name}}
+            </span>
+            <span class="tag">
+              {{account.shortName}}
+            </span>
           </p>
-          <small>Csv mask:</small>
-          <p>{{account.csv || 'no csv mask selected'}}</p>
+        </header>
+        <div class="card-content">
+          <div class="content">
+            <small>Description:</small>
+            <p>{{account.description}}</p>
+            <small>Initial - Amount:</small>
+            <p class="is-flex is-justify-content-space-between">
+              Fr. {{account.initialValue}}
+              <span class="title is-4">Fr. {{account.currentValue}}</span>
+            </p>
+            <small>Csv mask:</small>
+            <p>{{account.csv || 'no csv mask selected'}}</p>
+          </div>
         </div>
+        <footer class="card-footer">
+          <a class="card-footer-item" (click)="editAccount(account)">Edit</a>
+          <a class="card-footer-item has-text-danger" (click)="deleteAccount(account)">Delete</a>
+        </footer>
       </div>
-      <footer class="card-footer">
-        <a class="card-footer-item" (click)="editAccount(account)">Edit</a>
-        <a class="card-footer-item has-text-danger" (click)="deleteAccount(account)">Delete</a>
-      </footer>
     </div>
   </div>
-</div>
+</section>
 
-<app-account-form #accountModal [account]="accountForForm" [csvMasks]="csvMasks" [selector]="selector"></app-account-form>
+<app-account-form #accountModal [account]="accountForForm" [selector]="selector"></app-account-form>

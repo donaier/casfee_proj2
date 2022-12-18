@@ -1,29 +1,47 @@
-<div class="is-flex is-justify-content-space-between">
-  <h4 class="title is-4">
-    Categories:
-  </h4>
-  <a class="button" (click)="createCategoryGroup()">+ new</a>
-</div>
-<div class="card">
-  <div class="card-content">
-    <div class="box" *ngFor="let categoryGroup of categoryGroups" [ngStyle]="{borderColor: categoryGroup.color}">
-      <p class="is-flex is-justify-content-space-between">
-        <strong class="pb-3">{{categoryGroup.name}}</strong>
-        <span>
-          <a class="tag mr-2" (click)="editCategoryGroup(categoryGroup)">edit</a>
-          <a class="tag" (click)="addCategory(categoryGroup)">+</a>
-        </span>
-      </p>
-      <div class="field is-grouped is-grouped-multiline">
-        <div class="control" *ngFor="let category of categoryGroup.categories">
-          <div class="tags has-addons">
-            <span class="tag">{{category.name}}</span>
-            <a class="tag is-delete" (click)="deleteCategory(category, categoryGroup)"></a>
+
+
+<section>
+  <div class="is-flex is-justify-content-space-between">
+    <h4 class="title is-4">
+      Categories:
+    </h4>
+    <a class="button" (click)="createCategoryGroup()" *ngIf='data ==="data"'>+ new</a>
+  </div>
+
+  <article class="hero" *ngIf='data ==="isloading"'>
+    <div class="has-text-centered">
+      <button class="button is-primary is-loading m-6">Loading</button>
+    </div>
+  </article>
+
+  <article class="hero is-warning m-6" *ngIf='data ==="nodata"'>
+    <div class="hero-body">
+      <p class="title">Please create Categories to Start</p>
+      <a class="button" (click)="createCategoryGroup()">+ new</a>
+    </div>
+  </article>
+
+  <div class="card" *ngIf='data ==="data"'>
+    <div class="card-content">
+      <div class="box" *ngFor="let categoryGroup of categoryGroups" [ngStyle]="{borderColor: categoryGroup.color}">
+        <p class="is-flex is-justify-content-space-between">
+          <strong class="pb-3">{{categoryGroup.name}}</strong>
+          <span>
+            <a class="tag mr-2" (click)="editCategoryGroup(categoryGroup)">edit</a>
+            <a class="tag" (click)="addCategory(categoryGroup)">+</a>
+          </span>
+        </p>
+        <div class="field is-grouped is-grouped-multiline">
+          <div class="control" *ngFor="let category of categoryGroup.categories">
+            <div class="tags has-addons">
+              <span class="tag">{{category.name}}</span>
+              <a class="tag is-delete" (click)="deleteCategory(category, categoryGroup)"></a>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
 <app-category-form #categoryModal [categoryGroup]="categoryGroupForForm" [category]="categoryForForm" [selector]="selector"></app-category-form>

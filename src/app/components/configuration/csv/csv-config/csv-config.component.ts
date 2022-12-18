@@ -15,6 +15,7 @@ export class CsvConfigComponent implements OnInit, OnDestroy {
   csvMasks: csvMask[] = []
   csvForForm?: csvMask
   selector: string | undefined
+  data: string | undefined
   private subscription : Subscription | undefined
 
   constructor(public store: FluxStore) { }
@@ -22,7 +23,15 @@ export class CsvConfigComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscription = this.store.CsvMasks.subscribe(data => {
       if (data.length) {
+        this.data = 'data'
         this.csvMasks = data
+      }
+      if (data.length === undefined) {
+        this.data = 'isloading'
+      }
+      if(data.length === 0){
+        this.data = 'nodata'
+        this.csvMasks = []
       }
     })
   }
@@ -39,7 +48,7 @@ export class CsvConfigComponent implements OnInit, OnDestroy {
     this.csvModal.modal.nativeElement.classList.add('is-active')
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.subscription?.unsubscribe()
   }
 }
