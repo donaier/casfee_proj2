@@ -1,16 +1,32 @@
 import { TestBed } from '@angular/core/testing';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getAuth, provideAuth } from '@angular/fire/auth';
+import { Firestore, getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { BrowserModule } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
+import { environment } from 'src/environments/environment';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { SharedModule } from './components/shared_components/shared.module';
+import { UploadService } from './model/upload.service'
+import { FLUX_CONFIG } from './shared/helpers/flux.configuration';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        BrowserModule,
+        AppRoutingModule,
+        SharedModule,
+        provideFirebaseApp(() => initializeApp(environment.firebase)),
+        provideAuth(() => getAuth()),
+        provideFirestore(() => getFirestore()),
       ],
       declarations: [
         AppComponent
       ],
+      providers: [UploadService, ...FLUX_CONFIG]
     }).compileComponents();
   });
 
@@ -26,10 +42,8 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('FinanceApp');
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('FinanceApp app is running!');
+  it('navigates to another route when (...)', () => {
+
   });
+
 });
