@@ -12,7 +12,7 @@ import { LoginComponent } from './components/login/login.component';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
-import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { provideFirestore,getFirestore,  } from '@angular/fire/firestore';
 
 // Flux
 import { FLUX_CONFIG } from './shared/helpers/flux.configuration';
@@ -31,7 +31,7 @@ import { UploadService } from './model/upload.service';
     SharedModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore()),
+    provideFirestore(() => getFirestore())
   ],
   providers: [...FLUX_CONFIG, FluxStore, UploadService],
   bootstrap: [AppComponent]
