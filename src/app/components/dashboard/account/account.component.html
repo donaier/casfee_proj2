@@ -32,11 +32,12 @@
         </div>
       </div>
       <footer class="card-footer">
-        <a class="card-footer-item">+ csv Transactions</a>
+        <a class="card-footer-item" (click)="openCsvTransactionModal(account)">+ csv Transactions</a>
         <a class="card-footer-item" (click)="openManualTransactionModal(account)">+ single Transaction</a>
       </footer>
     </div>
   </div>
 </div>
 
-<app-manual-transaction-form [account]="selectedAccount"></app-manual-transaction-form>
+<app-manual-transaction-form #manualTransactionModal [account]="selectedAccount"></app-manual-transaction-form>
+<app-csv-transaction-form #csvTransactionModal [account]="selectedAccount"></app-csv-transaction-form>

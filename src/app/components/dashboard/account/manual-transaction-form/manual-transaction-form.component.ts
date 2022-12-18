@@ -3,7 +3,7 @@ import { FormControl, FormGroup, FormGroupDirective } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
 import { FluxStore } from 'src/app/shared/services/flux-store';
-import { Account } from 'src/app/shared/types/account';
+import { Account, calculateCurrentValue } from 'src/app/shared/types/account';
 import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
 import { Category, CategoryGroup } from 'src/app/shared/types/category';
 import { Transaction } from 'src/app/shared/types/transaction';
@@ -14,6 +14,7 @@ import { Transaction } from 'src/app/shared/types/transaction';
   styleUrls: ['./manual-transaction-form.component.scss']
 })
 export class ManualTransactionFormComponent implements OnInit, OnDestroy {
+  @ViewChild('modal') modal!: ElementRef
 
   @ViewChild('manualtransactionform', { static: false }) manualtransactionform!: ElementRef
   @ViewChildren('selectabletag') selectabletags!: QueryList<ElementRef>
@@ -74,13 +75,18 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
 
   submitTransactionForm(e: Event) {
     e.preventDefault();
-    if (this.transactionForm.valid && this.transactionForm.dirty) {
-      this.newTransaction = this.transactionForm.value
-      this.newTransaction!.forAccount = this.account!.name
-      this.newTransaction!.category = this.category!
-      this.dispatcher.next(new FluxAction(FluxActionTypes.Create,'transaction', this.transactionForm.value))
+
+    if(this.transactionForm.valid && this.transactionForm.dirty) {
+      let account = Object.assign(this.account!)
+      account.transactions.push(this.transactionForm.value)
+      account.currentValue = calculateCurrentValue(account)
+
+      this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'account', null, null, null, account))
+
+      this.hideModal()
+
       this.transactionForm.reset();
-      this.hideModal();
+      this.transactionForm.markAsUntouched();
     }
   }
 
