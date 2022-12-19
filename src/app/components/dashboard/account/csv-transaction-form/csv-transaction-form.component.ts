@@ -109,7 +109,8 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
     if (this.account) {
       this.account.transactions.push(...this.transactionsToCategorize)
       this.account.currentValue = Number(calculateCurrentValue(this.account))
-      this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'account', null, null, null, this.account))
+      console.log(this.account)
+      // this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'account', null, null, null, this.account))
 
       this.hideModal()
     }
