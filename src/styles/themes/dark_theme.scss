@@ -1,34 +1,15 @@
-$c0: #fff4e3;
-$c1: #ffe4ba;
-$c2: #ecb4aa;
-$c3: #a870ab;
-$c4: #413e9f;
-$c5: #041440;
 
-.light-theme {
-  :root {
-    --color-0: #{$c0};
-    --color-1: #{$c1};
-    --color-2: #{$c2};
-    --color-3: #{$c3};
-    --color-4: #{$c4};
-    --color-5: #{$c5};
+.dark-theme {
+  background-color: $c1;
+  color: $c5;
+  small {
+    color: $c4;
   }
-  
-  body {
-    min-height: 100vh;
-    background-color: $c1;
-    color: $c5;
-  
-    small {
-      color: $c4;
-    }
-  }
-  
+
   .button, .button:hover {
     background-color: $c0;
     border-color: transparent;
-  
+
     &.is-static {
       background-color: $c1;
     }
@@ -37,27 +18,27 @@ $c5: #041440;
     background-color: $c3;
     color: $c1;
   }
-  
+
   .title {
     color: $c5;
   }
-  
+
   .navbar {
     background-color: $c2;
-  
+
     a.navbar-item:hover {
       background-color: $c3;
       color: $c1;
     }
   }
-  
+
   .card {
     background-color: $c0;
     .box {
       background-color: $c0;
     }
   }
-  
+
   .modal {
     .modal-card-head {
       background-color: $c1;
@@ -69,12 +50,17 @@ $c5: #041440;
       background-color: $c1;
     }
   }
-  
+
   .tag:not(body) {
     background-color: $c1;
-  
+
     &:after{
       color: $c3;
     }
   }
+
+  .footer{
+    background-color: $c1;
+  }
+
 }

@@ -1,3 +1,62 @@
+## TODOS 
+
+* Navigation Responsonsive : Hamburger ist nicht zentriert, und das styling des Dropdowns ist noch unschoen. Kenne die klassen nicht du kennst bulma besser ? 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## dran denken + refactoring
+
+- Maximale Anzahl Accounts / Categorien ?
+- Keine Eintraege vorhanden ? was anzeigen
+- Updates erfolgreich durchfuehren - keine Aenderungen an Subklassen
+- Firestore ist nicht verfuegbar --> was nun ???
+- formulare ein neuer eintrag mitselbem namen -> evtl. mit validator loesen
+- Anzeige wenn maximale Eintraege gemacht wurden z.B max categorien -> zuerst eine loeschen bevor neue erstellt werden kann.
+
+account:
+- ~~Refactoring : Edit: Color & csv Mask wird nicht angezeigt. -> color habe ich gemacht, csv verhält sich komisch. wir könnten hier nur den "name" als identifier speichern und das csvMask objekt dann holen wenns benötigt wird (beim csv upload)~~
+- Edit Account initial Value / current value sperren.
+- Accounts Csv Masks noch undefined & Initial & CurrentValue anzeige unschoen.
+
+// Layout : Feste Groesse der Account Container
+
+
+donat:
+- ~~form validation mit bulma klassen machen, dann können einige repetitive stylesheets gespart werden. was dann noch sein muss, auf einem übergeordneten, nicht pro komponente dasselbe~~
+- ~~queryselektoren im csv-config-component ersetzen mit viewChild~~
+- csvMask mit datumsformatstring ergänzen (pf: dd.mm.yyyy)
+
+### upload service:
+
+create und update brauchts glaubs nicht beides, da create mit existentem record dieses updatet
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Subscriptions
 
 Habe gerade für die config seite + dashboard die accounts angezeigt und dafür den code vom store/subscriptions dupliziert. Das ist halt nicht so gut :P denke logisch wäre, wenn die app.component die subscriptions hält und die daten dann an dashboard/config weitergibt (und da werden sie gegebenenfalls an weitere components weitergegeben). Die subscriptions müssten nach meiner Meinung beim Login erstellt und beim logout destroyed werden.
@@ -151,28 +210,4 @@ interface category {
 }
 
 
-## dran denken + refactoring
 
-- Maximale Anzahl Accounts / Categorien ?
-- Keine Eintraege vorhanden ? was anzeigen
-- Updates erfolgreich durchfuehren - keine Aenderungen an Subklassen
-- Firestore ist nicht verfuegbar --> was nun ???
-- formulare ein neuer eintrag mitselbem namen -> evtl. mit validator loesen
-- Anzeige wenn maximale Eintraege gemacht wurden z.B max categorien -> zuerst eine loeschen bevor neue erstellt werden kann.
-
-account:
-- ~~Refactoring : Edit: Color & csv Mask wird nicht angezeigt. -> color habe ich gemacht, csv verhält sich komisch. wir könnten hier nur den "name" als identifier speichern und das csvMask objekt dann holen wenns benötigt wird (beim csv upload)~~
-- Edit Account initial Value / current value sperren.
-- Accounts Csv Masks noch undefined & Initial & CurrentValue anzeige unschoen.
-
-// Layout : Feste Groesse der Account Container
-
-
-donat:
-- ~~form validation mit bulma klassen machen, dann können einige repetitive stylesheets gespart werden. was dann noch sein muss, auf einem übergeordneten, nicht pro komponente dasselbe~~
-- ~~queryselektoren im csv-config-component ersetzen mit viewChild~~
-- csvMask mit datumsformatstring ergänzen (pf: dd.mm.yyyy)
-
-### upload service:
-
-create und update brauchts glaubs nicht beides, da create mit existentem record dieses updatet

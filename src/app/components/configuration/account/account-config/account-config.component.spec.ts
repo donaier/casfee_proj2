@@ -8,6 +8,9 @@ describe('AccountConfigComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [
+
+      ],
       declarations: [ AccountConfigComponent ]
     })
     .compileComponents();
@@ -16,8 +19,26 @@ describe('AccountConfigComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-  /*
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });  */
+
+
+  it('should initialise data', () => {
+
+
+
+  });
+
+  it('should create new account', () => {
+
+
+
+  });
+
+  it('should create delete account', () => {
+
+
+
+  });
+
+
+
 });

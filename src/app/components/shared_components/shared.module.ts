@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { FooterComponent } from './footer/footer.component';
 import { NavigationComponent } from './navigation/navigation.component';
 
 @NgModule({
@@ -9,11 +9,13 @@ import { NavigationComponent } from './navigation/navigation.component';
     RouterModule,
   ],
   declarations: [
-    NavigationComponent
+    NavigationComponent,
+    FooterComponent
   ],
   exports: [
     NavigationComponent,
-    ReactiveFormsModule,
+    FooterComponent,
+    ReactiveFormsModule
   ]
 })
 

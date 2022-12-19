@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { FluxStore } from 'src/app/shared/services/flux-store';
 import { Account, csvMask } from 'src/app/shared/types/account';
