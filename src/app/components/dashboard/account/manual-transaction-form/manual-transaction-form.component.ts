@@ -79,7 +79,7 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
     if(this.transactionForm.valid && this.transactionForm.dirty) {
       let account = Object.assign(this.account!)
       account.transactions.push(this.transactionForm.value)
-      account.currentValue = calculateCurrentValue(account)
+      account.currentValue = Number(calculateCurrentValue(account))
 
       this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'account', null, null, null, account))
 

@@ -76,6 +76,7 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
     this.csvInput.nativeElement.setAttribute('disabled', 'disabled')
 
     this.transactionsToCategorize = this.transactionService.cookTransactions(transactions, this.activeCsvMask!)
+    this.activeTransactionIndex = 0
     this.doneCategorizing = false
 
     if (this.transactionsToCategorize.length) {
@@ -107,7 +108,7 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
   saveTransactionsToAccount() {
     if (this.account) {
       this.account.transactions.push(...this.transactionsToCategorize)
-      this.account.currentValue = calculateCurrentValue(this.account)
+      this.account.currentValue = Number(calculateCurrentValue(this.account))
       this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'account', null, null, null, this.account))
 
       this.hideModal()

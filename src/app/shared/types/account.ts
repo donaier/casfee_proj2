@@ -48,5 +48,5 @@ export function calculateCurrentValue(account: Account) {
     currentValue += t.amount
   });
 
-  return currentValue
+  return Number(currentValue).toFixed(2)
 }

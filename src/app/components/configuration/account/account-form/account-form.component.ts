@@ -61,7 +61,7 @@ export class AccountFormComponent implements OnInit, OnChanges {
       if (this.account) {
         // edit
         account.transactions = this.account.transactions || []
-        account.currentValue = calculateCurrentValue(account)
+        account.currentValue = Number(calculateCurrentValue(account))
       } else {
         // create
         account.currentValue = this.initialValue.value
