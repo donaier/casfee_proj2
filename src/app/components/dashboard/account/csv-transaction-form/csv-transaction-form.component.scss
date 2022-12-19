@@ -1,5 +1,9 @@
 .modal-card {
   width: min(1200px, 80vw);
+
+  .selectable-tag {
+    cursor: pointer;
+  }
 }
 .table {
   background-color: unset;

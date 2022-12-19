@@ -2,9 +2,9 @@ import { Component, ElementRef, Inject, Input, OnChanges, OnDestroy, OnInit, Sim
 import { Subscription, Subject } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
 import { FluxStore } from 'src/app/shared/services/flux-store';
-import { Account, csvMask } from 'src/app/shared/types/account';
-import { FluxAction } from 'src/app/shared/types/actions.type';
-import { CategoryGroup } from 'src/app/shared/types/category';
+import { Account, calculateCurrentValue, csvMask } from 'src/app/shared/types/account';
+import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
+import { Category, CategoryGroup } from 'src/app/shared/types/category';
 import { Transaction } from 'src/app/shared/types/transaction';
 import { TransactionService } from 'src/app/shared/helpers/transaction.service';
 
@@ -31,6 +31,8 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
   csvMasks: csvMask[] = []
   activeCsvMask: csvMask | undefined
   transactionsToCategorize: Transaction[] = []
+  activeTransactionIndex: number = 0
+  doneCategorizing: boolean = false
 
   constructor(
     @Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>,
@@ -74,15 +76,13 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
     this.csvInput.nativeElement.setAttribute('disabled', 'disabled')
 
     this.transactionsToCategorize = this.transactionService.cookTransactions(transactions, this.activeCsvMask!)
+    this.doneCategorizing = false
 
     if (this.transactionsToCategorize.length) {
       this.csvInfo.nativeElement.innerHTML = this.transactionsToCategorize.length + ' transactions found to categorize'
-      this.csvInfo.nativeElement.innerHTML += '<br>(' + transactions.length + ' lines in the csv)'
+      this.csvInfo.nativeElement.innerHTML += ' (' + transactions.length + ' lines in the csv)'
       this.csvInputControl.nativeElement.classList.add('is-hidden')
       this.categoryColumns.nativeElement.classList.remove('is-hidden')
-
-      console.log(this.transactionsToCategorize)
-      // advance to next step
     } else {
       this.csvInfo.nativeElement.innerHTML = 'no usable transactions found'
       this.csvReset.nativeElement.classList.remove('is-hidden')
@@ -91,6 +91,27 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
 
   addCategory(category: CategoryGroup) {
     // here is subcategory creation on the fly
+  }
+
+  setCategoryForActiveTransaction(category: Category) {
+    this.transactionsToCategorize[this.activeTransactionIndex].category = category.name
+
+    if (this.activeTransactionIndex >= this.transactionsToCategorize.length-1) {
+      // done categorizing
+      this.doneCategorizing = true
+    } else {
+      this.activeTransactionIndex++
+    }
+  }
+
+  saveTransactionsToAccount() {
+    if (this.account) {
+      this.account.transactions.push(...this.transactionsToCategorize)
+      this.account.currentValue = calculateCurrentValue(this.account)
+      this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'account', null, null, null, this.account))
+
+      this.hideModal()
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {

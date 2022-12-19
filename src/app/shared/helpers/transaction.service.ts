@@ -37,7 +37,6 @@ export class TransactionService {
     // reverse here to have the oldest first
     return readyTransactions.reverse();
   }
-  
 
   resolveCsvMask(csvMask: csvMask) {
     let setArray = csvMask.mask.split(csvMask.delimiter);
