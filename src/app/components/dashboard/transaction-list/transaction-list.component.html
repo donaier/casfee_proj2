@@ -1,0 +1,20 @@
+<div class="card mt-5">
+  <header class="card-header">
+    <p class="card-header-title">
+      Transactions
+    </p>
+  </header>
+  <div class="card-content">
+    <table class="table is-fullwidth">
+      <thead></thead>
+      <tbody>
+        <tr *ngFor="let transaction of allTransactions">
+          <td>{{transaction.date}}</td>
+          <td>{{transaction.description}}</td>
+          <td>{{transaction.category}}</td>
+          <td>{{transaction.amount}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
