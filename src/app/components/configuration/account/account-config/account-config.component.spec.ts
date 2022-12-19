@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { fakeAsync, getTestBed, tick } from '@angular/core/testing';
 import { AccountConfigComponent } from './account-config.component';
+import { Account, csvMask } from 'src/app/shared/types/account';
+import { FluxStore } from 'src/app/shared/services/flux-store';
 
 describe('AccountConfigComponent', () => {
   let component: AccountConfigComponent;
@@ -11,7 +13,8 @@ describe('AccountConfigComponent', () => {
       imports: [
 
       ],
-      declarations: [ AccountConfigComponent ]
+      declarations: [ AccountConfigComponent ],
+      providers: [ FluxStore ]
     })
     .compileComponents();
 
@@ -19,6 +22,7 @@ describe('AccountConfigComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
+
 
 
   it('should initialise data', () => {
@@ -38,6 +42,7 @@ describe('AccountConfigComponent', () => {
 
 
   });
+
 
 
 
