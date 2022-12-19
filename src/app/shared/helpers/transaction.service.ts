@@ -26,7 +26,7 @@ export class TransactionService {
                 description: setPositions?.descriptionPos ? tArray[setPositions.descriptionPos].replace(/\"/gi, '').trim() : 'error',
                 fromAccount: '',
                 amount: parseFloat(tArray[ap]),
-                date: setPositions?.datePos != undefined ? tArray[setPositions.datePos] : 'error',
+                date: setPositions?.datePos != undefined ? tArray[setPositions.datePos] : new Date(),
                 category: '',
               })
             }

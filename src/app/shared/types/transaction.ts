@@ -5,7 +5,7 @@ export interface Transaction {
   description: string,
   fromAccount?: string,
   amount: number,
-  date: string,
+  date: Date,
   category: string,
   account?: Account
 }

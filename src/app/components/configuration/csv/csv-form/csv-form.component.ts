@@ -21,12 +21,14 @@ export class CsvFormComponent implements OnChanges {
   name!: FormControl
   delimiter!: FormControl
   mask!: FormControl
+  dateMask!: FormControl
 
   constructor(@Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>, private upload : UploadService ) {
     this.csvForm = new FormGroup({
       name: this.name = new FormControl('', [Validators.required]),
       delimiter: this.delimiter = new FormControl('', [Validators.required]),
       mask: this.mask = new FormControl('', [Validators.required]),
+      dateMask: this.dateMask = new FormControl('', [Validators.required]),
     })
   }
 

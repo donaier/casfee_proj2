@@ -32,7 +32,8 @@ export const AccountColors = [
 export interface csvMask {
   name: string,
   delimiter: string,
-  mask: string
+  mask: string,
+  dateMask: string
 }
 
 export const CsvMaskForm = {

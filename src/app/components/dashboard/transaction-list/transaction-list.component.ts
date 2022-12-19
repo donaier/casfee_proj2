@@ -22,7 +22,7 @@ export class TransactionListComponent implements OnChanges {
 
         this.allTransactions.push(...tempTransactions)
       })
-      this.allTransactions.sort((a,b) => Date.parse(a.date) - Date.parse(b.date))
+      // this.allTransactions.sort((a,b) => Date.parse(a.date) - Date.parse(b.date))
     }
   }
 }

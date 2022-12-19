@@ -48,7 +48,7 @@
           </div>
         </div>
         <div class="field">
-          <label class="label" for="input-mask">mask:</label>
+          <label class="label" for="input-mask">csv mask:</label>
           <div class="control">
             <input class="input"
              type="text"
@@ -58,6 +58,21 @@
              [ngClass]="{
               'is-danger': mask.invalid && (mask.dirty || mask.touched),
               'is-success': mask.valid && (mask.dirty || mask.touched)
+             }"
+             required>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label" for="date-mask">date mask:</label>
+          <div class="control">
+            <input class="input"
+             type="text"
+             id="date-mask"
+             placeholder="dd.mm.yyyy / dd-mm-yy / ..."
+             formControlName="dateMask"
+             [ngClass]="{
+              'is-danger': dateMask.invalid && (dateMask.dirty || dateMask.touched),
+              'is-success': dateMask.valid && (dateMask.dirty || dateMask.touched)
              }"
              required>
           </div>
