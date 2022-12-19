@@ -42,8 +42,4 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('FinanceApp');
   });
 
-  it('navigates to another route when (...)', () => {
-
-  });
-
 });

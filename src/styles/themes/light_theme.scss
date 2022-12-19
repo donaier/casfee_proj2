@@ -1,0 +1,96 @@
+$c00: #FFFFFF;
+$c11: #DCDCDC;
+$c12: #CCCCCC;
+$c21: #DEF6FB;
+$c3: #a870ab;
+$c4: #413e9f;
+$c5: #041440;
+
+
+.light-theme {
+  background-color: $c00;
+  color: $c4;
+  small {
+    color: $c4;
+  }
+  a{
+    color: $c4;
+  }
+  .navbar-item.has-dropdown.is-active{
+    background-color: $c11;
+  }
+  .button {
+    background-color: $c12;
+    border-color: transparent;
+    color: $c4;
+    &.is-static {
+      background-color: $c12;
+    }
+  }
+  .button:hover {
+    background-color: $c11;
+    color: $c4;
+  }
+
+  .title {
+    color: $c5;
+  }
+
+  .navbar {
+    background-color: $c12;
+    a, div{
+      background-color: $c12;
+      color: $c5;
+    }
+    .navbar-item{
+      background-color: $c12;
+    }
+    .navbar-link:hover{
+      background-color: $c11;
+    }
+
+    .has-dropdown:hover{
+      background-color: $c11;
+    }
+    a.navbar-item:hover {
+      background-color: $c11;
+      color: $c5;
+    }
+  }
+
+  .card {
+    background-color: $c11;
+    .box {
+      background-color: $c00;
+    }
+  }
+
+  .modal {
+    .modal-card-head {
+      background-color: $c12;
+    }
+    .modal-card-body {
+      background-color: $c11;
+    }
+    .modal-card-foot {
+      background-color: $c12;
+    }
+  }
+
+  .tag:not(body) {
+    background-color: $c12;
+
+    &:after{
+      color: $c4;
+    }
+    &:hover{
+      color: $c4;
+    }
+  }
+
+  .footer{
+    background-color: $c00;
+  }
+}
+
+

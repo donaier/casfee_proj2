@@ -1,3 +1,60 @@
+<nav class="navbar is-fixed-top" id="nav-menu" role="navigation" aria-label="main navigation" >
+  <div class="navbar-brand">
+    <div class="navbar-item is-size-3 mr-4">
+      Finance App
+    </div>
+
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" (click)="expandBurgerMenu($event)">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu" #navMenu>
+    <div class="navbar-start">
+      <a class="navbar-item" routerLink="/dashboard" routerLinkActive="active">
+        Dashboard
+      </a>
+
+      <a class="navbar-item" routerLink="/configuration" routerLinkActive="active">
+        Configuration
+      </a>
+
+      <a class="navbar-item" (click)="openManual()">
+        Help
+      </a>
+
+    </div>
+
+    <div class="navbar-end mr-6">
+      <a class="navbar-item">
+        Logout
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <div class="navbar-link" #Template>
+          Choose Style
+        </div>
+
+        <div class="navbar-dropdown">
+          <a class="navbar-item" (click)="set_theme('light')">
+            Light Theme
+          </a>
+          <a class="navbar-item" (click)="set_theme('dark')">
+            Dark Theme
+          </a>
+          <a class="navbar-item" (click)="set_theme('colored')">
+            Color Theme
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</nav>
+
+<!--
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="container">
     <div class="navbar-brand">
@@ -29,3 +86,5 @@
     </div>
   </div>
 </nav>
+
+-->

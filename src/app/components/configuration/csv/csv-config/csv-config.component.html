@@ -4,7 +4,7 @@
     <h4 class="title is-4">
       csv:
     </h4>
-    <a class="button" (click)="createCsv()" *ngIf='data ==="data"'>+ new</a>
+    <a class="button" (click)="createCsv()" *ngIf='data ==="data"'>+ Create new CsvMask</a>
   </div>
 
   <article class="hero" *ngIf='data ==="isloading"'>
@@ -16,10 +16,9 @@
   <article class="hero is-warning m-6" *ngIf='data ==="nodata"'>
     <div class="hero-body">
       <p class="title">Please add Csv to Start</p>
-      <a class="button" (click)="createCsv()">+ new CsvMask</a>
+      <a class="button" (click)="createCsv()">+ Create new CsvMask</a>
     </div>
   </article>
-
 
   <div class="card" *ngIf='data ==="data"'>
     <div class="card-content">
@@ -27,6 +26,5 @@
     </div>
   </div>
 </section>
-
 
 <app-csv-form #csvModal [csv]="csvForForm" [selector]="selector"></app-csv-form>

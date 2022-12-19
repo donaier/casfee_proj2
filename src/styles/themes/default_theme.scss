@@ -1,0 +1,68 @@
+
+.default-theme {
+  background-color: $c1;
+  color: $c5;
+  small {
+    color: $c4;
+  }
+
+  .button {
+    background-color: $c0;
+    border-color: transparent;
+    &.is-static {
+      background-color: $c1;
+    }
+    a{
+      color: $c4;
+    }
+  }
+  .button:hover {
+    background-color: $c3;
+    color: $c1;
+  }
+
+  .title {
+    color: $c5;
+  }
+
+  .navbar {
+    background-color: $c2;
+
+    a.navbar-item:hover {
+      background-color: $c3;
+      color: $c1;
+    }
+  }
+
+  .card {
+    background-color: $c0;
+    .box {
+      background-color: $c0;
+    }
+  }
+
+  .modal {
+    .modal-card-head {
+      background-color: $c1;
+    }
+    .modal-card-body {
+      background-color: $c0;
+    }
+    .modal-card-foot {
+      background-color: $c1;
+    }
+  }
+
+  .tag:not(body) {
+    background-color: $c1;
+
+    &:after{
+      color: $c3;
+    }
+  }
+
+  .footer{
+    background-color: $c1;
+  }
+
+}

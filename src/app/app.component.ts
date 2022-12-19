@@ -12,4 +12,5 @@ export class AppComponent {
   title = 'FinanceApp';
 
   constructor(public router: Router, private UploadService: UploadService) {}
+
 }
