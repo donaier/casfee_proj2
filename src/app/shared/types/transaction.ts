@@ -1,5 +1,4 @@
 import { FormControl, Validators } from '@angular/forms';
-import { Account } from './account';
 
 export interface Transaction {
   description: string,
@@ -7,7 +6,16 @@ export interface Transaction {
   amount: number,
   date: Date,
   category: string,
-  account?: Account
+}
+
+export interface ListTransaction {
+  description: string,
+  fromAccount?: string,
+  amount: number,
+  date: Date,
+  category: string,
+  accountName?: String,
+  accountShortName?: String
 }
 
 export const TransactionForm = {

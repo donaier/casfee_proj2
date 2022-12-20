@@ -15,14 +15,12 @@ import { Transaction } from 'src/app/shared/types/transaction';
 })
 export class ManualTransactionFormComponent implements OnInit, OnDestroy {
   @ViewChild('modal') modal!: ElementRef
-
   @ViewChild('manualtransactionform', { static: false }) manualtransactionform!: ElementRef
   @ViewChildren('selectabletag') selectabletags!: QueryList<ElementRef>
   @Input() account?: Account;
 
   transactionForm!: FormGroup
   description!: FormControl
-  forAccount!: FormControl
   fromAccount!: FormControl
   amount!: FormControl
   date!: FormControl
@@ -48,7 +46,6 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
     })
     this.transactionForm = new FormGroup({
       description: this.description = new FormControl(''),
-      forAccount: this.forAccount = new FormControl(''),
       fromAccount: this.fromAccount = new FormControl(''),
       amount: this.amount = new FormControl(''),
       date: this.date = new FormControl(''),
