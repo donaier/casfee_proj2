@@ -1,15 +1,15 @@
 import { FormControl, Validators } from "@angular/forms";
 
 export interface CategoryGroup{
+  id: string,
   name: string,
   color: string,
-  categories: Category[]
+  categories?: Category[]
 }
 
 export interface Category{
-  group?: string,
+  groupID: string,
   name: string,
-  color?: string
 }
 
 export const CategoryGroupColors = [

@@ -4,7 +4,7 @@ import { Subject } from 'rxjs'
 import { FluxAction, FluxActionTypes } from '../shared/types/actions.type'
 
 
-import { collection, deleteDoc, doc, Firestore, setDoc, updateDoc } from '@angular/fire/firestore'
+import { addDoc, collection, deleteDoc, doc, Firestore, setDoc, updateDoc } from '@angular/fire/firestore'
 
 @Injectable()
 
@@ -18,8 +18,13 @@ export class UploadService {
               await setDoc(docRef_add, action.account)
             }
             if(action.selector ==='categoryGroup'){
-              const docRef_add = doc(this.firestore, 'categories', action.categoryGroup!.name)
-              await setDoc(docRef_add, action.categoryGroup)
+              // const docRef_add = doc(this.firestore, 'categories', action.categoryGroup!.name)
+              // await setDoc(docRef_add, action.categoryGroup)
+
+              await addDoc(collection(this.firestore, 'categoryGroups'), action.categoryGroup)
+            }
+            if(action.selector ==='category'){
+              await addDoc(collection(this.firestore, 'categoryEntries'), action.category)
             }
             if(action.selector ==='csvMask'){
               const docRef_add = doc(this.firestore, 'csvMasks', action.csvMask!.name)
@@ -33,13 +38,18 @@ export class UploadService {
               await setDoc(docRef_update, action.account)
             }
             if(action.selector ==='categoryGroup'){
-              const docRef_add = doc(this.firestore, 'categories', action.categoryGroup!.name)
-              await setDoc(docRef_add, action.categoryGroup)
+              // const docRef_add = doc(this.firestore, 'categories', action.categoryGroup!.name)
+              // await setDoc(docRef_add, action.categoryGroup)
+
+              await updateDoc(doc(this.firestore, 'categoryGroups/'+ action.categoryGroup?.id), {
+                name: action.categoryGroup?.name,
+                color: action.categoryGroup?.color
+              })
             }
-            if(action.selector ==='category'){
-              const docRef = doc(this.firestore, 'categories', action.categoryGroup!.name)
-              await updateDoc(docRef, {categories: action.categoryGroup!.categories} )
-            }
+            // if(action.selector ==='category'){
+            //   const docRef = doc(this.firestore, 'categories', action.categoryGroup!.name)
+            //   await updateDoc(docRef, {categories: action.categoryGroup!.categories} )
+            // }
             if(action.selector ==='csvMask'){
               const docRef_update = doc(this.firestore, 'csvMasks', action.csvMask!.name)
               await setDoc(docRef_update, action.csvMask)

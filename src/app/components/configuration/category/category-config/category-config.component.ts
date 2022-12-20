@@ -69,7 +69,7 @@ export class CategoryConfigComponent implements OnInit, OnDestroy {
   // }
 
   deleteCategory(category: Category, categoryGroup : CategoryGroup) {
-    categoryGroup.categories = categoryGroup.categories.filter(item => item.name !== category.name)
+    categoryGroup.categories = categoryGroup.categories?.filter(item => item.name !== category.name)
     this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'category', null, categoryGroup))
   }
 

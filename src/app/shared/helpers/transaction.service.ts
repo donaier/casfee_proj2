@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import * as moment from 'moment';
 import { csvMask } from '../types/account';
 import { DATE_FORMAT, Transaction } from '../types/transaction';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'

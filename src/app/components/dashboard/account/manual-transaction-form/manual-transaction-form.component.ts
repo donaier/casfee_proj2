@@ -62,10 +62,6 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
   }
 
   setCategory(e: Event, category: Category, categoryGroup: CategoryGroup) {
-    this.category = {
-      name : category.name,
-      group : categoryGroup.name
-    }
     this.selectabletags.forEach(tag => { tag.nativeElement.classList.remove('selected')});
     (<HTMLElement>e.target).classList.add('selected')
   }

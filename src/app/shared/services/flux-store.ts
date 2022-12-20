@@ -53,11 +53,12 @@ export class FluxStore {
   }
 
   listener_categories(){
-    const q_categories = query(collection(this.firestore, 'categories'))
+    const q_categories = query(collection(this.firestore, 'categoryGroups'))
     const listener_categories = onSnapshot(q_categories, (querySnapshot) => {
       this.CategoryGroups_all = []
       querySnapshot.forEach((doc) => {
         let data_copy : CategoryGroup = Object.assign(doc.data())
+        data_copy.id = doc.id
         this.CategoryGroups_all.push(data_copy)
       })
       this.CategoryGroups.next(this.CategoryGroups_all)
