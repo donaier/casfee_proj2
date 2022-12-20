@@ -7,6 +7,7 @@ import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
 import { Category, CategoryGroup } from 'src/app/shared/types/category';
 import { Transaction } from 'src/app/shared/types/transaction';
 import { TransactionService } from 'src/app/shared/helpers/transaction.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-csv-transaction-form',
@@ -27,6 +28,7 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
   @Input() account?: Account;
 
   private subscription : Subscription[] = []
+  moment: any = moment;
   categoryGroups: CategoryGroup[] = []
   csvMasks: csvMask[] = []
   activeCsvMask: csvMask | undefined
@@ -109,8 +111,8 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
     if (this.account) {
       this.account.transactions.push(...this.transactionsToCategorize)
       this.account.currentValue = Number(calculateCurrentValue(this.account))
-      console.log(this.account)
-      // this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'account', null, null, null, this.account))
+
+      this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'account', null, null, null, this.account))
 
       this.hideModal()
     }

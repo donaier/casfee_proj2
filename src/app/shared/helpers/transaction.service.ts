@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 import { csvMask } from '../types/account';
-import { Transaction } from '../types/transaction';
+import { DATE_FORMAT, Transaction } from '../types/transaction';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +27,10 @@ export class TransactionService {
                 description: setPositions?.descriptionPos ? tArray[setPositions.descriptionPos].replace(/\"/gi, '').trim() : 'error',
                 fromAccount: '',
                 amount: parseFloat(tArray[ap]),
-                date: setPositions?.datePos != undefined ? moment(tArray[setPositions.datePos], csvMask.dateMask.toUpperCase()).toDate() : new Date(),
+                date: setPositions?.datePos != undefined ?
+                  moment(tArray[setPositions.datePos], csvMask.dateMask.toUpperCase()).format(DATE_FORMAT)
+                  :
+                  moment(new Date()).format(DATE_FORMAT),
                 category: '',
               })
             }

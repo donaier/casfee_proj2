@@ -1,10 +1,12 @@
 import { FormControl, Validators } from '@angular/forms';
 
+export const DATE_FORMAT = 'DD.MM.YYYY'
+
 export interface Transaction {
   description: string,
   fromAccount?: string,
   amount: number,
-  date: Date,
+  date: string,
   category: string,
 }
 
@@ -12,7 +14,7 @@ export interface ListTransaction {
   description: string,
   fromAccount?: string,
   amount: number,
-  date: Date,
+  date: string,
   category: string,
   accountName?: String,
   accountShortName?: String
