@@ -11,11 +11,12 @@ import { Category, CategoryGroupForm, CategoryGroup, CategoryForm, CategoryGroup
   templateUrl: './category-form.component.html',
   styleUrls: ['./category-form.component.scss']
 })
-export class CategoryFormComponent implements OnChanges, OnInit {
+export class CategoryFormComponent implements OnInit {
 
   @ViewChild('modal', { static: false }) modal!: ElementRef
   @ViewChild('modalCategoryGroupForm', { static: false }) modalCategoryGroupForm!: ElementRef
   @ViewChild('modalCategoryForm', { static: false }) modalCategoryForm!: ElementRef
+  @ViewChild('categoryIdInput') categoryIdInput!: ElementRef
 
   @Input() category?: Category
   @Input() categoryGroup?: CategoryGroup
@@ -29,7 +30,7 @@ export class CategoryFormComponent implements OnChanges, OnInit {
 
   categoryForm!: FormGroup
   group_id!: FormControl
-  color_category!: FormControl
+  subcategory_name!: FormControl
 
   categoryColors = CategoryGroupColors;
   equality_flag : boolean = false
@@ -42,11 +43,11 @@ export class CategoryFormComponent implements OnChanges, OnInit {
       name: this.name = new FormControl(''),
       group: this.group = new FormControl(''),
       color: this.color = new FormControl(''),
-     })
-     this.categoryForm = new FormGroup({
+    })
+    this.categoryForm = new FormGroup({
       group_id: this.group_id = new FormControl(''),
-      color_category: this.color_category = new FormControl(''),
-     })
+      subcategory_name: this.subcategory_name = new FormControl(''),
+    })
   }
 
   checkCategoryGroupForm(){
@@ -73,10 +74,8 @@ export class CategoryFormComponent implements OnChanges, OnInit {
 
     if (this.categoryForm.valid && this.categoryForm.dirty) {
       let category = this.categoryForm.value
-      // let categoryGroup = Object.assign(this.categoryGroup!) // Ist glaube ich nicht noetig mal schauen was e2e bringt
-      // categoryGroup.categories.push({name : this.categoryForm.value.group_id})
+      category.group_id = this.categoryIdInput.nativeElement.value
       this.dispatcher.next(new FluxAction(FluxActionTypes.Create, 'category', null, null, category))
-
       this.hideModal();
     }
   }
@@ -93,11 +92,4 @@ export class CategoryFormComponent implements OnChanges, OnInit {
     this.modalCategoryGroupForm.nativeElement.classList.add('is-hidden')
     this.modalCategoryForm.nativeElement.classList.add('is-hidden')
   }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['categoryGroup']?.currentValue?.name) {
-      this.categoryGroupForm.patchValue(changes['categoryGroup'].currentValue);
-    }
-  }
-
 }

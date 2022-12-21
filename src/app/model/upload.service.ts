@@ -18,9 +18,6 @@ export class UploadService {
               await setDoc(docRef_add, action.account)
             }
             if(action.selector ==='categoryGroup'){
-              // const docRef_add = doc(this.firestore, 'categories', action.categoryGroup!.name)
-              // await setDoc(docRef_add, action.categoryGroup)
-
               await addDoc(collection(this.firestore, 'categoryGroups'), action.categoryGroup)
             }
             if(action.selector ==='category'){
@@ -38,18 +35,11 @@ export class UploadService {
               await setDoc(docRef_update, action.account)
             }
             if(action.selector ==='categoryGroup'){
-              // const docRef_add = doc(this.firestore, 'categories', action.categoryGroup!.name)
-              // await setDoc(docRef_add, action.categoryGroup)
-
               await updateDoc(doc(this.firestore, 'categoryGroups/'+ action.categoryGroup?.id), {
                 name: action.categoryGroup?.name,
                 color: action.categoryGroup?.color
               })
             }
-            // if(action.selector ==='category'){
-            //   const docRef = doc(this.firestore, 'categories', action.categoryGroup!.name)
-            //   await updateDoc(docRef, {categories: action.categoryGroup!.categories} )
-            // }
             if(action.selector ==='csvMask'){
               const docRef_update = doc(this.firestore, 'csvMasks', action.csvMask!.name)
               await setDoc(docRef_update, action.csvMask)

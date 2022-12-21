@@ -40,25 +40,27 @@ export class CategoryConfigComponent implements OnInit, OnDestroy {
   }
 
   createCategoryGroup() {
-    this.categoryGroupForForm = undefined;
+    this.categoryGroupForForm = undefined
     this.selector = "create"
     this.categoryModal.modal.nativeElement.classList.add('is-active')
     this.categoryModal.modalCategoryGroupForm.nativeElement.classList.remove('is-hidden')
   }
 
   editCategoryGroup(categoryGroup: CategoryGroup) {
-    this.categoryGroupForForm = categoryGroup;
+    this.categoryGroupForForm = categoryGroup
     this.selector = "edit"
+    this.categoryModal.categoryGroupForm.patchValue(categoryGroup)
     this.categoryModal.modal.nativeElement.classList.add('is-active')
     this.categoryModal.modalCategoryGroupForm.nativeElement.classList.remove('is-hidden')
   }
 
   addCategory(categoryGroup: CategoryGroup) {
     this.categoryGroupForForm = categoryGroup;
-    this.categoryForForm = undefined;
+    this.categoryForForm = undefined
     this.selector = "addCategory"
     this.categoryModal.modal.nativeElement.classList.add('is-active')
     this.categoryModal.modalCategoryForm.nativeElement.classList.remove('is-hidden')
+    this.categoryModal.categoryIdInput.nativeElement.value = categoryGroup.id
   }
 
   // editCategory(category: Category) {

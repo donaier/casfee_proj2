@@ -66,6 +66,7 @@
 
     <!-- sub-category -->
     <form id="subcategory-form" #modalCategoryForm class="form is-hidden" [formGroup]="categoryForm" (ngSubmit)="submitCategoryForm($event)" novalidate>
+      <input type="hidden" id="group-id" formControlName="group_id" #categoryIdInput>
       <section class="modal-card-body">
         <div class="columns mb-0">
           <div class="column">
@@ -75,10 +76,10 @@
                id="input-name-subcategory"
                type="text"
                placeholder="name"
-               formControlName="group_id"
+               formControlName="subcategory_name"
                [ngClass]="{
-                'is-danger': group_id.invalid && (group_id.dirty || group_id.touched),
-                'is-success': group_id.valid && (group_id.dirty || group_id.touched)
+                'is-danger': subcategory_name.invalid && (subcategory_name.dirty || subcategory_name.touched),
+                'is-success': subcategory_name.valid && (subcategory_name.dirty || subcategory_name.touched)
               }"
                required>
             </div>
