@@ -24,16 +24,18 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
   fromAccount!: FormControl
   amount!: FormControl
   date!: FormControl
-  categoryGroups: CategoryGroup[] = []
-  category : Category | undefined
-  newTransaction : Transaction | undefined
-  private subscription : Subscription | undefined
+  categoryId!: FormControl
 
+  categoryGroups: CategoryGroup[] = []
+  categories: Category[] = []
+  category: Category | undefined
+  newTransaction : Transaction | undefined
+  private subscriptions : Subscription[] = []
 
   constructor(public store: FluxStore, @Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>) {}
 
   ngOnInit(){
-    this.subscription = this.store.CategoryGroups.subscribe((data) => {
+    this.subscriptions.push(this.store.CategoryGroups.subscribe((data) => {
       if (data.length > 0) {
         this.categoryGroups = data;
       }
@@ -43,12 +45,19 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
       if(data.length === 0){
         this.categoryGroups = []
       }
-    })
+    }))
+    this.subscriptions.push(this.store.Categories.subscribe((data) => {
+      if (data.length) {
+        this.categories = data
+      }
+    }))
+
     this.transactionForm = new FormGroup({
       description: this.description = new FormControl(''),
       fromAccount: this.fromAccount = new FormControl(''),
       amount: this.amount = new FormControl(''),
       date: this.date = new FormControl(''),
+      categoryId: this.categoryId = new FormControl('')
     })
   }
 
@@ -61,8 +70,9 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
     // Finde ich ein bisschen Overhead hier noch ein Modal zu oeffnen und items adden.
   }
 
-  setCategory(e: Event, category: Category, categoryGroup: CategoryGroup) {
+  setCategory(e: Event, category: Category) {
     this.selectabletags.forEach(tag => { tag.nativeElement.classList.remove('selected')});
+    this.transactionForm.get('categoryId')?.setValue(category.id);
     (<HTMLElement>e.target).classList.add('selected')
   }
 
@@ -84,6 +94,6 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription?.unsubscribe()
+    this.subscriptions.forEach(sub => sub.unsubscribe())
   }
 }

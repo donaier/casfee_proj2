@@ -7,7 +7,7 @@ export interface Transaction {
   fromAccount?: string,
   amount: number,
   date: string,
-  category: string,
+  categoryId: string,
 }
 
 export interface ListTransaction {
@@ -15,7 +15,7 @@ export interface ListTransaction {
   fromAccount?: string,
   amount: number,
   date: string,
-  category: string,
+  categoryId: string,
   accountName?: String,
   accountShortName?: String
 }

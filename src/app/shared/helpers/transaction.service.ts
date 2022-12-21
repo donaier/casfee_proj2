@@ -31,7 +31,7 @@ export class TransactionService {
                   moment(tArray[setPositions.datePos], csvMask.dateMask.toUpperCase()).format(DATE_FORMAT)
                   :
                   moment(new Date()).format(DATE_FORMAT),
-                category: '',
+                categoryId: '',
               })
             }
           })

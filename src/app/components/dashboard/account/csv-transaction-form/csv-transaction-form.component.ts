@@ -97,7 +97,7 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
   }
 
   setCategoryForActiveTransaction(category: Category) {
-    this.transactionsToCategorize[this.activeTransactionIndex].category = category.name
+    this.transactionsToCategorize[this.activeTransactionIndex].categoryId = category.id
 
     if (this.activeTransactionIndex >= this.transactionsToCategorize.length-1) {
       // done categorizing

@@ -25,7 +25,7 @@
               <tr>
                 <td>{{transactionsToCategorize[activeTransactionIndex].date}}</td>
                 <td>{{transactionsToCategorize[activeTransactionIndex].description}}</td>
-                <td>{{transactionsToCategorize[activeTransactionIndex].category}}</td>
+                <td>{{transactionsToCategorize[activeTransactionIndex].categoryId}}</td>
                 <td>{{transactionsToCategorize[activeTransactionIndex].amount}}</td>
               </tr>
             </tbody>
@@ -40,11 +40,11 @@
                   </span> -->
                 </p>
                 <div class="field is-grouped is-grouped-multiline">
-                  <div class="control" *ngFor="let category of categoryGroup.categories">
+                  <!-- <div class="control" *ngFor="let category of categoryGroup.categories">
                     <span class="tag selectable-tag" (click)="setCategoryForActiveTransaction(category)">
                       {{category.name}}
                     </span>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
@@ -58,7 +58,7 @@
               <tr *ngFor="let t of transactionsToCategorize">
                 <td>{{t.date}}</td>
                 <td>{{t.description}}</td>
-                <td>{{t.category}}</td>
+                <td>{{t.categoryId}}</td>
                 <td>{{t.amount}}</td>
               </tr>
             </tbody>
