@@ -18,9 +18,9 @@ export class CategoryFormComponent implements OnInit {
   @ViewChild('modalCategoryForm', { static: false }) modalCategoryForm!: ElementRef
   @ViewChild('categoryIdInput') categoryIdInput!: ElementRef
 
-  @Input() category?: Category
   @Input() categoryGroup?: CategoryGroup
   @Input() selector?: string
+  @Input() categories: Category[] = []
 
   categoryGroupForm!: FormGroup
   id!: FormControl
@@ -30,7 +30,6 @@ export class CategoryFormComponent implements OnInit {
 
   categoryForm!: FormGroup
   group_id!: FormControl
-  subcategory_name!: FormControl
 
   categoryColors = CategoryGroupColors;
   equality_flag : boolean = false
@@ -46,7 +45,7 @@ export class CategoryFormComponent implements OnInit {
     })
     this.categoryForm = new FormGroup({
       group_id: this.group_id = new FormControl(''),
-      subcategory_name: this.subcategory_name = new FormControl(''),
+      name: this.name = new FormControl(''),
     })
   }
 
@@ -81,6 +80,9 @@ export class CategoryFormComponent implements OnInit {
   }
 
   deleteCategoryGroup() {
+    this.categories.filter(c => c.group_id === this.categoryGroup?.id).forEach(catDelete => {
+      this.dispatcher.next(new FluxAction(FluxActionTypes.Delete,'category', null, null, catDelete))
+    })
     this.dispatcher.next(new FluxAction(FluxActionTypes.Delete,'categoryGroup', null, this.categoryGroup))
     this.hideModal();
   }

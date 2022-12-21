@@ -76,10 +76,10 @@
                id="input-name-subcategory"
                type="text"
                placeholder="name"
-               formControlName="subcategory_name"
+               formControlName="name"
                [ngClass]="{
-                'is-danger': subcategory_name.invalid && (subcategory_name.dirty || subcategory_name.touched),
-                'is-success': subcategory_name.valid && (subcategory_name.dirty || subcategory_name.touched)
+                'is-danger': name.invalid && (name.dirty || name.touched),
+                'is-success': name.valid && (name.dirty || name.touched)
               }"
                required>
             </div>

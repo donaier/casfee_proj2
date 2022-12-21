@@ -51,7 +51,10 @@ export class UploadService {
               await deleteDoc(doc(this.firestore, 'accounts', action.account!.name))
             }
             if(action.selector ==='categoryGroup'){
-              await deleteDoc(doc(this.firestore, 'categories', action.categoryGroup!.name))
+              await deleteDoc(doc(this.firestore, 'categoryGroups', action.categoryGroup!.id))
+            }
+            if(action.selector ==='category'){
+              await deleteDoc(doc(this.firestore, 'categoryEntries', action.category!.id))
             }
             if(action.selector ==='csvMask'){
               await deleteDoc(doc(this.firestore, 'csvMasks', action.csvMask!.name))

@@ -8,7 +8,8 @@ export interface CategoryGroup{
 }
 
 export interface Category{
-  groupID: string,
+  id: string,
+  group_id: string,
   name: string,
 }
 
