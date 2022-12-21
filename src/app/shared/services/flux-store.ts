@@ -95,6 +95,7 @@ export class FluxStore {
       this.CsvMasks_all = []
       querySnapshot.forEach((doc) => {
         let data_copy : csvMask = Object.assign(doc.data())
+        data_copy.id = doc.id
         this.CsvMasks_all.push(data_copy)
       })
       this.CsvMasks.next(this.CsvMasks_all)
