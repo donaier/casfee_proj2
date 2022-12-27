@@ -45,12 +45,11 @@ export class TransactionListComponent implements OnInit, OnChanges, OnDestroy {
         tempTransactions.map(t => {
           t.accountName = account.name
           t.accountShortName = account.shortName
-          t.date = moment(t.date).format('DD.MM.YYYY')
+          t.date = t.date
         })
 
         this.allTransactions.push(...tempTransactions)
       })
-      console.log(this.allTransactions)
       this.allTransactions.sort((a,b) => Date.parse(moment(b.date, 'DD.MM.YYYY').toString()) - Date.parse(moment(a.date, 'DD.MM.YYYY').toString()))
     }
   }
