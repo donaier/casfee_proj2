@@ -9,8 +9,15 @@
       <button class="delete" aria-label="close" (click)="hideModal()"></button>
     </header>
 
+<<<<<<< HEAD
     <form id="category-group-form" #modalCategoryGroupForm class="form is-hidden" [formGroup]="categoryGroupForm" #formDirective="ngForm" (ngSubmit)="submitCategoryGroupForm($event, formDirective)" novalidate>
       <div class="modal-card-body">
+=======
+    <!-- category Group -->
+    <form id="category-group-form" #modalCategoryGroupForm class="form is-hidden" [formGroup]="categoryGroupForm" (ngSubmit)="submitCategoryGroupForm($event)" novalidate>
+      <input type="hidden" id="input-id" formControlName="id">
+      <section class="modal-card-body">
+>>>>>>> bc1d91f3b39e797775724672cb5c496dfb1ab973
         <div class="columns mb-0">
           <div class="column is-8">
             <label class="label" for="input-name">Name</label>
@@ -46,6 +53,7 @@
         </div>
       </div>
       <footer class="modal-card-foot is-flex is-justify-content-center">
+<<<<<<< HEAD
         <button class="button is-success"
          type="submit"
          [disabled]="categoryGroupForm.invalid"
@@ -57,14 +65,33 @@
          (click)="editCategoryGroup()">Save</button>
         <button class="button theme-modifer" type="button" (click)="hideModal()">Cancel</button>
         <button class="button is-danger theme-modifer"
+=======
+        <button 
+          class="button is-success"
+          type="submit"
+          [disabled]="categoryGroupForm.invalid"
+          *ngIf="selector === 'create' || selector === 'edit'"
+        >
+          save
+        </button>
+        <button class="button" type="button" (click)="hideModal()">cancel</button>
+        <button class="button is-danger"
+>>>>>>> bc1d91f3b39e797775724672cb5c496dfb1ab973
          type="button"
          (click)="deleteCategoryGroup()"
          *ngIf="selector ==='edit'">Delete</button>
       </footer>
     </form>
 
+<<<<<<< HEAD
     <form id="subcategory-form" #modalCategoryForm class="form is-hidden" [formGroup]="categoryForm" #formDirective="ngForm" (ngSubmit)="submitCategoryForm($event, formDirective)" novalidate>
       <div class="modal-card-body">
+=======
+    <!-- sub-category -->
+    <form id="subcategory-form" #modalCategoryForm class="form is-hidden" [formGroup]="categoryForm" (ngSubmit)="submitCategoryForm($event)" novalidate>
+      <input type="hidden" id="group-id" formControlName="group_id" #categoryIdInput>
+      <section class="modal-card-body">
+>>>>>>> bc1d91f3b39e797775724672cb5c496dfb1ab973
         <div class="columns mb-0">
           <div class="column">
             <label class="label" for="input-name-subcategory">Name:</label>
@@ -73,10 +100,10 @@
                id="input-name-subcategory"
                type="text"
                placeholder="name"
-               formControlName="name_category"
+               formControlName="name"
                [ngClass]="{
-                'is-danger': name_category.invalid && (name_category.dirty || name_category.touched),
-                'is-success': name_category.valid && (name_category.dirty || name_category.touched)
+                'is-danger': name.invalid && (name.dirty || name.touched),
+                'is-success': name.valid && (name.dirty || name.touched)
               }"
                required>
             </div>

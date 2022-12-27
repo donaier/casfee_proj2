@@ -110,7 +110,7 @@
               }"
               required>
                 <option  value="no csv mask selected">No CsvMask</option>
-                <option *ngFor="let csvMask of csvMasks" value={{csvMask.name}} [selected]="account?.csv === csvMask.name">{{csvMask.name}}</option>
+                <option *ngFor="let csvMask of csvMasks" value={{csvMask.id}} [selected]="account?.csv === csvMask.id">{{csvMask.name}}</option>
             </select>
           </div>
         </div>

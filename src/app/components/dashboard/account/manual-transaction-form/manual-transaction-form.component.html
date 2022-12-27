@@ -56,8 +56,6 @@
               required>
           </div>
         </div>
-        <!--
-        <input id="category-manualTransaction" type="hidden" formControlName="category" #categorymanualTransaction> -->
         <div class="box" *ngFor="let categoryGroup of categoryGroups">
           <p class="is-flex is-justify-content-space-between">
             <strong class="pb-3">{{categoryGroup.name}}</strong>
@@ -67,9 +65,11 @@
             </span> -->
           </p>
           <div class="field is-grouped is-grouped-multiline">
-            <div class="control" *ngFor="let category of categoryGroup.categories">
-              <span class="tag selectable-tag" (click)="setCategory($event, category, categoryGroup)" #selectabletag>{{category.name}}</span>
-            </div>
+            <ng-container *ngFor="let category of categories">
+              <div class="control" *ngIf="category.group_id === categoryGroup.id">
+                <span class="tag selectable-tag" (click)="setCategory($event, category)" #selectabletag>{{category.name}}</span>
+              </div>
+            </ng-container>
           </div>
         </div>
 

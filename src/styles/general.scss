@@ -1,0 +1,32 @@
+table.table {
+  background: unset;
+
+  td {
+    border: none;
+  }
+}
+
+table.transaction-table {
+  width: 100%;
+  table-layout: fixed;
+
+  .col-account {
+    width: 5%;
+  }
+  .col-date, .col-amount {
+    width: 10%;
+  }
+  .col-category {
+    width: 15%;
+  }
+}
+
+.category-indicator {
+  display: inline-block;
+  height: 1.2rem;
+  width: 1.2rem;
+  border-radius: 50%;
+  position: relative;
+  top: .2rem;
+  margin-left: 0.3rem;
+}
