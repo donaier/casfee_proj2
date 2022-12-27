@@ -1,26 +1,8 @@
 
-$c0: #fff4e3;
-$c1: #ffe4ba;
-$c2: #ecb4aa;
-$c3: #a870ab;
-$c4: #413e9f;
-$c5: #041440;
-
-:root {
-  --color-0: #{$c0};
-  --color-1: #{$c1};
-  --color-2: #{$c2};
-  --color-3: #{$c3};
-  --color-4: #{$c4};
-  --color-5: #{$c5};
-}
-
 body {
   min-height: 100vh;
 }
 
-// Select tag in Navigation je nach Theme aendern in blau/rot/gruen etc...
-
-@import "src/styles/themes/default_theme.scss";
+@import "src/styles/themes/color_theme.scss";
 @import "src/styles/themes/light_theme.scss";
 @import "src/styles/themes/dark_theme.scss";

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject, OnInit } from '@angular/core';
 
 
 @Component({
@@ -6,7 +7,17 @@ import { Component } from '@angular/core';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
 
-  constructor() {}
+  constructor(@Inject(DOCUMENT) private document: Document) {}
+
+
+  ngOnInit() {
+    this.set_Theme()
+  }
+
+  set_Theme(){
+    this.document.body.classList.add('has-navbar-fixed-top', 'light-theme')
+  }
+
 }

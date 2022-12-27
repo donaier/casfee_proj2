@@ -45,6 +45,7 @@ export class NavigationComponent {
   }
 
   logout(){
+    console.log("open instructions")
     this.AuthService.logout()
   }
 

@@ -1,6 +1,6 @@
-<div class="modal" id="csv-mask-form" #modal>
+<section class="modal" id="csv-mask-form" #modal>
   <div class="modal-background"></div>
-  <div class="modal-card">
+  <article class="modal-card">
 
     <header class="modal-card-head">
       <p class="modal-card-title" *ngIf="selector ==='edit'">Edit: {{csv!.name}}</p>
@@ -10,11 +10,11 @@
     </header>
 
     <form class="form"
-    [formGroup]="csvForm"
-    #formDirective="ngForm"
-    *ngIf="selector ==='create' || selector === 'edit'"
-    novalidate>
-      <section class="modal-card-body">
+     [formGroup]="csvForm"
+     #formDirective="ngForm"
+     *ngIf="selector ==='create' || selector === 'edit'"
+     novalidate>
+      <div class="modal-card-body">
         <div class="columns mb-0">
           <div class="column is-8">
             <label class="label" for="input-name">name:</label>
@@ -62,7 +62,7 @@
              required>
           </div>
         </div>
-      </section>
+      </div>
     </form>
 
     <div class="modal-card-body" *ngIf="selector ==='delete'">
@@ -80,12 +80,13 @@
        (click)="submitCsvForm($event)"
        [disabled]="csvForm.invalid"
        *ngIf="selector==='create' || selector==='delete'">save</button>
-      <button class="button" type="button" (click)="hideModal()">cancel</button>
-      <button class="button is-danger"
+      <button class="button theme-modifer" type="button" (click)="hideModal()">cancel</button>
+      <button class="button is-danger theme-modifer"
        type="button"
        (click)="deleteCsvMask()"
        *ngIf="selector ==='edit'">delete</button>
     </footer>
 
-  </div>
-</div>
+  </article>
+
+</section>

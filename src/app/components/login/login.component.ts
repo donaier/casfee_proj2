@@ -1,4 +1,5 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core'
+import { DOCUMENT } from '@angular/common'
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import { AuthentificationService } from 'src/app/shared/services/authentification.service'
@@ -16,10 +17,10 @@ export class LoginComponent implements OnInit {
   email!: FormControl
   password!: FormControl
 
-  constructor(private AuthService: AuthentificationService,
-              private router: Router) {}
+  constructor(private AuthService: AuthentificationService, private router: Router, @Inject(DOCUMENT) private document: Document) {}
 
   ngOnInit() {
+    this.document.body.removeAttribute('class')
     this.login = new FormGroup({
       email: this.email = new FormControl('', [
         Validators.required,

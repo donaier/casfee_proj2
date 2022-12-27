@@ -1,6 +1,6 @@
-<div class="modal" id="bank-account-form" #modal>
+<section class="modal" id="bank-account-form" #modal>
   <div class="modal-background"></div>
-  <div class="modal-card">
+  <article class="modal-card">
 
     <header class="modal-card-head">
       <p class="modal-card-title" *ngIf="selector ==='edit'">Edit: {{account!.name}}</p>
@@ -14,7 +14,7 @@
      #formDirective="ngForm"
      *ngIf="selector ==='create' || selector === 'edit'"
      novalidate>
-      <section class="modal-card-body">
+      <div class="modal-card-body">
         <div class="columns mb-0">
           <div class="column is-6">
             <label for="input-name" class="label">name:</label>
@@ -114,7 +114,7 @@
             </select>
           </div>
         </div>
-      </section>
+      </div>
     </form>
 
     <div class="modal-card-body" *ngIf="selector ==='delete'">
@@ -133,9 +133,9 @@
       type="button"
       *ngIf="selector ==='delete'"
       (click)="deleteAccount()">OK</button>
-      <button class="button" type="button" (click)="hideModal()">cancel</button>
+      <button class="button theme-modifer" type="button" (click)="hideModal()">cancel</button>
     </footer>
 
-  </div>
+  </article>
 
-</div>
+</section>

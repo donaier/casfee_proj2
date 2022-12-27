@@ -50,6 +50,7 @@ export class AccountFormComponent implements OnInit, OnChanges {
   }
 
   hideModal() {
+    this.accountForm.reset();
     this.modal.nativeElement.classList.remove('is-active');
   }
 

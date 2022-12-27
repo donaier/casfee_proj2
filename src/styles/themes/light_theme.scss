@@ -19,6 +19,7 @@ $c5: #041440;
   .navbar-item.has-dropdown.is-active{
     background-color: $c11;
   }
+
   .button {
     background-color: $c12;
     border-color: transparent;
@@ -27,15 +28,23 @@ $c5: #041440;
       background-color: $c12;
     }
   }
+  .is-success{
+    background-color: $c00;
+  }
+  .theme-modifer{
+    background-color: $c00;
+  }
+  .button.is-success:disabled{
+    background-color: $c00;
+    border: none;
+  }
   .button:hover {
     background-color: $c11;
     color: $c4;
   }
-
   .title {
     color: $c5;
   }
-
   .navbar {
     background-color: $c12;
     a, div{
@@ -48,7 +57,6 @@ $c5: #041440;
     .navbar-link:hover{
       background-color: $c11;
     }
-
     .has-dropdown:hover{
       background-color: $c11;
     }
@@ -86,6 +94,14 @@ $c5: #041440;
     &:hover{
       color: $c4;
     }
+  }
+
+  .card-footer-item{
+    background-color: $c12;
+  }
+
+  .card-footer-item:hover{
+    background-color: $c11;
   }
 
   .footer{

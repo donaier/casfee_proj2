@@ -1,3 +1,9 @@
+$c0: #fff4e3;
+$c1: #ffe4ba;
+$c2: #ecb4aa;
+$c3: #a870ab;
+$c4: #413e9f;
+$c5: #041440;
 
 .default-theme {
   background-color: $c1;
@@ -5,29 +11,51 @@
   small {
     color: $c4;
   }
+  a{
+    color: $c4;
+  }
+  .navbar-item.has-dropdown.is-active{
 
+  }
   .button {
     background-color: $c0;
     border-color: transparent;
+
     &.is-static {
       background-color: $c1;
     }
-    a{
-      color: $c4;
-    }
+  }
+  .is-success{
+
+  }
+  .theme-modifer{
+
+  }
+  .button.is-success:disabled{
+
   }
   .button:hover {
     background-color: $c3;
     color: $c1;
   }
-
   .title {
     color: $c5;
   }
-
   .navbar {
     background-color: $c2;
+    a, div{
+      background-color: $c3;
+      color: $c1;
+    }
+    .navbar-item{
 
+    }
+    .navbar-link:hover{
+
+    }
+    .has-dropdown:hover{
+
+    }
     a.navbar-item:hover {
       background-color: $c3;
       color: $c1;
@@ -55,11 +83,22 @@
 
   .tag:not(body) {
     background-color: $c1;
-
     &:after{
       color: $c3;
     }
+    &:hover{
+      color: $c4;
+    }
   }
+
+  .card-footer-item{
+
+  }
+
+  .card-footer-item:hover{
+
+  }
+
 
   .footer{
     background-color: $c1;
