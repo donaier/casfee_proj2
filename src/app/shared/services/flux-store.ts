@@ -35,7 +35,7 @@ export class FluxStore {
         case FluxActionTypes.Load:
           this.listener_accounts()
           this.listener_categories()
-          this.listener_transactions()
+          // this.listener_transactions()
           this.listener_csvMasks()
           break
       }
@@ -77,17 +77,17 @@ export class FluxStore {
     })
   }
 
-  listener_transactions(){
-    const q_transactions = query(collection(this.firestore, 'transactions'))
-    const listener_transactions = onSnapshot(q_transactions, (querySnapshot) => {
-      this.Transactions_all = []
-      querySnapshot.forEach((doc) => {
-        let data_copy : Transaction = Object.assign(doc.data())
-        this.Transactions_all.push(data_copy)
-      })
-      this.CategoryGroups.next(this.CategoryGroups_all)
-    })
-  }
+  // listener_transactions(){
+  //   const q_transactions = query(collection(this.firestore, 'transactions'))
+  //   const listener_transactions = onSnapshot(q_transactions, (querySnapshot) => {
+  //     this.Transactions_all = []
+  //     querySnapshot.forEach((doc) => {
+  //       let data_copy : Transaction = Object.assign(doc.data())
+  //       this.Transactions_all.push(data_copy)
+  //     })
+  //     this.CategoryGroups.next(this.CategoryGroups_all)
+  //   })
+  // }
 
   listener_csvMasks(){
     const q_csvMasks = query(collection(this.firestore, 'csvMasks'))

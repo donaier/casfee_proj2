@@ -1,13 +1,12 @@
 import { Component, Inject, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
-import { Transaction } from '@angular/fire/firestore';
 import * as moment from 'moment';
 import { Subject, Subscription } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
 import { FluxStore } from 'src/app/shared/services/flux-store';
 import { Account } from 'src/app/shared/types/account';
 import { FluxAction } from 'src/app/shared/types/actions.type';
-import { Category } from 'src/app/shared/types/category';
-import { ListTransaction } from 'src/app/shared/types/transaction';
+import { Category, CategoryGroup } from 'src/app/shared/types/category';
+import { ListTransaction, Transaction } from 'src/app/shared/types/transaction';
 
 @Component({
   selector: 'app-transaction-list',
@@ -21,6 +20,7 @@ export class TransactionListComponent implements OnInit, OnChanges, OnDestroy {
 
   allTransactions: ListTransaction[] = []
   allCategories: Category[] = []
+  allCategoryGroups: CategoryGroup[] = []
 
   activeMonths: Set<string> = new Set
 
@@ -32,10 +32,21 @@ export class TransactionListComponent implements OnInit, OnChanges, OnDestroy {
         this.allCategories = data
       }
     }))
+    this.subscriptions.push(this.store.CategoryGroups.subscribe((data) => {
+      if (data.length) {
+        this.allCategoryGroups = data
+      }
+    }))
   }
 
   categoryNameFor(transaction: ListTransaction) {
     return this.allCategories.find(cat => cat.id === transaction.categoryId)?.name
+  }
+
+  colorFor(transaction: Transaction) {
+    return this.allCategoryGroups.find(cg => {
+      return cg.id === (this.allCategories.find(c => c.id === transaction.categoryId)?.group_id)
+    })?.color
   }
 
   ngOnChanges(changes: SimpleChanges) {

@@ -6,16 +6,32 @@
   </header>
   <div class="card-content">
     <ng-container *ngFor="let month of activeMonths">
-      <h3 class="title is-3 has-text-centered">{{month}}</h3>
-      <table class="table is-fullwidth">
+      <h4 class="title is-4 has-text-centered">{{month}}</h4>
+      <table class="table is-fullwidth transaction-table">
+        <colgroup>
+          <col class="col-account" />
+          <col class="col-date" />
+          <col class="col-description" />
+          <col class="col-category" />
+          <col class="col-amount" />
+        </colgroup>
         <tbody>
           <ng-container *ngFor="let transaction of allTransactions">
             <tr *ngIf="transaction.date.includes(month)">
-              <td>{{transaction.accountShortName}}</td>
+              <td>
+                <span class="tag">{{transaction.accountShortName}}</span>
+              </td>
               <td>{{transaction.date}}</td>
               <td>{{transaction.description}}</td>
-              <td>{{categoryNameFor(transaction)}}</td>
-              <td>{{transaction.amount}}</td>
+              <td class="has-text-right">
+                {{categoryNameFor(transaction)}}
+                <div class="category-indicator" [ngStyle]="{'background': colorFor(transaction)}"></div>
+              </td>
+              <td class="has-text-right">
+                <span class="{{transaction.amount > 0 ? 'has-text-success' : 'has-text-danger'}}">
+                  <b>{{transaction.amount | number: '1.2-2'}}</b>
+                </span>
+              </td>
             </tr>
           </ng-container>
         </tbody>
