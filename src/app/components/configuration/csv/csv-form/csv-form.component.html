@@ -10,12 +10,12 @@
     </header>
 
     <form class="form"
-     [formGroup]="csvForm"
-     #formDirective="ngForm"
-     *ngIf="selector ==='create' || selector === 'edit'"
-     novalidate>
+    [formGroup]="csvForm"
+    #formDirective="ngForm"
+    *ngIf="selector ==='create' || selector === 'edit'"
+    novalidate>
       <input type="hidden" formControlName="id">
-      <div class="modal-card-body">
+      <section class="modal-card-body">
         <div class="columns mb-0">
           <div class="column is-8">
             <label class="label" for="input-name">Name</label>
@@ -49,7 +49,7 @@
           </div>
         </div>
         <div class="field">
-          <label class="label" for="input-mask">mask:</label>
+          <label class="label" for="input-mask">csv mask:</label>
           <div class="control">
             <input class="input"
              type="text"
@@ -59,6 +59,21 @@
              [ngClass]="{
               'is-danger': mask.invalid && (mask.dirty || mask.touched),
               'is-success': mask.valid && (mask.dirty || mask.touched)
+             }"
+             required>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label" for="date-mask">date mask:</label>
+          <div class="control">
+            <input class="input"
+             type="text"
+             id="date-mask"
+             placeholder="dd.mm.yyyy / dd-mm-yy / ..."
+             formControlName="dateMask"
+             [ngClass]="{
+              'is-danger': dateMask.invalid && (dateMask.dirty || dateMask.touched),
+              'is-success': dateMask.valid && (dateMask.dirty || dateMask.touched)
              }"
              required>
           </div>
@@ -80,7 +95,7 @@
       <button class="button theme-modifer" type="button" (click)="hideModal()">Cancel</button>
       <button class="button is-danger theme-modifer"
        type="button"
-       (click)="deleteCsvMask()"
+       (click)="deleteCsvMask($event)"
        *ngIf="selector ==='edit'">delete</button>
     </footer>
 

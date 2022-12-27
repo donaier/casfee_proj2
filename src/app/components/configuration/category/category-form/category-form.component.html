@@ -9,10 +9,6 @@
       <button class="delete" aria-label="close" (click)="hideModal()"></button>
     </header>
 
-<<<<<<< HEAD
-    <form id="category-group-form" #modalCategoryGroupForm class="form is-hidden" [formGroup]="categoryGroupForm" #formDirective="ngForm" (ngSubmit)="submitCategoryGroupForm($event, formDirective)" novalidate>
-      <div class="modal-card-body">
-=======
     <!-- category Group -->
     <form id="category-group-form" #modalCategoryGroupForm class="form is-hidden" [formGroup]="categoryGroupForm" (ngSubmit)="submitCategoryGroupForm($event)" novalidate>
       <input type="hidden" id="input-id" formControlName="id">
@@ -53,20 +49,7 @@
         </div>
       </div>
       <footer class="modal-card-foot is-flex is-justify-content-center">
-<<<<<<< HEAD
-        <button class="button is-success"
-         type="submit"
-         [disabled]="categoryGroupForm.invalid"
-         *ngIf="selector ==='create'">save</button>
-         <button class="button is-success"
-         type="button"
-         [disabled]="categoryGroupForm.invalid"
-         *ngIf="selector ==='edit'"
-         (click)="editCategoryGroup()">Save</button>
-        <button class="button theme-modifer" type="button" (click)="hideModal()">Cancel</button>
-        <button class="button is-danger theme-modifer"
-=======
-        <button 
+        <button
           class="button is-success"
           type="submit"
           [disabled]="categoryGroupForm.invalid"
@@ -84,7 +67,8 @@
     </form>
 
 <<<<<<< HEAD
-    <form id="subcategory-form" #modalCategoryForm class="form is-hidden" [formGroup]="categoryForm" #formDirective="ngForm" (ngSubmit)="submitCategoryForm($event, formDirective)" novalidate>
+    <form id="subcategory-form" #modalCategoryForm class="form is-hidden" [formGroup]="categoryForm" (ngSubmit)="submitCategoryForm($event)" novalidate>
+      <input type="hidden" id="group-id" formControlName="group_id" #categoryIdInput>
       <div class="modal-card-body">
 =======
     <!-- sub-category -->
