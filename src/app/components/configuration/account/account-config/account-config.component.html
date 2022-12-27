@@ -3,7 +3,7 @@
     <h4 class="title is-4">
       Registered Accounts:
     </h4>
-    <a class="button" (click)="createAccount()" *ngIf='data ==="data"'>+ create new Account</a>
+    <a class="button" (click)="createAccount()" *ngIf='data ==="data"'>Create new Account</a>
   </div>
 
   <article class="hero" *ngIf='data ==="isloading"'>
@@ -34,17 +34,17 @@
         </header>
         <div class="card-content">
           <div class="content">
-            <small>Description:</small>
+            <small>Description</small>
             <p>{{account.description}}</p>
-            <small>Initial - Amount:</small>
+            <small>Initial Amount</small>
             <p class="is-flex is-justify-content-space-between">
               Fr. {{account.initialValue}}
             </p>
-            <small>Actual - Amount:</small>
+            <small>Actual Amount</small>
             <p class="is-flex is-justify-content-space-between">
               <span class="title is-4">Fr. {{account.currentValue}}</span>
             </p>
-            <small>Csv mask:</small>
+            <small>Csv mask</small>
             <p>{{account.csv || 'no csv mask selected'}}</p>
           </div>
         </div>

@@ -15,6 +15,9 @@ $c5: #041440;
   a{
     color: $c4;
   }
+  p{
+
+  }
   .navbar-item.has-dropdown.is-active{
 
   }
@@ -90,6 +93,10 @@ $c5: #041440;
     &:hover{
       color: $c4;
     }
+  }
+
+  .theme-modifier:hover{
+
   }
 
   .card-footer-item{

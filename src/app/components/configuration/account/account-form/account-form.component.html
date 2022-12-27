@@ -3,7 +3,7 @@
   <article class="modal-card">
 
     <header class="modal-card-head">
-      <p class="modal-card-title" *ngIf="selector ==='edit'">Edit: {{account!.name}}</p>
+      <p class="modal-card-title" *ngIf="selector ==='edit'">Edit Account: {{account!.name}}</p>
       <p class="modal-card-title" *ngIf="selector ==='create'">New Account</p>
       <p class="modal-card-title" *ngIf="selector ==='delete'">Delete Account</p>
       <button class="delete" aria-label="close" (click)="hideModal()"></button>
@@ -17,7 +17,7 @@
       <div class="modal-card-body">
         <div class="columns mb-0">
           <div class="column is-6">
-            <label for="input-name" class="label">name:</label>
+            <label for="input-name" class="label">Name</label>
             <div class="control">
               <input class="input"
                 id="input-name"
@@ -32,7 +32,7 @@
             </div>
           </div>
           <div class="column">
-            <label class="label">short:</label>
+            <label class="label">Short</label>
             <div class="control">
               <input class="input"
                 type="text"
@@ -46,7 +46,7 @@
             </div>
           </div>
           <div class="column">
-            <label class="label" for="colorSelect">color</label>
+            <label class="label" for="colorSelect">Color</label>
             <div class="select">
               <select
               class="input--select"
@@ -63,7 +63,7 @@
           </div>
         </div>
         <div class="field">
-          <label class="label">description:</label>
+          <label class="label">Description</label>
           <div class="control">
             <input class="input"
               type="text"
@@ -77,7 +77,7 @@
           </div>
         </div>
         <div class="field">
-          <label class="label">initial Balance:</label>
+          <label class="label">Initial Balance</label>
           <div class="field has-addons">
             <p class="control is-expanded">
               <input class="input"
@@ -98,7 +98,7 @@
           </div>
         </div>
         <div class="field">
-          <label class="label" for="csvMaskSelect">csv Mask:</label>
+          <label class="label" for="csvMaskSelect">Csv Mask</label>
           <div class="select">
             <select
               class="input--select input"
@@ -118,7 +118,7 @@
     </form>
 
     <div class="modal-card-body" *ngIf="selector ==='delete'">
-      Are you sure to Delete Account: {{account!.name}}
+      <p>Are you sure to Delete Account: <span class="is-size-4">{{account!.name}}</span></p>
     </div>
 
     <footer class="modal-card-foot is-flex is-justify-content-center">
@@ -127,13 +127,13 @@
       type="submit"
       (click)="submitAccountForm($event)"
       *ngIf="selector ==='create' || selector === 'edit'"
-      [disabled]="accountForm.invalid">save</button>
+      [disabled]="accountForm.invalid">Save</button>
       <button
       class="button is-success"
       type="button"
       *ngIf="selector ==='delete'"
       (click)="deleteAccount()">OK</button>
-      <button class="button theme-modifer" type="button" (click)="hideModal()">cancel</button>
+      <button class="button theme-modifer" type="button" (click)="hideModal()">Cancel</button>
     </footer>
 
   </article>

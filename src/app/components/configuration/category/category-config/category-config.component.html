@@ -5,7 +5,7 @@
     <h4 class="title is-4">
       Categories:
     </h4>
-    <a class="button" (click)="createCategoryGroup()" *ngIf='data ==="data"'>+ create new Categorie</a>
+    <a class="button" (click)="createCategoryGroup()" *ngIf='data ==="data"'>Create new Categorie</a>
   </div>
 
   <article class="hero" *ngIf='data ==="isloading"'>
@@ -27,8 +27,8 @@
         <p class="is-flex is-justify-content-space-between">
           <strong class="pb-3">{{categoryGroup.name}}</strong>
           <span>
-            <a class="tag mr-2" (click)="editCategoryGroup(categoryGroup)">edit</a>
-            <a class="tag" (click)="addCategory(categoryGroup)">+</a>
+            <a class="tag theme-modifier mr-2" (click)="editCategoryGroup(categoryGroup)">Edit</a>
+            <a class="tag theme-modifier" (click)="addCategory(categoryGroup)">Add Item</a>
           </span>
         </p>
         <div class="field is-grouped is-grouped-multiline">

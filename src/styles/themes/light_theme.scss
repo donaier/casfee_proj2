@@ -5,6 +5,7 @@ $c21: #DEF6FB;
 $c3: #a870ab;
 $c4: #413e9f;
 $c5: #041440;
+$c6: #000000;
 
 
 .light-theme {
@@ -15,6 +16,9 @@ $c5: #041440;
   }
   a{
     color: $c4;
+  }
+  p{
+    color: $c6;
   }
   .navbar-item.has-dropdown.is-active{
     background-color: $c11;
@@ -87,6 +91,7 @@ $c5: #041440;
 
   .tag:not(body) {
     background-color: $c12;
+    text-decoration: none;
 
     &:after{
       color: $c4;
@@ -94,6 +99,10 @@ $c5: #041440;
     &:hover{
       color: $c4;
     }
+  }
+
+  .theme-modifier:hover{
+    background-color: $c11;
   }
 
   .card-footer-item{
