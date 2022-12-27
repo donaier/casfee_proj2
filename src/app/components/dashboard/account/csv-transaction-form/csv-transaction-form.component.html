@@ -40,11 +40,13 @@
                   </span> -->
                 </p>
                 <div class="field is-grouped is-grouped-multiline">
-                  <!-- <div class="control" *ngFor="let category of categoryGroup.categories">
-                    <span class="tag selectable-tag" (click)="setCategoryForActiveTransaction(category)">
-                      {{category.name}}
-                    </span>
-                  </div> -->
+                  <ng-container *ngFor="let category of categories">
+                    <div class="control" *ngIf="category.group_id === categoryGroup.id">
+                      <span class="tag selectable-tag" (click)="setCategoryForActiveTransaction(category)">
+                        {{category.name}}
+                      </span>
+                    </div>
+                  </ng-container>
                 </div>
               </div>
             </div>
@@ -58,7 +60,7 @@
               <tr *ngFor="let t of transactionsToCategorize">
                 <td>{{t.date}}</td>
                 <td>{{t.description}}</td>
-                <td>{{t.categoryId}}</td>
+                <td>{{getCategory(t.categoryId)?.name}}</td>
                 <td>{{t.amount}}</td>
               </tr>
             </tbody>

@@ -30,6 +30,7 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
   private subscription : Subscription[] = []
   moment: any = moment;
   categoryGroups: CategoryGroup[] = []
+  categories: Category[] = []
   csvMasks: csvMask[] = []
   activeCsvMask: csvMask | undefined
   transactionsToCategorize: Transaction[] = []
@@ -45,12 +46,17 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
   ngOnInit(){
     this.subscription.push(this.store.CategoryGroups.subscribe((data) => {
       if (data.length > 0) {
-        this.categoryGroups = data;
+        this.categoryGroups = data
+      }
+    }))
+    this.subscription.push(this.store.Categories.subscribe((data) => {
+      if (data.length > 0) {
+        this.categories = data
       }
     }))
     this.subscription.push(this.store.CsvMasks.subscribe((data) => {
       if (data.length > 0) {
-        this.csvMasks = data;
+        this.csvMasks = data
       }
     }))
   }
@@ -100,7 +106,6 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
     this.transactionsToCategorize[this.activeTransactionIndex].categoryId = category.id
 
     if (this.activeTransactionIndex >= this.transactionsToCategorize.length-1) {
-      // done categorizing
       this.doneCategorizing = true
     } else {
       this.activeTransactionIndex++
@@ -118,10 +123,14 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
     }
   }
 
+  getCategory(id: string) {
+    return this.categories.find(c => c.id === id)
+  }
+
   ngOnChanges(changes: SimpleChanges) {
     if (changes['account'].currentValue) {
-      this.activeCsvMask = this.csvMasks.find(m => m.name === this.account?.csv)
-  
+      this.activeCsvMask = this.csvMasks.find(m => m.id === this.account?.csv)
+
       if(this.activeCsvMask !== undefined && this.transactionService.resolveCsvMask(this.activeCsvMask!)) {
         this.accountIsReadyElement.nativeElement.classList.remove('is-hidden')
         this.accountNotReadyElement.nativeElement.classList.add('is-hidden')
