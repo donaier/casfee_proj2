@@ -6,7 +6,7 @@ import { FluxStore } from 'src/app/shared/services/flux-store';
 import { Account } from 'src/app/shared/types/account';
 import { FluxAction } from 'src/app/shared/types/actions.type';
 import { Category, CategoryGroup } from 'src/app/shared/types/category';
-import { ListTransaction, Transaction } from 'src/app/shared/types/transaction';
+import { DATE_FORMAT, ListTransaction, Transaction } from 'src/app/shared/types/transaction';
 
 @Component({
   selector: 'app-transaction-list',
@@ -15,6 +15,7 @@ import { ListTransaction, Transaction } from 'src/app/shared/types/transaction';
 })
 export class TransactionListComponent implements OnInit, OnChanges, OnDestroy {
   @Input() accounts: Account[] = []
+  @Input() selectedTimes: string[] = []
 
   private subscriptions: Subscription[] = [];
 
@@ -50,22 +51,22 @@ export class TransactionListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['accounts']) {
-      this.allTransactions = []
+    this.allTransactions = []
 
-      this.accounts.forEach(account => {
-        let tempTransactions: ListTransaction[] = [...account.transactions];
-        tempTransactions.map(t => {
-          t.accountName = account.name
-          t.accountShortName = account.shortName
-          t.date = t.date
-        })
-
-        this.allTransactions.push(...tempTransactions)
+    this.accounts.forEach(account => {
+      let tempTransactions: ListTransaction[] = [...account.transactions];
+      tempTransactions.map(t => {
+        t.accountName = account.name
+        t.accountShortName = account.shortName
+        t.date = t.date
       })
-      this.allTransactions.sort((a,b) => Date.parse(moment(b.date, 'DD.MM.YYYY').toString()) - Date.parse(moment(a.date, 'DD.MM.YYYY').toString()))
-      this.activeMonths = new Set(this.allTransactions.map(t => moment(t.date, 'DD.MM.YYYY').format('M.Y')))
-    }
+
+      this.allTransactions.push(...tempTransactions)
+    })
+    this.allTransactions = this.allTransactions.filter(t => this.selectedTimes.some((times => t.date.includes(times))))
+
+    this.allTransactions.sort((a,b) => Date.parse(moment(b.date, DATE_FORMAT).toString()) - Date.parse(moment(a.date, DATE_FORMAT).toString()))
+    this.activeMonths = new Set(this.allTransactions.map(t => moment(t.date, DATE_FORMAT).format('M.Y')))
   }
 
   ngOnDestroy() {

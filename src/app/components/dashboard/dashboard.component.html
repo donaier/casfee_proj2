@@ -23,14 +23,58 @@
           </td>
         </tr>
         <tr>
-          <th class="has-text-right">selected Timeframe:</th>
-          <td>time</td>
+          <th class="has-text-right">selected Periods:</th>
+          <td>
+            <div class="field is-grouped is-grouped-multiline">
+
+              <ng-container *ngIf="selectedTimeframe === 'months'">
+                <div class="control" *ngFor="let group of groupedMonths">
+                  <div class="tags has-addons time-select-tag">
+                    <span class="tag"><strong>{{group.at(0).split('.').at(-1)}}</strong></span>
+                    <span 
+                      *ngFor="let month of group"
+                      class="tag {{selectedTime.includes(month) ? 'selected' : 'inactive'}}"
+                      (click)="toggleMonth(month)"
+                    >
+                      {{month.split('.').at(0)}}
+                    </span>
+                  </div>
+                </div>
+              </ng-container>
+
+              <ng-container *ngIf="selectedTimeframe === 'years'">
+                <div class="control" *ngFor="let group of groupedMonths">
+                  <div class="tags has-addons time-select-tag" (click)="toggleYear(group.at(0).split('.').at(-1))">
+                    <span class="tag"><strong>{{group.at(0).split('.').at(-1)}}</strong></span>
+                    <span class="tag">
+                      <span class="icon is-small">
+                        <i class="fas fa-check" *ngIf="selectedTime.includes(group.at(0).split('.').at(-1))"></i>
+                        <i class="fas fa-ban" *ngIf="!selectedTime.includes(group.at(0).split('.').at(-1))"></i>
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th class="has-text-right">select Timeframe:</th>
+          <td>
+            <div class="field is-grouped is-grouped-multiline">
+
+              <div class="tags has-addons timeframe-select-tag" (click)="toggleTimeframe()">
+                <span class="tag {{selectedTimeframe === 'years' ? 'selected' : ''}}">years</span>
+                <span class="tag {{selectedTimeframe === 'months' ? 'selected' : ''}}">months</span>
+              </div>
+            </div>
+          </td>
         </tr>
       </table>
     </div>
   </div>
 
   <app-graph [accounts]="activeAccounts"></app-graph>
-  <app-transaction-list [accounts]="activeAccounts"></app-transaction-list>
+  <app-transaction-list [accounts]="activeAccounts" [selectedTimes]="selectedTime"></app-transaction-list>
   
 </div>

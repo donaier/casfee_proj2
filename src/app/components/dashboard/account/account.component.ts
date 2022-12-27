@@ -42,8 +42,6 @@ export class AccountComponent implements OnInit, OnDestroy {
   }
 
   openManualTransactionModal(account: Account) {
-    console.log(this.activeAccounts)
-    console.log(this.accounts)
     this.selectedAccount = account
     this.manualTransactionModal.manualtransactionform.nativeElement.classList.add('is-active')
   }
