@@ -5,17 +5,21 @@
     </p>
   </header>
   <div class="card-content">
-    <table class="table is-fullwidth">
-      <thead></thead>
-      <tbody>
-        <tr *ngFor="let transaction of allTransactions">
-          <td>{{transaction.accountShortName}}</td>
-          <td>{{transaction.date}}</td>
-          <td>{{transaction.description}}</td>
-          <td>{{categoryNameFor(transaction)}}</td>
-          <td>{{transaction.amount}}</td>
-        </tr>
-      </tbody>
-    </table>
+    <ng-container *ngFor="let month of activeMonths">
+      <h3 class="title is-3 has-text-centered">{{month}}</h3>
+      <table class="table is-fullwidth">
+        <tbody>
+          <ng-container *ngFor="let transaction of allTransactions">
+            <tr *ngIf="transaction.date.includes(month)">
+              <td>{{transaction.accountShortName}}</td>
+              <td>{{transaction.date}}</td>
+              <td>{{transaction.description}}</td>
+              <td>{{categoryNameFor(transaction)}}</td>
+              <td>{{transaction.amount}}</td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </ng-container>
   </div>
 </div>

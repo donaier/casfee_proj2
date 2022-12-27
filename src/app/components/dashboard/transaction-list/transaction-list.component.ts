@@ -22,6 +22,8 @@ export class TransactionListComponent implements OnInit, OnChanges, OnDestroy {
   allTransactions: ListTransaction[] = []
   allCategories: Category[] = []
 
+  activeMonths: Set<string> = new Set
+
   constructor(@Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>, public store: FluxStore) {}
 
   ngOnInit() {
@@ -51,6 +53,7 @@ export class TransactionListComponent implements OnInit, OnChanges, OnDestroy {
         this.allTransactions.push(...tempTransactions)
       })
       this.allTransactions.sort((a,b) => Date.parse(moment(b.date, 'DD.MM.YYYY').toString()) - Date.parse(moment(a.date, 'DD.MM.YYYY').toString()))
+      this.activeMonths = new Set(this.allTransactions.map(t => moment(t.date, 'DD.MM.YYYY').format('M.Y')))
     }
   }
 
