@@ -13,7 +13,8 @@ export class AccountConfigComponent implements OnInit, OnDestroy {
   @ViewChild('accountModal') accountModal!: AccountFormComponent
 
   accounts: Account[] = []
-  subscriptions : Subscription | undefined
+  csvMasks: csvMask[] = []
+  subscriptions : Subscription[] = []
   accountForForm?: Account
   selector : string | undefined
   data : string = 'isloading'
@@ -21,7 +22,7 @@ export class AccountConfigComponent implements OnInit, OnDestroy {
   constructor(public store: FluxStore) {}
 
   ngOnInit() {
-    this.subscriptions = this.store.Accounts.subscribe((data) => {
+    this.subscriptions.push(this.store.Accounts.subscribe((data) => {
       if (data.length) {
         this.accounts = data;
         this.data = 'data'
@@ -33,7 +34,12 @@ export class AccountConfigComponent implements OnInit, OnDestroy {
         this.data = 'nodata'
         this.accounts = []
       }
-    })
+    }))
+    this.subscriptions.push(this.store.CsvMasks.subscribe((data) => {
+      if (data.length) {
+        this.csvMasks = data
+      }
+    }))
   }
 
   createAccount() {
@@ -54,7 +60,11 @@ export class AccountConfigComponent implements OnInit, OnDestroy {
     this.accountModal.modal.nativeElement.classList.add('is-active')
   }
 
+  csvNameFor(account: Account) {
+    return this.csvMasks.find(csv => csv.id === account.csv)?.name
+  }
+
   ngOnDestroy(){
-    this.subscriptions?.unsubscribe()
+    this.subscriptions?.forEach((subscription) => {subscription.unsubscribe()})
   }
 }

@@ -32,16 +32,18 @@
           </span>
         </p>
         <div class="field is-grouped is-grouped-multiline">
-          <div class="control" *ngFor="let category of categoryGroup.categories">
-            <div class="tags has-addons">
-              <span class="tag">{{category.name}}</span>
-              <a class="tag is-delete" (click)="deleteCategory(category, categoryGroup)"></a>
+          <ng-container *ngFor="let category of categories">
+            <div class="control" *ngIf="category.group_id === categoryGroup.id">
+              <div class="tags has-addons">
+                <span class="tag">{{category.name}}</span>
+                <a class="tag is-delete" (click)="deleteCategory(category)"></a>
+              </div>
             </div>
-          </div>
+          </ng-container>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<app-category-form #categoryModal [categoryGroup]="categoryGroupForForm" [category]="categoryForForm" [selector]="selector"></app-category-form>
+<app-category-form #categoryModal [categoryGroup]="categoryGroupForForm" [categories]="categories" [selector]="selector"></app-category-form>

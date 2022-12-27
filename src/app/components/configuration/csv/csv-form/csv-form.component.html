@@ -14,6 +14,7 @@
     #formDirective="ngForm"
     *ngIf="selector ==='create' || selector === 'edit'"
     novalidate>
+      <input type="hidden" formControlName="id">
       <section class="modal-card-body">
         <div class="columns mb-0">
           <div class="column is-8">
@@ -48,7 +49,7 @@
           </div>
         </div>
         <div class="field">
-          <label class="label" for="input-mask">mask:</label>
+          <label class="label" for="input-mask">csv mask:</label>
           <div class="control">
             <input class="input"
              type="text"
@@ -58,6 +59,21 @@
              [ngClass]="{
               'is-danger': mask.invalid && (mask.dirty || mask.touched),
               'is-success': mask.valid && (mask.dirty || mask.touched)
+             }"
+             required>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label" for="date-mask">date mask:</label>
+          <div class="control">
+            <input class="input"
+             type="text"
+             id="date-mask"
+             placeholder="dd.mm.yyyy / dd-mm-yy / ..."
+             formControlName="dateMask"
+             [ngClass]="{
+              'is-danger': dateMask.invalid && (dateMask.dirty || dateMask.touched),
+              'is-success': dateMask.valid && (dateMask.dirty || dateMask.touched)
              }"
              required>
           </div>
@@ -72,7 +88,7 @@
     <footer class="modal-card-foot is-flex is-justify-content-center">
       <button class="button is-success"
        type="button"
-       (click)="UpdateCsv()"
+       (click)="UpdateCsv($event)"
        [disabled]="csvForm.invalid"
        *ngIf="selector ==='edit'">save</button>
       <button class="button is-success"
@@ -83,7 +99,7 @@
       <button class="button" type="button" (click)="hideModal()">cancel</button>
       <button class="button is-danger"
        type="button"
-       (click)="deleteCsvMask()"
+       (click)="deleteCsvMask($event)"
        *ngIf="selector ==='edit'">delete</button>
     </footer>
 

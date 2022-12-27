@@ -1,12 +1,13 @@
 import { Component, ElementRef, Inject, Input, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { FormControl, FormGroup, FormGroupDirective } from '@angular/forms';
+import * as moment from 'moment';
 import { Subject, Subscription } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
 import { FluxStore } from 'src/app/shared/services/flux-store';
 import { Account, calculateCurrentValue } from 'src/app/shared/types/account';
 import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
 import { Category, CategoryGroup } from 'src/app/shared/types/category';
-import { Transaction } from 'src/app/shared/types/transaction';
+import { DATE_FORMAT, Transaction } from 'src/app/shared/types/transaction';
 
 @Component({
   selector: 'app-manual-transaction-form',
@@ -15,27 +16,27 @@ import { Transaction } from 'src/app/shared/types/transaction';
 })
 export class ManualTransactionFormComponent implements OnInit, OnDestroy {
   @ViewChild('modal') modal!: ElementRef
-
   @ViewChild('manualtransactionform', { static: false }) manualtransactionform!: ElementRef
   @ViewChildren('selectabletag') selectabletags!: QueryList<ElementRef>
   @Input() account?: Account;
 
   transactionForm!: FormGroup
   description!: FormControl
-  forAccount!: FormControl
   fromAccount!: FormControl
   amount!: FormControl
   date!: FormControl
-  categoryGroups: CategoryGroup[] = []
-  category : Category | undefined
-  newTransaction : Transaction | undefined
-  private subscription : Subscription | undefined
+  categoryId!: FormControl
 
+  categoryGroups: CategoryGroup[] = []
+  categories: Category[] = []
+  category: Category | undefined
+  newTransaction : Transaction | undefined
+  private subscriptions : Subscription[] = []
 
   constructor(public store: FluxStore, @Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>) {}
 
   ngOnInit(){
-    this.subscription = this.store.CategoryGroups.subscribe((data) => {
+    this.subscriptions.push(this.store.CategoryGroups.subscribe((data) => {
       if (data.length > 0) {
         this.categoryGroups = data;
       }
@@ -45,13 +46,19 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
       if(data.length === 0){
         this.categoryGroups = []
       }
-    })
+    }))
+    this.subscriptions.push(this.store.Categories.subscribe((data) => {
+      if (data.length) {
+        this.categories = data
+      }
+    }))
+
     this.transactionForm = new FormGroup({
       description: this.description = new FormControl(''),
-      forAccount: this.forAccount = new FormControl(''),
       fromAccount: this.fromAccount = new FormControl(''),
       amount: this.amount = new FormControl(''),
       date: this.date = new FormControl(''),
+      categoryId: this.categoryId = new FormControl('')
     })
   }
 
@@ -64,12 +71,9 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
     // Finde ich ein bisschen Overhead hier noch ein Modal zu oeffnen und items adden.
   }
 
-  setCategory(e: Event, category: Category, categoryGroup: CategoryGroup) {
-    this.category = {
-      name : category.name,
-      group : categoryGroup.name
-    }
+  setCategory(e: Event, category: Category) {
     this.selectabletags.forEach(tag => { tag.nativeElement.classList.remove('selected')});
+    this.transactionForm.get('categoryId')?.setValue(category.id);
     (<HTMLElement>e.target).classList.add('selected')
   }
 
@@ -78,7 +82,9 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
 
     if(this.transactionForm.valid && this.transactionForm.dirty) {
       let account = Object.assign(this.account!)
-      account.transactions.push(this.transactionForm.value)
+      let transaction: Transaction = this.transactionForm.value
+      transaction.date = moment(this.transactionForm.get('date')?.value).format(DATE_FORMAT)
+      account.transactions.push(transaction)
       account.currentValue = Number(calculateCurrentValue(account))
 
       this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'account', null, null, null, account))
@@ -91,6 +97,6 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription?.unsubscribe()
+    this.subscriptions.forEach(sub => sub.unsubscribe())
   }
 }

@@ -4,13 +4,13 @@ import { fluxDispatcherToken } from '../helpers/flux.configuration'
 
 // types
 import { Account, csvMask } from '../types/account'
-import { CategoryGroup } from '../types/category'
+import { Category, CategoryGroup } from '../types/category'
 import { Transaction } from '../types/transaction'
 import { FluxAction, FluxActionTypes } from '../types/actions.type'
 
 // Firestore
 import { Firestore, onSnapshot, query } from '@angular/fire/firestore'
-import { collection } from '@firebase/firestore'
+import { collection, QuerySnapshot } from '@firebase/firestore'
 
 
 @Injectable()
@@ -20,11 +20,13 @@ export class FluxStore {
   Transactions_all: Transaction[] = []
   Accounts_all: Account[] = []
   CategoryGroups_all: CategoryGroup[] = []
+  Categories_all: Category[] = []
   CsvMasks_all: csvMask[] = []
 
   Accounts: BehaviorSubject<Account[]> = new BehaviorSubject<Account[] | any>({})
   Transactions: BehaviorSubject<Transaction[]> = new BehaviorSubject<Transaction[] | any>({info: "init"})
   CategoryGroups: BehaviorSubject<CategoryGroup[]> = new BehaviorSubject<CategoryGroup[] | any>({info: "init"})
+  Categories: BehaviorSubject<Category[]> = new BehaviorSubject<Category[] | any>({info: "init"})
   CsvMasks: BehaviorSubject<csvMask[]> = new BehaviorSubject<csvMask[] | any>({info: "init"})
 
   constructor(@Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>, private firestore: Firestore) {
@@ -33,7 +35,7 @@ export class FluxStore {
         case FluxActionTypes.Load:
           this.listener_accounts()
           this.listener_categories()
-          this.listener_transactions()
+          // this.listener_transactions()
           this.listener_csvMasks()
           break
       }
@@ -53,28 +55,39 @@ export class FluxStore {
   }
 
   listener_categories(){
-    const q_categories = query(collection(this.firestore, 'categories'))
-    const listener_categories = onSnapshot(q_categories, (querySnapshot) => {
+    const q_categoryGroups = query(collection(this.firestore, 'categoryGroups'))
+    const listener_categoryGroups = onSnapshot(q_categoryGroups, (querySnapshot) => {
       this.CategoryGroups_all = []
       querySnapshot.forEach((doc) => {
         let data_copy : CategoryGroup = Object.assign(doc.data())
+        data_copy.id = doc.id
         this.CategoryGroups_all.push(data_copy)
       })
       this.CategoryGroups.next(this.CategoryGroups_all)
     })
-  }
-
-  listener_transactions(){
-    const q_transactions = query(collection(this.firestore, 'transactions'))
-    const listener_transactions = onSnapshot(q_transactions, (querySnapshot) => {
-      this.Transactions_all = []
+    const q_categories = query(collection(this.firestore, 'categoryEntries'))
+    const listener_categories = onSnapshot(q_categories, (querySnapshot) => {
+      this.Categories_all = []
       querySnapshot.forEach((doc) => {
-        let data_copy : Transaction = Object.assign(doc.data())
-        this.Transactions_all.push(data_copy)
+        let data_copy: Category = Object.assign(doc.data())
+        data_copy.id = doc.id
+        this.Categories_all.push(data_copy)
       })
-      this.CategoryGroups.next(this.CategoryGroups_all)
+      this.Categories.next(this.Categories_all)
     })
   }
+
+  // listener_transactions(){
+  //   const q_transactions = query(collection(this.firestore, 'transactions'))
+  //   const listener_transactions = onSnapshot(q_transactions, (querySnapshot) => {
+  //     this.Transactions_all = []
+  //     querySnapshot.forEach((doc) => {
+  //       let data_copy : Transaction = Object.assign(doc.data())
+  //       this.Transactions_all.push(data_copy)
+  //     })
+  //     this.CategoryGroups.next(this.CategoryGroups_all)
+  //   })
+  // }
 
   listener_csvMasks(){
     const q_csvMasks = query(collection(this.firestore, 'csvMasks'))
@@ -82,6 +95,7 @@ export class FluxStore {
       this.CsvMasks_all = []
       querySnapshot.forEach((doc) => {
         let data_copy : csvMask = Object.assign(doc.data())
+        data_copy.id = doc.id
         this.CsvMasks_all.push(data_copy)
       })
       this.CsvMasks.next(this.CsvMasks_all)

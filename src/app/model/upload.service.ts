@@ -4,7 +4,7 @@ import { Subject } from 'rxjs'
 import { FluxAction, FluxActionTypes } from '../shared/types/actions.type'
 
 
-import { collection, deleteDoc, doc, Firestore, setDoc, updateDoc } from '@angular/fire/firestore'
+import { addDoc, collection, deleteDoc, doc, Firestore, setDoc, updateDoc } from '@angular/fire/firestore'
 
 @Injectable()
 
@@ -18,12 +18,13 @@ export class UploadService {
               await setDoc(docRef_add, action.account)
             }
             if(action.selector ==='categoryGroup'){
-              const docRef_add = doc(this.firestore, 'categories', action.categoryGroup!.name)
-              await setDoc(docRef_add, action.categoryGroup)
+              await addDoc(collection(this.firestore, 'categoryGroups'), action.categoryGroup)
+            }
+            if(action.selector ==='category'){
+              await addDoc(collection(this.firestore, 'categoryEntries'), action.category)
             }
             if(action.selector ==='csvMask'){
-              const docRef_add = doc(this.firestore, 'csvMasks', action.csvMask!.name)
-              await setDoc(docRef_add, action.csvMask)
+              await addDoc(collection(this.firestore, 'csvMasks'), action.csvMask)
             }
             break
 
@@ -33,16 +34,18 @@ export class UploadService {
               await setDoc(docRef_update, action.account)
             }
             if(action.selector ==='categoryGroup'){
-              const docRef_add = doc(this.firestore, 'categories', action.categoryGroup!.name)
-              await setDoc(docRef_add, action.categoryGroup)
-            }
-            if(action.selector ==='category'){
-              const docRef = doc(this.firestore, 'categories', action.categoryGroup!.name)
-              await updateDoc(docRef, {categories: action.categoryGroup!.categories} )
+              await updateDoc(doc(this.firestore, 'categoryGroups/'+ action.categoryGroup?.id), {
+                name: action.categoryGroup?.name,
+                color: action.categoryGroup?.color
+              })
             }
             if(action.selector ==='csvMask'){
-              const docRef_update = doc(this.firestore, 'csvMasks', action.csvMask!.name)
-              await setDoc(docRef_update, action.csvMask)
+              await updateDoc(doc(this.firestore, 'csvMasks/'+ action.csvMask?.id), {
+                mask: action.csvMask?.mask,
+                delimiter: action.csvMask?.delimiter,
+                dateMask: action.csvMask?.dateMask,
+                name: action.csvMask?.name,
+              })
             }
             break
 
@@ -51,10 +54,13 @@ export class UploadService {
               await deleteDoc(doc(this.firestore, 'accounts', action.account!.name))
             }
             if(action.selector ==='categoryGroup'){
-              await deleteDoc(doc(this.firestore, 'categories', action.categoryGroup!.name))
+              await deleteDoc(doc(this.firestore, 'categoryGroups', action.categoryGroup!.id))
+            }
+            if(action.selector ==='category'){
+              await deleteDoc(doc(this.firestore, 'categoryEntries', action.category!.id))
             }
             if(action.selector ==='csvMask'){
-              await deleteDoc(doc(this.firestore, 'csvMasks', action.csvMask!.name))
+              await deleteDoc(doc(this.firestore, 'csvMasks', action.csvMask!.id))
             }
             break
         }

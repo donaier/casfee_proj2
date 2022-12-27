@@ -7,6 +7,7 @@ import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
 import { Category, CategoryGroup } from 'src/app/shared/types/category';
 import { Transaction } from 'src/app/shared/types/transaction';
 import { TransactionService } from 'src/app/shared/helpers/transaction.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-csv-transaction-form',
@@ -27,7 +28,9 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
   @Input() account?: Account;
 
   private subscription : Subscription[] = []
+  moment: any = moment;
   categoryGroups: CategoryGroup[] = []
+  categories: Category[] = []
   csvMasks: csvMask[] = []
   activeCsvMask: csvMask | undefined
   transactionsToCategorize: Transaction[] = []
@@ -43,12 +46,17 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
   ngOnInit(){
     this.subscription.push(this.store.CategoryGroups.subscribe((data) => {
       if (data.length > 0) {
-        this.categoryGroups = data;
+        this.categoryGroups = data
+      }
+    }))
+    this.subscription.push(this.store.Categories.subscribe((data) => {
+      if (data.length > 0) {
+        this.categories = data
       }
     }))
     this.subscription.push(this.store.CsvMasks.subscribe((data) => {
       if (data.length > 0) {
-        this.csvMasks = data;
+        this.csvMasks = data
       }
     }))
   }
@@ -95,10 +103,9 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
   }
 
   setCategoryForActiveTransaction(category: Category) {
-    this.transactionsToCategorize[this.activeTransactionIndex].category = category.name
+    this.transactionsToCategorize[this.activeTransactionIndex].categoryId = category.id
 
     if (this.activeTransactionIndex >= this.transactionsToCategorize.length-1) {
-      // done categorizing
       this.doneCategorizing = true
     } else {
       this.activeTransactionIndex++
@@ -109,16 +116,21 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
     if (this.account) {
       this.account.transactions.push(...this.transactionsToCategorize)
       this.account.currentValue = Number(calculateCurrentValue(this.account))
+
       this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'account', null, null, null, this.account))
 
       this.hideModal()
     }
   }
 
+  getCategory(id: string) {
+    return this.categories.find(c => c.id === id)
+  }
+
   ngOnChanges(changes: SimpleChanges) {
     if (changes['account'].currentValue) {
-      this.activeCsvMask = this.csvMasks.find(m => m.name === this.account?.csv)
-  
+      this.activeCsvMask = this.csvMasks.find(m => m.id === this.account?.csv)
+
       if(this.activeCsvMask !== undefined && this.transactionService.resolveCsvMask(this.activeCsvMask!)) {
         this.accountIsReadyElement.nativeElement.classList.remove('is-hidden')
         this.accountNotReadyElement.nativeElement.classList.add('is-hidden')

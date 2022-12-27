@@ -11,24 +11,25 @@ import { Category, CategoryGroupForm, CategoryGroup, CategoryForm, CategoryGroup
   templateUrl: './category-form.component.html',
   styleUrls: ['./category-form.component.scss']
 })
-export class CategoryFormComponent implements OnChanges, OnInit {
+export class CategoryFormComponent implements OnInit {
 
   @ViewChild('modal', { static: false }) modal!: ElementRef
   @ViewChild('modalCategoryGroupForm', { static: false }) modalCategoryGroupForm!: ElementRef
   @ViewChild('modalCategoryForm', { static: false }) modalCategoryForm!: ElementRef
+  @ViewChild('categoryIdInput') categoryIdInput!: ElementRef
 
-  @Input() category?: Category
   @Input() categoryGroup?: CategoryGroup
   @Input() selector?: string
+  @Input() categories: Category[] = []
 
   categoryGroupForm!: FormGroup
+  id!: FormControl
   group!: FormControl
   name!: FormControl
   color!: FormControl
 
   categoryForm!: FormGroup
-  name_category!: FormControl
-  color_category!: FormControl
+  group_id!: FormControl
 
   categoryColors = CategoryGroupColors;
   equality_flag : boolean = false
@@ -37,58 +38,51 @@ export class CategoryFormComponent implements OnChanges, OnInit {
 
   ngOnInit(){
     this.categoryGroupForm = new FormGroup({
+      id: this.id = new FormControl(''),
       name: this.name = new FormControl(''),
       group: this.group = new FormControl(''),
       color: this.color = new FormControl(''),
-     })
-     this.categoryForm = new FormGroup({
-      name_category: this.name_category = new FormControl(''),
-      color_category: this.color_category = new FormControl(''),
-     })
+    })
+    this.categoryForm = new FormGroup({
+      group_id: this.group_id = new FormControl(''),
+      name: this.name = new FormControl(''),
+    })
   }
 
-  checkForm(){
+  checkCategoryGroupForm(){
     if (this.categoryGroupForm.valid && this.categoryGroupForm.dirty) {
       let categoryGroup = this.categoryGroupForm.value
-      categoryGroup.categories = []
-      this.dispatcher.next(new FluxAction(FluxActionTypes.Create,'categoryGroup', null, categoryGroup))
+      if (this.selector === 'create') {
+        categoryGroup.categories = []
+        this.dispatcher.next(new FluxAction(FluxActionTypes.Create,'categoryGroup', null, categoryGroup))
+      } else if (this.selector === 'edit') {
+        this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'categoryGroup', null, categoryGroup))
+      }
     }
   }
 
-  submitCategoryGroupForm(e: Event, form: FormGroupDirective) {
+  submitCategoryGroupForm(e: Event) {
     e.preventDefault()
-    this.store.CategoryGroups.getValue().forEach(group => {
-      if(group.name == this.categoryGroupForm.value.name){
-        this.equality_flag = true
-      }
-    })
-    if(!this.equality_flag){
-      this.checkForm()
-    }
+    
+    this.checkCategoryGroupForm()
     this.hideModal();
   }
 
-  editCategoryGroup(){
-    if (this.categoryGroupForm.valid && this.categoryGroupForm.dirty) {
-      let categoryGroup_new = this.categoryGroupForm.value
-      categoryGroup_new.categories = this.categoryGroup!.categories
-      this.dispatcher.next(new FluxAction(FluxActionTypes.Delete,'categoryGroup', null, this.categoryGroup))
-      this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'categoryGroup', null, this.categoryGroupForm.value))
-      this.hideModal();
-    }
-  }
-
-  submitCategoryForm(e: Event, form: FormGroupDirective) {
+  submitCategoryForm(e: Event) {
     e.preventDefault();
+
     if (this.categoryForm.valid && this.categoryForm.dirty) {
-      let categoryGroup = Object.assign(this.categoryGroup!) // Ist glaube ich nicht noetig mal schauen was e2e bringt
-      categoryGroup.categories.push({name : this.categoryForm.value.name_category})
-      this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'category', null, categoryGroup))
+      let category = this.categoryForm.value
+      category.group_id = this.categoryIdInput.nativeElement.value
+      this.dispatcher.next(new FluxAction(FluxActionTypes.Create, 'category', null, null, category))
       this.hideModal();
     }
   }
 
   deleteCategoryGroup() {
+    this.categories.filter(c => c.group_id === this.categoryGroup?.id).forEach(catDelete => {
+      this.dispatcher.next(new FluxAction(FluxActionTypes.Delete,'category', null, null, catDelete))
+    })
     this.dispatcher.next(new FluxAction(FluxActionTypes.Delete,'categoryGroup', null, this.categoryGroup))
     this.hideModal();
   }
@@ -100,11 +94,4 @@ export class CategoryFormComponent implements OnChanges, OnInit {
     this.modalCategoryGroupForm.nativeElement.classList.add('is-hidden')
     this.modalCategoryForm.nativeElement.classList.add('is-hidden')
   }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['categoryGroup']?.currentValue?.name) {
-      this.categoryGroupForm.patchValue(changes['categoryGroup'].currentValue);
-    }
-  }
-
 }
