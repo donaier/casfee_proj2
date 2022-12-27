@@ -1,5 +1,36 @@
 <div class="container is-widescreen mt-5">
+  <app-account [activeAccounts]="activeAccounts"></app-account>
 
-  <app-account></app-account>
+  <div class="card">
+    <div class="card-content">
+      <table class="table is-narrow">
+        <tr>
+          <th class="has-text-right">selected Accounts:</th>
+          <td>
+            <div class="field is-grouped is-grouped-multiline">
+              <div class="control" *ngFor="let account of accounts">
+                <div class="tags has-addons account-select-tag" (click)="toggleAccount(account)">
+                  <span class="tag">{{account.name}}</span>
+                  <span class="tag">
+                    <span class="icon is-small">
+                      <i class="fas fa-check" *ngIf="activeAccounts.includes(account)"></i>
+                      <i class="fas fa-ban" *ngIf="!activeAccounts.includes(account)"></i>
+                    </span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th class="has-text-right">selected Timeframe:</th>
+          <td>time</td>
+        </tr>
+      </table>
+    </div>
+  </div>
 
+  <app-graph [accounts]="activeAccounts"></app-graph>
+  <app-transaction-list [accounts]="activeAccounts"></app-transaction-list>
+  
 </div>
