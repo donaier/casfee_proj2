@@ -16,10 +16,14 @@
 }
 .select select:active{
   border-color:#f14668;
+  outline: 0;
+  box-shadow: none;
 }
 
 .select select:focus{
   border-color:#f14668;
+  outline: 0;
+  box-shadow: none;
 }
 
 .muted {

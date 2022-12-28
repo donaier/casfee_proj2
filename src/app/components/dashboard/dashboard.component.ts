@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnInit, Inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { relativeTimeThreshold } from 'moment';
 import { Subject, Subscription } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
@@ -14,18 +14,19 @@ import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
 
-  constructor(@Inject(DOCUMENT) private document: Document) {}
+  constructor(
+    @Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>,
+    private transactionService: TransactionService,
+    public store: FluxStore,
+    @Inject(DOCUMENT) private document: Document
+    ){}
 
-
-  ngOnInit() {
-    this.set_Theme()
-  }
-
-  set_Theme()implements OnInit, OnDestroy {
+  set_Theme(){
     this.document.body.classList.add('has-navbar-fixed-top', 'dark-theme')
   }
+
   accounts: Account[] = []
   activeAccounts: Account[] = []
 
@@ -33,22 +34,15 @@ export class DashboardComponent implements OnInit {
   selectedTimeframe: string = 'years'
   selectedTime: any[] = []
 
-
   private subscription: Subscription[] = [];
 
-  constructor(
-    @Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>,
-    private transactionService: TransactionService,
-    public store: FluxStore
-    ){}
-
   ngOnInit() {
+    this.set_Theme()
     this.dispatcher.next(new FluxAction(FluxActionTypes.Load))
     this.subscription.push(this.store.Accounts.subscribe((data) => {
       if (data.length > 0) {
         this.accounts = data
         this.activeAccounts = data
-
         this.groupedMonths = this.transactionService.extractMonths(this.activeAccounts)
         this.toggleTimeframe()
       }
