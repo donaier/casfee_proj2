@@ -17,7 +17,7 @@ export class DashboardComponent implements OnInit {
   }
 
   set_Theme(){
-    this.document.body.classList.add('has-navbar-fixed-top', 'light-theme')
+    this.document.body.classList.add('has-navbar-fixed-top', 'dark-theme')
   }
 
 }

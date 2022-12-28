@@ -20,6 +20,9 @@ $c6: #000000;
   p{
     color: $c6;
   }
+  .background{
+    background-color: $c11 !important;
+  }
   .navbar-item.has-dropdown.is-active{
     background-color: $c11;
   }
@@ -38,6 +41,9 @@ $c6: #000000;
   .theme-modifer{
     background-color: $c00;
   }
+  .button.is-small.is-rounded{
+    border: 1px $c00 solid;
+  }
   .button.is-success:disabled{
     background-color: $c00;
     border: none;
@@ -54,6 +60,12 @@ $c6: #000000;
     a, div{
       background-color: $c12;
       color: $c5;
+    }
+    div.navbar-item:nth-child(2){
+      width: 143.1px;
+    }
+    .navbar-dropdown{
+      border-color: $c12;
     }
     .navbar-item{
       background-color: $c12;
@@ -74,6 +86,7 @@ $c6: #000000;
     background-color: $c11;
     .box {
       background-color: $c00;
+
     }
   }
 
@@ -94,7 +107,7 @@ $c6: #000000;
     text-decoration: none;
 
     &:after{
-      color: $c4;
+      color: $c6;
     }
     &:hover{
       color: $c4;

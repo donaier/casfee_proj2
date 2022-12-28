@@ -49,7 +49,7 @@
             <label class="label" for="colorSelect">Color</label>
             <div class="select">
               <select
-              class="input--select"
+              class="input--select select"
               id="colorSelect"
               formControlName="color"
               [ngClass]="{
@@ -109,7 +109,7 @@
                 'is-success': csv.valid && (csv.dirty || csv.touched)
               }"
               required>
-                <option  value="no csv mask selected">No CsvMask</option>
+                <option value="no csv mask selected">No CsvMask</option>
                 <option *ngFor="let csvMask of csvMasks" value={{csvMask.id}} [selected]="account?.csv === csvMask.id">{{csvMask.name}}</option>
             </select>
           </div>

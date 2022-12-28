@@ -9,11 +9,9 @@
       <button class="delete" aria-label="close" (click)="hideModal()"></button>
     </header>
 
-    <!-- category Group -->
     <form id="category-group-form" #modalCategoryGroupForm class="form is-hidden" [formGroup]="categoryGroupForm" (ngSubmit)="submitCategoryGroupForm($event)" novalidate>
       <input type="hidden" id="input-id" formControlName="id">
-      <section class="modal-card-body">
->>>>>>> bc1d91f3b39e797775724672cb5c496dfb1ab973
+      <div class="modal-card-body">
         <div class="columns mb-0">
           <div class="column is-8">
             <label class="label" for="input-name">Name</label>
@@ -53,29 +51,18 @@
           class="button is-success"
           type="submit"
           [disabled]="categoryGroupForm.invalid"
-          *ngIf="selector === 'create' || selector === 'edit'"
-        >
-          save
-        </button>
+          *ngIf="selector === 'create' || selector === 'edit'">save</button>
         <button class="button" type="button" (click)="hideModal()">cancel</button>
         <button class="button is-danger"
->>>>>>> bc1d91f3b39e797775724672cb5c496dfb1ab973
          type="button"
          (click)="deleteCategoryGroup()"
          *ngIf="selector ==='edit'">Delete</button>
       </footer>
     </form>
 
-<<<<<<< HEAD
     <form id="subcategory-form" #modalCategoryForm class="form is-hidden" [formGroup]="categoryForm" (ngSubmit)="submitCategoryForm($event)" novalidate>
       <input type="hidden" id="group-id" formControlName="group_id" #categoryIdInput>
       <div class="modal-card-body">
-=======
-    <!-- sub-category -->
-    <form id="subcategory-form" #modalCategoryForm class="form is-hidden" [formGroup]="categoryForm" (ngSubmit)="submitCategoryForm($event)" novalidate>
-      <input type="hidden" id="group-id" formControlName="group_id" #categoryIdInput>
-      <section class="modal-card-body">
->>>>>>> bc1d91f3b39e797775724672cb5c496dfb1ab973
         <div class="columns mb-0">
           <div class="column">
             <label class="label" for="input-name-subcategory">Name:</label>

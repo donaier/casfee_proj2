@@ -1,14 +1,18 @@
-$c0: #fff4e3;
+$c0: #ffffff;
 $c1: #ffe4ba;
 $c2: #ecb4aa;
 $c3: #a870ab;
 $c4: #413e9f;
 $c5: #041440;
-
+$c6: #000000;
 
 .dark-theme {
-  background-color: $c1;
-  color: $c5;
+
+  .background{
+    background-color: $c3 !important;
+  }
+  background-color: $c6;
+  color: $c0;
   small {
     color: $c4;
   }
@@ -16,7 +20,7 @@ $c5: #041440;
     color: $c4;
   }
   p{
-
+    color: $c0;
   }
   .navbar-item.has-dropdown.is-active{
 
@@ -24,41 +28,55 @@ $c5: #041440;
   .button {
     background-color: $c0;
     border-color: transparent;
-
+    color: $c6;
     &.is-static {
-      background-color: $c1;
+      background-color: $c6;
+      color: $c0;
+    }
+    &.is-success{
+      border: none;
+    }
+    .is-success{
+      background-color: $c0;
     }
   }
-  .is-success{
 
-  }
   .theme-modifer{
-
+    background-color: $c0;
+  }
+  .button.is-small.is-rounded{
+    border: 1px $c6 solid;
   }
   .button.is-success:disabled{
-
+    background-color: $c0;
   }
   .button:hover {
     background-color: $c3;
-    color: $c1;
+    color: $c6;
   }
   .title {
-    color: $c5;
+    color: $c0;
   }
   .navbar {
-    background-color: $c2;
+    background-color: $c6;
     a, div{
-      background-color: $c3;
+      background-color: $c6;
       color: $c1;
     }
-    .navbar-item{
-
+    div.navbar-item:nth-child(2){
+      width: 143.1px;
+    }
+    .navbar-dropdown{
+      border-color: $c6;
+    }
+    .navbar-item:hover{
+      background-color: $c3;
     }
     .navbar-link:hover{
-
+      background-color: $c3;
     }
     .has-dropdown:hover{
-
+      background-color: $c3;
     }
     a.navbar-item:hover {
       background-color: $c3;
@@ -68,35 +86,25 @@ $c5: #041440;
 
   .card {
     background-color: $c0;
+    p, a, .title{
+      color: $c6;
+    }
+    .title{
+
+    }
     .box {
       background-color: $c0;
+      .theme-modifier{
+        background-color: $c6;
+        color: $c0;
+      }
+      .theme-modifier:hover{
+        background-color: $c3;
+      }
+      .is-delete:hover{
+        background-color: $c3;
+      }
     }
-  }
-
-  .modal {
-    .modal-card-head {
-      background-color: $c1;
-    }
-    .modal-card-body {
-      background-color: $c0;
-    }
-    .modal-card-foot {
-      background-color: $c1;
-    }
-  }
-
-  .tag:not(body) {
-    background-color: $c1;
-    &:after{
-      color: $c3;
-    }
-    &:hover{
-      color: $c4;
-    }
-  }
-
-  .theme-modifier:hover{
-
   }
 
   .card-footer-item{
@@ -104,11 +112,49 @@ $c5: #041440;
   }
 
   .card-footer-item:hover{
+    background-color: $c3;
+  }
 
+  .modal {
+    .modal-card-head {
+      background-color: $c6;
+      border-top: 1px $c0 solid;
+      border-left: 1px $c0 solid;
+      border-right: 1px $c0 solid;
+    }
+    .modal-card-body {
+      background-color: $c0;
+      p{
+        color: $c6;
+      }
+    }
+    .modal-card-foot {
+      background-color: $c6;
+      border-bottom: 1px $c0 solid;
+      border-left: 1px $c0 solid;
+      border-right: 1px $c0 solid;
+    }
+  }
+
+  .tag:not(body) {
+    background-color: $c1;
+    text-decoration: none;
+    &:after{
+      color: $c6;
+    }
+    &:hover{
+      color: $c4;
+    }
   }
 
   .footer{
-    background-color: $c1;
+    background-color: $c6;
+    p, a, strong{
+      color: $c0;
+    }
+    a:hover{
+      color: $c3;
+    }
   }
 
 }

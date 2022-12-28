@@ -11,7 +11,9 @@ import { AuthentificationService } from 'src/app/shared/services/authentificatio
 export class NavigationComponent {
   @ViewChild('navMenu') navMenu!: ElementRef
   @ViewChild('select_theme') select_theme!: ElementRef
+  @ViewChild('dropdown') dropdown!: ElementRef
   @ViewChild('Template') theme!: ElementRef
+
 
   classlist : DOMTokenList | undefined
 
@@ -39,6 +41,14 @@ export class NavigationComponent {
       this.document.body.classList.add('default-theme')
     }
   }
+
+
+  change_color(){
+    this.theme.nativeElement.classList.toggle('background')
+  }
+
+
+
 
   openManual(){
     console.log("open instructions")

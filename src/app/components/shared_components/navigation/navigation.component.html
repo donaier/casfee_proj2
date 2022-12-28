@@ -37,7 +37,7 @@
           Choose Style
         </div>
 
-        <div class="navbar-dropdown">
+        <div class="navbar-dropdown" #dropdown (mouseover)="change_color()" (mouseout)="change_color()">
           <a class="navbar-item" (click)="set_theme('light')">
             Light Theme
           </a>

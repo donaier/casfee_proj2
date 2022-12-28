@@ -5,7 +5,7 @@ describe('basic tests for todo app', () => {
 
   beforeEach(() => {
     page = new AppDashboard();
-
+ // setlocalstorage
     page.navigateTo();
   });
 
