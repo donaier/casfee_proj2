@@ -3,3 +3,8 @@
   box-shadow: none;
   border-color: #ff0000;
 }
+
+.muted {
+  opacity: .7;
+  filter: blur(3px);
+}

@@ -1,4 +1,4 @@
-import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
 import { FluxStore } from 'src/app/shared/services/flux-store';
@@ -15,11 +15,12 @@ import { ManualTransactionFormComponent } from './manual-transaction-form/manual
 export class AccountComponent implements OnInit, OnDestroy {
   @ViewChild('manualTransactionModal') manualTransactionModal!: ManualTransactionFormComponent
   @ViewChild('csvTransactionModal') csvTransactionModal!: CsvTransactionFormComponent
+  @Input() activeAccounts: Account[] = []
 
-  accounts: Account[] = [];
-  selectedAccount?: Account;
+  accounts: Account[] = []
+  selectedAccount?: Account
   data : string = 'noentry'
-  private subscription: Subscription[] = [];
+  private subscription: Subscription[] = []
 
   constructor(@Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>, public store: FluxStore){}
 

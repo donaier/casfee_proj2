@@ -1,0 +1,23 @@
+.account-select-tag {
+  cursor: pointer;
+}
+
+.time-select-tag {
+  cursor: pointer;
+
+  span:hover {
+    font-weight: 500;
+  }
+
+  .inactive {
+    opacity: .4;
+  }
+}
+
+.timeframe-select-tag {
+  cursor: pointer;
+
+  .selected {
+    font-weight: 700;
+  }
+}

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { csvMask } from '../types/account';
+import { Account, csvMask } from '../types/account';
 import { DATE_FORMAT, Transaction } from '../types/transaction';
 import * as moment from 'moment';
 
@@ -61,5 +61,24 @@ export class TransactionService {
     } else {
       return null;
     }
+  }
+
+  extractMonths(accounts: Account[]) {
+    let allTransactions: Transaction[] = []
+    let groupedMonths: any[] = []
+
+    let uniqueMonths: string[] = []
+    let uniqueYears: string[] = []
+    
+    accounts.forEach(acc => {
+      allTransactions.push(...acc.transactions)
+    });
+    
+    uniqueMonths = Array.from(new Set(allTransactions.map(t => moment(t.date, DATE_FORMAT).format('MM.YYYY')))).sort()
+    uniqueYears = Array.from(new Set(allTransactions.map(t => moment(t.date, DATE_FORMAT).format('Y')))).sort()
+
+    uniqueYears.forEach(y => groupedMonths.push(uniqueMonths.filter(m => m.includes(y))))
+
+    return groupedMonths
   }
 }
