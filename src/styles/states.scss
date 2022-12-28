@@ -21,3 +21,8 @@
 .select select:focus{
   border-color:#f14668;
 }
+
+.muted {
+  opacity: .7;
+  filter: blur(3px);
+}
