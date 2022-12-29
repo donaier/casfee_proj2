@@ -6,6 +6,7 @@
       <p class="modal-card-title" *ngIf="selector ==='edit'">Edit Account: {{account!.name}}</p>
       <p class="modal-card-title" *ngIf="selector ==='create'">New Account</p>
       <p class="modal-card-title" *ngIf="selector ==='delete'">Delete Account</p>
+      <p class="modal-card-title" *ngIf="selector ==='warning'">Warning</p>
       <button class="delete" aria-label="close" (click)="hideModal()"></button>
     </header>
 
@@ -119,6 +120,10 @@
 
     <div class="modal-card-body" *ngIf="selector ==='delete'">
       <p>Are you sure to Delete Account: <span class="is-size-4">{{account!.name}}</span></p>
+    </div>
+
+    <div class="modal-card-body" *ngIf="selector ==='warning'">
+      <p>Maximum accounts reached!</p>
     </div>
 
     <footer class="modal-card-foot is-flex is-justify-content-center">

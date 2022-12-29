@@ -38,7 +38,12 @@ export class CsvConfigComponent implements OnInit, OnDestroy {
 
   createCsv() {
     this.csvForForm = undefined
-    this.selector = 'create'
+    if(this.csvMasks.length > 9){
+      this.selector = "warning"
+    }
+    if(this.csvMasks.length < 10){
+      this.selector = "create"
+    }
     this.csvModal.modal.nativeElement.classList.add('is-active')
   }
 

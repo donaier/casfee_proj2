@@ -83,14 +83,19 @@ $c6: #000000;
       color: $c1;
     }
   }
-
+  .subtitle > a:nth-child(1){
+    color: $c4;
+  }
   .card {
     background-color: $c0;
     p, a, .title{
       color: $c6;
     }
-    .title{
-
+    .button{
+      border: 1px $c6 solid;
+      &.dark{
+        background-color: $c6;
+      }
     }
     .box {
       background-color: $c0;

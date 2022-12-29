@@ -16,6 +16,15 @@ import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
 
+  accounts: Account[] = []
+  activeAccounts: Account[] = []
+
+  groupedMonths: any[] = []
+  selectedTimeframe: string = 'years'
+  selectedTime: any[] = []
+
+  private subscription: Subscription[] = [];
+
   constructor(
     @Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>,
     private transactionService: TransactionService,
@@ -26,15 +35,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   set_Theme(){
     this.document.body.classList.add('has-navbar-fixed-top', 'dark-theme')
   }
-
-  accounts: Account[] = []
-  activeAccounts: Account[] = []
-
-  groupedMonths: any[] = []
-  selectedTimeframe: string = 'years'
-  selectedTime: any[] = []
-
-  private subscription: Subscription[] = [];
 
   ngOnInit() {
     this.set_Theme()

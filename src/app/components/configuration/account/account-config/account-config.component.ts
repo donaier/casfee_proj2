@@ -44,7 +44,12 @@ export class AccountConfigComponent implements OnInit, OnDestroy {
 
   createAccount() {
     this.accountForForm = undefined
-    this.selector = "create"
+    if(this.accounts.length > 7){
+      this.selector = "warning"
+    }
+    if(this.accounts.length < 8){
+      this.selector = "create"
+    }
     this.accountModal.modal.nativeElement.classList.add('is-active')
   }
 

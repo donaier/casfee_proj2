@@ -4,7 +4,9 @@
 
 
 
-
+Maximum Accounts : 8
+Maximum CategoryGroups : 10
+Maximum Categories : 15
 
 
 
