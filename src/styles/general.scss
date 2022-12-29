@@ -30,3 +30,15 @@ table.transaction-table {
   top: .2rem;
   margin-left: 0.3rem;
 }
+
+.box.has-header {
+  padding-top: .25rem;
+
+  .box-header {
+    margin: 0 -1rem 0 -.75rem;
+
+    strong {
+      filter: brightness(2.5);
+    }
+  }
+}
