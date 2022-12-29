@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { relativeTimeThreshold } from 'moment';
 import { Subject, Subscription } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
@@ -15,6 +15,7 @@ import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit, OnDestroy {
+  @ViewChild('dashboardFilter') dashboardFilter!: ElementRef
 
   constructor(
     @Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>,
@@ -81,6 +82,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.selectedTimeframe = 'years'
       this.selectedTime = this.groupedMonths.map(group => group.at(0).split('.').at(-1))
     }
+  }
+
+  closeFilter() {
+    this.dashboardFilter.nativeElement.classList.add('hidden')
   }
 
   ngOnDestroy() {

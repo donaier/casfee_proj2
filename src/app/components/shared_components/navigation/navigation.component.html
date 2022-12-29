@@ -17,6 +17,16 @@
         Dashboard
       </a>
 
+      <div class="navbar-item has-dropdown filter-link-item" *ngIf="router.url === '/dashboard'">
+        <a class="navbar-link is-arrowless filter-link" (click)="expandFilter()">
+          <span class="icon is-small">
+            <i class="fas fa-filter"></i>
+          </span>
+        </a>
+      </div>
+
+      <div class="navbar-spacer"></div>
+
       <a class="navbar-item" routerLink="/configuration" routerLinkActive="active">
         Configuration
       </a>

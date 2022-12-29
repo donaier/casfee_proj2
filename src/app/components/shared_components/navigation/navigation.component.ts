@@ -1,7 +1,8 @@
 import { DOCUMENT } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core'
+import { AfterViewInit, Component, ElementRef, Inject, NgModule, OnInit, ViewChild } from '@angular/core'
 import { AuthentificationService } from 'src/app/shared/services/authentification.service';
 import { StorageService } from 'src/app/model/storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navigation',
@@ -15,14 +16,17 @@ export class NavigationComponent implements AfterViewInit {
   @ViewChild('dropdown') dropdown!: ElementRef
   @ViewChild('Template') theme!: ElementRef
 
-
   classlist : DOMTokenList | undefined
+  router: Router
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private AuthService: AuthentificationService,
-    private StorageService: StorageService
-  ) {}
+    private StorageService: StorageService,
+    router: Router
+  ) {
+    this.router = router
+  }
 
   ngAfterViewInit() {
     this.document.body.classList.add('has-navbar-fixed-top')
@@ -60,6 +64,10 @@ export class NavigationComponent implements AfterViewInit {
 
   openManual(){
     console.log("open instructions")
+  }
+
+  expandFilter() {
+    this.document.getElementById('dashboard-filter')?.classList.remove('hidden')
   }
 
   logout(){
