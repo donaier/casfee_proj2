@@ -23,10 +23,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     @Inject(DOCUMENT) private document: Document
     ){}
 
-  set_Theme(){
-    this.document.body.classList.add('has-navbar-fixed-top', 'dark-theme')
-  }
-
   accounts: Account[] = []
   activeAccounts: Account[] = []
 
@@ -37,7 +33,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   private subscription: Subscription[] = [];
 
   ngOnInit() {
-    this.set_Theme()
     this.dispatcher.next(new FluxAction(FluxActionTypes.Load))
     this.subscription.push(this.store.Accounts.subscribe((data) => {
       if (data.length > 0) {
