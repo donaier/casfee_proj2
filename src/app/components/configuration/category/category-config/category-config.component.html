@@ -1,5 +1,3 @@
-
-
 <section>
   <div class="is-flex is-justify-content-space-between">
     <h4 class="title is-4">
@@ -23,23 +21,35 @@
 
   <div class="card" *ngIf='data ==="data"'>
     <div class="card-content">
-      <div class="box" *ngFor="let categoryGroup of categoryGroups" [ngStyle]="{borderColor: categoryGroup.color}">
-        <p class="is-flex is-justify-content-space-between">
-          <strong class="pb-3">{{categoryGroup.name}}</strong>
-          <span>
-            <a class="tag theme-modifier mr-2" (click)="editCategoryGroup(categoryGroup)">Edit</a>
-            <a class="tag theme-modifier" (click)="addCategory(categoryGroup)">Add Item</a>
-          </span>
-        </p>
-        <div class="field is-grouped is-grouped-multiline">
-          <ng-container *ngFor="let category of categories">
-            <div class="control" *ngIf="category.group_id === categoryGroup.id">
-              <div class="tags has-addons">
-                <span class="tag">{{category.name}}</span>
-                <a class="tag is-delete" (click)="deleteCategory(category)"></a>
-              </div>
+      <div class="columns is-flex-wrap-wrap">
+        <div class="column is-4" *ngFor="let categoryGroup of categoryGroups">
+          <div class="box has-header" [ngStyle]="{borderColor: categoryGroup.color}">
+            <p class="is-flex is-justify-content-space-between box-header">
+              <strong class="pb-3">{{categoryGroup.name}}</strong>
+              <span>
+                <a class="tag theme-modifier mr-2" (click)="editCategoryGroup(categoryGroup)">
+                  <span class="icon is-small">
+                    <i class="fas fa-edit"></i>
+                  </span>
+                </a>
+                <a class="tag theme-modifier" (click)="addCategory(categoryGroup)">
+                  <span class="icon is-small">
+                    <i class="fas fa-plus"></i>
+                  </span>
+                </a>
+              </span>
+            </p>
+            <div class="field is-grouped is-grouped-multiline">
+              <ng-container *ngFor="let category of categories">
+                <div class="control" *ngIf="category.group_id === categoryGroup.id">
+                  <div class="tags has-addons">
+                    <span class="tag">{{category.name}}</span>
+                    <a class="tag is-delete" (click)="deleteCategory(category)"></a>
+                  </div>
+                </div>
+              </ng-container>
             </div>
-          </ng-container>
+          </div>
         </div>
       </div>
     </div>

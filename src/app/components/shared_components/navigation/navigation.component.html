@@ -17,6 +17,16 @@
         Dashboard
       </a>
 
+      <div class="navbar-item has-dropdown filter-link-item" *ngIf="router.url === '/dashboard'">
+        <a class="navbar-link is-arrowless filter-link" (click)="expandFilter()">
+          <span class="icon is-small">
+            <i class="fas fa-filter"></i>
+          </span>
+        </a>
+      </div>
+
+      <div class="navbar-spacer"></div>
+
       <a class="navbar-item" routerLink="/configuration" routerLinkActive="active">
         Configuration
       </a>
@@ -53,38 +63,3 @@
     </div>
   </div>
 </nav>
-
-<!--
-<nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="container">
-    <div class="navbar-brand">
-      <a class="navbar-item" routerLink="/dashboard" routerLinkActive="active">
-        <img src="/assets/logo.svg" width="80px">
-      </a>
-      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" (click)="expandBurgerMenu($event)">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
-    </div>
-
-    <div class="navbar-menu" id="nav-menu" #navMenu>
-      <div class="navbar-start">
-      </div>
-      <div class="navbar-end">
-        <a class="navbar-item" routerLink="/configuration" routerLinkActive="active">
-          config
-        </a>
-        <div class="navbar-item">
-          <div class="buttons">
-            <a class="button is-dark is-rounded" routerLink="/login" (click)="logout()">
-              logout
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</nav>
-
--->

@@ -16,6 +16,10 @@ export class StorageService {
       localStorage.removeItem('Userdata')
     }
 
+    set_theme_preference(theme: string) {
+      localStorage.setItem('theme-preference', theme)
+    }
+
     getUserdata() : null | boolean | string  {
       if (localStorage.getItem('Userdata') !== null) {
         return localStorage.getItem('Userdata')

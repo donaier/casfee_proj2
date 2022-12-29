@@ -61,9 +61,6 @@ $c6: #000000;
       background-color: $c12;
       color: $c5;
     }
-    div.navbar-item:nth-child(2){
-      width: 143.1px;
-    }
     .navbar-dropdown{
       border-color: $c12;
     }
@@ -80,6 +77,10 @@ $c6: #000000;
       background-color: $c11;
       color: $c5;
     }
+  }
+
+  .dashboard-filter {
+    background-color: $c00;
   }
 
   .card {
@@ -130,5 +131,3 @@ $c6: #000000;
     background-color: $c00;
   }
 }
-
-
