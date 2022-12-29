@@ -1,4 +1,4 @@
- <section class="hero" *ngIf='data ==="isloading"'>
+<section class="hero" *ngIf='data ==="isloading"'>
   <div class="has-text-centered">
     <button class="button is-primary is-loading m-6">Loading</button>
   </div>
@@ -11,7 +11,7 @@
   </div>
 </section>
 
-<div class="columns mb-3" *ngIf='data ==="data"'>
+<section class="columns mb-3" *ngIf='data ==="data"'>
   <div class="column" *ngFor="let account of accounts" class="{{activeAccounts.includes(account) ? '' : 'muted'}}">
     <div class="card">
       <header class="card-header">
@@ -29,7 +29,6 @@
           <p>{{account.description}}</p>
           <p class="title">Fr. {{account.currentValue}}</p>
         </div>
-
         <div class="field is-grouped is-justify-content-center">
           <a class="button is-small is-rounded mx-1" (click)="openManualTransactionModal(account)">
             <span class="icon is-small">
@@ -45,7 +44,7 @@
       </div>
     </div>
   </div>
-</div>
+</section>
 
 <app-manual-transaction-form #manualTransactionModal [account]="selectedAccount"></app-manual-transaction-form>
 <app-csv-transaction-form #csvTransactionModal [account]="selectedAccount"></app-csv-transaction-form>

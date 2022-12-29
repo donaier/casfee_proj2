@@ -31,7 +31,7 @@
                 <div class="control" *ngFor="let group of groupedMonths">
                   <div class="tags has-addons time-select-tag">
                     <span class="tag"><strong>{{group.at(0).split('.').at(-1)}}</strong></span>
-                    <span 
+                    <span
                       *ngFor="let month of group"
                       class="tag {{selectedTime.includes(month) ? 'selected' : 'inactive'}}"
                       (click)="toggleMonth(month)"
@@ -76,5 +76,5 @@
 
   <app-graph [accounts]="activeAccounts"></app-graph>
   <app-transaction-list [accounts]="activeAccounts" [selectedTimes]="selectedTime"></app-transaction-list>
-  
+
 </div>

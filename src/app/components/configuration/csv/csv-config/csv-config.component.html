@@ -2,9 +2,9 @@
 <section>
   <div class="is-flex is-justify-content-space-between">
     <h4 class="title is-4">
-      csv:
+      Csv:
     </h4>
-    <a class="button" (click)="createCsv()" *ngIf='data ==="data"'>+ Create new CsvMask</a>
+    <a class="button" (click)="createCsv()" *ngIf='data ==="data"'>Create new CsvMask</a>
   </div>
 
   <article class="hero" *ngIf='data ==="isloading"'>
@@ -16,13 +16,17 @@
   <article class="hero is-warning m-6" *ngIf='data ==="nodata"'>
     <div class="hero-body">
       <p class="title">Please add Csv to Start</p>
-      <a class="button" (click)="createCsv()">+ Create new CsvMask</a>
+      <a class="button" (click)="createCsv()">Create new CsvMask</a>
     </div>
   </article>
 
   <div class="card" *ngIf='data ==="data"'>
     <div class="card-content">
-      <span class="tag is-medium mb-2" *ngFor="let csvMask of csvMasks" (click)="editCsv(csvMask)">{{csvMask.name}}</span>
+      <div class="field is-grouped is-grouped-multiline">
+        <div class="control" *ngFor="let csvMask of csvMasks" >
+            <span class="tag is-medium mb-2 mr-6" (click)="editCsv(csvMask)">{{csvMask.name}}</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>

@@ -1,6 +1,6 @@
 export class AppDashboard {
   navigateTo() {
-    return cy.visit('http://localhost:4200/');
+    return cy.visit('http://localhost:4200/dashboard');
   }
 
   getParagraph() {

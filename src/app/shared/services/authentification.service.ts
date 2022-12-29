@@ -3,11 +3,12 @@ import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
 import { StorageService } from '../../model/storage.service';
 import { User } from '../types/user';
 import { User as FirebaseUser } from "firebase/auth";
+import { Router } from '@angular/router';
 
 
 @Injectable({providedIn: 'root'})
 export class AuthentificationService {
-  constructor(private StorageService: StorageService, private auth: Auth) {}
+  constructor(private StorageService: StorageService, private auth: Auth, private router: Router) {}
 
   async login_firebase(Login: User) : Promise<boolean> {
     try {
@@ -30,11 +31,12 @@ export class AuthentificationService {
 
   logout() {
     this.StorageService.delete_localStorage()
+    this.router.navigate(['/login'])
     this.logout_firebase()
   }
 
   logout_firebase() {
-      return this.auth.signOut()
+    this.auth.signOut()
   }
 
   isLoggedin(): boolean {

@@ -50,20 +50,27 @@ export class AccountFormComponent implements OnInit, OnChanges {
   }
 
   hideModal() {
+    this.accountForm.reset();
     this.modal.nativeElement.classList.remove('is-active');
+  }
+
+  calculateCurrentValue(account: Account) {
+    let currentValue = account.initialValue
+    account.transactions.forEach(t => {
+      currentValue += t.amount
+    });
+    return Number(currentValue).toFixed(2)
   }
 
   submitAccountForm(e: Event) {
     e.preventDefault();
     if(this.accountForm.valid) {
       let account = this.accountForm.value
-
       if (this.account) {
-        // edit
         account.transactions = this.account.transactions || []
-        account.currentValue = Number(calculateCurrentValue(account))
-      } else {
-        // create
+        account.currentValue = this.calculateCurrentValue(account)
+      }
+      if(!this.account) {
         account.currentValue = this.initialValue.value
         account.transactions = []
       }
