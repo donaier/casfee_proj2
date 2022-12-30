@@ -38,7 +38,8 @@ export class GraphComponent implements OnChanges, AfterViewInit, OnDestroy {
   }
 
   ngOnChanges() {
-    let chartOptions = this.graphService.composeOptions(this.accounts, this.selectedTimes)
+    // let chartOptions = this.graphService.composeOptionsTotal(this.accounts, this.selectedTimes)
+    let chartOptions = this.graphService.composeOptionsInOut(this.accounts, this.selectedTimes)
 
     this.graph?.setOption(chartOptions, true)
   }

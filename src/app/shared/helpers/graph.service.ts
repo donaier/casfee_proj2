@@ -27,7 +27,7 @@ export class GraphService {
       lineStyle: { width: 0 },
       symbol: 'none',
       data: this.setMonthlyTotals(acc, selectedMonths),
-      color: acc.color
+      color: acc.color,
     }})
 
     return accGraphObjects
@@ -59,7 +59,56 @@ export class GraphService {
     return flatMonthlyTotals
   }
 
-  composeOptions(accounts: Account[], selectedTimes: string[]) {
+  private setAccountInOut(accounts: Account[], selectedMonths: string[]) {
+    return [
+      {
+        name: 'Income',
+        type: 'bar',
+        stack: 'Total',
+        label: {
+          show: true
+        },
+        // data: [320, 302, 341, 374, 390, 450, 420]
+        data: this.setOutData(accounts, selectedMonths)
+      },
+      {
+        name: 'Expenses',
+        type: 'bar',
+        stack: 'Total',
+        label: {
+          show: true,
+        },
+        // data: [-120, -132, -101, -134, -190, -230, -210]
+        data: this.setInData(accounts, selectedMonths)
+      }
+    ]
+  }
+
+  private setOutData(accounts: Account[], selectedMonths: string[]) {
+    return accounts.map(acc => {
+      let out: number = 0
+      acc.transactions.forEach(trans => {
+        if (trans.amount < 0 && selectedMonths.some(times => trans.date.includes(times))) {
+          out += trans.amount
+        }
+      });
+      return out;
+    }).reverse()
+  }
+
+  private setInData(accounts: Account[], selectedMonths: string[]) {
+    return accounts.map(acc => {
+      let out: number = 0
+      acc.transactions.forEach(trans => {
+        if (trans.amount > 0 && selectedMonths.some(times => trans.date.includes(times))) {
+          out += trans.amount
+        }
+      });
+      return out;
+    }).reverse()
+  }
+
+  composeOptionsTotal(accounts: Account[], selectedTimes: string[]) {
     let accNames: string[] = this.setAccountNames(accounts)
     let timeSteps: string[] = selectedTimes
     let accSeries: object[] = this.setAccountSeries(accounts, selectedTimes)
@@ -69,7 +118,6 @@ export class GraphService {
       title: { text: 'Total (accumulated)' },
       legend: {
         data: accNames,
-        // icon: 'none',
         selectedMode: false
       },
       toolbox: {},
@@ -92,6 +140,38 @@ export class GraphService {
         {
           type: 'value',
           splitLine: { lineStyle: { color: '#F0F0F0'}}
+        }
+      ],
+      series: accSeries
+    };
+  }
+
+  composeOptionsInOut(accounts: Account[], selectedTimes: string[]) {
+    let accNames: string[] = this.setAccountNames(accounts).reverse()
+    let accSeries: object[] = this.setAccountInOut(accounts, selectedTimes)
+
+    return {
+      legend: {
+        show: false,
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      },
+      xAxis: [
+        {
+          type: 'value'
+        }
+      ],
+      yAxis: [
+        {
+          type: 'category',
+          axisTick: {
+            show: false
+          },
+          data: accNames
         }
       ],
       series: accSeries
