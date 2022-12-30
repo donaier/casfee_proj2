@@ -1,6 +1,4 @@
-import { DOCUMENT } from '@angular/common';
 import { Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { relativeTimeThreshold } from 'moment';
 import { Subject, Subscription } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
 import { TransactionService } from 'src/app/shared/helpers/transaction.service';
@@ -20,7 +18,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   activeAccounts: Account[] = []
 
   groupedMonths: any[] = []
-  selectedTimeframe: string = 'years'
+  selectedTimeframe: string = 'months'
   selectedTime: any[] = []
 
   private subscription: Subscription[] = [];
@@ -29,9 +27,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     @Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>,
     private transactionService: TransactionService,
     public store: FluxStore,
-    ){}
-
-
+  ){}
 
   ngOnInit() {
     this.dispatcher.next(new FluxAction(FluxActionTypes.Load))
@@ -67,9 +63,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
   toggleMonth(month: string) {
     if (this.selectedTimeframe === 'months') {
       if (this.selectedTime.includes(month)) {
-        this.selectedTime = this.selectedTime.filter(s => s != month)
+        this.selectedTime = this.selectedTime.filter(s => s != month).sort()
       } else {
-        this.selectedTime = [...this.selectedTime, month]
+        this.selectedTime = [...this.selectedTime, month].sort()
       }
     }
   }
