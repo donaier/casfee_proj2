@@ -23,10 +23,12 @@ export class GraphService {
       name: acc.name,
       type: 'line',
       stack: 'Total',
-      areaStyle: {}, //here set color of account
+      areaStyle: { color: acc.color },
+      lineStyle: { width: 0 },
+      symbol: 'none',
       data: this.setMonthlyTotals(acc, selectedMonths)
     }})
-    console.log(accGraphObjects)
+
     return accGraphObjects
   }
 
@@ -64,7 +66,11 @@ export class GraphService {
 
     return {
       title: { text: '' },
-      legend: { data: accNames },
+      legend: {
+        data: accNames,
+        icon: 'none',
+        selectedMode: false
+      },
       toolbox: {},
       grid: {
         left: '3%',
