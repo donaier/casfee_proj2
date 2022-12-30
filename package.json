@@ -28,6 +28,7 @@
     "bulma-extensions": "^6.2.7",
     "bulma-tooltip": "^3.0.2",
     "cypress-firebase": "^2.2.3",
+    "echarts": "^5.4.1",
     "moment": "^2.29.4",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
