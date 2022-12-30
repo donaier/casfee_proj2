@@ -14,8 +14,6 @@ import { Category, CategoryGroupForm, CategoryGroup, CategoryForm, CategoryGroup
 export class CategoryFormComponent implements OnInit {
 
   @ViewChild('modal', { static: false }) modal!: ElementRef
-  @ViewChild('modalCategoryGroupForm', { static: false }) modalCategoryGroupForm!: ElementRef
-  @ViewChild('modalCategoryForm', { static: false }) modalCategoryForm!: ElementRef
   @ViewChild('categoryIdInput') categoryIdInput!: ElementRef
 
   @Input() categoryGroup?: CategoryGroup
@@ -30,8 +28,9 @@ export class CategoryFormComponent implements OnInit {
 
   categoryForm!: FormGroup
   group_id!: FormControl
+  name_category!: FormControl
 
-  categoryColors = CategoryGroupColors;
+  categoryColors = CategoryGroupColors
   equality_flag : boolean = false
 
   constructor(@Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>, public store: FluxStore) { }
@@ -45,17 +44,18 @@ export class CategoryFormComponent implements OnInit {
     })
     this.categoryForm = new FormGroup({
       group_id: this.group_id = new FormControl(''),
-      name: this.name = new FormControl(''),
+      name_category: this.name_category = new FormControl(''),
     })
   }
 
   checkCategoryGroupForm(){
-    if (this.categoryGroupForm.valid && this.categoryGroupForm.dirty) {
+    if(this.categoryGroupForm.valid && this.categoryGroupForm.dirty) {
       let categoryGroup = this.categoryGroupForm.value
-      if (this.selector === 'create') {
+      if(this.selector === 'create'){
         categoryGroup.categories = []
         this.dispatcher.next(new FluxAction(FluxActionTypes.Create,'categoryGroup', null, categoryGroup))
-      } else if (this.selector === 'edit') {
+      }
+      if(this.selector === 'edit'){
         this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'categoryGroup', null, categoryGroup))
       }
     }
@@ -63,17 +63,14 @@ export class CategoryFormComponent implements OnInit {
 
   submitCategoryGroupForm(e: Event) {
     e.preventDefault()
-    
     this.checkCategoryGroupForm()
     this.hideModal();
   }
 
   submitCategoryForm(e: Event) {
     e.preventDefault();
-
-    if (this.categoryForm.valid && this.categoryForm.dirty) {
-      let category = this.categoryForm.value
-      category.group_id = this.categoryIdInput.nativeElement.value
+    if(this.categoryForm.valid && this.categoryForm.dirty) {
+      let category = {name : this.categoryForm.value.name_category, group_id : this.categoryGroup!.id, id: ""}
       this.dispatcher.next(new FluxAction(FluxActionTypes.Create, 'category', null, null, category))
       this.hideModal();
     }
@@ -91,7 +88,5 @@ export class CategoryFormComponent implements OnInit {
     this.modal.nativeElement.classList.remove('is-active')
     this.categoryGroupForm.reset();
     this.categoryForm.reset();
-    this.modalCategoryGroupForm.nativeElement.classList.add('is-hidden')
-    this.modalCategoryForm.nativeElement.classList.add('is-hidden')
   }
 }

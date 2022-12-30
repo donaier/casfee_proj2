@@ -1,7 +1,7 @@
-<div class="container is-widescreen mt-5">
+<section class="container is-widescreen mt-5">
   <app-account [activeAccounts]="activeAccounts"></app-account>
 
-  <div class="dashboard-filter hidden" #dashboardFilter id="dashboard-filter">
+  <article class="dashboard-filter hidden" #dashboardFilter id="dashboard-filter">
     <div class="container is-widescreen my-5">
       <button class="button is-pulled-right" (click)="closeFilter()">
         <span class="icon is-small">
@@ -74,9 +74,9 @@
         </tr>
       </table>
     </div>
-  </div>
+  </article>
 
   <app-graph [accounts]="activeAccounts"></app-graph>
   <app-transaction-list [accounts]="activeAccounts" [selectedTimes]="selectedTime"></app-transaction-list>
 
-</div>
+</section>

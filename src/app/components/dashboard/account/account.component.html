@@ -1,17 +1,17 @@
-<section class="hero" *ngIf='data ==="isloading"'>
+<article class="card" *ngIf='data ==="isloading"'>
   <div class="has-text-centered">
-    <button class="button is-primary is-loading m-6">Loading</button>
+    <button class="button is-primary dark is-loading m-6">Loading</button>
   </div>
-</section>
+</article>
 
-<section class="hero is-warning m-6" *ngIf='data ==="nodata"'>
-  <div class="hero-body">
+<article class="card is-warning m-6" *ngIf='data ==="nodata"'>
+  <div class="card-content">
     <p class="title">Accounts</p>
-    <p class="subtitle">No registered Account</p>
+    <p class="subtitle">No registered Account go to <a href="/configuration">configuration</a> to start</p>
   </div>
-</section>
+</article>
 
-<section class="columns mb-3" *ngIf='data ==="data"'>
+<article class="columns mb-3" *ngIf='data ==="data"'>
   <div class="column" *ngFor="let account of accounts" class="{{activeAccounts.includes(account) ? '' : 'muted'}}">
     <div class="card">
       <header class="card-header">
@@ -44,7 +44,7 @@
       </div>
     </div>
   </div>
-</section>
+</article>
 
 <app-manual-transaction-form #manualTransactionModal [account]="selectedAccount"></app-manual-transaction-form>
 <app-csv-transaction-form #csvTransactionModal [account]="selectedAccount"></app-csv-transaction-form>

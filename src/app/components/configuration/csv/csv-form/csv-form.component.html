@@ -6,8 +6,15 @@
       <p class="modal-card-title" *ngIf="selector ==='edit'">Edit: {{csv!.name}}</p>
       <p class="modal-card-title" *ngIf="selector ==='create'">New CsvMask</p>
       <p class="modal-card-title" *ngIf="selector ==='delete'">Delete</p>
+      <p class="modal-card-title" *ngIf="selector ==='warning'">Warning</p>
       <button class="delete" aria-label="close" (click)="hideModal()"></button>
     </header>
+
+    <article *ngIf="selector ==='warning'">
+      <div class="modal-card-body" >
+        <p>Maximum csvMasks reached!</p>
+      </div>
+    </article>
 
     <form class="form"
     [formGroup]="csvForm"
@@ -15,7 +22,7 @@
     *ngIf="selector ==='create' || selector === 'edit'"
     novalidate>
       <input type="hidden" formControlName="id">
-      <section class="modal-card-body">
+      <div class="modal-card-body">
         <div class="columns mb-0">
           <div class="column is-8">
             <label class="label" for="input-name">Name</label>
@@ -78,7 +85,7 @@
              required>
           </div>
         </div>
-      </section>
+      </div>
     </form>
 
     <footer class="modal-card-foot is-flex is-justify-content-center">

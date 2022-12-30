@@ -18,7 +18,7 @@
       </a>
 
       <div class="navbar-item has-dropdown filter-link-item" *ngIf="router.url === '/dashboard'">
-        <a class="navbar-link is-arrowless filter-link" (click)="expandFilter()">
+        <a class="navbar-link is-arrowless filter-link" (click)="showSettings()">
           <span class="icon is-small">
             <i class="fas fa-filter"></i>
           </span>
@@ -32,7 +32,7 @@
       </a>
 
       <a class="navbar-item" (click)="openManual()">
-        Help
+        Manual
       </a>
 
     </div>
@@ -42,8 +42,8 @@
         Logout
       </a>
 
-      <div class="navbar-item has-dropdown is-hoverable">
-        <div class="navbar-link" #Template>
+      <div class="navbar-item has-dropdown is-hoverable width">
+        <div class="navbar-link" #theme_select>
           Choose Style
         </div>
 

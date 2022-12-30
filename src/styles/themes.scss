@@ -1,6 +1,9 @@
 body {
   min-height: 100vh;
 }
+.width{
+  width: 143.1px;  // Ist fuer das dropdown menu sonst gibt es so einen versatz -> unschoenes layout
+}
 
 @import "src/styles/themes/color_theme.scss";
 @import "src/styles/themes/light_theme.scss";

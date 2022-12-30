@@ -16,14 +16,6 @@ import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   @ViewChild('dashboardFilter') dashboardFilter!: ElementRef
-
-  constructor(
-    @Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>,
-    private transactionService: TransactionService,
-    public store: FluxStore,
-    @Inject(DOCUMENT) private document: Document
-    ){}
-
   accounts: Account[] = []
   activeAccounts: Account[] = []
 
@@ -32,6 +24,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
   selectedTime: any[] = []
 
   private subscription: Subscription[] = [];
+
+  constructor(
+    @Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>,
+    private transactionService: TransactionService,
+    public store: FluxStore,
+    ){}
+
+
 
   ngOnInit() {
     this.dispatcher.next(new FluxAction(FluxActionTypes.Load))

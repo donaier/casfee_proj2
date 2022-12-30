@@ -14,7 +14,7 @@ export class NavigationComponent implements AfterViewInit {
   @ViewChild('navMenu') navMenu!: ElementRef
   @ViewChild('select_theme') select_theme!: ElementRef
   @ViewChild('dropdown') dropdown!: ElementRef
-  @ViewChild('Template') theme!: ElementRef
+  @ViewChild('theme_select') theme!: ElementRef
 
   classlist : DOMTokenList | undefined
   router: Router
@@ -43,7 +43,6 @@ export class NavigationComponent implements AfterViewInit {
   set_theme(theme : string){
     this.StorageService.set_theme_preference(theme)
     this.document.body.classList.remove('light-theme', 'dark-theme', 'default-theme')
-
     if(theme === "light"){
       this.theme.nativeElement.innerText = "Light Theme"
       this.document.body.classList.add('light-theme')
@@ -66,7 +65,7 @@ export class NavigationComponent implements AfterViewInit {
     console.log("open instructions")
   }
 
-  expandFilter() {
+  showSettings() {
     this.document.getElementById('dashboard-filter')?.classList.remove('hidden')
   }
 

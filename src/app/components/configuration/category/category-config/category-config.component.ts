@@ -47,9 +47,14 @@ export class CategoryConfigComponent implements OnInit, OnDestroy {
 
   createCategoryGroup() {
     this.categoryGroupForForm = undefined
-    this.selector = "create"
+    if(this.categoryGroups.length > 9){
+      this.selector = "warning"
+    }
+    if(this.categoryGroups.length < 10){
+      this.selector = "create"
+
+    }
     this.categoryModal.modal.nativeElement.classList.add('is-active')
-    this.categoryModal.modalCategoryGroupForm.nativeElement.classList.remove('is-hidden')
   }
 
   editCategoryGroup(categoryGroup: CategoryGroup) {
@@ -57,16 +62,18 @@ export class CategoryConfigComponent implements OnInit, OnDestroy {
     this.selector = "edit"
     this.categoryModal.categoryGroupForm.patchValue(categoryGroup)
     this.categoryModal.modal.nativeElement.classList.add('is-active')
-    this.categoryModal.modalCategoryGroupForm.nativeElement.classList.remove('is-hidden')
   }
 
   addCategory(categoryGroup: CategoryGroup) {
-    this.categoryGroupForForm = categoryGroup;
     this.categoryForForm = undefined
-    this.selector = "addCategory"
+    this.categoryGroupForForm = categoryGroup;
+    if(this.categories.length > 14){
+      this.selector = "warning-category"
+    }
+    if(this.categories.length < 15){
+      this.selector = "addCategory"
+    }
     this.categoryModal.modal.nativeElement.classList.add('is-active')
-    this.categoryModal.modalCategoryForm.nativeElement.classList.remove('is-hidden')
-    this.categoryModal.categoryIdInput.nativeElement.value = categoryGroup.id
   }
 
   deleteCategory(category: Category) {
