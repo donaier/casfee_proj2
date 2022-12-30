@@ -15,17 +15,13 @@ import * as echarts from 'echarts';
   templateUrl: './graph.component.html',
   styleUrls: ['./graph.component.scss']
 })
-export class GraphComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
+export class GraphComponent implements OnChanges, AfterViewInit, OnDestroy {
   @Input() accounts: Account[] = []
   @Input() selectedTimes: string[] = []
 
   @ViewChild('graph') graphElement!: ElementRef
 
   private subscriptions: Subscription[] = [];
-
-  allTransactions: ListTransaction[] = []
-  allCategories: Category[] = []
-  allCategoryGroups: CategoryGroup[] = []
 
   graph: echarts.ECharts | null = null
 
@@ -37,27 +33,14 @@ export class GraphComponent implements OnInit, OnChanges, AfterViewInit, OnDestr
     private graphService: GraphService
   ) {}
 
-  ngOnInit() {
-    this.subscriptions.push(this.store.Categories.subscribe((data) => {
-      if (data.length) {
-        this.allCategories = data
-      }
-    }))
-    this.subscriptions.push(this.store.CategoryGroups.subscribe((data) => {
-      if (data.length) {
-        this.allCategoryGroups = data
-      }
-    }))
-  }
-
   ngAfterViewInit() {
     this.graph = echarts.init(this.graphElement.nativeElement)
   }
 
   ngOnChanges() {
-    let chartOptions = this.graphService.composeOptions(this.allTransactions)
+    let chartOptions = this.graphService.composeOptions(this.accounts, this.selectedTimes)
 
-    this.graph?.setOption(chartOptions)
+    this.graph?.setOption(chartOptions, true)
   }
 
   ngOnDestroy() {

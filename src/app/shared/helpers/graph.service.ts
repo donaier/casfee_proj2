@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Transaction } from '../types/transaction';
+import { Account } from '../types/account';
+import { DATE_FORMAT, Transaction } from '../types/transaction';
+import * as moment from 'moment';
+import { reduce } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,14 +12,59 @@ export class GraphService {
 
   constructor() {}
 
-  composeOptions(transactions: Transaction[]) {
+  private setAccountNames(accounts: Account[]) {
+
+    return accounts.map(acc => acc.name)
+  }
+
+  private setAccountSeries(accounts: Account[], selectedMonths: string[]) {
+
+    let accGraphObjects = accounts.map(acc => {return {
+      name: acc.name,
+      type: 'line',
+      stack: 'Total',
+      areaStyle: {}, //here set color of account
+      data: this.setMonthlyTotals(acc, selectedMonths)
+    }})
+    console.log(accGraphObjects)
+    return accGraphObjects
+  }
+
+  private setMonthlyTotals(account: Account, selectedMonths: string[]) {
+    let sortedTransactions = account.transactions.sort((a,b) => Date.parse(moment(a.date, DATE_FORMAT).toString()) - Date.parse(moment(b.date, DATE_FORMAT).toString()))
+    let availableMonths = [...new Set(sortedTransactions.map(trans => trans.date.substring(3)))]
+    let runningTotal = account.initialValue
+    let monthlyTotals: {
+      [key: string]: number,
+    } = {}
+    let flatMonthlyTotals: number[] = []
+
+    availableMonths.forEach((month, i) => {
+      monthlyTotals[month] = sortedTransactions.reduce(
+        (accumulator, currentValue) => accumulator + (currentValue.date.includes(month) ? currentValue.amount: 0),
+        runningTotal
+      )
+      runningTotal = monthlyTotals[month]
+    });
+
+    let lastMonth: number = 0
+    selectedMonths.forEach(month => {
+      flatMonthlyTotals.push(monthlyTotals[month] || lastMonth)
+      lastMonth = flatMonthlyTotals.at(-1) || 0
+    })
+
+    return flatMonthlyTotals
+  }
+
+  composeOptions(accounts: Account[], selectedTimes: string[]) {
+    let accNames: string[] = this.setAccountNames(accounts)
+    let timeSteps: string[] = selectedTimes
+    let accSeries: object[] = this.setAccountSeries(accounts, selectedTimes)
+
+
     return {
-      title: {
-        text: ''
-      },
-      legend: {
-        data: ['accountName1', 'accountName2']
-      },
+      title: { text: '' },
+      legend: { data: accNames },
       toolbox: {},
       grid: {
         left: '3%',
@@ -28,7 +76,7 @@ export class GraphService {
         {
           type: 'category',
           boundaryGap: false,
-          data: ['time', 'slots']
+          data: timeSteps
         }
       ],
       yAxis: [
@@ -36,26 +84,7 @@ export class GraphService {
           type: 'value'
         }
       ],
-      series: [
-        {
-          name: 'accountName1',
-          type: 'line',
-          stack: 'Total',
-          areaStyle: {},
-          data: [120, 132]
-        },
-        {
-          name: 'accountName2',
-          type: 'line',
-          stack: 'Total',
-          label: {
-            show: true,
-            position: 'top'
-          },
-          areaStyle: {},
-          data: [120, 132]
-        },
-      ]
+      series: accSeries
     };
   }
 }
