@@ -66,10 +66,11 @@ export class GraphService {
         type: 'bar',
         stack: 'Total',
         label: {
-          show: true
+          show: true,
+          position: 'left'
         },
-        // data: [320, 302, 341, 374, 390, 450, 420]
-        data: this.setOutData(accounts, selectedMonths)
+        data: this.setOutData(accounts, selectedMonths),
+        color: '#FF2255'
       },
       {
         name: 'Expenses',
@@ -77,9 +78,10 @@ export class GraphService {
         stack: 'Total',
         label: {
           show: true,
+          position: 'right'
         },
-        // data: [-120, -132, -101, -134, -190, -230, -210]
-        data: this.setInData(accounts, selectedMonths)
+        data: this.setInData(accounts, selectedMonths),
+        color: 'green'
       }
     ]
   }
@@ -92,7 +94,7 @@ export class GraphService {
           out += trans.amount
         }
       });
-      return out;
+      return out < 0 ? out : NaN;
     }).reverse()
   }
 
@@ -104,7 +106,7 @@ export class GraphService {
           out += trans.amount
         }
       });
-      return out;
+      return out > 0 ? out : NaN;
     }).reverse()
   }
 
@@ -151,6 +153,7 @@ export class GraphService {
     let accSeries: object[] = this.setAccountInOut(accounts, selectedTimes)
 
     return {
+      title: { text: 'In/Out' },
       legend: {
         show: false,
       },
