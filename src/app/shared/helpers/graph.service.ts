@@ -26,7 +26,8 @@ export class GraphService {
       areaStyle: { color: acc.color },
       lineStyle: { width: 0 },
       symbol: 'none',
-      data: this.setMonthlyTotals(acc, selectedMonths)
+      data: this.setMonthlyTotals(acc, selectedMonths),
+      color: acc.color
     }})
 
     return accGraphObjects
@@ -43,7 +44,7 @@ export class GraphService {
 
     availableMonths.forEach((month, i) => {
       monthlyTotals[month] = sortedTransactions.reduce(
-        (accumulator, currentValue) => accumulator + (currentValue.date.includes(month) ? currentValue.amount: 0),
+        (accumulator, currentValue) => accumulator + (currentValue.date.includes(month) ? currentValue.amount : 0),
         runningTotal
       )
       runningTotal = monthlyTotals[month]
@@ -65,10 +66,10 @@ export class GraphService {
 
 
     return {
-      title: { text: '' },
+      title: { text: 'Total (accumulated)' },
       legend: {
         data: accNames,
-        icon: 'none',
+        // icon: 'none',
         selectedMode: false
       },
       toolbox: {},
@@ -82,12 +83,15 @@ export class GraphService {
         {
           type: 'category',
           boundaryGap: false,
-          data: timeSteps
+          data: timeSteps,
+          axisLine: { show: false },
+          axisTick: { show: false }
         }
       ],
       yAxis: [
         {
-          type: 'value'
+          type: 'value',
+          splitLine: { lineStyle: { color: '#F0F0F0'}}
         }
       ],
       series: accSeries

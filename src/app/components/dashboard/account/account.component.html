@@ -13,7 +13,7 @@
 
 <article class="columns mb-3" *ngIf='data ==="data"'>
   <div class="column" *ngFor="let account of accounts" class="{{activeAccounts.includes(account) ? '' : 'muted'}}">
-    <div class="card">
+    <div class="card account-card" [ngStyle]="{'border-bottom-color': account.color}">
       <header class="card-header">
         <p class="card-header-title is-flex is-justify-content-space-between">
           <span>
