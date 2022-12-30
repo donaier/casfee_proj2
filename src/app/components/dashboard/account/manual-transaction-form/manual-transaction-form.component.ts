@@ -3,6 +3,7 @@ import { FormControl, FormGroup, FormGroupDirective } from '@angular/forms';
 import * as moment from 'moment';
 import { Subject, Subscription } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
+import { TransactionService } from 'src/app/shared/helpers/transaction.service';
 import { FluxStore } from 'src/app/shared/services/flux-store';
 import { Account, calculateCurrentValue } from 'src/app/shared/types/account';
 import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
@@ -33,7 +34,9 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
   newTransaction : Transaction | undefined
   private subscriptions : Subscription[] = []
 
-  constructor(public store: FluxStore, @Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>) {}
+  constructor(public store: FluxStore,
+   @Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>,
+   private transactionService: TransactionService) {}
 
   ngOnInit(){
     this.subscriptions.push(this.store.CategoryGroups.subscribe((data) => {
@@ -50,6 +53,7 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
     this.subscriptions.push(this.store.Categories.subscribe((data) => {
       if (data.length) {
         this.categories = data
+        this.categoryGroups = this.transactionService.checkavailableCategories(this.categoryGroups, data)
       }
     }))
 
@@ -91,12 +95,10 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
 
       this.hideModal()
 
-      this.transactionForm.reset();
-      this.transactionForm.markAsUntouched();
     }
   }
 
   ngOnDestroy() {
-    this.subscriptions.forEach(sub => sub.unsubscribe())
+    this.subscriptions.forEach(subscription => subscription.unsubscribe())
   }
 }

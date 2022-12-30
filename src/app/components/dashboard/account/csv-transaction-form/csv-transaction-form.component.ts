@@ -52,6 +52,7 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
     this.subscription.push(this.store.Categories.subscribe((data) => {
       if (data.length > 0) {
         this.categories = data
+        this.categoryGroups = this.transactionService.checkavailableCategories(this.categoryGroups, data)
       }
     }))
     this.subscription.push(this.store.CsvMasks.subscribe((data) => {

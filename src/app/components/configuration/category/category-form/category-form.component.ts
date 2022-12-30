@@ -50,9 +50,8 @@ export class CategoryFormComponent implements OnInit {
 
   checkCategoryGroupForm(){
     if(this.categoryGroupForm.valid && this.categoryGroupForm.dirty) {
-      let categoryGroup = this.categoryGroupForm.value
+      let categoryGroup : CategoryGroup = this.categoryGroupForm.value
       if(this.selector === 'create'){
-        categoryGroup.categories = []
         this.dispatcher.next(new FluxAction(FluxActionTypes.Create,'categoryGroup', null, categoryGroup))
       }
       if(this.selector === 'edit'){
@@ -70,7 +69,7 @@ export class CategoryFormComponent implements OnInit {
   submitCategoryForm(e: Event) {
     e.preventDefault();
     if(this.categoryForm.valid && this.categoryForm.dirty) {
-      let category = {name : this.categoryForm.value.name_category, group_id : this.categoryGroup!.id, id: ""}
+      let category : Category = {name : this.categoryForm.value.name_category, group_id : this.categoryGroup!.id, id: ""}
       this.dispatcher.next(new FluxAction(FluxActionTypes.Create, 'category', null, null, category))
       this.hideModal();
     }

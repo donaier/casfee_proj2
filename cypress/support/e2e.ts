@@ -15,23 +15,3 @@
 
 // When a command from ./commands is ready to use, import with `import './commands'` syntax
 // import './commands';
-
-
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import 'firebase/compat/database';
-import 'firebase/compat/firestore';
-import { attachCustomCommands } from 'cypress-firebase';
-
-const fbConfig = {
-  apiKey: "AIzaSyA1ieGAgrVtOsKx_gVp4nQ4gNGv3h1WTJc",
-  authDomain: "finance-app-b2a26.firebaseapp.com",
-  projectId: "finance-app-b2a26",
-  storageBucket: "finance-app-b2a26.appspot.com",
-  messagingSenderId: "241318413487",
-  appId: "1:241318413487:web:236479c353fd16b730405a"
-};
-
-firebase.initializeApp(fbConfig);
-
-attachCustomCommands({ Cypress, cy, firebase });
