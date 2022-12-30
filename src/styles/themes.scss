@@ -2,7 +2,7 @@ body {
   min-height: 100vh;
 }
 .width{
-  width: 143.1px;  // Ist fuer das dropdown menu sonst gibt es so einen versatz -> unschoenes layout
+  width: 150px;  // Ist fuer das dropdown menu sonst gibt es so einen versatz -> unschoenes layout (db: braucht sogar noch ein bitzli mehr)
 }
 
 @import "src/styles/themes/color_theme.scss";
