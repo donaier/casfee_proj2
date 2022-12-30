@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, Input, OnChanges, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, Input, OnChanges, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
 import { FluxStore } from 'src/app/shared/services/flux-store';
@@ -6,6 +6,7 @@ import { Account } from 'src/app/shared/types/account';
 import { FluxAction } from 'src/app/shared/types/actions.type';
 import { Category, CategoryGroup } from 'src/app/shared/types/category';
 import { ListTransaction } from 'src/app/shared/types/transaction';
+import { GraphService } from 'src/app/shared/helpers/graph.service';
 
 import * as echarts from 'echarts';
 
@@ -14,7 +15,7 @@ import * as echarts from 'echarts';
   templateUrl: './graph.component.html',
   styleUrls: ['./graph.component.scss']
 })
-export class GraphComponent implements OnInit, OnChanges, OnDestroy {
+export class GraphComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   @Input() accounts: Account[] = []
   @Input() selectedTimes: string[] = []
 
@@ -32,7 +33,8 @@ export class GraphComponent implements OnInit, OnChanges, OnDestroy {
 
   constructor(
     @Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>,
-    public store: FluxStore
+    public store: FluxStore,
+    private graphService: GraphService
   ) {}
 
   ngOnInit() {
@@ -46,12 +48,14 @@ export class GraphComponent implements OnInit, OnChanges, OnDestroy {
         this.allCategoryGroups = data
       }
     }))
+  }
 
-    this.graph = echarts.init(this.graphElement.nativeElement);
+  ngAfterViewInit() {
+    this.graph = echarts.init(this.graphElement.nativeElement)
   }
 
   ngOnChanges() {
-    let chartOptions = {}
+    let chartOptions = this.graphService.composeOptions(this.allTransactions)
 
     this.graph?.setOption(chartOptions)
   }
