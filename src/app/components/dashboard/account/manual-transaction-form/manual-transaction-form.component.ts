@@ -3,9 +3,9 @@ import { FormControl, FormGroup, FormGroupDirective } from '@angular/forms';
 import * as moment from 'moment';
 import { Subject, Subscription } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
-import { TransactionService } from 'src/app/shared/helpers/transaction.service';
+import { UtilityService } from 'src/app/shared/services/utility.service';
 import { FluxStore } from 'src/app/shared/services/flux-store';
-import { Account, calculateCurrentValue } from 'src/app/shared/types/account';
+import { Account } from 'src/app/shared/types/account';
 import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
 import { Category, CategoryGroup } from 'src/app/shared/types/category';
 import { DATE_FORMAT, Transaction } from 'src/app/shared/types/transaction';
@@ -36,7 +36,7 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
 
   constructor(public store: FluxStore,
    @Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>,
-   private transactionService: TransactionService) {}
+   private utilityService: UtilityService) {}
 
   ngOnInit(){
     this.subscriptions.push(this.store.CategoryGroups.subscribe((data) => {
@@ -53,7 +53,7 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
     this.subscriptions.push(this.store.Categories.subscribe((data) => {
       if (data.length) {
         this.categories = data
-        this.categoryGroups = this.transactionService.checkavailableCategories(this.categoryGroups, data)
+        this.categoryGroups = this.utilityService.checkavailableCategories(this.categoryGroups, data)
       }
     }))
 
@@ -89,7 +89,7 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
       let transaction: Transaction = this.transactionForm.value
       transaction.date = moment(this.transactionForm.get('date')?.value).format(DATE_FORMAT)
       account.transactions.push(transaction)
-      account.currentValue = Number(calculateCurrentValue(account))
+      account.currentValue = Number(this.utilityService.calculateCurrentValue(account))
 
       this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'account', null, null, null, account))
 

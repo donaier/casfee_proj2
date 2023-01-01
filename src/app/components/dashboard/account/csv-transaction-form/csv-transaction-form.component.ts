@@ -1,12 +1,13 @@
-import { Component, ElementRef, Inject, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, Input, OnChanges, OnDestroy, OnInit, QueryList, SimpleChanges, ViewChild, ViewChildren } from '@angular/core';
 import { Subscription, Subject } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
 import { FluxStore } from 'src/app/shared/services/flux-store';
-import { Account, calculateCurrentValue, csvMask } from 'src/app/shared/types/account';
+import { Account, csvMask } from 'src/app/shared/types/account';
 import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
 import { Category, CategoryGroup } from 'src/app/shared/types/category';
 import { Transaction } from 'src/app/shared/types/transaction';
 import { TransactionService } from 'src/app/shared/helpers/transaction.service';
+import { UtilityService } from 'src/app/shared/services/utility.service';
 import * as moment from 'moment';
 
 @Component({
@@ -21,6 +22,7 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
   @ViewChild('categoryColumns') categoryColumns!: ElementRef
   @ViewChild('csvInfo') csvInfo!: ElementRef
   @ViewChild('csvReset') csvReset!: ElementRef
+  @ViewChildren('categorytag') categorytags!: QueryList<ElementRef>
 
   @ViewChild('accountIsReady') accountIsReadyElement!: ElementRef
   @ViewChild('accountNotReady') accountNotReadyElement!: ElementRef
@@ -36,11 +38,14 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
   transactionsToCategorize: Transaction[] = []
   activeTransactionIndex: number = 0
   doneCategorizing: boolean = false
+  setCategory: boolean = false
+  activeTag: Category | undefined
 
   constructor(
     @Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>,
     private transactionService: TransactionService,
-    public store: FluxStore
+    public store: FluxStore,
+    private utilityService: UtilityService
   ) {}
 
   ngOnInit(){
@@ -52,7 +57,7 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
     this.subscription.push(this.store.Categories.subscribe((data) => {
       if (data.length > 0) {
         this.categories = data
-        this.categoryGroups = this.transactionService.checkavailableCategories(this.categoryGroups, data)
+        this.categoryGroups = this.utilityService.checkavailableCategories(this.categoryGroups, data)
       }
     }))
     this.subscription.push(this.store.CsvMasks.subscribe((data) => {
@@ -70,7 +75,7 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
   resetForm() {
     this.csvInput.nativeElement.removeAttribute('disabled')
     this.csvInput.nativeElement.value = ''
-    this.csvInfo.nativeElement.innerHTML = ''
+  //  this.csvInfo.nativeElement.innerHTML = ''
     this.csvInputControl.nativeElement.classList.remove('is-loading')
     this.csvInputControl.nativeElement.classList.remove('is-hidden')
     this.csvReset.nativeElement.classList.add('is-hidden')
@@ -84,17 +89,18 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
     this.csvInputControl.nativeElement.classList.add('is-loading')
     this.csvInput.nativeElement.setAttribute('disabled', 'disabled')
 
+
     this.transactionsToCategorize = this.transactionService.cookTransactions(transactions, this.activeCsvMask!)
     this.activeTransactionIndex = 0
     this.doneCategorizing = false
 
     if (this.transactionsToCategorize.length) {
-      this.csvInfo.nativeElement.innerHTML = this.transactionsToCategorize.length + ' transactions found to categorize'
-      this.csvInfo.nativeElement.innerHTML += ' (' + transactions.length + ' lines in the csv)'
+     // this.csvInfo.nativeElement.innerHTML = this.transactionsToCategorize.length + ' transactions found to categorize'
+    //  this.csvInfo.nativeElement.innerHTML += ' (' + transactions.length + ' lines in the csv)'
       this.csvInputControl.nativeElement.classList.add('is-hidden')
       this.categoryColumns.nativeElement.classList.remove('is-hidden')
     } else {
-      this.csvInfo.nativeElement.innerHTML = 'no usable transactions found'
+    //  this.csvInfo.nativeElement.innerHTML = 'no usable transactions found'
       this.csvReset.nativeElement.classList.remove('is-hidden')
     }
   }
@@ -103,20 +109,67 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
     // here is subcategory creation on the fly
   }
 
-  setCategoryForActiveTransaction(category: Category) {
-    this.transactionsToCategorize[this.activeTransactionIndex].categoryId = category.id
+  isActive(category : Category){
+    return this.activeTag === category
+  }
 
+  setCategoryForActiveTransaction(category: Category) {
+    this.activeTag = category;
+
+    this.transactionsToCategorize[this.activeTransactionIndex].categoryId = category.id
+    this.setCategory = true
+  }
+
+  setTransaction(){
     if (this.activeTransactionIndex >= this.transactionsToCategorize.length-1) {
       this.doneCategorizing = true
-    } else {
+
+    } if (this.activeTransactionIndex < this.transactionsToCategorize.length-1) {
+      this.activeTransactionIndex++
+      this.setCategory = false
+    }
+  }
+
+  deleteTransaction(){
+    /*
+    if(this.transactionsToCategorize.length === 0){
+      this.activeTransactionIndex = 0
+    } */
+    console.log(this.activeTransactionIndex)
+    console.log(this.transactionsToCategorize)
+
+    this.transactionsToCategorize.splice(this.activeTransactionIndex, 1);
+
+
+    if (this.transactionsToCategorize.length === 0) {
+      this.doneCategorizing = true
+    }
+    if (this.transactionsToCategorize.length > 0) {
+     // this.activeTransactionIndex++
+    }
+
+
+    console.log(this.activeTransactionIndex)
+    console.log(this.transactionsToCategorize)
+
+    /*
+    if (this.activeTransactionIndex >= this.transactionsToCategorize.length -1) {
+      this.doneCategorizing = true
+
+    }
+
+    if (this.activeTransactionIndex < this.transactionsToCategorize.length-1) {
+
       this.activeTransactionIndex++
     }
+*/
+
   }
 
   saveTransactionsToAccount() {
     if (this.account) {
       this.account.transactions.push(...this.transactionsToCategorize)
-      this.account.currentValue = Number(calculateCurrentValue(this.account))
+      this.account.currentValue = Number(this.utilityService.calculateCurrentValue(this.account))
 
       this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'account', null, null, null, this.account))
 

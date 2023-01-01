@@ -4,7 +4,7 @@
       Transactions
     </p>
   </header>
-  <div class="card-content">
+  <div class="card-content height">
     <ng-container *ngFor="let month of activeMonths">
       <h4 class="title is-4 has-text-centered">{{month}}</h4>
       <table class="table is-fullwidth transaction-table">
@@ -31,6 +31,9 @@
                 <span class="{{transaction.amount > 0 ? 'has-text-success' : 'has-text-danger'}}">
                   <b>{{transaction.amount | number: '1.2-2'}}</b>
                 </span>
+              </td>
+              <td class="is-20px">
+                <button class="delete" aria-label="close" (click)="deletetransaction(transaction)"></button>
               </td>
             </tr>
           </ng-container>

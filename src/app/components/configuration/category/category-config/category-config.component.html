@@ -1,4 +1,4 @@
-<section>
+<section data-cy="CategoryComponent">
   <div class="is-flex is-justify-content-space-between">
     <h4 class="title is-4">
       Categories:
@@ -15,14 +15,14 @@
   <article class="card mt-5" *ngIf='data ==="nodata"'>
     <div class="card-content">
       <p class="title is-flex is-justify-content-space-between">Please create category to start</p>
-      <a class="button" (click)="createCategoryGroup()">+ Create new category</a>
+      <a class="button new-categoryGroup" (click)="createCategoryGroup()">+ Create new category</a>
     </div>
   </article>
 
   <article class="card" *ngIf='data ==="data"'>
     <div class="card-content">
       <div class="columns is-flex-wrap-wrap">
-        <div class="column is-4" *ngFor="let categoryGroup of categoryGroups">
+        <div class="column is-4 categoryGroup" *ngFor="let categoryGroup of categoryGroups">
           <div class="box has-header" [ngStyle]="{borderColor: categoryGroup.color}">
             <p class="is-flex is-justify-content-space-between box-header">
               <strong class="pb-3">{{categoryGroup.name}}</strong>

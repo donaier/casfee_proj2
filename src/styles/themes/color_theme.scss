@@ -5,7 +5,7 @@ $c3: #a870ab;
 $c4: #413e9f;
 $c5: #041440;
 
-.default-theme {
+.color-theme {
   // general
   background-color: $c1;
   color: $c5;
@@ -32,6 +32,10 @@ $c5: #041440;
   .theme-modifer{
 
   }
+  .button.is-small.is-rounded{
+    border: 1px $c3 solid;
+  }
+
   .button.is-success:disabled{
 
   }
@@ -46,8 +50,17 @@ $c5: #041440;
     background-color: $c0;
     .box {
       background-color: $c0;
+
+      .theme-modifier:hover{
+        background-color: $c3;
+      }
     }
   }
+
+  .card-footer-item:hover{
+    background-color: $c3;
+  }
+
   .modal {
     .modal-card-head {
       background-color: $c1;
@@ -62,6 +75,7 @@ $c5: #041440;
 
   .tag:not(body) {
     background-color: $c1;
+    text-decoration: none;
     &:after{
       color: $c3;
     }
@@ -89,10 +103,10 @@ $c5: #041440;
       color: $c1;
     }
     .navbar-item{
-      
+
     }
     .navbar-link:hover{
-      
+
     }
     .navbar-item.has-dropdown:hover {
       background-color: $c2;

@@ -1,13 +1,12 @@
 import { AppLogin } from './app.login.po';
 
-describe('basic tests for todo app', () => {
+describe('Basic tests for login', () => {
   let page: AppLogin;
 
   beforeEach(() => {
     page = new AppLogin();
     page.navigateTo();
   });
-
 
   it('should render all elemets"', () => {
     page.getLoginSection().should('be.visible')
@@ -24,6 +23,13 @@ describe('basic tests for todo app', () => {
     page.getSubmitBtn().should('be.disabled')
     page.getLoginSection().click()
     page.getSubmitBtn().should('be.disabled')
+  });
+
+  it('should do a correct redirect"', () => {
+    cy.visit('http://localhost:4200/dashboard');
+    cy.url().should('include', '/login');
+    cy.visit('http://localhost:4200/configuration');
+    cy.url().should('include', '/login');
   });
 
   it('should do correct validation"', () => {
@@ -45,7 +51,7 @@ describe('basic tests for todo app', () => {
     page.getInputPassword().type('123456')
     page.getSubmitBtn().should('be.enabled')
     page.getSubmitBtn().click()
-    cy.url().should('include', '/dashboard');
+    cy.url().should('include', '/dashboard'); // Anmerkung wurde bei mir durch AntiVirus blockiert, erlauben dann funktionnierts
   });
 
   // Should reject a login with wrong data
