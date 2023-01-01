@@ -85,7 +85,7 @@ export class TransactionService {
   }
 
   checkavailableCategories(categoryGroups : CategoryGroup[], categories : Category[]) : CategoryGroup[]{
-    if(categoryGroups && categories){
+    if(categoryGroups && categories) {
       categoryGroups.forEach(categoryGroup => {
         categoryGroup.categories = false
         categories.forEach(category =>{
@@ -97,5 +97,4 @@ export class TransactionService {
     }
     return categoryGroups
   }
-
 }
