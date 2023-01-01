@@ -3,6 +3,7 @@ import { Account } from '../types/account';
 import { DATE_FORMAT, Transaction } from '../types/transaction';
 import * as moment from 'moment';
 import { reduce } from 'rxjs';
+import { Category, CategoryGroup } from '../types/category';
 
 @Injectable({
   providedIn: 'root'
