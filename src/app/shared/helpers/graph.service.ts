@@ -94,19 +94,19 @@ export class GraphService {
           out += trans.amount
         }
       });
-      return out < 0 ? out : NaN;
+      return out < 0 ? out.toFixed(0) : NaN;
     }).reverse()
   }
 
   private setInData(accounts: Account[], selectedMonths: string[]) {
     return accounts.map(acc => {
-      let out: number = 0
+      let incoming: number = 0
       acc.transactions.forEach(trans => {
         if (trans.amount > 0 && selectedMonths.some(times => trans.date.includes(times))) {
-          out += trans.amount
+          incoming += trans.amount
         }
       });
-      return out > 0 ? out : NaN;
+      return incoming > 0 ? incoming.toFixed(0) : NaN;
     }).reverse()
   }
 
@@ -114,7 +114,6 @@ export class GraphService {
     let accNames: string[] = this.setAccountNames(accounts)
     let timeSteps: string[] = selectedTimes
     let accSeries: object[] = this.setAccountSeries(accounts, selectedTimes)
-
 
     return {
       title: { text: 'Total (accumulated)' },
