@@ -12,3 +12,14 @@
     border-color: var(--color-2);
   }
 }
+
+.category-selects {
+  width: 100%;
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  .box {
+    margin: .5rem;
+  }
+}
