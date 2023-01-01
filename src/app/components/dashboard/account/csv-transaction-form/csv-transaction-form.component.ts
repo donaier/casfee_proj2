@@ -115,7 +115,6 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
 
   setCategoryForActiveTransaction(category: Category) {
     this.activeTag = category;
-
     this.transactionsToCategorize[this.activeTransactionIndex].categoryId = category.id
     this.setCategory = true
   }
@@ -131,39 +130,10 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
   }
 
   deleteTransaction(){
-    /*
-    if(this.transactionsToCategorize.length === 0){
-      this.activeTransactionIndex = 0
-    } */
-    console.log(this.activeTransactionIndex)
-    console.log(this.transactionsToCategorize)
-
     this.transactionsToCategorize.splice(this.activeTransactionIndex, 1);
-
-
     if (this.transactionsToCategorize.length === 0) {
       this.doneCategorizing = true
     }
-    if (this.transactionsToCategorize.length > 0) {
-     // this.activeTransactionIndex++
-    }
-
-
-    console.log(this.activeTransactionIndex)
-    console.log(this.transactionsToCategorize)
-
-    /*
-    if (this.activeTransactionIndex >= this.transactionsToCategorize.length -1) {
-      this.doneCategorizing = true
-
-    }
-
-    if (this.activeTransactionIndex < this.transactionsToCategorize.length-1) {
-
-      this.activeTransactionIndex++
-    }
-*/
-
   }
 
   saveTransactionsToAccount() {

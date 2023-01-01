@@ -71,6 +71,9 @@ $c5: #041440;
     .modal-card-foot {
       background-color: $c1;
     }
+    .set-border{
+      border: 1px $c3 solid;
+    }
   }
 
   .tag:not(body) {

@@ -21,6 +21,7 @@
 
         <div #categoryColumns class="is-hidden">
           <p class="subtitle is-size-4 has-text-weight-medium" *ngIf="categoryGroups.length > 1">Choose Category for Transaction</p>
+          <small #csvInfo></small>
           <table class="table active-transaction" *ngIf="!doneCategorizing && transactionsToCategorize.length">
             <tbody>
               <tr>
@@ -53,10 +54,9 @@
                     <ng-container *ngFor="let category of categories">
                       <div class="control" *ngIf="category.group_id === categoryGroup.id">
                         <span class="tag selectable-tag"
-                        #categorytag
                         (click)="setCategoryForActiveTransaction(category)"
                         [ngClass]="{
-                          'is-active': isActive(category)}">
+                        'is-active': isActive(category)}">
                           {{category.name}}
                         </span>
                       </div>
@@ -68,10 +68,10 @@
           </div>
 
           <div class="is-flex is-justify-content-center">
-            <button class="button new-account mt-5 mb-5 mr-1 is-120px"
+            <button class="button mt-5 mb-5 mr-1 is-120px set-border"
             (click)="setTransaction()"
             [disabled]="!setCategory">Save</button>
-            <button class="button new-account mt-5 mb-5 ml-1 is-120px" (click)="deleteTransaction()">Delete</button>
+            <button class="button mt-5 mb-5 ml-1 is-120px set-border" (click)="deleteTransaction()">Delete</button>
           </div>
 
           <div>

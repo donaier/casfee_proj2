@@ -66,7 +66,7 @@ export class NavigationComponent implements AfterViewInit {
   }
 
   showSettings() {
-    this.document.getElementById('dashboard-filter')?.classList.remove('hidden')
+    this.document.getElementById('dashboard-filter')?.classList.toggle('hidden')
   }
 
   logout(){
