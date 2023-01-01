@@ -19,16 +19,23 @@ export class GraphService {
 
   private setAccountSeries(accounts: Account[], selectedMonths: string[]) {
 
-    let accGraphObjects = accounts.map(acc => {return {
+    let accGraphObjects: any = accounts.map(acc => {return {
       name: acc.name,
       type: 'line',
-      stack: 'Total',
-      areaStyle: { color: acc.color },
-      lineStyle: { width: 0 },
+      lineStyle: { width: 2 },
       symbol: 'none',
       data: this.setMonthlyTotals(acc, selectedMonths),
       color: acc.color,
     }})
+
+    accGraphObjects.push({
+      name: 'Total',
+      type: 'line',
+      lineStyle: { width: 2, type: 'dotted' },
+      symbol: 'none',
+      data: this.setMonthlyGrandTotal(accGraphObjects),
+      color: 'black',
+    })
 
     return accGraphObjects
   }
@@ -57,6 +64,17 @@ export class GraphService {
     })
 
     return flatMonthlyTotals
+  }
+
+  private setMonthlyGrandTotal(accGraphObjects: any[]) {
+    let grandTotals: number[] = []
+    accGraphObjects.forEach(acc => {
+      acc.data.forEach((value: number, i: number) => {
+        if (grandTotals[i] == undefined) {grandTotals[i] = 0}
+        grandTotals[i] += value
+      });
+    });
+    return grandTotals
   }
 
   private setAccountInOut(accounts: Account[], selectedMonths: string[]) {
@@ -116,9 +134,9 @@ export class GraphService {
     let accSeries: object[] = this.setAccountSeries(accounts, selectedTimes)
 
     return {
-      title: { text: 'Total (accumulated)' },
+      title: { text: 'Total' },
       legend: {
-        data: accNames,
+        data: [...accNames, 'Total'],
         selectedMode: false
       },
       toolbox: {},
