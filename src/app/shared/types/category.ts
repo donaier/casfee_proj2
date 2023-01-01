@@ -4,6 +4,7 @@ export interface CategoryGroup{
   id: string,
   name: string,
   color: string,
+  categories?: boolean
 }
 
 export interface Category{

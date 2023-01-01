@@ -8,7 +8,12 @@ Maximum Accounts : 8
 Maximum CategoryGroups : 10
 Maximum Categories : 15
 
+Maximum Amount per Account/Transaction.
 
+Um eine CategoryGroup auszuwaehlen muss mindestens eine Category vorhanden sein. Habe ich      aktuell implementiert.
+Alternativen : 
+  1. CategoryGroups sind auch auswaehlbar : leider viel Code anpassungen / User kann verrwirrt werden wegen mehrfachauswahl der Box selbst oder Items.
+  2. Fuer jede neue CategoryGroup ein Item mit demselben Namen miterstellen. / Sieht auch nicht so toll aus.
 
 
 

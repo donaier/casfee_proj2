@@ -1,17 +1,18 @@
 import { AppDashboard } from './app.dashboard.po';
 
-describe('basic tests for todo app', () => {
+describe('Basic Tests Dashboard', () => {
   let page: AppDashboard;
 
   beforeEach(() => {
     page = new AppDashboard();
- // setlocalstorage
-    page.navigateTo();
+    window.localStorage.setItem('Userdata', "test")
+    page.navigateTo()
+
+  //  page.navigateTo();
   });
 
-  it('first todo item is "Go shopping"', () => {
-    page.getFirstTodo().should('contain.text', 'Go shopping');
-  });
+it('should do a login', () => {
 
+  });
 
 });

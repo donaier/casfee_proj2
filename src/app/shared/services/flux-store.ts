@@ -17,12 +17,6 @@ import { collection, QuerySnapshot } from '@firebase/firestore'
 
 export class FluxStore {
 
-  Transactions_all: Transaction[] = []
-  Accounts_all: Account[] = []
-  CategoryGroups_all: CategoryGroup[] = []
-  Categories_all: Category[] = []
-  CsvMasks_all: csvMask[] = []
-
   Accounts: BehaviorSubject<Account[]> = new BehaviorSubject<Account[] | any>({})
   Transactions: BehaviorSubject<Transaction[]> = new BehaviorSubject<Transaction[] | any>({info: "init"})
   CategoryGroups: BehaviorSubject<CategoryGroup[]> = new BehaviorSubject<CategoryGroup[] | any>({info: "init"})
@@ -45,35 +39,35 @@ export class FluxStore {
   listener_accounts(){
     const q_accounts = query(collection(this.firestore, 'accounts'))
     const listener_accounts = onSnapshot(q_accounts, (querySnapshot) => {
-      this.Accounts_all = []
+      let Accounts_all : Account[]  = []
       querySnapshot.forEach((doc) => {
         let data_copy : Account = Object.assign(doc.data())
-        this.Accounts_all.push(data_copy)
+        Accounts_all.push(data_copy)
       })
-      this.Accounts.next(this.Accounts_all)
+      this.Accounts.next(Accounts_all)
     })
   }
 
   listener_categories(){
     const q_categoryGroups = query(collection(this.firestore, 'categoryGroups'))
     const listener_categoryGroups = onSnapshot(q_categoryGroups, (querySnapshot) => {
-      this.CategoryGroups_all = []
+      let CategoryGroups_all : CategoryGroup[]  = []
       querySnapshot.forEach((doc) => {
         let data_copy : CategoryGroup = Object.assign(doc.data())
         data_copy.id = doc.id
-        this.CategoryGroups_all.push(data_copy)
+        CategoryGroups_all.push(data_copy)
       })
-      this.CategoryGroups.next(this.CategoryGroups_all)
+      this.CategoryGroups.next(CategoryGroups_all)
     })
     const q_categories = query(collection(this.firestore, 'categoryEntries'))
     const listener_categories = onSnapshot(q_categories, (querySnapshot) => {
-      this.Categories_all = []
+      let Categories_all : Category[] = []
       querySnapshot.forEach((doc) => {
         let data_copy: Category = Object.assign(doc.data())
         data_copy.id = doc.id
-        this.Categories_all.push(data_copy)
+        Categories_all.push(data_copy)
       })
-      this.Categories.next(this.Categories_all)
+      this.Categories.next(Categories_all)
     })
   }
 
@@ -92,13 +86,13 @@ export class FluxStore {
   listener_csvMasks(){
     const q_csvMasks = query(collection(this.firestore, 'csvMasks'))
     const listener_csvMasks = onSnapshot(q_csvMasks, (querySnapshot) => {
-      this.CsvMasks_all = []
+      let CsvMasks_all : csvMask[] = []
       querySnapshot.forEach((doc) => {
         let data_copy : csvMask = Object.assign(doc.data())
         data_copy.id = doc.id
-        this.CsvMasks_all.push(data_copy)
+        CsvMasks_all.push(data_copy)
       })
-      this.CsvMasks.next(this.CsvMasks_all)
+      this.CsvMasks.next(CsvMasks_all)
     })
   }
 

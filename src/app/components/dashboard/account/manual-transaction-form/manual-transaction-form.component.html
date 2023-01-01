@@ -1,14 +1,14 @@
 <section class="modal" id="manual-transaction-form" #manualtransactionform>
   <div class="modal-background"></div>
-  <div class="modal-card scrollable">
+  <div class="modal-card">
 
     <header class="modal-card-head">
       <p class="modal-card-title">New transaction on {{account?.name}}</p>
       <button class="delete" aria-label="close" (click)="hideModal()"></button>
     </header>
 
-    <form class="form" [formGroup]="transactionForm" #formDirective="ngForm" (ngSubmit)="submitTransactionForm($event)">
-      <div class="modal-card-body">
+    <article class="modal-card-body" [formGroup]="transactionForm" #formDirective="ngForm">
+      <form class="form">
         <div class="columns mb-0">
           <div class="column is-8">
             <label class="label" for="input-amount">Amount</label>
@@ -56,8 +56,8 @@
               required>
           </div>
         </div>
-
-        <div class="box" *ngFor="let categoryGroup of categoryGroups"
+        <ng-container *ngFor="let categoryGroup of categoryGroups">
+        <div class="box" *ngIf="categoryGroup.categories === true"
           [ngClass]="{
           'is-light': categoryGroup.color === '#EAF2E3',
           'is-blue': categoryGroup.color === '#61E8E1',
@@ -79,12 +79,12 @@
             </ng-container>
           </div>
         </div>
-
-      </div>
-      <footer class="modal-card-foot is-flex is-justify-content-center">
-        <button class="button is-success" type="submit" [disabled]="transactionForm.invalid">Save</button>
-        <button class="button" type="button" (click)="hideModal()">Cancel</button>
-      </footer>
-    </form>
+        </ng-container>
+      </form>
+    </article>
+    <footer class="modal-card-foot is-flex is-justify-content-center">
+      <button class="button is-success" type="button" (click)="submitTransactionForm($event)" [disabled]="transactionForm.invalid">Save</button>
+      <button class="button" type="button" (click)="hideModal()">Cancel</button>
+    </footer>
   </div>
 </section>
