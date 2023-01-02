@@ -15,15 +15,15 @@
   <article class="card mt-5" *ngIf='data ==="nodata"'>
     <div class="card-content">
       <p class="title">Please add csv to start</p>
-      <a class="button" (click)="createCsv()">+ Create new csvMask</a>
+      <a class="button new-csvMask" (click)="createCsv()">+ Create new csvMask</a>
     </div>
   </article>
 
   <article class="card" *ngIf='data ==="data"'>
     <div class="card-content">
       <div class="field is-grouped is-grouped-multiline">
-        <div class="control" *ngFor="let csvMask of csvMasks" >
-            <span class="tag is-medium mb-2 mr-6" (click)="editCsv(csvMask)">{{csvMask.name}}</span>
+        <div class="control csvMask" *ngFor="let csvMask of csvMasks" >
+            <span class="tag is-medium mb-2 mr-6 editcsv" (click)="editCsv(csvMask)">{{csvMask.name}}</span>
         </div>
       </div>
     </div>

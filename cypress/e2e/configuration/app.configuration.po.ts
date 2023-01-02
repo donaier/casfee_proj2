@@ -64,8 +64,6 @@ export class AppConfiguration {
     return cy.get('[data-cy="account-name"]');
   }
 
-
-
 // Category Component
   getCategoryComponent() {
     return cy.get('[data-cy="CategoryComponent"]');
@@ -83,6 +81,49 @@ export class AppConfiguration {
     return cy.get('.new-categoryGroup')
   }
 
+  getInputCategoryName(){
+    return cy.get('#input-name')
+  }
+
+  getSelectColorCategorie(){
+    return cy.get('#select-color')
+  }
+
+  getCategorieSubmitBtn(){
+    return cy.get('.submit-category')
+  }
+
+  getNewCategoryGroup(){
+    return cy.get('.categoryGroup')
+  }
+
+  getEditCategoryGroup(){
+    return cy.get('.fa-edit')
+  }
+
+  getAddCategory(){
+    return cy.get('.fa-plus')
+  }
+
+  getCategoryName(){
+    return cy.get('.pb-3')
+  }
+
+  getNewItemModal(){
+    return cy.get('.item-modal')
+  }
+
+  getInpuNameCategory(){
+    return cy.get('#input-name-subcategory')
+  }
+
+  getSubmitBtnCategoryItem(){
+    return cy.get('.submit-subcategory')
+  }
+
+  getCategoryItem(){
+    return cy.get('.category-item')
+  }
 
 
 // Csv Component
@@ -98,38 +139,40 @@ export class AppConfiguration {
     return cy.get('.modal-csv')
   }
 
-
-
-  getParagraph() {
-    return cy.get('app-root h1');
+  getBtnNewCsv(){
+    return cy.get('.new-csvMask')
   }
 
-  getFirstTodo() {
-    return cy.get('mat-list-item').first();
+ getInputNameNewCsv(){
+    return cy.get('#input-name-csvMask')
   }
 
-  getLastTodo() {
-    return cy.get('mat-list-item').last();
+  getSaveCsvMaskBtn(){
+    return cy.get('.button-save')
   }
 
-  getAddTodo() {
-    return cy.get('.mat-input-element').first();
+  getInputDelimiter(){
+    return cy.get('#input-delimiter')
   }
 
-  getAddTodoButton() {
-    return cy.get('.mat-button').first();
+  getInputMask(){
+    return cy.get('#input-mask')
   }
 
-  getFirstTodoCheckbox() {
-    return cy.get('mat-checkbox').first();
+  getInputDateMask(){
+    return cy.get('#date-mask')
   }
 
-  getNavBtn(){
-    return cy.get('[data-cy="testbtn"]');
+  getNewCsvMask(){
+    return cy.get('.csvMask')
   }
 
-  getSidebar(){
-    return cy.get('[data-cy="sidenav"]');
+  getEditCsvMask(){
+    return cy.get('.editcsv')
+  }
+
+  getEditCsvMaskBtn(){
+    return cy.get('.button-edit')
   }
 
 }
