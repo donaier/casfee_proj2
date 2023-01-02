@@ -122,7 +122,6 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
   setTransaction(){
     if (this.activeTransactionIndex >= this.transactionsToCategorize.length-1) {
       this.doneCategorizing = true
-
     } if (this.activeTransactionIndex < this.transactionsToCategorize.length-1) {
       this.activeTransactionIndex++
       this.setCategory = false
