@@ -40,6 +40,7 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
   doneCategorizing: boolean = false
   setCategory: boolean = false
   activeTag: Category | undefined
+  autoAdvance: boolean = false
 
   constructor(
     @Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>,
@@ -117,9 +118,13 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
     this.activeTag = category;
     this.transactionsToCategorize[this.activeTransactionIndex].categoryId = category.id
     this.setCategory = true
+
+    if (this.autoAdvance) {
+      this.setTransaction()
+    }
   }
 
-  setTransaction(){
+  setTransaction() {
     if (this.activeTransactionIndex >= this.transactionsToCategorize.length-1) {
       this.doneCategorizing = true
     } if (this.activeTransactionIndex < this.transactionsToCategorize.length-1) {
@@ -144,6 +149,10 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
 
       this.hideModal()
     }
+  }
+
+  toggleAutoAdvance() {
+    this.autoAdvance = !this.autoAdvance
   }
 
   getCategory(id: string) {
