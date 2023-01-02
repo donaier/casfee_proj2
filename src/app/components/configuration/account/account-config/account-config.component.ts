@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { FluxStore } from 'src/app/shared/services/flux-store';
-import { Account, csvMask } from 'src/app/shared/types/account';
+import { Account } from 'src/app/shared/types/account';
+import { csvMask } from 'src/app/shared/types/csvMask';
 import { AccountFormComponent } from '../account-form/account-form.component';
 
 @Component({

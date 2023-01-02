@@ -4,7 +4,7 @@ import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
 import { FluxStore } from 'src/app/shared/services/flux-store';
 import { Account } from 'src/app/shared/types/account';
 import { FluxAction } from 'src/app/shared/types/actions.type';
-import { GraphService } from 'src/app/shared/helpers/graph.service';
+import { GraphService } from 'src/app/shared/services/graph.service';
 
 import * as echarts from 'echarts';
 

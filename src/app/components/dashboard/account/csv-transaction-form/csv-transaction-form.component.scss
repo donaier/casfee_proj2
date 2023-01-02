@@ -3,6 +3,12 @@
 
   .selectable-tag {
     cursor: pointer;
+    opacity: .6;
+    border: 1px solid transparent;
+  }
+  &.selected {
+    opacity: 1;
+    border-color: var(--color-3);
   }
 }
 .table {
@@ -15,8 +21,4 @@
 
 .is-120px{
   width: 120px;
-}
-
-.is-active{
-  border: 1px black solid;
 }

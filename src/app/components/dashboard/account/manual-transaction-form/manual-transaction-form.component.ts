@@ -9,6 +9,8 @@ import { Account } from 'src/app/shared/types/account';
 import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
 import { Category, CategoryGroup } from 'src/app/shared/types/category';
 import { DATE_FORMAT, Transaction } from 'src/app/shared/types/transaction';
+import { v4 as uuidv4 } from 'uuid';
+
 
 @Component({
   selector: 'app-manual-transaction-form',
@@ -18,7 +20,7 @@ import { DATE_FORMAT, Transaction } from 'src/app/shared/types/transaction';
 export class ManualTransactionFormComponent implements OnInit, OnDestroy {
   @ViewChild('modal') modal!: ElementRef
   @ViewChild('manualtransactionform', { static: false }) manualtransactionform!: ElementRef
-  @ViewChildren('selectabletag') selectabletags!: QueryList<ElementRef>
+  @ViewChildren('selectabletags') selectabletags!: QueryList<ElementRef>
   @Input() account?: Account;
 
   transactionForm!: FormGroup
@@ -43,9 +45,6 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
       if (data.length > 0) {
         this.categoryGroups = data;
       }
-      if (data.length === undefined) {
-       // this.data = 'isloading'
-      }
       if(data.length === 0){
         this.categoryGroups = []
       }
@@ -68,15 +67,16 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
 
   hideModal() {
     this.manualtransactionform.nativeElement.classList.remove('is-active');
+    this.removeSelectedTags()
     this.transactionForm.reset();
   }
 
-  addCategory(category: CategoryGroup) {
-    // Finde ich ein bisschen Overhead hier noch ein Modal zu oeffnen und items adden.
+  removeSelectedTags(){
+    this.selectabletags.forEach(tag => { tag.nativeElement.classList.remove('selected')});
   }
 
-  setCategory(e: Event, category: Category) {
-    this.selectabletags.forEach(tag => { tag.nativeElement.classList.remove('selected')});
+  setCategory(category: Category, e : Event) {
+    this.removeSelectedTags()
     this.transactionForm.get('categoryId')?.setValue(category.id);
     (<HTMLElement>e.target).classList.add('selected')
   }
@@ -85,16 +85,14 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
     e.preventDefault();
 
     if(this.transactionForm.valid && this.transactionForm.dirty) {
-      let account = Object.assign(this.account!)
+      let account = this.account!
       let transaction: Transaction = this.transactionForm.value
       transaction.date = moment(this.transactionForm.get('date')?.value).format(DATE_FORMAT)
+      transaction.id = uuidv4()
       account.transactions.push(transaction)
       account.currentValue = Number(this.utilityService.calculateCurrentValue(account))
-
       this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'account', null, null, null, account))
-
       this.hideModal()
-
     }
   }
 

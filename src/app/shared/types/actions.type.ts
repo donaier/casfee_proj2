@@ -1,6 +1,7 @@
 import { Transaction } from './transaction'
 import { Category, CategoryGroup } from './category'
-import { Account, csvMask } from './account'
+import { Account } from './account'
+import { csvMask } from './csvMask'
 
 export enum FluxActionTypes {
     Load,

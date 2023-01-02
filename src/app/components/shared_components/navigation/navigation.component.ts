@@ -45,7 +45,6 @@ export class NavigationComponent implements AfterViewInit {
 
   set_theme(theme : string){
     this.StorageService.set_theme_preference(theme)
-
     this.document.body.classList.remove('light-theme', 'dark-theme', 'color-theme')
     if(theme === "light-theme"){
       this.theme.nativeElement.innerText = "Light Theme"

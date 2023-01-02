@@ -2,7 +2,7 @@ import { Component, ElementRef, Inject, Input, OnChanges, SimpleChanges, ViewChi
 import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
-import { csvMask } from 'src/app/shared/types/account';
+import { csvMask } from 'src/app/shared/types/csvMask';
 import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
 
 import { UploadService } from 'src/app/model/upload.service';

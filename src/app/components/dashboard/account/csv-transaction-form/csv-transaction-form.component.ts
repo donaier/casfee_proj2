@@ -2,13 +2,15 @@ import { Component, ElementRef, Inject, Input, OnChanges, OnDestroy, OnInit, Que
 import { Subscription, Subject } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
 import { FluxStore } from 'src/app/shared/services/flux-store';
-import { Account, csvMask } from 'src/app/shared/types/account';
+import { Account } from 'src/app/shared/types/account';
+import { csvMask } from 'src/app/shared/types/csvMask';
 import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
 import { Category, CategoryGroup } from 'src/app/shared/types/category';
 import { Transaction } from 'src/app/shared/types/transaction';
-import { TransactionService } from 'src/app/shared/helpers/transaction.service';
+import { TransactionService } from 'src/app/shared/services/transaction.service';
 import { UtilityService } from 'src/app/shared/services/utility.service';
 import * as moment from 'moment';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-csv-transaction-form',
@@ -22,7 +24,7 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
   @ViewChild('categoryColumns') categoryColumns!: ElementRef
   @ViewChild('csvInfo') csvInfo!: ElementRef
   @ViewChild('csvReset') csvReset!: ElementRef
-  @ViewChildren('categorytag') categorytags!: QueryList<ElementRef>
+  @ViewChildren('categorytags') categorytags!: QueryList<ElementRef>
 
   @ViewChild('accountIsReady') accountIsReadyElement!: ElementRef
   @ViewChild('accountNotReady') accountNotReadyElement!: ElementRef
@@ -69,6 +71,7 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
 
   hideModal() {
     this.modal.nativeElement.classList.remove('is-active')
+    this.removeSelectedTags()
     this.resetForm()
   }
 
@@ -109,14 +112,15 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
     // here is subcategory creation on the fly
   }
 
-  isActive(category : Category){
-    return this.activeTag === category
+  removeSelectedTags(){
+    this.categorytags.forEach(tag => { tag.nativeElement.classList.remove('selected')});
   }
 
-  setCategoryForActiveTransaction(category: Category) {
-    this.activeTag = category;
+  setCategoryForActiveTransaction(category: Category, e : Event) {
+    this.removeSelectedTags()
     this.transactionsToCategorize[this.activeTransactionIndex].categoryId = category.id
-    this.setCategory = true
+    this.setCategory = true;
+    (<HTMLElement>e.target).classList.add('selected')
   }
 
   setTransaction(){
@@ -137,11 +141,12 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
 
   saveTransactionsToAccount() {
     if (this.account) {
+      this.transactionsToCategorize.forEach(transaction => {
+        transaction.id = uuidv4()
+      })
       this.account.transactions.push(...this.transactionsToCategorize)
       this.account.currentValue = Number(this.utilityService.calculateCurrentValue(this.account))
-
       this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'account', null, null, null, this.account))
-
       this.hideModal()
     }
   }

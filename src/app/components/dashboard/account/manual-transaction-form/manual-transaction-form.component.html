@@ -7,8 +7,6 @@
       <button class="delete" aria-label="close" (click)="hideModal()"></button>
     </header>
 
-
-
     <article class="modal-card-body" [formGroup]="transactionForm" #formDirective="ngForm">
       <form class="form">
         <div class="columns mb-0">
@@ -76,7 +74,9 @@
           <div class="field is-grouped is-grouped-multiline">
             <ng-container *ngFor="let category of categories" >
               <div class="control" *ngIf="category.group_id === categoryGroup.id">
-                <span class="tag selectable-tag" (click)="setCategory($event, category)" #selectabletag>{{category.name}}</span>
+                <span class="tag selectable-tag"
+                 (click)="setCategory(category, $event)"
+                  #selectabletag>{{category.name}}</span>
               </div>
             </ng-container>
           </div>

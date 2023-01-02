@@ -7,7 +7,7 @@ import { UtilityService } from 'src/app/shared/services/utility.service';
 import { Account } from 'src/app/shared/types/account';
 import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
 import { Category, CategoryGroup } from 'src/app/shared/types/category';
-import { DATE_FORMAT, ListTransaction, Transaction } from 'src/app/shared/types/transaction';
+import { DATE_FORMAT, Transaction } from 'src/app/shared/types/transaction';
 
 @Component({
   selector: 'app-transaction-list',
@@ -20,7 +20,7 @@ export class TransactionListComponent implements OnInit, OnChanges, OnDestroy {
 
   private subscriptions: Subscription[] = [];
 
-  allTransactions: ListTransaction[] = []
+  allTransactions: Transaction[] = []
   allCategories: Category[] = []
   allCategoryGroups: CategoryGroup[] = []
 
@@ -43,7 +43,7 @@ export class TransactionListComponent implements OnInit, OnChanges, OnDestroy {
     }))
   }
 
-  categoryNameFor(transaction: ListTransaction) {
+  categoryNameFor(transaction: Transaction) {
     return this.allCategories.find(cat => cat.id === transaction.categoryId)?.name
   }
 
@@ -53,20 +53,12 @@ export class TransactionListComponent implements OnInit, OnChanges, OnDestroy {
     })?.color
   }
 
-  deletetransaction(transaction : ListTransaction){
+
+  deletetransaction(transaction : Transaction){
     this.accounts.forEach(account => {
-      let account_update : Account;
+      let account_update : Account
       if(account.name === transaction.accountName){
-       // console.log(account.transactions)
-        account.transactions = account.transactions.filter(tran => {
-          //  && tran.date !== transaction.date ???
-          if(tran.description !== transaction.description && tran.amount !== transaction.amount){
-           return true
-          }else{
-            return false
-          }
-        })
-       // console.log(account.transactions)
+        account.transactions = account.transactions.filter(tran => tran.id !== transaction.id)
         account_update = account
         account_update.currentValue = Number(this.utilityService.calculateCurrentValue(account))
         this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'account', null, null, null, account_update))
@@ -74,23 +66,18 @@ export class TransactionListComponent implements OnInit, OnChanges, OnDestroy {
     })
   }
 
-
-
   ngOnChanges(changes: SimpleChanges) {
     this.allTransactions = []
-
     this.accounts.forEach(account => {
-      let tempTransactions: ListTransaction[] = [...account.transactions];
+      let tempTransactions: Transaction[] = [...account.transactions];
       tempTransactions.map(t => {
         t.accountName = account.name
         t.accountShortName = account.shortName
         t.date = t.date
       })
-
       this.allTransactions.push(...tempTransactions)
     })
     this.allTransactions = this.allTransactions.filter(t => this.selectedTimes.some((times => t.date.includes(times))))
-
     this.allTransactions.sort((a,b) => Date.parse(moment(b.date, DATE_FORMAT).toString()) - Date.parse(moment(a.date, DATE_FORMAT).toString()))
     this.activeMonths = new Set(this.allTransactions.map(t => moment(t.date, DATE_FORMAT).format('M.Y')))
   }

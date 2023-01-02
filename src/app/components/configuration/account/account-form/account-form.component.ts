@@ -3,7 +3,8 @@ import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular
 import { Subject, Subscription } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
 import { FluxStore } from 'src/app/shared/services/flux-store';
-import { Account, AccountColors, csvMask } from 'src/app/shared/types/account';
+import { Account, AccountColors } from 'src/app/shared/types/account';
+import { csvMask } from 'src/app/shared/types/csvMask';
 import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
 import { UtilityService } from 'src/app/shared/services/utility.service';
 

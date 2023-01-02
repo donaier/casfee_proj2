@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Account } from '../types/account';
 import { Category, CategoryGroup } from '../types/category';
+import { Transaction } from '../types/transaction';
 
 
 
@@ -27,10 +28,7 @@ export class UtilityService {
     account.transactions.forEach(t => {
       currentValue += t.amount
     });
-
     return Number(currentValue).toFixed(2)
   }
-
-
 
 }
