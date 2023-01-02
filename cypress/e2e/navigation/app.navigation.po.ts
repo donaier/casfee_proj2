@@ -21,11 +21,11 @@ export class AppNavigation {
   }
 
   getNavDashboard(){
-    return cy.get('.navbar-item').eq(1)
+    return cy.get('.navbar-item').eq(2)
   }
 
   getNavDashboardSettings(){
-    return cy.get('[data-cy="settings"]');
+    return cy.get('.navbar-item').eq(3)
   }
 
   getSettingsModal(){
@@ -33,19 +33,19 @@ export class AppNavigation {
   }
 
   getNavConfiguration(){
-    return cy.get('.navbar-item').eq(3);
-  }
-
-  getNavManual(){
     return cy.get('.navbar-item').eq(4);
   }
 
-  getNavLogout(){
+  getNavManual(){
     return cy.get('.navbar-item').eq(5);
   }
 
-  getNavThemes(){
+  getNavLogout(){
     return cy.get('.navbar-item').eq(6);
+  }
+
+  getNavThemes(){
+    return cy.get('.navbar-item').eq(7);
   }
 
   getNavThemeContent(){
@@ -57,7 +57,7 @@ export class AppNavigation {
   }
 
   getDarkTheme(){
-    return cy.get('.navbar-item').eq(8);
+    return cy.get('.navbar-item').eq(9);
   }
 
 

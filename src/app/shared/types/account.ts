@@ -9,6 +9,7 @@ export interface Account {
   currentValue: number,
   color: string,
   csv: string,
+  id: string,
   transactions: Transaction[],
 }
 
@@ -43,12 +44,4 @@ export const CsvMaskForm = {
   mask: new FormControl('', [Validators.required]),
 };
 
-export function calculateCurrentValue(account: Account) {
-  let currentValue = account.initialValue
 
-  account.transactions.forEach(t => {
-    currentValue += t.amount
-  });
-
-  return Number(currentValue).toFixed(2)
-}

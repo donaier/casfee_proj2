@@ -14,8 +14,7 @@ export class UploadService {
         switch (action.type) {
           case FluxActionTypes.Create:
             if(action.selector ==='account'){
-              const docRef_add = doc(this.firestore, 'accounts', action.account!.name)
-              await setDoc(docRef_add, action.account)
+              await addDoc(collection(this.firestore, 'accounts'), action.account)
             }
             if(action.selector ==='categoryGroup'){
               await addDoc(collection(this.firestore, 'categoryGroups'), action.categoryGroup)
@@ -30,8 +29,16 @@ export class UploadService {
 
           case FluxActionTypes.Update:
             if(action.selector ==='account'){
-              const docRef_update = doc(this.firestore, 'accounts', action.account!.name)
-              await setDoc(docRef_update, action.account)
+              await updateDoc(doc(this.firestore, 'accounts/'+ action.account?.id), {
+                name: action.account?.name,
+                shortName: action.account?.shortName,
+                description: action.account?.description,
+                initialValue: action.account?.initialValue,
+                currentValue: action.account?.currentValue,
+                color: action.account?.color,
+                csv: action.account?.csv,
+                transactions: action.account?.transactions
+               })
             }
             if(action.selector ==='categoryGroup'){
               await updateDoc(doc(this.firestore, 'categoryGroups/'+ action.categoryGroup?.id), {
@@ -51,7 +58,7 @@ export class UploadService {
 
           case FluxActionTypes.Delete:
             if(action.selector ==='account'){
-              await deleteDoc(doc(this.firestore, 'accounts', action.account!.name))
+              await deleteDoc(doc(this.firestore, 'accounts', action.account!.id))
             }
             if(action.selector ==='categoryGroup'){
               await deleteDoc(doc(this.firestore, 'categoryGroups', action.categoryGroup!.id))

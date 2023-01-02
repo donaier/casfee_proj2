@@ -58,6 +58,7 @@ describe('Basic Tests Navigation', () => {
       page.getDarkTheme().click()
       page.getNavThemeContent().should('contain.text', "Dark Theme")
       page.getBody().should('have.class', 'dark-theme')
+      page.getNavHamburger().click()
     });
 
   })

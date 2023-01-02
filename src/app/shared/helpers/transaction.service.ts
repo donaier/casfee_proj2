@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Account, csvMask } from '../types/account';
 import { DATE_FORMAT, Transaction } from '../types/transaction';
 import * as moment from 'moment';
-import { Category, CategoryGroup } from '../types/category';
 
 @Injectable({
   providedIn: 'root'
@@ -84,17 +83,4 @@ export class TransactionService {
     return groupedMonths
   }
 
-  checkavailableCategories(categoryGroups : CategoryGroup[], categories : Category[]) : CategoryGroup[]{
-    if(categoryGroups && categories) {
-      categoryGroups.forEach(categoryGroup => {
-        categoryGroup.categories = false
-        categories.forEach(category =>{
-          if(categoryGroup.id === category.group_id){
-            categoryGroup.categories = true
-          }
-        })
-      })
-    }
-    return categoryGroups
-  }
 }

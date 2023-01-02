@@ -15,59 +15,80 @@
               <p>csvMask used here: {{activeCsvMask?.name}}: {{activeCsvMask?.mask}}</p><br>
               <textarea #csvInput class="textarea" placeholder="paste csv here" (input)="computeCsvData($event)"></textarea>
             </div>
-            <small #csvInfo></small>
+
           </div>
         </div>
 
         <div #categoryColumns class="is-hidden">
-          <table class="table active-transaction" *ngIf="!doneCategorizing && transactionsToCategorize.length">
+          <p class="subtitle is-size-4 has-text-weight-medium" *ngIf="categoryGroups.length > 1">Choose Category for Transaction</p>
+          <small #csvInfo></small>
+          <table class="table active-transaction is-fullwidth" *ngIf="!doneCategorizing && transactionsToCategorize.length">
             <tbody>
               <tr>
                 <td>{{transactionsToCategorize[activeTransactionIndex].date}}</td>
                 <td>{{transactionsToCategorize[activeTransactionIndex].description}}</td>
-                <td>{{transactionsToCategorize[activeTransactionIndex].categoryId}}</td>
+                <td>{{getCategory(transactionsToCategorize[activeTransactionIndex].categoryId)?.name}}</td>
                 <td>{{transactionsToCategorize[activeTransactionIndex].amount}}</td>
               </tr>
             </tbody>
           </table>
-          <div class="category-selects">
+
+          <div class="columns is-flex-wrap-wrap">
             <ng-container *ngFor="let categoryGroup of categoryGroups">
-              <div class="box" *ngIf="categoryGroup.categories === true"
-                [ngClass]="{
-                'is-light': categoryGroup.color === '#EAF2E3',
-                'is-blue': categoryGroup.color === '#61E8E1',
-                'is-red': categoryGroup.color === '#F25757',
-                'is-yellow': categoryGroup.color === '#F2E863',
-                'is-orange': categoryGroup.color === '#F2CD60'}"
-              >
-                <p class="is-flex is-justify-content-space-between">
-                  <strong class="pb-3">{{categoryGroup.name}}</strong>
-                  <!--
-                  <span>
-                    <a class="tag" (click)="addCategory(categoryGroup)">+</a>
-                  </span> -->
-                </p>
-                <div class="field is-grouped is-grouped-multiline">
-                  <ng-container *ngFor="let category of categories" >
-                    <div class="control" *ngIf="category.group_id === categoryGroup.id">
-                      <span class="tag selectable-tag" (click)="setCategoryForActiveTransaction(category)">{{category.name}}</span>
-                    </div>
-                  </ng-container>
+              <div class="column" *ngIf="categoryGroup.categories === true">
+                <div class="box" [ngClass]="{
+                  'is-light': categoryGroup.color === '#EAF2E3',
+                  'is-blue': categoryGroup.color === '#61E8E1',
+                  'is-red': categoryGroup.color === '#F25757',
+                  'is-yellow': categoryGroup.color === '#F2E863',
+                  'is-orange': categoryGroup.color === '#F2CD60'}"
+                  >
+                  <p class="is-flex is-justify-content-space-between">
+                    <strong class="pb-3">{{categoryGroup.name}}</strong>
+                    <!-- <span>
+                      <a class="tag" (click)="addCategory(categoryGroup)">+</a>
+                    </span> -->
+                  </p>
+                  <div class="field is-grouped is-grouped-multiline">
+                    <ng-container *ngFor="let category of categories">
+                      <div class="control" *ngIf="category.group_id === categoryGroup.id">
+                        <span class="tag selectable-tag"
+                        (click)="setCategoryForActiveTransaction(category)"
+                        [ngClass]="{
+                        'is-active': isActive(category)}">
+                          {{category.name}}
+                        </span>
+                      </div>
+                    </ng-container>
+                  </div>
                 </div>
               </div>
             </ng-container>
           </div>
 
-          <table class="table">
+          <div class="is-flex is-justify-content-center">
+            <button class="button mt-5 mb-5 mr-1 is-120px set-border"
+            (click)="setTransaction()"
+            [disabled]="!setCategory">Save</button>
+            <button class="button mt-5 mb-5 ml-1 is-120px set-border" (click)="deleteTransaction()">Delete</button>
+          </div>
+
+          <div>
+            <p class="subtitle is-size-4 has-text-weight-medium">Transaction overview</p>
+            <p class="">Total {{transactionsToCategorize.length}} Transactions</p>
+           <!-- <small #csvInfo></small> -->
+          </div>
+
+          <table class="table is-fullwidth">
             <thead>
-              <tr><th>date</th><th>description/info</th><th>category</th><th>amount</th></tr>
+              <tr><th>Date</th><th>Description/Info</th><th>Category</th><th>Amount</th></tr>
             </thead>
             <tbody>
-              <tr *ngFor="let t of transactionsToCategorize">
-                <td>{{t.date}}</td>
-                <td>{{t.description}}</td>
-                <td>{{getCategory(t.categoryId)?.name}}</td>
-                <td>{{t.amount}}</td>
+              <tr *ngFor="let transaction of transactionsToCategorize">
+                <td>{{transaction.date}}</td>
+                <td>{{transaction.description}}</td>
+                <td>{{getCategory(transaction.categoryId)?.name}}</td>
+                <td>{{transaction.amount}}</td>
               </tr>
             </tbody>
           </table>

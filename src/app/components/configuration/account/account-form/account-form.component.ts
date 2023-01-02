@@ -3,8 +3,9 @@ import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular
 import { Subject, Subscription } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
 import { FluxStore } from 'src/app/shared/services/flux-store';
-import { Account, AccountForm, AccountColors, csvMask, calculateCurrentValue } from 'src/app/shared/types/account';
+import { Account, AccountColors, csvMask } from 'src/app/shared/types/account';
 import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
+import { UtilityService } from 'src/app/shared/services/utility.service';
 
 @Component({
   selector: 'app-account-form',
@@ -28,7 +29,8 @@ export class AccountFormComponent implements OnInit, OnChanges {
   color!: FormControl
   csv!: FormControl
 
-  constructor(@Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>, public store: FluxStore) { }
+  constructor(@Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>,
+   public store: FluxStore, private utilityService: UtilityService) { }
 
   ngOnInit(){
     this.accountForm = new FormGroup({
@@ -54,27 +56,21 @@ export class AccountFormComponent implements OnInit, OnChanges {
     this.modal.nativeElement.classList.remove('is-active');
   }
 
-  calculateCurrentValue(account: Account) {
-    let currentValue = account.initialValue
-    account.transactions.forEach(t => {
-      currentValue += t.amount
-    });
-    return Number(currentValue).toFixed(2)
-  }
-
   submitAccountForm(e: Event) {
     e.preventDefault();
     if(this.accountForm.valid) {
       let account = this.accountForm.value
       if (this.account) {
+        account.id = this.account.id
         account.transactions = this.account.transactions || []
-        account.currentValue = this.calculateCurrentValue(account)
+        account.currentValue = this.utilityService.calculateCurrentValue(account)
+        this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'account', null, null, null, account))
       }
       if(!this.account) {
         account.currentValue = this.initialValue.value
         account.transactions = []
+        this.dispatcher.next(new FluxAction(FluxActionTypes.Create,'account', null, null, null, account))
       }
-      this.dispatcher.next(new FluxAction(FluxActionTypes.Create,'account', null, null, null, account))
       this.hideModal()
     }
   }

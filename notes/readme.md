@@ -16,8 +16,13 @@ Alternativen :
   2. Fuer jede neue CategoryGroup ein Item mit demselben Namen miterstellen. / Sieht auch nicht so toll aus.
 
 
+// Fuer die Abgabe: 
+Leer / Csv Bsp. zum Upload. 
 
-
+// loeschen von transactions
+// erfassen v. Transaktionen ohne categories
+// scrollen innerhalb transactions
+// Frontend on Csv Upload
 
 
 

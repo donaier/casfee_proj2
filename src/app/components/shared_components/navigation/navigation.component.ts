@@ -42,7 +42,7 @@ export class NavigationComponent implements AfterViewInit {
 
   set_theme(theme : string){
     this.StorageService.set_theme_preference(theme)
-    this.document.body.classList.remove('light-theme', 'dark-theme', 'default-theme')
+    this.document.body.classList.remove('light-theme', 'dark-theme', 'color-theme')
     if(theme === "light"){
       this.theme.nativeElement.innerText = "Light Theme"
       this.document.body.classList.add('light-theme')
@@ -53,7 +53,7 @@ export class NavigationComponent implements AfterViewInit {
     }
     if(theme === "colored"){
       this.theme.nativeElement.innerText = "Color Theme"
-      this.document.body.classList.add('default-theme')
+      this.document.body.classList.add('color-theme')
     }
   }
 
@@ -66,7 +66,7 @@ export class NavigationComponent implements AfterViewInit {
   }
 
   showSettings() {
-    this.document.getElementById('dashboard-filter')?.classList.remove('hidden')
+    this.document.getElementById('dashboard-filter')?.classList.toggle('hidden')
   }
 
   logout(){

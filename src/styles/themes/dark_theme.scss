@@ -139,6 +139,9 @@ $c6: #000000;
       border-left: 1px $c0 solid;
       border-right: 1px $c0 solid;
     }
+    .set-border{
+      border: 1px $c6 solid;
+    }
   }
 
   .tag:not(body) {
