@@ -7,6 +7,8 @@
       <button class="delete" aria-label="close" (click)="hideModal()"></button>
     </header>
 
+
+
     <article class="modal-card-body" [formGroup]="transactionForm" #formDirective="ngForm">
       <form class="form">
         <div class="columns mb-0">
@@ -83,7 +85,10 @@
       </form>
     </article>
     <footer class="modal-card-foot is-flex is-justify-content-center">
-      <button class="button is-success" type="button" (click)="submitTransactionForm($event)" [disabled]="transactionForm.invalid">Save</button>
+      <button class="button is-success"
+      type="button"
+      (click)="submitTransactionForm($event)"
+      [disabled]="transactionForm.invalid">Save</button>
       <button class="button" type="button" (click)="hideModal()">Cancel</button>
     </footer>
   </div>

@@ -3,8 +3,9 @@ import * as moment from 'moment';
 import { Subject, Subscription } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
 import { FluxStore } from 'src/app/shared/services/flux-store';
+import { UtilityService } from 'src/app/shared/services/utility.service';
 import { Account } from 'src/app/shared/types/account';
-import { FluxAction } from 'src/app/shared/types/actions.type';
+import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
 import { Category, CategoryGroup } from 'src/app/shared/types/category';
 import { DATE_FORMAT, ListTransaction, Transaction } from 'src/app/shared/types/transaction';
 
@@ -25,7 +26,9 @@ export class TransactionListComponent implements OnInit, OnChanges, OnDestroy {
 
   activeMonths: Set<string> = new Set
 
-  constructor(@Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>, public store: FluxStore) {}
+  constructor(@Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>,
+  public store: FluxStore,
+  private utilityService: UtilityService) {}
 
   ngOnInit() {
     this.subscriptions.push(this.store.Categories.subscribe((data) => {
@@ -49,6 +52,29 @@ export class TransactionListComponent implements OnInit, OnChanges, OnDestroy {
       return cg.id === (this.allCategories.find(c => c.id === transaction.categoryId)?.group_id)
     })?.color
   }
+
+  deletetransaction(transaction : ListTransaction){
+    this.accounts.forEach(account => {
+      let account_update : Account;
+      if(account.name === transaction.accountName){
+       // console.log(account.transactions)
+        account.transactions = account.transactions.filter(tran => {
+          //  && tran.date !== transaction.date ???
+          if(tran.description !== transaction.description && tran.amount !== transaction.amount){
+           return true
+          }else{
+            return false
+          }
+        })
+       // console.log(account.transactions)
+        account_update = account
+        account_update.currentValue = Number(this.utilityService.calculateCurrentValue(account))
+        this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'account', null, null, null, account_update))
+      }
+    })
+  }
+
+
 
   ngOnChanges(changes: SimpleChanges) {
     this.allTransactions = []
