@@ -66,7 +66,7 @@
           </div>
 
           <div class="is-flex is-justify-content-space-between">
-            <button class="button mt-5 mb-5 mr-1 is-120px set-border" (click)="deleteTransaction()">
+            <button class="button mt-5 mb-5 mr-1 is-120px btn-modifier" (click)="deleteTransaction()">
               <span class="icon is-small">
                 <i class="fas fa-times"></i>
               </span>
@@ -78,7 +78,7 @@
               <input id="autoAdvance" type="checkbox" name="autoAdvance" class="switch is-rounded" [checked]="autoAdvance" (change)="toggleAutoAdvance()">
               <label for="autoAdvance">auto-advance</label>
             </div>
-            <button class="button mt-5 mb-5 ml-1 is-120px set-border"
+            <button class="button mt-5 mb-5 ml-1 is-120px btn-modifier"
             (click)="setTransaction()"
             [disabled]="!setCategory">
               <span>

@@ -76,7 +76,7 @@
               <div class="field is-grouped is-grouped-multiline">
                 <ng-container *ngFor="let category of categories" >
                   <div class="control" *ngIf="category.group_id === categoryGroup.id">
-                    <span class="tag selectable-tag" (click)="setCategory(category, $event)" #selectabletag>{{category.name}}</span>
+                    <span class="tag selectable-tag" (click)="setCategory(category, $event)" #selectabletags>{{category.name}}</span>
                   </div>
                 </ng-container>
               </div>

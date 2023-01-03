@@ -19,6 +19,7 @@
   outline: 0;
   box-shadow: none !important;
 }
+
 .select select:active{
   border-color:#f14668;
   outline: 0;
@@ -30,6 +31,29 @@
   outline: 0;
   box-shadow: none !important;
 }
+
+.textfield{
+ // border-color:#f14668 !important;
+ // outline: 0;
+//  box-shadow: none !important;
+}
+
+.textfield:focus{
+ // border-color:#f14668 !important;
+ // outline: 0;
+ // box-shadow: none !important;
+}
+.textfield:active{
+//  border-color:#f14668 !important;
+//  outline: 0;
+//  box-shadow: none !important;
+}
+
+.textfield:focus-visible{
+  //  border-color:#f14668 !important;
+  //  outline: 0;
+  //  box-shadow: none !important;
+  }
 
 .muted {
   opacity: .7;

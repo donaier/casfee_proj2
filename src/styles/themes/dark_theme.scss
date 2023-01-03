@@ -5,6 +5,7 @@ $c3: #a870ab;
 $c4: #413e9f;
 $c5: #041440;
 $c6: #000000;
+$c12: #CCCCCC;
 
 .dark-theme {
 
@@ -131,6 +132,14 @@ $c6: #000000;
       background-color: $c0;
       p{
         color: $c6;
+      }
+      .btn-modifier{
+        background-color: $c12;
+        box-shadow: none;
+        border: none;
+      }
+      .btn-modifier:hover {
+        background-color: $c3;
       }
     }
     .modal-card-foot {

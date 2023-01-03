@@ -67,16 +67,16 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
 
   hideModal() {
     this.manualtransactionform.nativeElement.classList.remove('is-active');
-    this.removeSelectedTags()
+    this.removeActiveTag()
     this.transactionForm.reset();
   }
 
-  removeSelectedTags(){
+  removeActiveTag(){
     this.selectabletags.forEach(tag => { tag.nativeElement.classList.remove('selected')});
   }
 
   setCategory(category: Category, e : Event) {
-    this.removeSelectedTags()
+    this.removeActiveTag()
     this.transactionForm.get('categoryId')?.setValue(category.id);
     (<HTMLElement>e.target).classList.add('selected')
   }
