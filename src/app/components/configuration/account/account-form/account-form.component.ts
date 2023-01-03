@@ -76,15 +76,16 @@ export class AccountFormComponent implements OnInit, OnChanges {
     }
   }
 
-  deleteAccount(){
+  deleteAccount() {
     this.dispatcher.next(new FluxAction(FluxActionTypes.Delete,'account', null, null, null, this.account))
     this.hideModal();
   }
 
-  ngOnChanges(): void {
-    if (this.account) {
+  ngOnChanges() {
+    if(this.account) {
       this.accountForm?.patchValue(this.account!)
-    } else {
+    }
+    if(!this.account) {
       this.accountForm?.reset()
     }
   }

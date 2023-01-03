@@ -17,7 +17,7 @@
         </colgroup>
         <tbody>
           <ng-container *ngFor="let transaction of allTransactions">
-            <tr *ngIf="transaction.date.includes(month)">
+            <tr class="is-transaction" *ngIf="transaction.date.includes(month)" (click)="openModal(transaction)">
               <td>
                 <span class="tag">{{transaction.accountShortName}}</span>
               </td>
@@ -42,3 +42,5 @@
     </ng-container>
   </div>
 </div>
+
+<app-transaction-form #DetailTransactionModal [transaction]="selectedtransaction"></app-transaction-form>

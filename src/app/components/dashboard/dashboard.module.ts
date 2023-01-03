@@ -7,7 +7,7 @@ import { ManualTransactionFormComponent } from './account/manual-transaction-for
 import { CsvTransactionFormComponent } from './account/csv-transaction-form/csv-transaction-form.component';
 import { TransactionListComponent } from './transaction-list/transaction-list.component';
 import { GraphComponent } from './graph/graph.component'
-
+import { TransactionFormComponent } from './transaction-list/transaction-form/transaction-form.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +17,7 @@ import { GraphComponent } from './graph/graph.component'
     CsvTransactionFormComponent,
     TransactionListComponent,
     GraphComponent,
+    TransactionFormComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,106 @@
+<section class="modal" #modaltransaction>
+  <div class="modal-background"></div>
+  <article class="modal-card">
+
+    <header class="modal-card-head">
+      <p class="modal-card-title">Edit or Delete transaction</p>
+      <button class="delete" aria-label="close" (click)="hideModal()"></button>
+    </header>
+
+    <form id="category-group-form" class="form" [formGroup]="transactionForm" novalidate>
+      <input type="hidden" id="input-id" formControlName="id">
+      <div class="modal-card-body">
+
+
+        <div class="columns mb-0">
+
+          <div class="column">
+            <label class="label">Date</label>
+            <div class="control">
+              <input class="input"
+                id="input-date"
+                type="date"
+                placeholder="date"
+                formControlName="date"
+                [ngClass]="{
+                  'is-danger': date.invalid && (date.dirty || date.touched),
+                  'is-success': date.valid && (date.dirty || date.touched)
+                }"
+                required>
+            </div>
+          </div>
+
+          <div class="column">
+            <label class="label">Amount</label>
+            <div class="field has-addons">
+              <p class="control is-expanded">
+                <input class="input"
+                  id="input-amount"
+                  type="number"
+
+                  formControlName="amount"
+                  [ngClass]="{
+                    'is-danger': amount.invalid && (amount.dirty || amount.touched),
+                    'is-success': amount.valid && (amount.dirty || amount.touched)
+                  }"
+                  required>
+              </p>
+              <p class="control">
+                <a class="button is-static is-outlined">Fr.</a>
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="field">
+          <label class="label" for="input-categoryName">Category</label>
+          <div class="control">
+            <input type="hidden" id="input-categoryNam" formControlName="categoryName">
+            <div #CategoryName></div>
+
+          </div>
+        </div>
+
+
+
+
+        <div class="field">
+          <label class="label" for="input-description">Description</label>
+          <div class="control">
+            <textarea class="input"
+              id="input-description"
+              type="text"
+              placeholder="transaction-description"
+              formControlName="description"
+              [ngClass]="{
+                'is-danger': description.invalid && (description.dirty || description.touched),
+                'is-success': description.valid && (description.dirty || description.touched)
+              }"
+              required>
+            </textarea>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+      </div>
+    </form>
+
+
+    <footer class="modal-card-foot is-flex is-justify-content-center">
+      <button class="button is-success" type="submit" [disabled]="transactionForm.invalid">Save</button>
+      <button class="button" type="button" (click)="hideModal()">Cancel</button>
+      <button class="button" type="button" (click)="deletetransaction()">Delete</button>
+    </footer>
+
+  </article>
+
+</section>
+
