@@ -34,7 +34,6 @@
           </table>
 
           <div class="columns is-flex-wrap-wrap">
-
             <ng-container *ngFor="let categoryGroup of categoryGroups">
               <div class="column" *ngIf="categoryGroup.categories === true">
                 <div class="box" [ngClass]="{
@@ -67,11 +66,29 @@
             </ng-container>
           </div>
 
-          <div class="is-flex is-justify-content-center">
-            <button class="button mt-5 mb-5 mr-1 is-120px set-border"
+          <div class="is-flex is-justify-content-space-between">
+            <button class="button mt-5 mb-5 mr-1 is-120px set-border" (click)="deleteTransaction()">
+              <span class="icon is-small">
+                <i class="fas fa-times"></i>
+              </span>
+              <span>
+                Delete
+              </span>
+            </button>
+            <div class="autoadvance-switch is-align-self-center">
+              <input id="autoAdvance" type="checkbox" name="autoAdvance" class="switch is-rounded" [checked]="autoAdvance" (change)="toggleAutoAdvance()">
+              <label for="autoAdvance">auto-advance</label>
+            </div>
+            <button class="button mt-5 mb-5 ml-1 is-120px set-border"
             (click)="setTransaction()"
-            [disabled]="!setCategory">Save</button>
-            <button class="button mt-5 mb-5 ml-1 is-120px set-border" (click)="deleteTransaction()">Delete</button>
+            [disabled]="!setCategory">
+              <span>
+                Next
+              </span>
+              <span class="icon is-small">
+                <i class="fas fa-arrow-right"></i>
+              </span>
+            </button>
           </div>
 
           <div>
@@ -85,7 +102,14 @@
               <tr><th>Date</th><th>Description/Info</th><th>Category</th><th>Amount</th></tr>
             </thead>
             <tbody>
-              <tr *ngFor="let transaction of transactionsToCategorize">
+              <tr
+                *ngFor="let transaction of transactionsToCategorize; let i = index"
+                [ngClass]="{
+                  'is-incoming': i > activeTransactionIndex,
+                  'is-current': i === activeTransactionIndex,
+                  'is-done': i < activeTransactionIndex
+                }"
+              >
                 <td>{{transaction.date}}</td>
                 <td>{{transaction.description}}</td>
                 <td>{{getCategory(transaction.categoryId)?.name}}</td>

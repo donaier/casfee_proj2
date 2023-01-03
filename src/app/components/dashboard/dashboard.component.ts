@@ -36,7 +36,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.accounts = data
         this.activeAccounts = data
         this.groupedMonths = this.transactionService.extractMonths(this.activeAccounts)
-        this.toggleTimeframe()
+        this.toggleTimeframe(true)
       }
     }))
   }
@@ -70,13 +70,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
   }
 
-  toggleTimeframe() {
-    if (this.selectedTimeframe === 'years') {
-      this.selectedTimeframe = 'months'
-      this.selectedTime = this.groupedMonths.flat()
-    } else {
+  toggleTimeframe(setToMonths: boolean = false) {
+    if (this.selectedTimeframe === 'months' && !setToMonths) {
       this.selectedTimeframe = 'years'
       this.selectedTime = this.groupedMonths.map(group => group.at(0).split('.').at(-1))
+    } else {
+      this.selectedTimeframe = 'months'
+      this.selectedTime = this.groupedMonths.flat()
     }
   }
 
