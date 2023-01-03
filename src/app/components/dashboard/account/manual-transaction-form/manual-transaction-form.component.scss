@@ -8,3 +8,14 @@
     border-color: var(--color-3);
   }
 }
+
+.modal-card {
+  width: 75vw;
+}
+
+.category-selects {
+  width: 100%;
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
