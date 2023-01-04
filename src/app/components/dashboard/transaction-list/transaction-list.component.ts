@@ -44,7 +44,11 @@ export class TransactionListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   categoryNameFor(transaction: ListTransaction) {
-    return this.allCategories.find(cat => cat.id === transaction.categoryId)?.name
+    if (transaction.categoryId !== 'ACCOUNT_TRANSFER') {
+      return this.allCategories.find(cat => cat.id === transaction.categoryId)?.name
+    } else {
+      return (transaction.accountShortName? + transaction.accountShortName?)
+    }
   }
 
   colorFor(transaction: Transaction) {
