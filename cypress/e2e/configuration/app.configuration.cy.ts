@@ -7,6 +7,7 @@ describe('Basic tests for configuration', () => {
     page = new AppConfiguration();
     window.localStorage.setItem('Userdata', "test")
     page.navigateTo();
+
   });
 
   it('should render all components"', () => {
@@ -38,6 +39,9 @@ describe('Basic tests for configuration', () => {
     page.getInputCsv().select('No CsvMask')
     page.getSubmitBtn().should('be.enabled')
     page.getSubmitBtn().click()
+    cy.visit('http://localhost:4200/dashboard');
+    //console.log(page.accounts)
+    cy.pause()
     // Is visible on configuration
     page.getNewAccount().should('be.visible')
     page.getEditBtn().click()

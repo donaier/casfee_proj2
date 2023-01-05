@@ -101,11 +101,10 @@ export class TransactionFormComponent implements OnInit, OnChanges{
         this.transactionForm.value.categoryName = null
       }
       this.getAccountforTransaction()
-
-
       this.filterchangedTransaction()
 
       console.log(this.transactionForm.value)
+
       this.account!.transactions.push(this.transactionForm.value)
 
       if(this.transaction?.amount !== this.transactionForm.value.amount){
@@ -120,6 +119,7 @@ export class TransactionFormComponent implements OnInit, OnChanges{
   hideModal() {
     this.modaltransaction.nativeElement.classList.remove('is-active')
     this.removeActiveTag()
+    this.showCategoriesFlag = false
     this.transactionForm.reset();
   }
 

@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { fakeAsync, getTestBed, tick } from '@angular/core/testing';
 import { AccountConfigComponent } from './account-config.component';
-import { Account, csvMask } from 'src/app/shared/types/account';
+import { Account} from 'src/app/shared/types/account';
 import { FluxStore } from 'src/app/shared/services/flux-store';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from 'src/app/components/shared_components/shared.module';

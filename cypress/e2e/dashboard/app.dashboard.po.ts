@@ -1,7 +1,60 @@
+import  { AppConfiguration } from '../configuration/app.configuration.po';
+
+
+
+
 export class AppDashboard {
+
+
   navigateTo() {
     return cy.visit('http://localhost:4200/dashboard');
   }
+
+
+  createNewAccount(){
+
+
+
+
+
+
+  }
+
+
+  getAccountComponent(){
+    return cy.get('app-account');
+  }
+
+  getGraphComopnent(){
+    return cy.get('app-graph');
+
+  }
+
+  getSettingsKomponent(){
+    return cy.get('.dashboard-filter');
+  }
+
+  getTransactionsComponent(){
+    return cy.get('app-transaction-list');
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   getParagraph() {
     return cy.get('app-root h1');

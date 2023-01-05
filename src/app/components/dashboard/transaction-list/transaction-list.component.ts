@@ -31,7 +31,7 @@ export class TransactionListComponent implements OnInit, OnChanges, OnDestroy {
 
   constructor(@Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>,
   public store: FluxStore,
-  private utilityService: UtilityService) {}
+  ) {}
 
   ngOnInit() {
     this.subscriptions.push(this.store.Categories.subscribe((data) => {
@@ -63,18 +63,6 @@ export class TransactionListComponent implements OnInit, OnChanges, OnDestroy {
     })?.color
   }
 
-
-  deletetransaction(transaction : Transaction){
-    this.accounts.forEach(account => {
-      let account_update : Account
-      if(account.name === transaction.accountName){
-        account.transactions = account.transactions.filter(tran => tran.id !== transaction.id)
-        account_update = account
-        account_update.currentValue = Number(this.utilityService.calculateCurrentValue(account))
-        this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'account', null, null, null, account_update))
-      }
-    })
-  }
 
   ngOnChanges(changes: SimpleChanges) {
     this.allTransactions = []

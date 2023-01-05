@@ -33,6 +33,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.dispatcher.next(new FluxAction(FluxActionTypes.Load))
     this.subscription.push(this.store.Accounts.subscribe((data) => {
       if (data.length > 0) {
+        console.log(data)
         this.accounts = data
         this.activeAccounts = data
         this.groupedMonths = this.transactionService.extractMonths(this.activeAccounts)
