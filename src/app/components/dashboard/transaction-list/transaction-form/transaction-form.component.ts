@@ -41,7 +41,7 @@ export class TransactionFormComponent implements OnInit, OnChanges{
   date!: FormControl
   categoryName!: FormControl
   amount!: FormControl
-  categoryid!: FormControl
+  categoryId!: FormControl
 
   constructor(public store: FluxStore,
   @Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>,
@@ -54,7 +54,7 @@ export class TransactionFormComponent implements OnInit, OnChanges{
       date: this.date = new FormControl(''),
       categoryName: this.categoryName = new FormControl(''),
       amount: this.amount = new FormControl(''),
-      categoryid: this.categoryid = new FormControl('')
+      categoryId: this.categoryId = new FormControl('')
     })
   }
 
@@ -88,7 +88,7 @@ export class TransactionFormComponent implements OnInit, OnChanges{
 
   setCategory(category : Category, e:Event){
     this.removeActiveTag()
-    this.transactionForm.value.categoryid = category.id
+    this.transactionForm.value.categoryId = category.id
     this.CategoryName.nativeElement.value = category.name;
     (<HTMLElement>e.target).classList.add('selected')
   }
@@ -98,17 +98,18 @@ export class TransactionFormComponent implements OnInit, OnChanges{
   }
 
   updateTransaction(){
+
     if(this.transactionForm.valid){
 
       if(this.transactionForm.value.categoryName === undefined){
         this.transactionForm.value.categoryName = null
       }
+
       this.getAccountforTransaction()
       this.filterchangedTransaction()
-
-      console.log(this.transactionForm.value)
-
-      this.account!.transactions.push(this.transactionForm.value)
+      let transaction : Transaction = this.transactionForm.value
+      transaction.date = moment(this.transactionForm.get('date')?.value).format(DATE_FORMAT)
+      this.account!.transactions.push(transaction)
 
       if(this.transaction?.amount !== this.transactionForm.value.amount){
         this.account!.currentValue = Number(this.utilityService.calculateCurrentValue(this.account!))
@@ -124,30 +125,43 @@ export class TransactionFormComponent implements OnInit, OnChanges{
     this.removeActiveTag()
     this.showCategoriesFlag = false
     this.transactionForm.reset();
+  //  this.transaction = undefined
   }
 
   ngOnChanges() {
 
     if (this.transaction) {
     //  this.transaction.date = this.convertDate(this.transaction.date)
-   //   console.log(this.transaction)
+
       this.convertDate(this.transaction);
+
+    //  this.dateinput.nativeElement.value = "2014-02-11"
+   // 28.12.2022
+
+    this.dateinput.nativeElement.value = moment(this.transaction.date, "DD.MM.YYYY").format('YYYY-MM-DD');
+
+
+
       this.CategoryName.nativeElement.value = this.transaction.categoryName
-     // console.log(this.transaction)
-      this.transactionForm?.patchValue(this.transaction)
+
+     this.transactionForm?.patchValue(this.transaction)
 
     }
   }
 
   convertDate(transaction : Transaction){
 
-    console.log(transaction);
- //   transaction.date = moment(transaction.date, "DD-MM-YYYY");
+  //  console.log(transaction.date);
+
+    transaction.date = moment(transaction.date, "DD.MM.YYYY").format('YYYY-MM-DD');
+
+   // console.log(date)
+
     // In work updat soon
 
     // = moment(date).format(DATE_FORMAT)
-    // 2023-01-04
-    console.log(transaction);
+    // 2023-01-07
+  //  console.log(transaction);
 
   }
 

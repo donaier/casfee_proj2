@@ -29,6 +29,7 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
   amount!: FormControl
   date!: FormControl
   categoryId!: FormControl
+  categoryName!: FormControl
 
   categoryGroups: CategoryGroup[] = []
   categories: Category[] = []
@@ -61,7 +62,8 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
       fromAccount: this.fromAccount = new FormControl(''),
       amount: this.amount = new FormControl(''),
       date: this.date = new FormControl(''),
-      categoryId: this.categoryId = new FormControl('')
+      categoryId: this.categoryId = new FormControl(''),
+      categoryName: this.categoryName = new FormControl('')
     })
   }
 
@@ -77,7 +79,8 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
 
   setCategory(category: Category, e : Event) {
     this.removeActiveTag()
-    this.transactionForm.get('categoryId')?.setValue(category.id);
+    this.transactionForm.get('categoryId')?.setValue(category.id)
+    this.transactionForm.get('categoryName')?.setValue(category.name);
     (<HTMLElement>e.target).classList.add('selected')
   }
 
@@ -89,6 +92,9 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
       let transaction: Transaction = this.transactionForm.value
       transaction.date = moment(this.transactionForm.get('date')?.value).format(DATE_FORMAT)
       transaction.id = uuidv4()
+      if(transaction.categoryName === 'undefined'){
+        transaction.categoryName = "noCategorie"
+      }
       account.transactions.push(transaction)
       account.currentValue = Number(this.utilityService.calculateCurrentValue(account))
       this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'account', null, null, null, account))

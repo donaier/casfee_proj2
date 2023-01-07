@@ -57,6 +57,8 @@
           </div>
         </div>
         <div class="category-selects">
+          <input type="hidden" id="category-name" formControlName="categoryName">
+          <input type="hidden" id="category-id" formControlName="categoryId">
           <ng-container *ngFor="let categoryGroup of categoryGroups">
             <div class="box" *ngIf="categoryGroup.categories === true"
               [ngClass]="{

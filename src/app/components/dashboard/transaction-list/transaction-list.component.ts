@@ -54,7 +54,17 @@ export class TransactionListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   categoryNameFor(transaction: Transaction) {
+    /*
+    if(transaction.accountName === "ForTesting"){
+      console.log(transaction)
+      console.log(transaction.accountName)
+      console.log(transaction.categoryId)
+
+      console.log(this.allCategories.find(cat => cat.id === transaction.categoryId)?.name)
+    } */
+
     return this.allCategories.find(cat => cat.id === transaction.categoryId)?.name
+
   }
 
   colorFor(transaction: Transaction) {
@@ -65,16 +75,26 @@ export class TransactionListComponent implements OnInit, OnChanges, OnDestroy {
 
 
   ngOnChanges(changes: SimpleChanges) {
+
+
     this.allTransactions = []
     this.accounts.forEach(account => {
       let tempTransactions: Transaction[] = [...account.transactions];
+
       tempTransactions.map(t => {
         t.accountName = account.name
         t.accountShortName = account.shortName
         t.date = t.date
       })
+
       this.allTransactions.push(...tempTransactions)
+
+
+
+
     })
+
+
     this.allTransactions = this.allTransactions.filter(t => this.selectedTimes.some((times => t.date.includes(times))))
     this.allTransactions.sort((a,b) => Date.parse(moment(b.date, DATE_FORMAT).toString()) - Date.parse(moment(a.date, DATE_FORMAT).toString()))
     this.activeMonths = new Set(this.allTransactions.map(t => moment(t.date, DATE_FORMAT).format('M.Y')))
