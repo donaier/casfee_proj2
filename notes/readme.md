@@ -7,7 +7,7 @@ donat:
 - tests
 - graph nach Kategories (oder willst du da mal einen machen?)
 - würde gerne doch noch das Erstellen von neuen subCategories erlauben, wenn der csv-Prozess schon im Gange ist. Falls da was vergessen wurde oder es was neues braucht müsste sonst das Kategorisieren abgebrochen werden, Kategorie erstellt und wieder gestartet werden.
-- Transaktionen als "Kontoübertrag" markieren (haben wir so in der Eingabe drin, anstelle der Kategorie wird da das "Zielkonto" (eines der erfassten) angegeben)
+- ~~Transaktionen als "Kontoübertrag" markieren (haben wir so in der Eingabe drin, anstelle der Kategorie wird da das "Zielkonto" (eines der erfassten) angegeben)~~
 
 kay:
 - tests :)
