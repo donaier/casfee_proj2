@@ -9,8 +9,27 @@ donat:
 - würde gerne doch noch das Erstellen von neuen subCategories erlauben, wenn der csv-Prozess schon im Gange ist. Falls da was vergessen wurde oder es was neues braucht müsste sonst das Kategorisieren abgebrochen werden, Kategorie erstellt und wieder gestartet werden.
 - Transaktionen als "Kontoübertrag" markieren (haben wir so in der Eingabe drin, anstelle der Kategorie wird da das "Zielkonto" (eines der erfassten) angegeben)
 
+Edit: Also mir viel noch auf die Graphen sind noch nicht so aussagekraeftig evtl. kommt da noch was :) ? 
+Vorallem das thema responsive hast du mal ein paar tests gemacht funktionniert bei uns noch nicht vorrallem die graphen. 
+Ja von mir aus gesehen reicht auch ein kurzes manual in readme fuer den Dozenten. Anstelle eine neue Komonente erstellen. 
+Ich sehe noch mehr funktionen -> ich meine grundsaetzlich funktionniert es ja zur Abgabe muessen die Basics sicher funktionnieren, und alles sollte bestPratice sein. 
+Hast du mal getestet auf verschiedenen Screens ? Das Layout ist sehr klein gehalten, also schriftarten , Titel etc..
+Hier der Link falls du Testen willst auf versch. Geraeten :) 
+Ist ein Hosting der geforkten Version von mir. 
+
+
+
 kay:
-- tests :)
+- Formulare -> Themes anpassungen, evtl. noch validators. 
+Edit Transactions. 
+
+
+Thema Testing: 
+
+E2E : Login / Navigation / Configuration. -> done
+E2E : DAshboard habe ich nicht geschrieben schwierig weil ich nicht weiss wie daten laden :)  
+
+Unit Tests : laufen bei mir noch keine sobald du welche hast oder ich sollten wir uns austauschen. ?
 
 
 

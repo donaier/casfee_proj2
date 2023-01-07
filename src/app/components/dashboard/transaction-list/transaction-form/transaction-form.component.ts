@@ -13,6 +13,9 @@ import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
 import { Category, CategoryGroup } from 'src/app/shared/types/category';
 import { Transaction } from 'src/app/shared/types/transaction';
 
+import * as moment from 'moment';
+import { DATE_FORMAT } from 'src/app/shared/types/transaction';
+
 
 
 @Component({
@@ -128,7 +131,7 @@ export class TransactionFormComponent implements OnInit, OnChanges{
     if (this.transaction) {
     //  this.transaction.date = this.convertDate(this.transaction.date)
    //   console.log(this.transaction)
-
+      this.convertDate(this.transaction);
       this.CategoryName.nativeElement.value = this.transaction.categoryName
      // console.log(this.transaction)
       this.transactionForm?.patchValue(this.transaction)
@@ -136,9 +139,15 @@ export class TransactionFormComponent implements OnInit, OnChanges{
     }
   }
 
-  convertDate(date : string){
+  convertDate(transaction : Transaction){
 
+    console.log(transaction);
+ //   transaction.date = moment(transaction.date, "DD-MM-YYYY");
+    // In work updat soon
+
+    // = moment(date).format(DATE_FORMAT)
     // 2023-01-04
+    console.log(transaction);
 
   }
 
