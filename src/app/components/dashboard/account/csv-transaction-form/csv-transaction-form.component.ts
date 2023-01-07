@@ -17,6 +17,9 @@ import * as moment from 'moment';
 })
 export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges {
   @ViewChild('modal') modal!: ElementRef
+  @ViewChild('subcategoryModal') subcategoryModal!: ElementRef
+  @ViewChild('subcategoryInput') subcategoryInput!: ElementRef
+  @ViewChild('categoryInput') categoryInput!: ElementRef
   @ViewChild('csvInput') csvInput!: ElementRef
   @ViewChild('csvInputControl') csvInputControl!: ElementRef
   @ViewChild('categoryColumns') categoryColumns!: ElementRef
@@ -113,7 +116,27 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
   }
 
   addCategory(category: CategoryGroup) {
-    // here is subcategory creation on the fly
+    this.subcategoryModal.nativeElement.classList.add('is-active')
+    this.subcategoryInput.nativeElement.value = ''
+    this.subcategoryInput.nativeElement.focus()
+    this.categoryInput.nativeElement.value = category.id
+  }
+
+  submitCategoryForm(e: Event) {
+    e.preventDefault();
+
+    if (this.subcategoryInput.nativeElement.value &&  this.categoryInput.nativeElement.value) {
+      let category: Category = {name : this.subcategoryInput.nativeElement.value, group_id: this.categoryInput.nativeElement.value, id: ""}
+      this.dispatcher.next(new FluxAction(FluxActionTypes.Create, 'category', null, null, category))
+    }
+
+    this.subcategoryModal.nativeElement.classList.remove('is-active')
+  }
+
+  hideSubcategoryModal(e: Event) {
+    e.preventDefault();
+
+    this.subcategoryModal.nativeElement.classList.remove('is-active')
   }
 
   isActive(tag: string | undefined){

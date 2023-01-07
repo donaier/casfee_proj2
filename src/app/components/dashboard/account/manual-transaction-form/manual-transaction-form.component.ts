@@ -77,10 +77,6 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
     this.transactionForm.reset();
   }
 
-  addCategory(category: CategoryGroup) {
-    // Finde ich ein bisschen Overhead hier noch ein Modal zu oeffnen und items adden.
-  }
-
   setCategory(e: Event, category: Category) {
     this.selectabletags.forEach(tag => { tag.nativeElement.classList.remove('selected')});
     this.transactionForm.get('categoryId')?.setValue(category.id);
