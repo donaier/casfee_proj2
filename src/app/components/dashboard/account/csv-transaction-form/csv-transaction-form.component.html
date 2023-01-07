@@ -27,7 +27,7 @@
               <tr>
                 <td>{{transactionsToCategorize[activeTransactionIndex].date}}</td>
                 <td>{{transactionsToCategorize[activeTransactionIndex].description}}</td>
-                <td>{{getCategory(transactionsToCategorize[activeTransactionIndex].categoryId)?.name}}</td>
+                <td>{{getCategoryName(transactionsToCategorize[activeTransactionIndex])}}</td>
                 <td>{{transactionsToCategorize[activeTransactionIndex].amount}}</td>
               </tr>
             </tbody>
@@ -55,7 +55,7 @@
                         <span class="tag selectable-tag"
                         (click)="setCategoryForActiveTransaction(category)"
                         [ngClass]="{
-                        'is-active': isActive(category)}">
+                        'is-active': isActive(category.id)}">
                           {{category.name}}
                         </span>
                       </div>
@@ -64,6 +64,23 @@
                 </div>
               </div>
             </ng-container>
+            <div class="box" *ngIf="accounts.length > 1">
+              <p class="is-flex is-justify-content-space-between">
+                <strong class="pb-3">Transfer from/to</strong>
+              </p>
+              <div class="field is-grouped is-grouped-multiline">
+                <ng-container *ngFor="let acc of accounts" >
+                  <div class="control" *ngIf="acc !== account ">
+                    <span class="tag selectable-tag"
+                    (click)="setTransferCategoryForActiveTransaction(acc)"
+                    [ngClass]="{
+                      'is-active': isActive(acc.id)}">
+                      {{acc.name}}
+                    </span>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
           </div>
 
           <div class="is-flex is-justify-content-space-between">
@@ -112,7 +129,7 @@
               >
                 <td>{{transaction.date}}</td>
                 <td>{{transaction.description}}</td>
-                <td>{{getCategory(transaction.categoryId)?.name}}</td>
+                <td>{{getCategoryName(transaction)}}</td>
                 <td>{{transaction.amount}}</td>
               </tr>
             </tbody>

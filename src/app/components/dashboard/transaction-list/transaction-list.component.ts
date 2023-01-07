@@ -59,7 +59,7 @@ export class TransactionListComponent implements OnInit, OnChanges, OnDestroy {
       } else {
         transferIndicator += 'to '
       }
-      transferIndicator += transaction.fromAccount
+      transferIndicator += this.allAccounts.find(acc => acc.id === transaction.fromAccount)?.name
 
       return transferIndicator
     }

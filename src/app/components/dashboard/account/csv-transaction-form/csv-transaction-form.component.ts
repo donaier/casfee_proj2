@@ -35,11 +35,12 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
   categories: Category[] = []
   csvMasks: csvMask[] = []
   activeCsvMask: csvMask | undefined
+  accounts: Account[] = []
   transactionsToCategorize: Transaction[] = []
   activeTransactionIndex: number = 0
   doneCategorizing: boolean = false
   setCategory: boolean = false
-  activeTag: Category | undefined
+  activeTag: string = ''
   autoAdvance: boolean = false
 
   constructor(
@@ -64,6 +65,11 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
     this.subscription.push(this.store.CsvMasks.subscribe((data) => {
       if (data.length > 0) {
         this.csvMasks = data
+      }
+    }))
+    this.subscription.push(this.store.Accounts.subscribe((data) => {
+      if (data.length) {
+        this.accounts = data
       }
     }))
   }
@@ -110,13 +116,24 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
     // here is subcategory creation on the fly
   }
 
-  isActive(category : Category){
-    return this.activeTag === category
+  isActive(tag: string | undefined){
+    return this.activeTag === tag
   }
 
   setCategoryForActiveTransaction(category: Category) {
-    this.activeTag = category;
+    this.activeTag = category.id;
     this.transactionsToCategorize[this.activeTransactionIndex].categoryId = category.id
+    this.setCategory = true
+
+    if (this.autoAdvance) {
+      this.setTransaction()
+    }
+  }
+
+  setTransferCategoryForActiveTransaction(transferAcc: Account) {
+    this.activeTag = transferAcc.id
+    this.transactionsToCategorize[this.activeTransactionIndex].fromAccount = transferAcc.id
+    this.transactionsToCategorize[this.activeTransactionIndex].categoryId = "ACCOUNT_TRANSFER"
     this.setCategory = true
 
     if (this.autoAdvance) {
@@ -155,8 +172,12 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
     this.autoAdvance = !this.autoAdvance
   }
 
-  getCategory(id: string) {
-    return this.categories.find(c => c.id === id)
+  getCategoryName(transaction: Transaction) {
+    if (transaction.categoryId !== 'ACCOUNT_TRANSFER') {
+      return this.categories.find(c => c.id === transaction.categoryId)?.name
+    } else {
+      return this.accounts.find(acc => acc.id === transaction.fromAccount)?.name
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {
