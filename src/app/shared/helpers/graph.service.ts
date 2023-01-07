@@ -131,21 +131,21 @@ export class GraphService {
 
   private setCategorizedData(accounts: Account[], selectedMonths: string[], categoryGroups: CategoryGroup[], categories: Category[]) {
     let catNames: string[] = []
-    let catSeries: number[] = []
+    let catSeries: {value: number, itemStyle: { color: string }}[] = []
 
     accounts.map(acc => {
       acc.transactions.forEach(trans => {
         if (selectedMonths.some(times => trans.date.includes(times)) && trans.categoryId) {
-          let catGroupName = categoryGroups.find(catGroup => catGroup.id === (categories.find(cat => cat.id === trans.categoryId)?.group_id))?.name
+          let catGroup = categoryGroups.find(catGroup => catGroup.id === (categories.find(cat => cat.id === trans.categoryId)?.group_id))
 
-          if (catGroupName) {
-            let catIndex = catNames.indexOf(catGroupName)
+          if (catGroup) {
+            let catIndex = catNames.indexOf(catGroup.name)
 
             if (catIndex >= 0) {
-              catSeries[catIndex] += trans.amount
+              catSeries[catIndex].value += trans.amount
             } else {
-              catNames.push(catGroupName)
-              catSeries.push(trans.amount)
+              catNames.push(catGroup.name)
+              catSeries.push({value: trans.amount, itemStyle: { color: catGroup.color }})
             }
           }
         }
@@ -159,7 +159,7 @@ export class GraphService {
   }
 
   composeOptionsCategorized(accounts: Account[], selectedTimes: string[], categoryGroups: CategoryGroup[], categories: Category[]) {
-    let catData: {catNames: (string|undefined)[], catSeries: number[]} = this.setCategorizedData(accounts, selectedTimes, categoryGroups, categories)
+    let catData: {catNames: (string|undefined)[], catSeries: {value: number, itemStyle: {color: string}}[]} = this.setCategorizedData(accounts, selectedTimes, categoryGroups, categories)
 
     return {
       title: { text: 'Categorized' },
