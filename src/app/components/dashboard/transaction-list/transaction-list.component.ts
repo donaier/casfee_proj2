@@ -23,6 +23,7 @@ export class TransactionListComponent implements OnInit, OnChanges, OnDestroy {
   allTransactions: ListTransaction[] = []
   allCategories: Category[] = []
   allCategoryGroups: CategoryGroup[] = []
+  allAccounts: Account[] = []
 
   activeMonths: Set<string> = new Set
 
@@ -41,20 +42,37 @@ export class TransactionListComponent implements OnInit, OnChanges, OnDestroy {
         this.allCategoryGroups = data
       }
     }))
+    this.subscriptions.push(this.store.Accounts.subscribe((data) => {
+      if (data.length) {
+        this.allAccounts = data
+      }
+    }))
   }
 
   categoryNameFor(transaction: ListTransaction) {
     if (transaction.categoryId !== 'ACCOUNT_TRANSFER') {
       return this.allCategories.find(cat => cat.id === transaction.categoryId)?.name
     } else {
-      return (transaction.accountShortName? + transaction.accountShortName?)
+      let transferIndicator: string = ''
+      if (transaction.amount > 0) {
+        transferIndicator += 'from '
+      } else {
+        transferIndicator += 'to '
+      }
+      transferIndicator += transaction.fromAccount
+
+      return transferIndicator
     }
   }
 
   colorFor(transaction: Transaction) {
-    return this.allCategoryGroups.find(cg => {
-      return cg.id === (this.allCategories.find(c => c.id === transaction.categoryId)?.group_id)
-    })?.color
+    if (transaction.categoryId !== 'ACCOUNT_TRANSFER') {
+      return this.allCategoryGroups.find(cg => {
+        return cg.id === (this.allCategories.find(c => c.id === transaction.categoryId)?.group_id)
+      })?.color
+    } else {
+      return this.allAccounts.find(acc => acc.id === transaction.fromAccount)?.color
+    }
   }
 
   deletetransaction(transaction : ListTransaction){
