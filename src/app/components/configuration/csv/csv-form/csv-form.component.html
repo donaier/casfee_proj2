@@ -89,18 +89,18 @@
     </form>
 
     <footer class="modal-card-foot is-flex is-justify-content-center">
-      <button class="button is-success button-edit"
+      <button class="button button-edit"
        type="button"
        (click)="UpdateCsv($event)"
        [disabled]="csvForm.invalid"
        *ngIf="selector ==='edit'">Save</button>
-      <button class="button is-success button-save"
-       type="button"
+      <button class="button button-save"
+       type="button is-success"
        (click)="submitCsvForm($event)"
        [disabled]="csvForm.invalid"
        *ngIf="selector==='create' || selector==='delete'">Save</button>
       <button class="button theme-modifer" type="button" (click)="hideModal()">Cancel</button>
-      <button class="button is-danger theme-modifer"
+      <button class="button theme-modifer"
        type="button"
        (click)="deleteCsvMask($event)"
        *ngIf="selector ==='edit'">Delete</button>

@@ -80,8 +80,9 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
   setCategory(category: Category, e : Event) {
     this.removeActiveTag()
     this.transactionForm.get('categoryId')?.setValue(category.id)
-    this.transactionForm.get('categoryName')?.setValue(category.name);
-    (<HTMLElement>e.target).classList.add('selected')
+    this.transactionForm.get('categoryName')?.setValue(category.name)
+    let target = e.target as HTMLElement
+    target.classList.add('selected')
   }
 
   submitTransactionForm(e: Event) {

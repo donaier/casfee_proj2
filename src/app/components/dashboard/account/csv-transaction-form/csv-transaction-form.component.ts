@@ -121,8 +121,8 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
     this.removeSelectedTags()
     this.transactionsToCategorize[this.activeTransactionIndex].categoryId = category.id
     this.setCategory = true;
-    (<HTMLElement>e.target).classList.add('selected')
-
+    let target = e.target as HTMLElement
+    target.classList.add('selected')
     if (this.autoAdvance) {
       this.setTransaction()
     }

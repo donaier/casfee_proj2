@@ -90,7 +90,8 @@ export class TransactionFormComponent implements OnInit, OnChanges{
     this.removeActiveTag()
     this.transactionForm.value.categoryId = category.id
     this.CategoryName.nativeElement.value = category.name;
-    (<HTMLElement>e.target).classList.add('selected')
+    let target = e.target as HTMLElement
+    target.classList.add('selected')
   }
 
   removeActiveTag(){
@@ -100,11 +101,9 @@ export class TransactionFormComponent implements OnInit, OnChanges{
   updateTransaction(){
 
     if(this.transactionForm.valid){
-
       if(this.transactionForm.value.categoryName === undefined){
         this.transactionForm.value.categoryName = null
       }
-
       this.getAccountforTransaction()
       this.filterchangedTransaction()
       let transaction : Transaction = this.transactionForm.value
@@ -125,7 +124,7 @@ export class TransactionFormComponent implements OnInit, OnChanges{
     this.removeActiveTag()
     this.showCategoriesFlag = false
     this.transactionForm.reset();
-  //  this.transaction = undefined
+    this.transaction = undefined
   }
 
   ngOnChanges() {
@@ -133,18 +132,20 @@ export class TransactionFormComponent implements OnInit, OnChanges{
     if (this.transaction) {
     //  this.transaction.date = this.convertDate(this.transaction.date)
 
-      this.convertDate(this.transaction);
+    //  this.convertDate(this.transaction);
 
     //  this.dateinput.nativeElement.value = "2014-02-11"
    // 28.12.2022
+    //  let date = this.transaction.date
+    //  date = moment(this.transaction.date, "DD.MM.YYYY").format('YYYY-MM-DD')
 
-    this.dateinput.nativeElement.value = moment(this.transaction.date, "DD.MM.YYYY").format('YYYY-MM-DD');
+      this.dateinput.nativeElement.value = moment(this.transaction.date, "DD.MM.YYYY").format('YYYY-MM-DD');
 
 
 
       this.CategoryName.nativeElement.value = this.transaction.categoryName
 
-     this.transactionForm?.patchValue(this.transaction)
+      this.transactionForm?.patchValue(this.transaction)
 
     }
   }

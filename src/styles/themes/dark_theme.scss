@@ -41,7 +41,6 @@ $c12: #CCCCCC;
       background-color: $c0;
     }
   }
-
   .theme-modifer{
     background-color: $c0;
   }
@@ -112,15 +111,12 @@ $c12: #CCCCCC;
       }
     }
   }
-
   .card-footer-item{
 
   }
-
   .card-footer-item:hover{
     background-color: $c3;
   }
-
   .modal {
     .modal-card-head {
       background-color: $c6;
@@ -141,6 +137,9 @@ $c12: #CCCCCC;
       .btn-modifier:hover {
         background-color: $c3;
       }
+      .control-modifier{
+        margin-left: 3px;
+      }
     }
     .modal-card-foot {
       background-color: $c6;
@@ -152,7 +151,6 @@ $c12: #CCCCCC;
       border: 1px $c6 solid;
     }
   }
-
   .tag:not(body) {
     background-color: $c1;
     text-decoration: none;
@@ -163,7 +161,6 @@ $c12: #CCCCCC;
       color: $c4;
     }
   }
-
   .footer{
     background-color: $c6;
     p, a, strong{
@@ -173,5 +170,4 @@ $c12: #CCCCCC;
       color: $c3;
     }
   }
-
 }
