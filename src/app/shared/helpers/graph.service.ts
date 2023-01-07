@@ -129,6 +129,67 @@ export class GraphService {
     }).reverse()
   }
 
+  private setCategorizedData(accounts: Account[], selectedMonths: string[], categoryGroups: CategoryGroup[], categories: Category[]) {
+    let catNames: string[] = []
+    let catSeries: number[] = []
+
+    accounts.map(acc => {
+      acc.transactions.forEach(trans => {
+        if (selectedMonths.some(times => trans.date.includes(times)) && trans.categoryId) {
+          let catGroupName = categoryGroups.find(catGroup => catGroup.id === (categories.find(cat => cat.id === trans.categoryId)?.group_id))?.name
+
+          if (catGroupName) {
+            let catIndex = catNames.indexOf(catGroupName)
+
+            if (catIndex >= 0) {
+              catSeries[catIndex] += trans.amount
+            } else {
+              catNames.push(catGroupName)
+              catSeries.push(trans.amount)
+            }
+          }
+        }
+      });
+    })
+
+    return {
+      catNames: catNames,
+      catSeries: catSeries
+    }
+  }
+
+  composeOptionsCategorized(accounts: Account[], selectedTimes: string[], categoryGroups: CategoryGroup[], categories: Category[]) {
+    let catData: {catNames: (string|undefined)[], catSeries: number[]} = this.setCategorizedData(accounts, selectedTimes, categoryGroups, categories)
+
+    return {
+      title: { text: 'Categorized' },
+      legend: {
+        data: [],
+        selectedMode: false
+      },
+      toolbox: {},
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      },
+      yAxis: {
+        type: 'category',
+        data: catData.catNames
+      },
+      xAxis: {
+        type: 'value'
+      },
+      series: [
+        {
+          data: catData.catSeries,
+          type: 'bar'
+        }
+      ]
+    };
+  }
+
   composeOptionsTotal(accounts: Account[], selectedTimes: string[]) {
     let accNames: string[] = this.setAccountNames(accounts)
     let timeSteps: string[] = selectedTimes
