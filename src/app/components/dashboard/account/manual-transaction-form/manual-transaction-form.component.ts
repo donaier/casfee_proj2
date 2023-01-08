@@ -20,7 +20,9 @@ import { v4 as uuidv4 } from 'uuid';
 export class ManualTransactionFormComponent implements OnInit, OnDestroy {
   @ViewChild('modal') modal!: ElementRef
   @ViewChild('manualtransactionform', { static: false }) manualtransactionform!: ElementRef
-  @ViewChildren('selectabletags') selectabletags!: QueryList<ElementRef>
+  @ViewChildren('tags') tags!: QueryList<ElementRef>
+
+
   @Input() account?: Account;
 
   transactionForm!: FormGroup
@@ -33,6 +35,7 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
 
   categoryGroups: CategoryGroup[] = []
   categories: Category[] = []
+  accounts: Account[] = []
   category: Category | undefined
   newTransaction : Transaction | undefined
   private subscriptions : Subscription[] = []
@@ -56,6 +59,11 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
         this.categoryGroups = this.utilityService.checkavailableCategories(this.categoryGroups, data)
       }
     }))
+    this.subscriptions.push(this.store.Accounts.subscribe((data) => {
+      if (data.length) {
+        this.accounts = data
+      }
+    }))
 
     this.transactionForm = new FormGroup({
       description: this.description = new FormControl(''),
@@ -77,15 +85,30 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
   }
 
   removeActiveTag(){
-    this.selectabletags.forEach(tag => { tag.nativeElement.classList.remove('selected')});
+    this.tags.forEach(tag => { tag.nativeElement.classList.remove('selected')});
+  }
+
+  seTag(e: Event){
+    let target = e.target as HTMLElement
+    target.classList.add('selected')
   }
 
   setCategory(category: Category, e : Event) {
     this.removeActiveTag()
     this.transactionForm.get('categoryId')?.setValue(category.id)
     this.transactionForm.get('categoryName')?.setValue(category.name)
-    let target = e.target as HTMLElement
-    target.classList.add('selected')
+    this.seTag(e)
+  }
+
+
+  setTransferCategory(e: Event, transferAcc: Account) {
+    this.removeActiveTag()
+    this.transactionForm.get('fromAccount')?.setValue(transferAcc.id);
+    this.transactionForm.get('categoryId')?.setValue('ACCOUNT_TRANSFER');
+    this.seTag(e)
+
+// Eine transaktion auf einen Account braucht trotzdem eine Category, und theoretisch muesste
+// man 2 Updates durchfuehren , weil es entstehen ja 2 Transaktionen so ??
   }
 
   submitTransactionForm(e: Event) {

@@ -19,12 +19,15 @@ import { v4 as uuidv4 } from 'uuid';
 })
 export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges {
   @ViewChild('modal') modal!: ElementRef
+  @ViewChild('subcategoryModal') subcategoryModal!: ElementRef
+  @ViewChild('subcategoryInput') subcategoryInput!: ElementRef
+  @ViewChild('categoryInput') categoryInput!: ElementRef
   @ViewChild('csvInput') csvInput!: ElementRef
   @ViewChild('csvInputControl') csvInputControl!: ElementRef
   @ViewChild('categoryColumns') categoryColumns!: ElementRef
   @ViewChild('csvInfo') csvInfo!: ElementRef
   @ViewChild('csvReset') csvReset!: ElementRef
-  @ViewChildren('categorytags') categorytags!: QueryList<ElementRef>
+  @ViewChildren('tags') tags!: QueryList<ElementRef>
 
   @ViewChild('accountIsReady') accountIsReadyElement!: ElementRef
   @ViewChild('accountNotReady') accountNotReadyElement!: ElementRef
@@ -37,11 +40,12 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
   categories: Category[] = []
   csvMasks: csvMask[] = []
   activeCsvMask: csvMask | undefined
+  accounts: Account[] = []
   transactionsToCategorize: Transaction[] = []
   activeTransactionIndex: number = 0
   doneCategorizing: boolean = false
   setCategory: boolean = false
-  activeTag: Category | undefined
+  activeTag: string = ''
   autoAdvance: boolean = false
 
   constructor(
@@ -66,6 +70,11 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
     this.subscription.push(this.store.CsvMasks.subscribe((data) => {
       if (data.length > 0) {
         this.csvMasks = data
+      }
+    }))
+    this.subscription.push(this.store.Accounts.subscribe((data) => {
+      if (data.length) {
+        this.accounts = data
       }
     }))
   }
@@ -110,23 +119,64 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
   }
 
   addCategory(category: CategoryGroup) {
-    // here is subcategory creation on the fly
+    this.subcategoryModal.nativeElement.classList.add('is-active')
+    this.subcategoryInput.nativeElement.value = ''
+    this.subcategoryInput.nativeElement.focus()
+    this.categoryInput.nativeElement.value = category.id
+  }
+
+  submitCategoryForm(e: Event) {
+    e.preventDefault();
+
+    if (this.subcategoryInput.nativeElement.value &&  this.categoryInput.nativeElement.value) {
+      let category: Category = {name : this.subcategoryInput.nativeElement.value, group_id: this.categoryInput.nativeElement.value, id: ""}
+      this.dispatcher.next(new FluxAction(FluxActionTypes.Create, 'category', null, null, category))
+    }
+
+    this.subcategoryModal.nativeElement.classList.remove('is-active')
+  }
+
+  hideSubcategoryModal(e: Event) {
+    e.preventDefault();
+    this.subcategoryModal.nativeElement.classList.remove('is-active')
   }
 
   removeSelectedTags(){
-    this.categorytags.forEach(tag => { tag.nativeElement.classList.remove('selected')});
+    this.tags.forEach(tag => { tag.nativeElement.classList.remove('selected')});
   }
 
-  setCategoryForActiveTransaction(category: Category, e : Event) {
+  SetTag(e: Event){
+    let target = e.target as HTMLElement
+    target.classList.add('selected')
+  }
+
+
+
+  setCategoryForActiveTransaction(category: Category, e: Event) {
     this.removeSelectedTags()
     this.transactionsToCategorize[this.activeTransactionIndex].categoryId = category.id
     this.setCategory = true;
-    let target = e.target as HTMLElement
-    target.classList.add('selected')
+    this.SetTag(e)
     if (this.autoAdvance) {
       this.setTransaction()
     }
   }
+
+
+
+  setTransferCategoryForActiveTransaction(transferAcc: Account, e: Event) {
+
+    this.removeSelectedTags()
+    this.transactionsToCategorize[this.activeTransactionIndex].fromAccount = transferAcc.id
+    this.transactionsToCategorize[this.activeTransactionIndex].categoryId = "ACCOUNT_TRANSFER"
+    this.setCategory = true
+    this.SetTag(e)
+    if (this.autoAdvance) {
+      this.setTransaction()
+    }
+  }
+
+
 
   setTransaction() {
     if (this.activeTransactionIndex >= this.transactionsToCategorize.length-1) {
@@ -160,8 +210,12 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
     this.autoAdvance = !this.autoAdvance
   }
 
-  getCategory(id: string) {
-    return this.categories.find(c => c.id === id)
+  getCategoryName(transaction: Transaction) {
+    if (transaction.categoryId !== 'ACCOUNT_TRANSFER') {
+      return this.categories.find(c => c.id === transaction.categoryId)?.name
+    } else {
+      return this.accounts.find(acc => acc.id === transaction.fromAccount)?.name
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {

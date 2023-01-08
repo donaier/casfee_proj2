@@ -25,6 +25,7 @@ export class TransactionListComponent implements OnInit, OnChanges, OnDestroy {
   allTransactions: Transaction[] = []
   allCategories: Category[] = []
   allCategoryGroups: CategoryGroup[] = []
+  allAccounts: Account[] = []
   selectedtransaction: Transaction | undefined
 
   activeMonths: Set<string> = new Set
@@ -42,6 +43,11 @@ export class TransactionListComponent implements OnInit, OnChanges, OnDestroy {
     this.subscriptions.push(this.store.CategoryGroups.subscribe((data) => {
       if (data.length) {
         this.allCategoryGroups = data
+      }
+    }))
+    this.subscriptions.push(this.store.Accounts.subscribe((data) => {
+      if (data.length) {
+        this.allAccounts = data
       }
     }))
   }
@@ -68,14 +74,30 @@ export class TransactionListComponent implements OnInit, OnChanges, OnDestroy {
       console.log(this.allCategories.find(cat => cat.id === transaction.categoryId)?.name)
     } */
 
-    return this.allCategories.find(cat => cat.id === transaction.categoryId)?.name
+    if (transaction.categoryId !== 'ACCOUNT_TRANSFER') {
+      return this.allCategories.find(cat => cat.id === transaction.categoryId)?.name
 
+    } else {
+      let transferIndicator: string = ''
+      if (transaction.amount > 0) {
+        transferIndicator += 'from '
+      } else {
+        transferIndicator += 'to '
+      }
+      transferIndicator += this.allAccounts.find(acc => acc.id === transaction.fromAccount)?.name
+
+      return transferIndicator
+    }
   }
 
   colorFor(transaction: Transaction) {
-    return this.allCategoryGroups.find(cg => {
-      return cg.id === (this.allCategories.find(c => c.id === transaction.categoryId)?.group_id)
-    })?.color
+    if (transaction.categoryId !== 'ACCOUNT_TRANSFER') {
+      return this.allCategoryGroups.find(cg => {
+        return cg.id === (this.allCategories.find(c => c.id === transaction.categoryId)?.group_id)
+      })?.color
+    } else {
+      return this.allAccounts.find(acc => acc.id === transaction.fromAccount)?.color
+    }
   }
 
 

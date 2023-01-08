@@ -73,20 +73,28 @@
             >
               <p class="is-flex is-justify-content-space-between">
                 <strong class="pb-3">{{categoryGroup.name}}</strong>
-                <!--
-                <span>
-                  <a class="tag" (click)="addCategory(categoryGroup)">+</a>
-                </span> -->
               </p>
               <div class="field is-grouped is-grouped-multiline">
                 <ng-container *ngFor="let category of categories" >
                   <div class="control" *ngIf="category.group_id === categoryGroup.id">
-                    <span class="tag selectable-tag" (click)="setCategory(category, $event)" #selectabletags>{{category.name}}</span>
+                    <span class="tag selectable-tag" (click)="setCategory(category, $event)" #tags>{{category.name}}</span>
                   </div>
                 </ng-container>
               </div>
             </div>
           </ng-container>
+          <div class="box" *ngIf="accounts.length > 1">
+            <p class="is-flex is-justify-content-space-between">
+              <strong class="pb-3">Transfer from/to</strong>
+            </p>
+            <div class="field is-grouped is-grouped-multiline">
+              <ng-container *ngFor="let acc of accounts" >
+                <div class="control" *ngIf="acc !== account ">
+                  <span class="tag selectable-tag" (click)="setTransferCategory($event, acc)" #tags>{{acc.name}}</span>
+                </div>
+              </ng-container>
+            </div>
+          </div>
         </div>
       </form>
     </article>

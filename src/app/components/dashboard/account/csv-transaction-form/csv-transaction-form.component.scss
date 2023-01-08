@@ -5,10 +5,11 @@
     cursor: pointer;
     opacity: .6;
     border: 1px solid transparent;
-  }
-  &.selected {
-    opacity: 1;
-    border-color: var(--color-3);
+
+    &.selected {
+      opacity: 1;
+      border-color: var(--color-3);
+    }
   }
 }
 .table {
@@ -27,6 +28,9 @@
   .is-incoming {
     // next transactions
   }
+}
+.subcategory-modal {
+  z-index: 400;
 }
 
 .category-selects {
