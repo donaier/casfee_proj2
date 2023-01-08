@@ -16,6 +16,8 @@ export class LoginComponent implements OnInit {
   login!: FormGroup
   email!: FormControl
   password!: FormControl
+  authorisation : boolean = true
+  wronguser? : string
 
   constructor(private AuthService: AuthentificationService, private router: Router, @Inject(DOCUMENT) private document: Document) {}
 
@@ -24,7 +26,7 @@ export class LoginComponent implements OnInit {
     this.login = new FormGroup({
       email: this.email = new FormControl('', [
         Validators.required,
-        Validators.pattern('[^ @]*@[^ @]*'),
+        Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$'),
       ]),
       password: this.password = new FormControl('', [
         Validators.required,
@@ -38,9 +40,11 @@ export class LoginComponent implements OnInit {
       this.signinButton.nativeElement.classList.add('is-loading')
       if(await this.AuthService.login_firebase(this.login.value)){
         this.router.navigate(['/dashboard'])
+        this.login.reset()
+      }else{
+        this.authorisation = false
       }
       this.signinButton.nativeElement.classList.remove('is-loading')
-      this.login.reset()
     }
   }
 

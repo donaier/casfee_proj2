@@ -47,9 +47,14 @@ export class TransactionListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   openModal(transaction : Transaction){
+
+  //  this.selectedtransaction = undefined
+
     this.selectedtransaction = transaction
     this.selectedtransaction.categoryName = this.categoryNameFor(this.selectedtransaction)
-   // this.manualTransactionModal.manualtransactionform.nativeElement.classList.add('is-active')
+
+
+
     this.DetailTransactionModal.modaltransaction.nativeElement.classList.add('is-active')
   }
 

@@ -24,6 +24,9 @@
                 }"
                 required>
             </div>
+            <div *ngIf="(amount.invalid && amount.touched) || amount.dirty">
+              <p *ngIf="amount.invalid" class="validation">Must be a number with maximum length 10 digits</p>
+            </div>
           </div>
           <div class="column">
             <label class="label" for="input-date">Date</label>

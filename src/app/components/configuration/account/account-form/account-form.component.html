@@ -46,6 +46,9 @@
                 }"
                 required>
             </div>
+            <div *ngIf="(shortName.invalid && shortName.touched) || shortName.dirty">
+              <p *ngIf="shortName.invalid" class="validation">A maximum short length of 6 characters</p>
+            </div>
           </div>
           <div class="column">
             <label class="label" for="select-color">Color</label>
@@ -98,6 +101,9 @@
                 Fr.
               </a>
             </p>
+          </div>
+          <div *ngIf="(initialValue.invalid && initialValue.touched) || initialValue.dirty">
+            <p *ngIf="initialValue.invalid" class="validation">Must be a number</p>
           </div>
         </div>
         <div class="field">

@@ -1,5 +1,5 @@
 import { Component, ElementRef, Inject, Input, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { FormControl, FormGroup, FormGroupDirective } from '@angular/forms';
+import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { Subject, Subscription } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
@@ -60,7 +60,10 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
     this.transactionForm = new FormGroup({
       description: this.description = new FormControl(''),
       fromAccount: this.fromAccount = new FormControl(''),
-      amount: this.amount = new FormControl(''),
+      amount: this.amount = new FormControl('', [
+        Validators.required,
+        Validators.maxLength(100000000)
+      ]),
       date: this.date = new FormControl(''),
       categoryId: this.categoryId = new FormControl(''),
       categoryName: this.categoryName = new FormControl('')
@@ -94,7 +97,7 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
       transaction.date = moment(this.transactionForm.get('date')?.value).format(DATE_FORMAT)
       transaction.id = uuidv4()
       if(transaction.categoryName === 'undefined'){
-        transaction.categoryName = "noCategorie"
+        transaction.categoryName = "noCategory"
       }
       account.transactions.push(transaction)
       account.currentValue = Number(this.utilityService.calculateCurrentValue(account))

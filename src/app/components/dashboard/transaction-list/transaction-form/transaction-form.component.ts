@@ -1,6 +1,6 @@
 import { Component, ElementRef, Inject, Input, OnChanges, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 
-import { FormControl, FormGroup, FormGroupDirective } from '@angular/forms';
+import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 
 import { Subject, Subscription } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
@@ -53,7 +53,10 @@ export class TransactionFormComponent implements OnInit, OnChanges{
       description: this.description = new FormControl(''),
       date: this.date = new FormControl(''),
       categoryName: this.categoryName = new FormControl(''),
-      amount: this.amount = new FormControl(''),
+      amount: this.amount = new FormControl('', [
+        Validators.required,
+        Validators.maxLength(100000000)
+      ]),
       categoryId: this.categoryId = new FormControl('')
     })
   }
@@ -123,11 +126,10 @@ export class TransactionFormComponent implements OnInit, OnChanges{
     this.modaltransaction.nativeElement.classList.remove('is-active')
     this.removeActiveTag()
     this.showCategoriesFlag = false
-    this.transactionForm.reset();
-    this.transaction = undefined
   }
 
   ngOnChanges() {
+
 
     if (this.transaction) {
     //  this.transaction.date = this.convertDate(this.transaction.date)

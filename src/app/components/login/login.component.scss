@@ -8,3 +8,13 @@
   background-position: center center;
   background-repeat: no-repeat;
 }
+
+.button:focus, button:focus-visible{
+  outline: none;
+  border: 1px #dbdbdb solid;
+  box-shadow: none;
+}
+
+.button:hover{
+  background-color: rgb(144, 144, 144);
+}

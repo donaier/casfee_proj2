@@ -36,7 +36,10 @@ export class AccountFormComponent implements OnInit, OnChanges {
   ngOnInit(){
     this.accountForm = new FormGroup({
       name: this.name = new FormControl(''),
-      shortName: this.shortName = new FormControl(''),
+      shortName: this.shortName = new FormControl('', [
+        Validators.required,
+        Validators.maxLength(8)
+      ]),
       description: this.description = new FormControl(''),
       initialValue: this.initialValue = new FormControl(''),
       color: this.color = new FormControl(''),
@@ -60,11 +63,11 @@ export class AccountFormComponent implements OnInit, OnChanges {
   submitAccountForm(e: Event) {
     e.preventDefault();
     if(this.accountForm.valid) {
-      let account = this.accountForm.value
+      let account : Account = this.accountForm.value
       if (this.account) {
         account.id = this.account.id
         account.transactions = this.account.transactions || []
-        account.currentValue = this.utilityService.calculateCurrentValue(account)
+        account.currentValue = Number(this.utilityService.calculateCurrentValue(account))
         this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'account', null, null, null, account))
       }
       if(!this.account) {
