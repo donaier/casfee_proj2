@@ -16,8 +16,8 @@ import { provideFirestore,getFirestore,  } from '@angular/fire/firestore';
 
 // Flux
 import { FLUX_CONFIG } from './shared/helpers/flux.configuration';
-import { FluxStore } from './shared/services/flux-store';
-import { UploadService } from './model/upload.service';
+import { FluxStore } from './model/flux-store';
+import { UploadService } from './shared/services/upload.service';
 
 
 @NgModule({

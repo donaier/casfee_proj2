@@ -1,7 +1,7 @@
 import { Component, ElementRef, Inject, Input, OnChanges, OnDestroy, OnInit, QueryList, SimpleChanges, ViewChild, ViewChildren } from '@angular/core';
 import { Subscription, Subject } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
-import { FluxStore } from 'src/app/shared/services/flux-store';
+import { FluxStore } from 'src/app/model/flux-store';
 import { Account } from 'src/app/shared/types/account';
 import { csvMask } from 'src/app/shared/types/csvMask';
 import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';

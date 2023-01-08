@@ -5,7 +5,7 @@ import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular
 import { Subject, Subscription } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
 
-import { FluxStore } from 'src/app/shared/services/flux-store';
+import { FluxStore } from 'src/app/model/flux-store';
 import { UtilityService } from 'src/app/shared/services/utility.service';
 import { Account } from 'src/app/shared/types/account';
 
@@ -102,7 +102,6 @@ export class TransactionFormComponent implements OnInit, OnChanges{
   }
 
   updateTransaction(){
-
     if(this.transactionForm.valid){
       if(this.transactionForm.value.categoryName === undefined){
         this.transactionForm.value.categoryName = null
@@ -132,8 +131,10 @@ export class TransactionFormComponent implements OnInit, OnChanges{
     // Noch in Arbeit
     //  this.transaction.date = this.convertDate(this.transaction.date)
     //    this.convertDate(this.transaction);
-    //  this.dateinput.nativeElement.value = "2023-01-07";
-    //  console.log(this.dateinput.nativeElement.value)
+
+    //  this.dateinput.nativeElement.value = "01-01-2023";
+      console.log(this.dateinput.nativeElement.value)
+
     // 28.12.2022
     //  let date = this.transaction.date
     //  date = moment(this.transaction.date, "DD.MM.YYYY").format('YYYY-MM-DD')

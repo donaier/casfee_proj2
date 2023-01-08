@@ -85,7 +85,9 @@ $c6: #000000;
     background-color: $c11;
     .box {
       background-color: $c00;
-
+    }
+    .is-transaction:hover{
+      background-color: $c00;
     }
   }
 

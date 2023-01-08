@@ -35,6 +35,7 @@ export class NavigationComponent implements AfterViewInit {
       theme = 'dark-theme'
     }
     this.set_theme(theme)
+    console.log("did")
   }
 
   expandBurgerMenu(e: Event) {

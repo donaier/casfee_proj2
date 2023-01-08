@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './components/shared_components/shared.module';
-import { UploadService } from './model/upload.service'
+import { UploadService } from './shared/services/upload.service'
 import { FLUX_CONFIG } from './shared/helpers/flux.configuration';
 
 describe('AppComponent', () => {

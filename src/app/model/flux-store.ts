@@ -1,18 +1,18 @@
 import { Inject, Injectable } from '@angular/core'
 import { BehaviorSubject, Subject } from 'rxjs'
-import { fluxDispatcherToken } from '../helpers/flux.configuration'
+import { fluxDispatcherToken } from '../shared/helpers/flux.configuration'
 
 // types
-import { Account } from '../types/account'
-import { csvMask } from '../types/csvMask'
-import { Category, CategoryGroup } from '../types/category'
-import { Transaction } from '../types/transaction'
-import { FluxAction, FluxActionTypes } from '../types/actions.type'
+import { Account } from '../shared/types/account'
+import { csvMask } from '../shared/types/csvMask'
+import { Category, CategoryGroup } from '../shared/types/category'
+import { Transaction } from '../shared/types/transaction'
+import { FluxAction, FluxActionTypes } from '../shared/types/actions.type'
 
 // Firestore
 import { Firestore, onSnapshot, query } from '@angular/fire/firestore'
 import { collection, QuerySnapshot } from '@firebase/firestore'
-import { UtilityService } from './utility.service'
+import { UtilityService } from '../shared/services/utility.service'
 
 
 @Injectable()

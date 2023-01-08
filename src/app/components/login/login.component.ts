@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   email!: FormControl
   password!: FormControl
   authorisation : boolean = true
-  wronguser? : string
+
 
   constructor(private AuthService: AuthentificationService, private router: Router, @Inject(DOCUMENT) private document: Document) {}
 

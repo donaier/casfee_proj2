@@ -97,6 +97,9 @@ $c12: #CCCCCC;
         background-color: $c6;
       }
     }
+    .is-transaction:hover{
+      background-color: $c12;
+    }
     .box {
       background-color: $c0;
       .theme-modifier{

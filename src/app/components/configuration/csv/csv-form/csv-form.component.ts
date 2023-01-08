@@ -5,7 +5,7 @@ import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
 import { csvMask } from 'src/app/shared/types/csvMask';
 import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
 
-import { UploadService } from 'src/app/model/upload.service';
+import { UploadService } from 'src/app/shared/services/upload.service';
 
 @Component({
   selector: 'app-csv-form',

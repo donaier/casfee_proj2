@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core'
-import { fluxDispatcherToken } from '../shared/helpers/flux.configuration'
+import { fluxDispatcherToken } from '../helpers/flux.configuration'
 import { Subject } from 'rxjs'
-import { FluxAction, FluxActionTypes } from '../shared/types/actions.type'
+import { FluxAction, FluxActionTypes } from '../types/actions.type'
 
 
 import { addDoc, collection, deleteDoc, doc, Firestore, setDoc, updateDoc } from '@angular/fire/firestore'

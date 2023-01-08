@@ -31,8 +31,8 @@ export class AuthentificationService {
 
   logout() {
     this.StorageService.delete_localStorage()
-    this.router.navigate(['/login'])
     this.logout_firebase()
+    this.router.navigate(['/login'])
   }
 
   logout_firebase() {

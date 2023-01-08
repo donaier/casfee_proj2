@@ -50,10 +50,12 @@ $c5: #041440;
     background-color: $c0;
     .box {
       background-color: $c0;
-
       .theme-modifier:hover{
         background-color: $c3;
       }
+    }
+    .is-transaction:hover{
+      background-color: $c2;
     }
   }
 

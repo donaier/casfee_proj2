@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, Inject, Input, OnChanges, OnDestroy, ViewChild } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
-import { FluxStore } from 'src/app/shared/services/flux-store';
+import { FluxStore } from 'src/app/model/flux-store';
 import { Account } from 'src/app/shared/types/account';
 import { FluxAction } from 'src/app/shared/types/actions.type';
 import { GraphService } from 'src/app/shared/services/graph.service';
