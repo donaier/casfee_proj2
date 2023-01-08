@@ -112,11 +112,9 @@ export class TransactionFormComponent implements OnInit, OnChanges{
       let transaction : Transaction = this.transactionForm.value
       transaction.date = moment(this.transactionForm.get('date')?.value).format(DATE_FORMAT)
       this.account!.transactions.push(transaction)
-
       if(this.transaction?.amount !== this.transactionForm.value.amount){
         this.account!.currentValue = Number(this.utilityService.calculateCurrentValue(this.account!))
       }
-
       this.UpdateAccount()
     }
     this.hideModal()
@@ -129,24 +127,19 @@ export class TransactionFormComponent implements OnInit, OnChanges{
   }
 
   ngOnChanges() {
-
-
     if (this.transaction) {
+
+    // Noch in Arbeit
     //  this.transaction.date = this.convertDate(this.transaction.date)
-
-    //  this.convertDate(this.transaction);
-
-    //  this.dateinput.nativeElement.value = "2014-02-11"
-   // 28.12.2022
+    //    this.convertDate(this.transaction);
+    //  this.dateinput.nativeElement.value = "2023-01-07";
+    //  console.log(this.dateinput.nativeElement.value)
+    // 28.12.2022
     //  let date = this.transaction.date
     //  date = moment(this.transaction.date, "DD.MM.YYYY").format('YYYY-MM-DD')
-
-      this.dateinput.nativeElement.value = moment(this.transaction.date, "DD.MM.YYYY").format('YYYY-MM-DD');
-
-
+    //   this.dateinput.nativeElement.value = moment(this.transaction.date, "DD.MM.YYYY").format('YYYY-MM-DD');
 
       this.CategoryName.nativeElement.value = this.transaction.categoryName
-
       this.transactionForm?.patchValue(this.transaction)
 
     }
@@ -154,20 +147,11 @@ export class TransactionFormComponent implements OnInit, OnChanges{
 
   convertDate(transaction : Transaction){
 
-  //  console.log(transaction.date);
+    // Noch in Arbeit
 
-    transaction.date = moment(transaction.date, "DD.MM.YYYY").format('YYYY-MM-DD');
-
-   // console.log(date)
-
-    // In work updat soon
-
+    //transaction.date = moment(transaction.date, "DD.MM.YYYY").format('YYYY-MM-DD');
     // = moment(date).format(DATE_FORMAT)
     // 2023-01-07
-  //  console.log(transaction);
-
   }
-
-
 
 }
