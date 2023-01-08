@@ -5,6 +5,7 @@ import { TransactionService } from 'src/app/shared/helpers/transaction.service';
 import { FluxStore } from 'src/app/shared/services/flux-store';
 import { Account } from 'src/app/shared/types/account';
 import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
+import { Category, CategoryGroup } from 'src/app/shared/types/category';
 
 
 @Component({
@@ -15,6 +16,8 @@ import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
 export class DashboardComponent implements OnInit, OnDestroy {
   @ViewChild('dashboardFilter') dashboardFilter!: ElementRef
   accounts: Account[] = []
+  categoryGroups: CategoryGroup[] = []
+  categories: Category[] = []
   activeAccounts: Account[] = []
 
   groupedMonths: any[] = []
@@ -37,6 +40,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.activeAccounts = data
         this.groupedMonths = this.transactionService.extractMonths(this.activeAccounts)
         this.toggleTimeframe(true)
+      }
+    }))
+    this.subscription.push(this.store.CategoryGroups.subscribe((data) => {
+      if (data.length > 0) {
+        this.categoryGroups = data
+      }
+    }))
+    this.subscription.push(this.store.Categories.subscribe((data) => {
+      if (data.length > 0) {
+        this.categories = data
       }
     }))
   }

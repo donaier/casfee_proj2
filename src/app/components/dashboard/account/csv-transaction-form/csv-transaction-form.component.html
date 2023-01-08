@@ -1,3 +1,18 @@
+<section class="modal subcategory-modal" #subcategoryModal>
+  <div class="modal-background"></div>
+  <div class="is-flex is-justify-content-space-between">
+    <form class="categoryHotForm form" (submit)="submitCategoryForm($event)">
+      <input type="text" #subcategoryInput class="input is-small">
+      <input type="hidden" #categoryInput>
+    </form>
+    <button class="button is-small" (click)="hideSubcategoryModal($event)">
+      <span class="icon is-small">
+        <i class="fas fa-times"></i>
+      </span>
+    </button>
+  </div>
+</section>
+
 <section #modal class="modal" id="csv-transaction-form">
   <div class="modal-background"></div>
   <div class="modal-card">
@@ -27,7 +42,7 @@
               <tr>
                 <td>{{transactionsToCategorize[activeTransactionIndex].date}}</td>
                 <td>{{transactionsToCategorize[activeTransactionIndex].description}}</td>
-                <td>{{getCategory(transactionsToCategorize[activeTransactionIndex].categoryId)?.name}}</td>
+                <td>{{getCategoryName(transactionsToCategorize[activeTransactionIndex])}}</td>
                 <td>{{transactionsToCategorize[activeTransactionIndex].amount}}</td>
               </tr>
             </tbody>
@@ -35,7 +50,7 @@
 
           <div class="columns is-flex-wrap-wrap">
             <ng-container *ngFor="let categoryGroup of categoryGroups">
-              <div class="column" *ngIf="categoryGroup.categories === true">
+              <div class="column is-3" *ngIf="categoryGroup.categories === true">
                 <div class="box" [ngClass]="{
                   'is-light': categoryGroup.color === '#EAF2E3',
                   'is-blue': categoryGroup.color === '#61E8E1',
@@ -45,9 +60,9 @@
                   >
                   <p class="is-flex is-justify-content-space-between">
                     <strong class="pb-3">{{categoryGroup.name}}</strong>
-                    <!-- <span>
+                    <span>
                       <a class="tag" (click)="addCategory(categoryGroup)">+</a>
-                    </span> -->
+                    </span>
                   </p>
                   <div class="field is-grouped is-grouped-multiline">
                     <ng-container *ngFor="let category of categories">
@@ -55,7 +70,7 @@
                         <span class="tag selectable-tag"
                         (click)="setCategoryForActiveTransaction(category)"
                         [ngClass]="{
-                        'is-active': isActive(category)}">
+                        'is-active': isActive(category.id)}">
                           {{category.name}}
                         </span>
                       </div>
@@ -64,6 +79,25 @@
                 </div>
               </div>
             </ng-container>
+            <div class="column is-3" *ngIf="accounts.length > 1">
+              <div class="box">
+                <p class="is-flex is-justify-content-space-between">
+                  <strong class="pb-3">Transfer from/to</strong>
+                </p>
+                <div class="field is-grouped is-grouped-multiline">
+                  <ng-container *ngFor="let acc of accounts" >
+                    <div class="control" *ngIf="acc !== account ">
+                      <span class="tag selectable-tag"
+                      (click)="setTransferCategoryForActiveTransaction(acc)"
+                      [ngClass]="{
+                        'is-active': isActive(acc.id)}">
+                        {{acc.name}}
+                      </span>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div class="is-flex is-justify-content-space-between">
@@ -112,7 +146,7 @@
               >
                 <td>{{transaction.date}}</td>
                 <td>{{transaction.description}}</td>
-                <td>{{getCategory(transaction.categoryId)?.name}}</td>
+                <td>{{getCategoryName(transaction)}}</td>
                 <td>{{transaction.amount}}</td>
               </tr>
             </tbody>

@@ -30,6 +30,7 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
 
   categoryGroups: CategoryGroup[] = []
   categories: Category[] = []
+  accounts: Account[] = []
   category: Category | undefined
   newTransaction : Transaction | undefined
   private subscriptions : Subscription[] = []
@@ -56,6 +57,11 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
         this.categoryGroups = this.utilityService.checkavailableCategories(this.categoryGroups, data)
       }
     }))
+    this.subscriptions.push(this.store.Accounts.subscribe((data) => {
+      if (data.length) {
+        this.accounts = data
+      }
+    }))
 
     this.transactionForm = new FormGroup({
       description: this.description = new FormControl(''),
@@ -71,13 +77,16 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
     this.transactionForm.reset();
   }
 
-  addCategory(category: CategoryGroup) {
-    // Finde ich ein bisschen Overhead hier noch ein Modal zu oeffnen und items adden.
-  }
-
   setCategory(e: Event, category: Category) {
     this.selectabletags.forEach(tag => { tag.nativeElement.classList.remove('selected')});
     this.transactionForm.get('categoryId')?.setValue(category.id);
+    (<HTMLElement>e.target).classList.add('selected')
+  }
+
+  setTransferCategory(e: Event, transferAcc: Account) {
+    this.selectabletags.forEach(tag => { tag.nativeElement.classList.remove('selected')});
+    this.transactionForm.get('fromAccount')?.setValue(transferAcc.id);
+    this.transactionForm.get('categoryId')?.setValue('ACCOUNT_TRANSFER');
     (<HTMLElement>e.target).classList.add('selected')
   }
 
