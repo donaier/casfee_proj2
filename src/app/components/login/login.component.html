@@ -24,6 +24,9 @@
                 <i class="fas fa-envelope"></i>
               </span>
             </div>
+            <div *ngIf="(email.invalid && email.touched) || email.dirty">
+              <small *ngIf="email.invalid" class="validation">Please provide a valid email address</small>
+            </div>
           </div>
           <div class="field">
             <label class="label label_password">Password</label>
@@ -42,20 +45,23 @@
                 <i class="fas fa-lock"></i>
               </span>
             </div>
+            <div *ngIf="(password.invalid && password.touched) || password.dirty">
+              <small *ngIf="password.invalid" class="validation">A minimum password length of 6 characters</small>
+            </div>
           </div>
+          <div *ngIf="!authorisation">
+            <small class="validation">No valid email/password</small>
+          </div>
+
           <a href="/">
-            <button class="button is-fullwidth mt-5 has-text-black"
-            type="submit"
-            #signinButton
-            [disabled]="login.invalid"
-            >
-              Login
-            </button>
-          </a>
+          <button class="button is-fullwidth mt-5 has-text-black"
+          type="submit"
+          #signinButton
+          [disabled]="login.invalid">
+          Login</button></a>
         </form>
       </div>
     </div>
   </div>
 </section>
 
-<!--  routerLink="/dashboard"  -->

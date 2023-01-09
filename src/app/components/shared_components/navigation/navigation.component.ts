@@ -30,8 +30,12 @@ export class NavigationComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.document.body.classList.add('has-navbar-fixed-top')
-    let theme = localStorage.getItem('theme-preference') || 'default-theme'
+    let theme = localStorage.getItem('theme-preference')
+    if(!theme){
+      theme = 'dark-theme'
+    }
     this.set_theme(theme)
+    console.log("did")
   }
 
   expandBurgerMenu(e: Event) {
@@ -43,15 +47,15 @@ export class NavigationComponent implements AfterViewInit {
   set_theme(theme : string){
     this.StorageService.set_theme_preference(theme)
     this.document.body.classList.remove('light-theme', 'dark-theme', 'color-theme')
-    if(theme === "light"){
+    if(theme === "light-theme"){
       this.theme.nativeElement.innerText = "Light Theme"
       this.document.body.classList.add('light-theme')
     }
-    if(theme === "dark"){
+    if(theme === "dark-theme"){
       this.theme.nativeElement.innerText = "Dark Theme"
       this.document.body.classList.add('dark-theme')
     }
-    if(theme === "colored"){
+    if(theme === "color-theme"){
       this.theme.nativeElement.innerText = "Color Theme"
       this.document.body.classList.add('color-theme')
     }

@@ -68,9 +68,8 @@
                     <ng-container *ngFor="let category of categories">
                       <div class="control" *ngIf="category.group_id === categoryGroup.id">
                         <span class="tag selectable-tag"
-                        (click)="setCategoryForActiveTransaction(category)"
-                        [ngClass]="{
-                        'is-active': isActive(category.id)}">
+                        #tags
+                        (click)="setCategoryForActiveTransaction(category, $event)">
                           {{category.name}}
                         </span>
                       </div>
@@ -88,9 +87,8 @@
                   <ng-container *ngFor="let acc of accounts" >
                     <div class="control" *ngIf="acc !== account ">
                       <span class="tag selectable-tag"
-                      (click)="setTransferCategoryForActiveTransaction(acc)"
-                      [ngClass]="{
-                        'is-active': isActive(acc.id)}">
+                      (click)="setTransferCategoryForActiveTransaction(acc, $event)"
+                      #tags>
                         {{acc.name}}
                       </span>
                     </div>
@@ -101,7 +99,7 @@
           </div>
 
           <div class="is-flex is-justify-content-space-between">
-            <button class="button mt-5 mb-5 mr-1 is-120px set-border" (click)="deleteTransaction()">
+            <button class="button mt-5 mb-5 mr-1 is-120px btn-modifier" (click)="deleteTransaction()">
               <span class="icon is-small">
                 <i class="fas fa-times"></i>
               </span>
@@ -113,7 +111,7 @@
               <input id="autoAdvance" type="checkbox" name="autoAdvance" class="switch is-rounded" [checked]="autoAdvance" (change)="toggleAutoAdvance()">
               <label for="autoAdvance">auto-advance</label>
             </div>
-            <button class="button mt-5 mb-5 ml-1 is-120px set-border"
+            <button class="button mt-5 mb-5 ml-1 is-120px btn-modifier"
             (click)="setTransaction()"
             [disabled]="!setCategory">
               <span>

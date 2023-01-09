@@ -2,9 +2,9 @@ import { Component, ElementRef, Inject, Input, OnChanges, OnInit, SimpleChanges,
 import { FormControl, FormGroup, FormGroupDirective } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
-import { FluxStore } from 'src/app/shared/services/flux-store';
+import { FluxStore } from 'src/app/model/flux-store';
 import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
-import { Category, CategoryGroupForm, CategoryGroup, CategoryForm, CategoryGroupColors } from 'src/app/shared/types/category';
+import { Category, CategoryGroup, CategoryGroupColors } from 'src/app/shared/types/category';
 
 @Component({
   selector: 'app-category-form',

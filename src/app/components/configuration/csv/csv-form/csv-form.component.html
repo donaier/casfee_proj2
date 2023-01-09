@@ -10,11 +10,11 @@
       <button class="delete" aria-label="close" (click)="hideModal()"></button>
     </header>
 
-    <article *ngIf="selector ==='warning'">
+    <div *ngIf="selector ==='warning'">
       <div class="modal-card-body" >
         <p>Maximum csvMasks reached!</p>
       </div>
-    </article>
+    </div>
 
     <form class="form"
     [formGroup]="csvForm"
@@ -25,11 +25,11 @@
       <div class="modal-card-body">
         <div class="columns mb-0">
           <div class="column is-8">
-            <label class="label" for="input-name">Name</label>
+            <label class="label" for="input-name-csvMask">Name</label>
             <div class="control">
               <input class="input"
                type="text"
-               id="input-name"
+               id="input-name-csvMask"
                placeholder="name"
                formControlName="name"
                [ngClass]="{
@@ -56,7 +56,7 @@
           </div>
         </div>
         <div class="field">
-          <label class="label" for="input-mask">csv mask:</label>
+          <label class="label" for="input-mask">Csv mask</label>
           <div class="control">
             <input class="input"
              type="text"
@@ -71,7 +71,7 @@
           </div>
         </div>
         <div class="field">
-          <label class="label" for="date-mask">date mask:</label>
+          <label class="label" for="date-mask">Date mask</label>
           <div class="control">
             <input class="input"
              type="text"
@@ -89,21 +89,21 @@
     </form>
 
     <footer class="modal-card-foot is-flex is-justify-content-center">
-      <button class="button is-success"
+      <button class="button button-edit"
        type="button"
        (click)="UpdateCsv($event)"
        [disabled]="csvForm.invalid"
        *ngIf="selector ==='edit'">Save</button>
-      <button class="button is-success"
-       type="button"
+      <button class="button button-save"
+       type="button is-success"
        (click)="submitCsvForm($event)"
        [disabled]="csvForm.invalid"
        *ngIf="selector==='create' || selector==='delete'">Save</button>
       <button class="button theme-modifer" type="button" (click)="hideModal()">Cancel</button>
-      <button class="button is-danger theme-modifer"
+      <button class="button theme-modifer"
        type="button"
        (click)="deleteCsvMask($event)"
-       *ngIf="selector ==='edit'">delete</button>
+       *ngIf="selector ==='edit'">Delete</button>
     </footer>
 
   </article>

@@ -1,16 +1,18 @@
 import { Inject, Injectable } from '@angular/core'
 import { BehaviorSubject, Subject } from 'rxjs'
-import { fluxDispatcherToken } from '../helpers/flux.configuration'
+import { fluxDispatcherToken } from '../shared/helpers/flux.configuration'
 
 // types
-import { Account, csvMask } from '../types/account'
-import { Category, CategoryGroup } from '../types/category'
-import { Transaction } from '../types/transaction'
-import { FluxAction, FluxActionTypes } from '../types/actions.type'
+import { Account } from '../shared/types/account'
+import { csvMask } from '../shared/types/csvMask'
+import { Category, CategoryGroup } from '../shared/types/category'
+import { Transaction } from '../shared/types/transaction'
+import { FluxAction, FluxActionTypes } from '../shared/types/actions.type'
 
 // Firestore
 import { Firestore, onSnapshot, query } from '@angular/fire/firestore'
 import { collection, QuerySnapshot } from '@firebase/firestore'
+import { UtilityService } from '../shared/services/utility.service'
 
 
 @Injectable()
@@ -18,18 +20,19 @@ import { collection, QuerySnapshot } from '@firebase/firestore'
 export class FluxStore {
 
   Accounts: BehaviorSubject<Account[]> = new BehaviorSubject<Account[] | any>({})
-  Transactions: BehaviorSubject<Transaction[]> = new BehaviorSubject<Transaction[] | any>({info: "init"})
+ // Transactions: BehaviorSubject<Transaction[]> = new BehaviorSubject<Transaction[] | any>({info: "init"})
   CategoryGroups: BehaviorSubject<CategoryGroup[]> = new BehaviorSubject<CategoryGroup[] | any>({info: "init"})
   Categories: BehaviorSubject<Category[]> = new BehaviorSubject<Category[] | any>({info: "init"})
   CsvMasks: BehaviorSubject<csvMask[]> = new BehaviorSubject<csvMask[] | any>({info: "init"})
 
-  constructor(@Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>, private firestore: Firestore) {
+  constructor(@Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>,
+   private firestore: Firestore, private utilityService: UtilityService) {
     this.dispatcher.subscribe(async (action: FluxAction) => {
       switch (action.type) {
         case FluxActionTypes.Load:
           this.listener_accounts()
           this.listener_categories()
-          // this.listener_transactions()
+       //   this.listener_transactions()
           this.listener_csvMasks()
           break
       }
@@ -72,17 +75,21 @@ export class FluxStore {
     })
   }
 
-  // listener_transactions(){
-  //   const q_transactions = query(collection(this.firestore, 'transactions'))
-  //   const listener_transactions = onSnapshot(q_transactions, (querySnapshot) => {
-  //     this.Transactions_all = []
-  //     querySnapshot.forEach((doc) => {
-  //       let data_copy : Transaction = Object.assign(doc.data())
-  //       this.Transactions_all.push(data_copy)
-  //     })
-  //     this.CategoryGroups.next(this.CategoryGroups_all)
-  //   })
-  // }
+  /*
+   listener_transactions(){
+     const q_transactions = query(collection(this.firestore, 'transactions'))
+     const listener_transactions = onSnapshot(q_transactions, (querySnapshot) => {
+       let Transactions_all : Transaction[] = []
+       querySnapshot.forEach((doc) => {
+         let data_copy : Transaction = Object.assign(doc.data())
+         data_copy.id = doc.id
+         Transactions_all.push(data_copy)
+       })
+       this.utilityService.setTransactionstoAccount(Transactions_all, this.Accounts.value)
+
+     })
+   }
+*/
 
   listener_csvMasks(){
     const q_csvMasks = query(collection(this.firestore, 'csvMasks'))

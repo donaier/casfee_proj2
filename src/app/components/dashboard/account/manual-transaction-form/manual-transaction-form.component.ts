@@ -1,14 +1,16 @@
 import { Component, ElementRef, Inject, Input, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { FormControl, FormGroup, FormGroupDirective } from '@angular/forms';
+import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { Subject, Subscription } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
 import { UtilityService } from 'src/app/shared/services/utility.service';
-import { FluxStore } from 'src/app/shared/services/flux-store';
+import { FluxStore } from 'src/app/model/flux-store';
 import { Account } from 'src/app/shared/types/account';
 import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
 import { Category, CategoryGroup } from 'src/app/shared/types/category';
 import { DATE_FORMAT, Transaction } from 'src/app/shared/types/transaction';
+import { v4 as uuidv4 } from 'uuid';
+
 
 @Component({
   selector: 'app-manual-transaction-form',
@@ -18,7 +20,9 @@ import { DATE_FORMAT, Transaction } from 'src/app/shared/types/transaction';
 export class ManualTransactionFormComponent implements OnInit, OnDestroy {
   @ViewChild('modal') modal!: ElementRef
   @ViewChild('manualtransactionform', { static: false }) manualtransactionform!: ElementRef
-  @ViewChildren('selectabletag') selectabletags!: QueryList<ElementRef>
+  @ViewChildren('tags') tags!: QueryList<ElementRef>
+
+
   @Input() account?: Account;
 
   transactionForm!: FormGroup
@@ -27,6 +31,7 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
   amount!: FormControl
   date!: FormControl
   categoryId!: FormControl
+  categoryName!: FormControl
 
   categoryGroups: CategoryGroup[] = []
   categories: Category[] = []
@@ -43,9 +48,6 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
     this.subscriptions.push(this.store.CategoryGroups.subscribe((data) => {
       if (data.length > 0) {
         this.categoryGroups = data;
-      }
-      if (data.length === undefined) {
-       // this.data = 'isloading'
       }
       if(data.length === 0){
         this.categoryGroups = []
@@ -66,44 +68,64 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
     this.transactionForm = new FormGroup({
       description: this.description = new FormControl(''),
       fromAccount: this.fromAccount = new FormControl(''),
-      amount: this.amount = new FormControl(''),
+      amount: this.amount = new FormControl('', [
+        Validators.required,
+        Validators.maxLength(100000000)
+      ]),
       date: this.date = new FormControl(''),
-      categoryId: this.categoryId = new FormControl('')
+      categoryId: this.categoryId = new FormControl(''),
+      categoryName: this.categoryName = new FormControl('')
     })
   }
 
   hideModal() {
     this.manualtransactionform.nativeElement.classList.remove('is-active');
+    this.removeActiveTag()
     this.transactionForm.reset();
   }
 
-  setCategory(e: Event, category: Category) {
-    this.selectabletags.forEach(tag => { tag.nativeElement.classList.remove('selected')});
-    this.transactionForm.get('categoryId')?.setValue(category.id);
-    (<HTMLElement>e.target).classList.add('selected')
+  removeActiveTag(){
+    this.tags.forEach(tag => { tag.nativeElement.classList.remove('selected')});
   }
 
+  seTag(e: Event){
+    let target = e.target as HTMLElement
+    target.classList.add('selected')
+  }
+
+  setCategory(category: Category, e : Event) {
+    this.removeActiveTag()
+    this.transactionForm.get('categoryId')?.setValue(category.id)
+    this.transactionForm.get('categoryName')?.setValue(category.name)
+    this.seTag(e)
+  }
+
+
   setTransferCategory(e: Event, transferAcc: Account) {
-    this.selectabletags.forEach(tag => { tag.nativeElement.classList.remove('selected')});
+    this.removeActiveTag()
     this.transactionForm.get('fromAccount')?.setValue(transferAcc.id);
     this.transactionForm.get('categoryId')?.setValue('ACCOUNT_TRANSFER');
-    (<HTMLElement>e.target).classList.add('selected')
+    this.seTag(e)
+
+// Eine transaktion auf einen Account braucht trotzdem eine Category, und theoretisch muesste
+// man 2 Updates durchfuehren , weil es entstehen ja 2 Transaktionen so ??
   }
 
   submitTransactionForm(e: Event) {
     e.preventDefault();
 
     if(this.transactionForm.valid && this.transactionForm.dirty) {
-      let account = Object.assign(this.account!)
+      let account = this.account!
       let transaction: Transaction = this.transactionForm.value
       transaction.date = moment(this.transactionForm.get('date')?.value).format(DATE_FORMAT)
+      transaction.id = uuidv4()
+      if(transaction.categoryName === 'undefined'){
+        transaction.categoryName = "noCategory"
+      }
       account.transactions.push(transaction)
       account.currentValue = Number(this.utilityService.calculateCurrentValue(account))
-
       this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'account', null, null, null, account))
-
       this.hideModal()
-
     }
   }
 

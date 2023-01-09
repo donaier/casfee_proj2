@@ -50,10 +50,12 @@ $c5: #041440;
     background-color: $c0;
     .box {
       background-color: $c0;
-
       .theme-modifier:hover{
         background-color: $c3;
       }
+    }
+    .is-transaction:hover{
+      background-color: $c2;
     }
   }
 
@@ -67,6 +69,18 @@ $c5: #041440;
     }
     .modal-card-body {
       background-color: $c0;
+      .control-modifier{
+        margin-left: 3px;
+      }
+      .color-modifier{
+        background-color: $c1;
+        outline: none;
+        border: none;
+        box-shadow: none;
+      }
+      .color-modifier:hover{
+        background-color: $c3;
+      }
     }
     .modal-card-foot {
       background-color: $c1;

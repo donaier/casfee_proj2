@@ -1,7 +1,7 @@
 import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
-import { FluxStore } from 'src/app/shared/services/flux-store';
+import { FluxStore } from 'src/app/model/flux-store';
 import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
 import { Category, CategoryGroup } from 'src/app/shared/types/category';
 import { CategoryFormComponent } from '../category-form/category-form.component';
@@ -45,6 +45,16 @@ export class CategoryConfigComponent implements OnInit, OnDestroy {
     }))
   }
 
+  countCategories(CategoryGroup : CategoryGroup): number{
+    let categories = 0
+    this.categories.forEach(category =>{
+      if(category.group_id === CategoryGroup.id){
+        categories++
+      }
+    })
+    return categories
+  }
+
   createCategoryGroup() {
     this.categoryGroupForForm = undefined
     if(this.categoryGroups.length > 9){
@@ -66,11 +76,11 @@ export class CategoryConfigComponent implements OnInit, OnDestroy {
 
   addCategory(categoryGroup: CategoryGroup) {
     this.categoryForForm = undefined
-    this.categoryGroupForForm = categoryGroup;
-    if(this.categories.length > 14){
+    this.categoryGroupForForm = categoryGroup
+    if(this.countCategories(categoryGroup) > 14){
       this.selector = "warning-category"
     }
-    if(this.categories.length < 15){
+    if(this.countCategories(categoryGroup) < 15){
       this.selector = "addCategory"
     }
     this.categoryModal.modal.nativeElement.classList.add('is-active')

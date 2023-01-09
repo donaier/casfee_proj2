@@ -2,8 +2,9 @@ import { Component, ElementRef, Inject, Input, OnChanges, OnInit, SimpleChanges,
 import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
-import { FluxStore } from 'src/app/shared/services/flux-store';
-import { Account, AccountColors, csvMask } from 'src/app/shared/types/account';
+import { FluxStore } from 'src/app/model/flux-store';
+import { Account, AccountColors } from 'src/app/shared/types/account';
+import { csvMask } from 'src/app/shared/types/csvMask';
 import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
 import { UtilityService } from 'src/app/shared/services/utility.service';
 
@@ -35,7 +36,10 @@ export class AccountFormComponent implements OnInit, OnChanges {
   ngOnInit(){
     this.accountForm = new FormGroup({
       name: this.name = new FormControl(''),
-      shortName: this.shortName = new FormControl(''),
+      shortName: this.shortName = new FormControl('', [
+        Validators.required,
+        Validators.maxLength(8)
+      ]),
       description: this.description = new FormControl(''),
       initialValue: this.initialValue = new FormControl(''),
       color: this.color = new FormControl(''),
@@ -59,11 +63,11 @@ export class AccountFormComponent implements OnInit, OnChanges {
   submitAccountForm(e: Event) {
     e.preventDefault();
     if(this.accountForm.valid) {
-      let account = this.accountForm.value
+      let account : Account = this.accountForm.value
       if (this.account) {
         account.id = this.account.id
         account.transactions = this.account.transactions || []
-        account.currentValue = this.utilityService.calculateCurrentValue(account)
+        account.currentValue = Number(this.utilityService.calculateCurrentValue(account))
         this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'account', null, null, null, account))
       }
       if(!this.account) {
@@ -75,15 +79,16 @@ export class AccountFormComponent implements OnInit, OnChanges {
     }
   }
 
-  deleteAccount(){
+  deleteAccount() {
     this.dispatcher.next(new FluxAction(FluxActionTypes.Delete,'account', null, null, null, this.account))
     this.hideModal();
   }
 
-  ngOnChanges(): void {
-    if (this.account) {
+  ngOnChanges() {
+    if(this.account) {
       this.accountForm?.patchValue(this.account!)
-    } else {
+    }
+    if(!this.account) {
       this.accountForm?.reset()
     }
   }

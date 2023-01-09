@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Account, csvMask } from '../types/account';
+import { Account } from '../types/account';
+import { csvMask } from '../types/csvMask';
 import { DATE_FORMAT, Transaction } from '../types/transaction';
 import * as moment from 'moment';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({providedIn: 'root'})
 
 export class TransactionService {
-
   constructor() { }
 
   cookTransactions(transactions: [], csvMask: csvMask) {
@@ -33,6 +31,7 @@ export class TransactionService {
                   :
                   moment(new Date()).format(DATE_FORMAT),
                 categoryId: '',
+                id: ''
               })
             }
           })

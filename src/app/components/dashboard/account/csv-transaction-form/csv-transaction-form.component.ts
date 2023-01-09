@@ -1,14 +1,16 @@
 import { Component, ElementRef, Inject, Input, OnChanges, OnDestroy, OnInit, QueryList, SimpleChanges, ViewChild, ViewChildren } from '@angular/core';
 import { Subscription, Subject } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
-import { FluxStore } from 'src/app/shared/services/flux-store';
-import { Account, csvMask } from 'src/app/shared/types/account';
+import { FluxStore } from 'src/app/model/flux-store';
+import { Account } from 'src/app/shared/types/account';
+import { csvMask } from 'src/app/shared/types/csvMask';
 import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
 import { Category, CategoryGroup } from 'src/app/shared/types/category';
 import { Transaction } from 'src/app/shared/types/transaction';
-import { TransactionService } from 'src/app/shared/helpers/transaction.service';
+import { TransactionService } from 'src/app/shared/services/transaction.service';
 import { UtilityService } from 'src/app/shared/services/utility.service';
 import * as moment from 'moment';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-csv-transaction-form',
@@ -25,7 +27,7 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
   @ViewChild('categoryColumns') categoryColumns!: ElementRef
   @ViewChild('csvInfo') csvInfo!: ElementRef
   @ViewChild('csvReset') csvReset!: ElementRef
-  @ViewChildren('categorytag') categorytags!: QueryList<ElementRef>
+  @ViewChildren('tags') tags!: QueryList<ElementRef>
 
   @ViewChild('accountIsReady') accountIsReadyElement!: ElementRef
   @ViewChild('accountNotReady') accountNotReadyElement!: ElementRef
@@ -79,6 +81,7 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
 
   hideModal() {
     this.modal.nativeElement.classList.remove('is-active')
+    this.removeSelectedTags()
     this.resetForm()
   }
 
@@ -135,34 +138,45 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
 
   hideSubcategoryModal(e: Event) {
     e.preventDefault();
-
     this.subcategoryModal.nativeElement.classList.remove('is-active')
   }
 
-  isActive(tag: string | undefined){
-    return this.activeTag === tag
+  removeSelectedTags(){
+    this.tags.forEach(tag => { tag.nativeElement.classList.remove('selected')});
   }
 
-  setCategoryForActiveTransaction(category: Category) {
-    this.activeTag = category.id;
-    this.transactionsToCategorize[this.activeTransactionIndex].categoryId = category.id
-    this.setCategory = true
+  SetTag(e: Event){
+    let target = e.target as HTMLElement
+    target.classList.add('selected')
+  }
 
+
+
+  setCategoryForActiveTransaction(category: Category, e: Event) {
+    this.removeSelectedTags()
+    this.transactionsToCategorize[this.activeTransactionIndex].categoryId = category.id
+    this.setCategory = true;
+    this.SetTag(e)
     if (this.autoAdvance) {
       this.setTransaction()
     }
   }
 
-  setTransferCategoryForActiveTransaction(transferAcc: Account) {
-    this.activeTag = transferAcc.id
+
+
+  setTransferCategoryForActiveTransaction(transferAcc: Account, e: Event) {
+
+    this.removeSelectedTags()
     this.transactionsToCategorize[this.activeTransactionIndex].fromAccount = transferAcc.id
     this.transactionsToCategorize[this.activeTransactionIndex].categoryId = "ACCOUNT_TRANSFER"
     this.setCategory = true
-
+    this.SetTag(e)
     if (this.autoAdvance) {
       this.setTransaction()
     }
   }
+
+
 
   setTransaction() {
     if (this.activeTransactionIndex >= this.transactionsToCategorize.length-1) {
@@ -182,11 +196,12 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
 
   saveTransactionsToAccount() {
     if (this.account) {
+      this.transactionsToCategorize.forEach(transaction => {
+        transaction.id = uuidv4()
+      })
       this.account.transactions.push(...this.transactionsToCategorize)
       this.account.currentValue = Number(this.utilityService.calculateCurrentValue(this.account))
-
       this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'account', null, null, null, this.account))
-
       this.hideModal()
     }
   }

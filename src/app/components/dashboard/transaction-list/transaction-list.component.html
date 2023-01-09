@@ -17,7 +17,7 @@
         </colgroup>
         <tbody>
           <ng-container *ngFor="let transaction of allTransactions">
-            <tr *ngIf="transaction.date.includes(month)">
+            <tr class="is-transaction" *ngIf="transaction.date.includes(month)" (click)="openModal(transaction)">
               <td>
                 <span class="tag">{{transaction.accountShortName}}</span>
               </td>
@@ -32,9 +32,6 @@
                   <b>{{transaction.amount | number: '1.2-2'}}</b>
                 </span>
               </td>
-              <td class="is-20px">
-                <button class="delete" aria-label="close" (click)="deletetransaction(transaction)"></button>
-              </td>
             </tr>
           </ng-container>
         </tbody>
@@ -42,3 +39,5 @@
     </ng-container>
   </div>
 </div>
+
+<app-transaction-form #DetailTransactionModal [transaction]="selectedtransaction" [categoryGroups]="allCategoryGroups" [categories]="allCategories"></app-transaction-form>

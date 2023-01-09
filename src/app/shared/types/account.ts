@@ -12,7 +12,7 @@ export interface Account {
   id: string,
   transactions: Transaction[],
 }
-
+/*
 export const AccountForm = {
   name: new FormControl('', [Validators.required]),
   shortName: new FormControl(''),
@@ -21,6 +21,7 @@ export const AccountForm = {
   color: new FormControl(''),
   csv: new FormControl('', [Validators.required]),
 };
+*/
 
 export const AccountColors = [
   { name: 'blue', value: 'hsl(217, 71%, 53%)'},
@@ -30,18 +31,12 @@ export const AccountColors = [
   { name: 'red', value: 'hsl(348, 100%, 61%)'},
 ]
 
-export interface csvMask {
-  id: string,
-  name: string,
-  delimiter: string,
-  mask: string,
-  dateMask: string
-}
 
+/*
 export const CsvMaskForm = {
   name: new FormControl('', [Validators.required]),
   delimiter: new FormControl('', [Validators.required]),
   mask: new FormControl('', [Validators.required]),
 };
-
+*/
 

@@ -41,7 +41,7 @@
             </p>
             <div class="field is-grouped is-grouped-multiline">
               <ng-container *ngFor="let category of categories">
-                <div class="control" *ngIf="category.group_id === categoryGroup.id">
+                <div class="control category-item" *ngIf="category.group_id === categoryGroup.id">
                   <div class="tags has-addons">
                     <span class="tag">{{category.name}}</span>
                     <a class="tag is-delete" (click)="deleteCategory(category)"></a>
