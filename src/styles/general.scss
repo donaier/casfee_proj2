@@ -1,25 +1,6 @@
-table.table {
-  background: unset;
-
-  td {
-    border: none;
-  }
-}
-
-table.transaction-table {
-  width: 100%;
-  table-layout: fixed;
-
-  .col-account {
-    width: 5%;
-  }
-  .col-date, .col-amount {
-    width: 10%;
-  }
-  .col-category {
-    width: 15%;
-  }
-}
+$tablet: 850px;
+$mobile: 550px;
+$mobile-small: 400px;
 
 .category-indicator {
   display: inline-block;
@@ -33,10 +14,8 @@ table.transaction-table {
 
 .box.has-header {
   padding-top: .25rem;
-
   .box-header {
     margin: 0 -1rem 0 -.75rem;
-
     strong {
       filter: brightness(2.5);
     }
@@ -58,3 +37,26 @@ table.transaction-table {
   font-weight: 600;
   font-size: 0.875em;
 }
+
+.box-margin{
+  margin-left: 1px;
+  margin-right: 1px;
+}
+
+
+@media (max-width: $mobile){
+  .modal-card-title{
+    font-size: 16px;
+  }
+  .heading{
+    flex-direction: column;
+  }
+}
+
+@media (max-width: $mobile-small){
+  .modal-card-title{
+    font-size: 12px;
+  }
+}
+
+

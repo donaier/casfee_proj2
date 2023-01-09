@@ -8,16 +8,42 @@
     <ng-container *ngFor="let month of activeMonths">
       <h4 class="title is-4 has-text-centered">{{month}}</h4>
       <table class="table is-fullwidth transaction-table">
-        <colgroup>
+        <colgroup class="is-widescreen">
           <col class="col-account" />
           <col class="col-date" />
           <col class="col-description" />
           <col class="col-category" />
           <col class="col-amount" />
         </colgroup>
+
         <tbody>
           <ng-container *ngFor="let transaction of allTransactions">
-            <tr class="is-transaction" *ngIf="transaction.date.includes(month)" (click)="openModal(transaction)">
+            <div class="is-transaction is-mobile" *ngIf="transaction.date.includes(month)" (click)="openModal(transaction)">
+              <tr class="col-date-short-category">
+                <td>
+                  <span class="tag">{{transaction.accountShortName}}</span>
+                </td>
+                <td>{{transaction.date}}</td>
+                <td class="has-text-left">
+                  {{categoryNameFor(transaction)}}
+                  <div class="category-indicator" [ngStyle]="{'background': colorFor(transaction)}"></div>
+                </td>
+              </tr>
+
+              <tr class="col-description">
+                <td>{{transaction.description}}</td>
+              </tr>
+
+              <tr class="col-amount">
+                <td class="has-text-right">
+                  <span class="{{transaction.amount > 0 ? 'has-text-success' : 'has-text-danger'}}">
+                    <b>{{transaction.amount | number: '1.2-2'}}</b>
+                  </span>
+                </td>
+              </tr>
+            </div>
+
+            <tr class="is-transaction is-widescreen" *ngIf="transaction.date.includes(month)" (click)="openModal(transaction)">
               <td>
                 <span class="tag">{{transaction.accountShortName}}</span>
               </td>
@@ -33,6 +59,7 @@
                 </span>
               </td>
             </tr>
+
           </ng-container>
         </tbody>
       </table>

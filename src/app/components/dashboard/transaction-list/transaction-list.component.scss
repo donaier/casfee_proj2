@@ -1,3 +1,85 @@
+$tablet: 850px;
+$mobile: 550px;
+
+
+table.table {
+  background: unset;
+
+  td {
+    border: none;
+  }
+}
+
+
+table.transaction-table {
+  width: 100%;
+  table-layout: fixed;
+  .is-mobile {
+    display: none;
+  }
+  .col-account {
+    width: 10%;
+  }
+  .col-date, .col-amount {
+    width: 10%;
+  }
+  .col-category {
+    width: 15%;
+  }
+}
+
+
+@media (max-width: $tablet){
+  table.transaction-table {
+    .col-account {
+      width: 10%;
+    }
+    .col-date, .col-amount {
+      width: 10%;
+    }
+    .col-category {
+      width: 8%;
+    }
+    .col-description {
+      width: 20%;
+    }
+  }
+}
+
+
+@media (max-width: $mobile){
+  table.transaction-table {
+    .is-widescreen{
+      display: none;
+    }
+    .is-mobile {
+      display: block;
+    }
+    tr{
+      display: block;
+      width: 100%;
+    }
+    td{
+      display: inline-block;
+      width: 100%;
+    }
+    tr.col-date-short-category {
+      width: 100%;
+      td {
+        width: 33.3333%;
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
 .height{
   max-height: 100vh;
   overflow: auto;
