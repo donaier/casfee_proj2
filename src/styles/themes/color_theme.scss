@@ -96,8 +96,11 @@ $c5: #041440;
     &:after{
       color: $c3;
     }
+    &:before {
+      color: $c3;
+    }
     &:hover{
-      color: $c4;
+      color: $c3;
     }
   }
   .theme-modifier:hover{
