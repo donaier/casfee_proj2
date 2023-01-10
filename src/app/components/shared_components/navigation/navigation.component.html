@@ -18,7 +18,7 @@
       </a>
 
       <div class="navbar-item has-dropdown filter-link-item" *ngIf="router.url === '/dashboard'">
-        <a class="navbar-item is-arrowless filter-link" (click)="showSettings()">
+        <a class="navbar-item is-arrowless filter-link" (click)="showSettings($event)">
           <span class="icon is-small">
             <i class="fas fa-filter"></i>
           </span>

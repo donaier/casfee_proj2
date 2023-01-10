@@ -1,16 +1,17 @@
 <section class="container is-widescreen section">
   <app-account [activeAccounts]="activeAccounts"></app-account>
 
-  <article class="dashboard-filter hidden" #dashboardFilter id="dashboard-filter">
+  <article class="dashboard-filter hidden border-modifier" #dashboardFilter id="dashboard-filter">
     <div class="container is-widescreen my-5">
-      <button class="button is-pulled-right" (click)="closeFilter()">
+      <p class="modal-card-title mb-5 is-inline-block">Dashboard Settings</p>
+      <button class="button is-pulled-right mr-4" (click)="closeFilter()">
         <span class="icon is-small">
           <i class="fas fa-times"></i>
         </span>
       </button>
       <table class="table is-narrow">
         <tr>
-          <th class="has-text-right">selected Accounts:</th>
+          <th class="has-text-right">Enable/Disable Accounts:</th>
           <td>
             <div class="field is-grouped is-grouped-multiline">
               <div class="control" *ngFor="let account of accounts">
@@ -28,7 +29,18 @@
           </td>
         </tr>
         <tr>
-          <th class="has-text-right">selected Periods:</th>
+          <th class="has-text-right">Select Timeframe:</th>
+          <td>
+            <div class="field is-grouped is-grouped-multiline">
+              <div class="tags has-addons timeframe-select-tag" (click)="toggleTimeframe()">
+                <span class="tag {{selectedTimeframe === 'years' ? 'selected' : ''}}">Years</span>
+                <span class="tag {{selectedTimeframe === 'months' ? 'selected' : ''}}">Months</span>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th class="has-text-right">Choose Periods to display:</th>
           <td>
             <div class="field is-grouped is-grouped-multiline">
               <ng-container *ngIf="selectedTimeframe === 'months'">
@@ -58,17 +70,6 @@
                   </div>
                 </div>
               </ng-container>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <th class="has-text-right">select Timeframe:</th>
-          <td>
-            <div class="field is-grouped is-grouped-multiline">
-              <div class="tags has-addons timeframe-select-tag" (click)="toggleTimeframe()">
-                <span class="tag {{selectedTimeframe === 'years' ? 'selected' : ''}}">years</span>
-                <span class="tag {{selectedTimeframe === 'months' ? 'selected' : ''}}">months</span>
-              </div>
             </div>
           </td>
         </tr>

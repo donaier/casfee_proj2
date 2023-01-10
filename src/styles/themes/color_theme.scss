@@ -140,5 +140,16 @@ $c5: #041440;
   }
   .dashboard-filter {
     background-color: $c2;
+    &.border-modifier{
+      border-top-left-radius : 0px;
+      border-top-right-radius: 0px;
+    }
+
+    table{
+      background-color: $c2;
+    }
+    .modal-card-title{
+      color: $c5
+    }
   }
 }
