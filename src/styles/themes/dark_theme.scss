@@ -59,9 +59,12 @@ $c12: #CCCCCC;
   }
   .navbar {
     background-color: $c6;
-    a, div{
+    a, div, h1{
       background-color: $c6;
       color: $c1;
+    }
+    h1.navbar-item.is-size-3.mr-4:hover{
+      background-color: $c6;
     }
     .navbar-dropdown{
       border-color: $c6;

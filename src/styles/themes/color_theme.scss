@@ -94,14 +94,12 @@ $c5: #041440;
     background-color: $c1;
     text-decoration: none;
     &:after{
-      color: $c3;
+      color: $c5;
     }
     &:before {
-      color: $c3;
+      color: $c5;
     }
-    &:hover{
-      color: $c3;
-    }
+
   }
   .theme-modifier:hover{
 
@@ -118,15 +116,16 @@ $c5: #041440;
   // nav
   .navbar {
     background-color: $c2;
-    a, div{
+    a, div, h1{
       background-color: $c3;
       color: $c1;
     }
-    .navbar-item{
-
+    &.navbar-burger.no-decoration{
+      border: none;
+      background-color: $c2;
     }
-    .navbar-link:hover{
-
+    .navbar-dropdown{
+      border-color: $c3;
     }
     .navbar-item.has-dropdown:hover {
       background-color: $c2;

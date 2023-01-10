@@ -15,6 +15,8 @@ export class NavigationComponent implements AfterViewInit {
   @ViewChild('select_theme') select_theme!: ElementRef
   @ViewChild('dropdown') dropdown!: ElementRef
   @ViewChild('theme_select') theme!: ElementRef
+  @ViewChild('hamburgerBtn') hamburgerBtn!: ElementRef
+
 
   classlist : DOMTokenList | undefined
   router: Router
@@ -37,9 +39,9 @@ export class NavigationComponent implements AfterViewInit {
     this.set_theme(theme)
   }
 
-  expandBurgerMenu(e: Event) {
-    const btn = <HTMLElement>e.target;
-    btn.classList.toggle('is-active');
+  expandBurgerMenu(e : Event) {
+    e.stopPropagation()
+    this.hamburgerBtn.nativeElement.classList.toggle('is-active')
     this.navMenu.nativeElement.classList.toggle('is-active')
   }
 
@@ -62,10 +64,6 @@ export class NavigationComponent implements AfterViewInit {
 
   change_color(){
     this.theme.nativeElement.classList.toggle('background')
-  }
-
-  openManual(){
-    console.log("open instructions")
   }
 
   showSettings() {
