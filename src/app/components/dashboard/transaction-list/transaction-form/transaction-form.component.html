@@ -11,15 +11,16 @@
     <form id="category-group-form" class="form" [formGroup]="transactionForm" novalidate>
       <input type="hidden" id="input-id" formControlName="id">
       <div class="modal-card-body">
+
         <div class="columns mb-0">
           <div class="column">
-            <label class="label">Date</label>
+            <label class="label" for="input-date">Date</label>
             <div class="control">
               <input class="input"
                 id="input-date"
                 type="date"
-                #dateinput
                 formControlName="date"
+                #dateinput
                 [ngClass]="{
                   'is-danger': date.invalid && (date.dirty || date.touched),
                   'is-success': date.valid && (date.dirty || date.touched)
@@ -30,7 +31,7 @@
 
 
           <div class="column">
-            <label class="label">Amount</label>
+            <label class="label" for="input-amount">Amount</label>
             <div class="field has-addons">
               <div class="control is-expanded">
                 <input class="input"

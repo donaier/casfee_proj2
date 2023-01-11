@@ -44,8 +44,7 @@ export class TransactionFormComponent implements OnInit, OnChanges{
   categoryId!: FormControl
 
   constructor(public store: FluxStore,
-  @Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>,
-  private utilityService: UtilityService) {}
+  @Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>, private utilityService: UtilityService) {}
 
   ngOnInit(){
     this.transactionForm = new FormGroup({
@@ -109,7 +108,9 @@ export class TransactionFormComponent implements OnInit, OnChanges{
       this.getAccountforTransaction()
       this.filterchangedTransaction()
       let transaction : Transaction = this.transactionForm.value
-      transaction.date = moment(this.transactionForm.get('date')?.value).format(DATE_FORMAT)
+      if(this.transaction!.date !== this.transactionForm.value.date){
+        transaction.date = moment(this.transactionForm.value.date, "YYYY-MM-DD").format('DD.MM.YYYY')
+      }
       this.account!.transactions.push(transaction)
       if(this.transaction?.amount !== this.transactionForm.value.amount){
         this.account!.currentValue = Number(this.utilityService.calculateCurrentValue(this.account!))
@@ -127,32 +128,10 @@ export class TransactionFormComponent implements OnInit, OnChanges{
 
   ngOnChanges() {
     if (this.transaction) {
-
-    // Noch in Arbeit
-    //  this.transaction.date = this.convertDate(this.transaction.date)
-    //    this.convertDate(this.transaction);
-
-    //  this.dateinput.nativeElement.value = "01-01-2023";
-      console.log(this.dateinput.nativeElement.value)
-
-    // 28.12.2022
-    //  let date = this.transaction.date
-    //  date = moment(this.transaction.date, "DD.MM.YYYY").format('YYYY-MM-DD')
-    //   this.dateinput.nativeElement.value = moment(this.transaction.date, "DD.MM.YYYY").format('YYYY-MM-DD');
-
       this.CategoryName.nativeElement.value = this.transaction.categoryName
       this.transactionForm?.patchValue(this.transaction)
-
+      this.dateinput.nativeElement.value = moment(this.transaction!.date, "DD.MM.YYYY").format('YYYY-MM-DD')
     }
-  }
-
-  convertDate(transaction : Transaction){
-
-    // Noch in Arbeit
-
-    //transaction.date = moment(transaction.date, "DD.MM.YYYY").format('YYYY-MM-DD');
-    // = moment(date).format(DATE_FORMAT)
-    // 2023-01-07
   }
 
 }
