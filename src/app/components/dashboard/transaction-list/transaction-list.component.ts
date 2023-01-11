@@ -121,7 +121,6 @@ export class TransactionListComponent implements OnInit, OnChanges, OnDestroy {
 
     })
 
-
     this.allTransactions = this.allTransactions.filter(t => this.selectedTimes.some((times => t.date.includes(times))))
     this.allTransactions.sort((a,b) => Date.parse(moment(b.date, DATE_FORMAT).toString()) - Date.parse(moment(a.date, DATE_FORMAT).toString()))
     this.activeMonths = new Set(this.allTransactions.map(t => moment(t.date, DATE_FORMAT).format('M.Y')))

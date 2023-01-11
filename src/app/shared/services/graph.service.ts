@@ -86,7 +86,7 @@ export class GraphService {
         stack: 'Total',
         label: {
           show: true,
-          position: 'left'
+          position: 'insideTop'
         },
         data: this.setOutData(accounts, selectedMonths),
         color: '#FF2255'
@@ -97,7 +97,7 @@ export class GraphService {
         stack: 'Total',
         label: {
           show: true,
-          position: 'right'
+          position: 'insideTop'
         },
         data: this.setInData(accounts, selectedMonths),
         color: 'green'

@@ -38,6 +38,12 @@ export class GraphComponent implements OnChanges, AfterViewInit, OnDestroy {
     private graphService: GraphService
   ) {}
 
+  resizeGraphs() {
+    this.graph?.resize()
+    this.inout?.resize()
+    this.categorized?.resize()
+  }
+
   ngAfterViewInit() {
     this.graph = echarts.init(this.graphElement.nativeElement)
     this.inout = echarts.init(this.inoutElement.nativeElement)
