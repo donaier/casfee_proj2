@@ -6,6 +6,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component'
 import { ConfigurationComponent } from './components/configuration/configuration.component'
 
 import { AuthGuard } from './shared/helpers/auth.guard'
+import { ManualComponent } from './components/manual/manual.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,12 @@ const routes: Routes = [
     component: ConfigurationComponent,
     canActivate: [AuthGuard],
     data: {role: 'configuration'},
+  },
+  {
+    path: 'manual',
+    component: ManualComponent,
+    canActivate:  [AuthGuard],
+    data: {role: 'manual'}
   },
   {path: '', redirectTo: 'login', pathMatch: 'full'},
 ]

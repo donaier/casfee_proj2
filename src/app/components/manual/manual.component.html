@@ -1,0 +1,76 @@
+<section class="container is-widescreen section">
+  <article class="card">
+    <header class="card-header">
+      <p class="card-header-title">
+        General Information
+      </p>
+    </header>
+    <div class="card-content">
+      <div class="content">
+        <p>
+          Happy to have you here! <br>
+          The "Finance App" should provide you with possibilities to manage your expenses, categorize transactions and to keep a steady eye on your accounts.
+        </p>
+        <p>
+          Use this for yourself, your family, your "WG" or whatever. There is no precondition and you could use the app without even having a bank account but it is best when the following criteria is met:
+        </p>
+        <ul>
+          <li>
+            <strong>1 to 8 Account(s)</strong> - these will be bank accounts usually but also could be your piggybank, kitchen drawer or any virtual assets you transfer money to/from.
+          </li>
+          <li>
+            <strong>Transactions as csv-Export</strong> - most banks will provide you with all transactions as csv-file. You won't have to enter any information when using the import.
+          </li>
+          <li>
+            <strong>Meaningful Categories</strong> for your Transactions. In a household it could be "Food", "Utilities", "Mobility" etc.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </article>
+
+  <article class="card mt-5">
+    <header class="card-header">
+      <p class="card-header-title">
+        Setup Accounts (+ csv Options)
+      </p>
+    </header>
+    <div class="card-content">
+      <div class="content">
+        <p>
+          To add your account(s), head over to <a routerLink="/configuration">configuration</a> add a new one. Use a recognizeable name and shortname (used in lists and where space is tight), select a color and add a short description if you want. <br>
+        </p>
+        <p>
+          Set the "Initial Amount" to the balance of your account at the time of your first transaction - if you want to enter the data for 2023, set the "Initial Amount" to the balance at 31. Dec 2022. <em>(if you later on decide to enter more data from the past, you can change the value accordingly and the current balance will be recalculated)</em>
+        </p>
+        <br>
+        <h6 class="title is-6">csv Masks</h6>
+        <p>
+          To correctly match the csv-data, have an export from your bank ready and create a new "CsvMask".
+        </p>
+        <p>
+          Give it a name (of your bank) and then examine a line from your csv-export. You are looking for three values: <strong>date, description/info</strong> and the <strong>transaction amount</strong>. <br>
+          Using the delimiter of your export (mostly ";", sometimes ",") enter a mask to define at wich positions these values are in the export of your bank.
+        </p>
+        <p>
+          <em>Example:</em><br>
+          <code>
+            16.09.2022;"BARGELDBEZUG VOM 16.09.2022 KARTEN NR. XXXX9809 FILIALE GLARUS ";;-80;16.09.2022;9280.23
+          </code><br>
+          This actual line from a PostFinance export uses ";" as delimiter. It has the date at the first position and the description at the second. The transaction amount is on the fourth position if negative and on the third if positive. The csv-mask to be entered would look like this: <br>
+          <code>
+            date;info;amount;amount;(unused);(unused)
+          </code><br>
+          Note that the two mentions of "amount" are not neccessary on any bank. You can also skip everything after the last used position, so the mask would behave the same if it looks like this: <br>
+          <code>
+            date;info;amount;amount
+          </code>
+        </p>
+        <p>
+          Now select that csv-mask on the created account and save.
+        </p>
+      </div>
+    </div>
+  </article>
+
+</section>

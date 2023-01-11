@@ -16,7 +16,7 @@ export class AuthGuard implements CanActivate {
         return true
       }
     }
-    if(route.data['role'] === 'dashboard' || route.data['role'] === 'configuration') {
+    if(route.data['role'] === 'dashboard' || route.data['role'] === 'configuration' || route.data['role'] === 'manual') {
       if(this.AuthService.isLoggedin()) {
         return true
       }
@@ -28,5 +28,3 @@ export class AuthGuard implements CanActivate {
     return false
   }
 }
-
-
