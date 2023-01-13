@@ -2,8 +2,8 @@
 
 donat:
 - ~~nav mobile~~ (dank geht an kay)
-- manual/instructions
-- Beispieldaten csv
+- ~~manual/instructions~~
+- ~~Beispieldaten csv~~
 - tests
 - ~~graph nach Kategories (oder willst du da mal einen machen?)~~
 - ~~würde gerne doch noch das Erstellen von neuen subCategories erlauben, wenn der csv-Prozess schon im Gange ist. Falls da was vergessen wurde oder es was neues braucht müsste sonst das Kategorisieren abgebrochen werden, Kategorie erstellt und wieder gestartet werden.~~
