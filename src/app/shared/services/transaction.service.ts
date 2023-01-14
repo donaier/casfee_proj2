@@ -71,7 +71,9 @@ export class TransactionService {
     let uniqueYears: string[] = []
 
     accounts.forEach(acc => {
-      allTransactions.push(...acc.transactions)
+      if (acc.transactions) {
+        allTransactions.push(...acc.transactions)
+      }
     });
 
     uniqueMonths = Array.from(new Set(allTransactions.map(t => moment(t.date, DATE_FORMAT).format('MM.YYYY')))).sort()
