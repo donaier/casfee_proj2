@@ -1,6 +1,7 @@
-$tablet: 850px;
-$mobile: 550px;
 $mobile-small: 400px;
+$mobile: 550px;
+$tablet: 850px;
+$screen-large: 1450px;
 
 .category-indicator {
   display: inline-block;
@@ -59,4 +60,35 @@ $mobile-small: 400px;
   }
 }
 
+@media (min-width: $screen-large){
+  // Navigation
+  nav.navbar{
+    .navbar-item{
+      font-size: 24px;
+    }
+    .width{
+      width: 250px;
+    }
+  }
+ // Dashboard Accounts
+  article .column{
+    .card-header-title{
+      font-size: 24px;
+    }
+    .content p{
+      font-size: 22px;
+    }
+  }
 
+// Dashboard Transactions
+
+  article.card{
+    .card-header-title{
+      font-size: 26px;
+    }
+  }
+
+
+
+
+}

@@ -30,9 +30,7 @@ export class TransactionListComponent implements OnInit, OnChanges, OnDestroy {
 
   activeMonths: Set<string> = new Set
 
-  constructor(@Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>,
-  public store: FluxStore,
-  ) {}
+  constructor(@Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>, public store: FluxStore) {}
 
   ngOnInit() {
     this.subscriptions.push(this.store.Categories.subscribe((data) => {
