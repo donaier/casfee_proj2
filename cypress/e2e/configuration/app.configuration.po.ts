@@ -57,7 +57,7 @@ export class AppConfiguration {
   }
 
   getNewAccount(){
-    return cy.get('.account')
+    return cy.get('.account-card')
   }
 
   getAccountName(){
@@ -176,5 +176,3 @@ export class AppConfiguration {
   }
 
 }
-
-
