@@ -1,0 +1,11 @@
+{
+  "name": "EmptyAccount",
+  "shortName": "SN",
+  "description": "Description",
+  "initialValue": 100,
+  "currentValue": 0,
+  "color": "red",
+  "csv": "csv",
+  "id": "id",
+  "transactions": []
+}

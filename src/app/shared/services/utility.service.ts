@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Account } from '../types/account';
 import { Category, CategoryGroup } from '../types/category';
-import { Transaction } from '../types/transaction';
-
-
 
 @Injectable({providedIn: 'root'})
+
 export class UtilityService {
   constructor() {}
 
@@ -30,6 +28,4 @@ export class UtilityService {
     });
     return Number(currentValue).toFixed(2)
   }
-
-
 }
