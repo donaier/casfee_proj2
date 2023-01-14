@@ -1,4 +1,4 @@
-import { TransactionService } from '../../../src/app/shared/services/transaction.service'
+import { TransactionService } from 'src/app/shared/services/transaction.service'
 
 describe('Unit Test Transaction Service', function () {
   const ts = new TransactionService
