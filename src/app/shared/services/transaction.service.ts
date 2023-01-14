@@ -81,7 +81,7 @@ export class TransactionService {
 
     uniqueYears.forEach(y => groupedMonths.push(uniqueMonths.filter(m => m.includes(y))))
 
-    return groupedMonths
+    return groupedMonths.flat()
   }
 
 }

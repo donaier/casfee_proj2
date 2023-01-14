@@ -19,7 +19,7 @@
     {
       "amount": 0,
       "categoryId": "cat_id",
-      "date": "01.01.2020",
+      "date": "01.02.2020",
       "description": "desc",
       "fromAccount": "",
       "id": "id2" 
@@ -27,10 +27,18 @@
     {
       "amount": 0,
       "categoryId": "cat_id",
-      "date": "01.01.2020",
+      "date": "01.03.2020",
       "description": "desc",
       "fromAccount": "",
       "id": "id3" 
+    },
+    {
+      "amount": 0,
+      "categoryId": "cat_id",
+      "date": "04.03.2020",
+      "description": "desc",
+      "fromAccount": "",
+      "id": "id4" 
     }
   ]
 }
