@@ -194,7 +194,6 @@ export class GraphService {
     let accSeries: object[] = this.setAccountSeries(accounts, selectedTimes)
 
     return {
-      title: { text: 'Total' },
       legend: {
         data: [...accNames, 'Total'],
         selectedMode: false

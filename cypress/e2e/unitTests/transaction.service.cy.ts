@@ -61,7 +61,7 @@ describe('Unit Test Transaction Service', () => {
 
     it('with three different months', () => {
       cy.fixture('AccountWithTransactionsOfDifferentMonths').then((acc: Account) => {
-        expect(ts.extractMonths([acc])).to.have.lengthOf(3)
+        expect(ts.extractMonths([acc]).at(0)).to.have.lengthOf(3)
       })
     })
   })

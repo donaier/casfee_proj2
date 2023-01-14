@@ -54,6 +54,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }))
   }
 
+  showFilter(e: Event) {
+    e.preventDefault()
+    this.dashboardFilter.nativeElement.classList.remove('hidden')
+  }
+
   toggleAccount(account: Account) {
     if (this.activeAccounts.includes(account)) {
       this.activeAccounts = this.activeAccounts.filter(a => a != account)
