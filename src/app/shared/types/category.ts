@@ -20,15 +20,3 @@ export const CategoryGroupColors = [
   { name: 'yellow', value: '#F2E863'},
   { name: 'orange', value: '#F2CD60'},
 ]
-/*
-export const CategoryGroupForm = {
-  name: new FormControl('', [Validators.required]),
-  color: new FormControl(''),
-};
-
-export const CategoryForm = {
-  group: new FormControl('', [Validators.required]),
-  name: new FormControl('', [Validators.required]),
-  color: new FormControl(''),
-};
-*/

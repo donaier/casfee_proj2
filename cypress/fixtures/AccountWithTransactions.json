@@ -1,0 +1,36 @@
+{
+  "name": "EmptyAccount",
+  "shortName": "SN",
+  "description": "Description",
+  "initialValue": 100,
+  "currentValue": 0,
+  "color": "red",
+  "csv": "csv",
+  "id": "id",
+  "transactions": [
+    {
+      "amount": -100,
+      "categoryId": "cat_id",
+      "date": "01.01.2020",
+      "description": "desc",
+      "fromAccount": "",
+      "id": "id1" 
+    },
+    {
+      "amount": 0,
+      "categoryId": "cat_id",
+      "date": "01.01.2020",
+      "description": "desc",
+      "fromAccount": "",
+      "id": "id2" 
+    },
+    {
+      "amount": 0,
+      "categoryId": "cat_id",
+      "date": "01.01.2020",
+      "description": "desc",
+      "fromAccount": "",
+      "id": "id3" 
+    }
+  ]
+}

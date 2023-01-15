@@ -88,7 +88,6 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
   resetForm() {
     this.csvInput.nativeElement.removeAttribute('disabled')
     this.csvInput.nativeElement.value = ''
-  //  this.csvInfo.nativeElement.innerHTML = ''
     this.csvInputControl.nativeElement.classList.remove('is-loading')
     this.csvInputControl.nativeElement.classList.remove('is-hidden')
     this.csvReset.nativeElement.classList.add('is-hidden')
@@ -102,18 +101,14 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
     this.csvInputControl.nativeElement.classList.add('is-loading')
     this.csvInput.nativeElement.setAttribute('disabled', 'disabled')
 
-
     this.transactionsToCategorize = this.transactionService.cookTransactions(transactions, this.activeCsvMask!)
     this.activeTransactionIndex = 0
     this.doneCategorizing = false
 
     if (this.transactionsToCategorize.length) {
-     // this.csvInfo.nativeElement.innerHTML = this.transactionsToCategorize.length + ' transactions found to categorize'
-    //  this.csvInfo.nativeElement.innerHTML += ' (' + transactions.length + ' lines in the csv)'
       this.csvInputControl.nativeElement.classList.add('is-hidden')
       this.categoryColumns.nativeElement.classList.remove('is-hidden')
     } else {
-    //  this.csvInfo.nativeElement.innerHTML = 'no usable transactions found'
       this.csvReset.nativeElement.classList.remove('is-hidden')
     }
   }
