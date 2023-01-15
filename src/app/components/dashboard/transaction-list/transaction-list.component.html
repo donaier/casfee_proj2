@@ -19,11 +19,15 @@
         <tbody>
           <ng-container *ngFor="let transaction of allTransactions">
             <div class="is-transaction is-mobile" *ngIf="transaction.date.includes(month)" (click)="openModal(transaction)">
-              <tr class="col-date-short-category">
+              <tr class="col-date-short">
                 <td>
                   <span class="tag">{{transaction.accountShortName}}</span>
                 </td>
                 <td>{{transaction.date}}</td>
+
+              </tr>
+
+              <tr class="col-category">
                 <td class="has-text-left">
                   {{categoryNameFor(transaction)}}
                   <div class="category-indicator" [ngStyle]="{'background': colorFor(transaction)}"></div>
