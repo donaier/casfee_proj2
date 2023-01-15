@@ -59,7 +59,9 @@ $c12: #CCCCCC;
   }
   .navbar {
     background-color: $c6;
-    a, div, h1{
+    a,
+    div,
+    h1{
       background-color: $c6;
       color: $c1;
     }
@@ -91,7 +93,9 @@ $c12: #CCCCCC;
   }
   .card {
     background-color: $c0;
-    p, a, .title{
+    p,
+    a,
+    .title{
       color: $c6;
     }
     .button{
@@ -116,6 +120,9 @@ $c12: #CCCCCC;
         background-color: $c3;
       }
     }
+  }
+  .card-footer-item{
+    background-color: $c0;
   }
   .card-footer-item:hover{
     background-color: $c3;
@@ -180,7 +187,9 @@ $c12: #CCCCCC;
 
   .footer{
     background-color: $c6;
-    p, a, strong{
+    p,
+    a,
+    strong{
       color: $c0;
     }
     a:hover{

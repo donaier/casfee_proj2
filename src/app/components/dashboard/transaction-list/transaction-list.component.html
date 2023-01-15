@@ -1,12 +1,12 @@
 <article class="card mt-5">
   <header class="card-header">
-    <p class="card-header-title">
+    <p class="card-header-title is-responsive-24px">
       Transactions
     </p>
   </header>
   <div class="card-content height">
     <ng-container *ngFor="let month of activeMonths">
-      <h4 class="title is-4 has-text-centered">{{month}}</h4>
+      <h4 class="title is-4 has-text-centered table-title is-responsive-22px">{{month}}</h4>
       <table class="table is-fullwidth transaction-table">
         <colgroup class="is-widescreen">
           <col class="col-account" />

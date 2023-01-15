@@ -53,12 +53,17 @@ $c5: #041440;
       .theme-modifier:hover{
         background-color: $c3;
       }
+      .tag.is-delete:hover{
+        background-color: $c3;
+      }
     }
     .is-transaction:hover{
       background-color: $c2;
     }
   }
-
+  .card-footer-item{
+    background-color: $c0;
+  }
   .card-footer-item:hover{
     background-color: $c3;
   }
@@ -99,24 +104,18 @@ $c5: #041440;
     &:before {
       color: $c5;
     }
-
   }
-  .theme-modifier:hover{
 
-  }
-  .card-footer-item{
 
-  }
-  .card-footer-item:hover{
-
-  }
   .footer{
     background-color: $c1;
   }
   // nav
   .navbar {
     background-color: $c2;
-    a, div, h1{
+    a,
+    div,
+    h1{
       background-color: $c3;
       color: $c1;
     }

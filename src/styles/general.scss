@@ -1,7 +1,3 @@
-$mobile-small: 400px;
-$mobile: 550px;
-$tablet: 850px;
-$screen-large: 1450px;
 
 .category-indicator {
   display: inline-block;
@@ -27,68 +23,20 @@ $screen-large: 1450px;
   visibility: hidden;
 }
 
-.no-decoration{
+.no-decoration {
   outline: none;
   border: none;
   box-shadow: none;
 }
 
-.validation{
+.validation {
   color : red !important;
   font-weight: 600;
   font-size: 0.875em;
 }
 
-.box-margin{
+.box-margin {
   margin-left: 1px;
   margin-right: 1px;
 }
 
-
-@media (max-width: $mobile){
-  .modal-card-title{
-    font-size: 16px;
-  }
-  .heading{
-    flex-direction: column;
-  }
-}
-
-@media (max-width: $mobile-small){
-  .modal-card-title{
-    font-size: 12px;
-  }
-}
-
-@media (min-width: $screen-large){
-  // Navigation
-  nav.navbar{
-    .navbar-item{
-      font-size: 24px;
-    }
-    .width{
-      width: 250px;
-    }
-  }
- // Dashboard Accounts
-  article .column{
-    .card-header-title{
-      font-size: 24px;
-    }
-    .content p{
-      font-size: 22px;
-    }
-  }
-
-// Dashboard Transactions
-
-  article.card{
-    .card-header-title{
-      font-size: 26px;
-    }
-  }
-
-
-
-
-}

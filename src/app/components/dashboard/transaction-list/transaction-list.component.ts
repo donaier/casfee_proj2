@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import * as moment from 'moment';
 import { Subject, Subscription } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
@@ -51,26 +51,13 @@ export class TransactionListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   openModal(transaction : Transaction){
-
-  //  this.selectedtransaction = undefined
-
     this.selectedtransaction = transaction
     this.selectedtransaction.categoryName = this.categoryNameFor(this.selectedtransaction)
-
-
-
     this.DetailTransactionModal.modaltransaction.nativeElement.classList.add('is-active')
   }
 
   categoryNameFor(transaction: Transaction) {
-    /*
-    if(transaction.accountName === "ForTesting"){
-      console.log(transaction)
-      console.log(transaction.accountName)
-      console.log(transaction.categoryId)
 
-      console.log(this.allCategories.find(cat => cat.id === transaction.categoryId)?.name)
-    } */
 
     if (transaction.categoryId !== 'ACCOUNT_TRANSFER') {
       return this.allCategories.find(cat => cat.id === transaction.categoryId)?.name
@@ -86,6 +73,7 @@ export class TransactionListComponent implements OnInit, OnChanges, OnDestroy {
 
       return transferIndicator
     }
+
   }
 
   colorFor(transaction: Transaction) {
@@ -100,23 +88,15 @@ export class TransactionListComponent implements OnInit, OnChanges, OnDestroy {
 
 
   ngOnChanges(changes: SimpleChanges) {
-
-
     this.allTransactions = []
     this.accounts.forEach(account => {
       let tempTransactions: Transaction[] = [...account.transactions];
-
       tempTransactions.map(t => {
         t.accountName = account.name
         t.accountShortName = account.shortName
         t.date = t.date
       })
-
       this.allTransactions.push(...tempTransactions)
-
-
-
-
     })
 
     this.allTransactions = this.allTransactions.filter(t => this.selectedTimes.some((times => t.date.includes(times))))

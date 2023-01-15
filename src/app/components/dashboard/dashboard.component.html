@@ -1,4 +1,5 @@
-<section class="container is-widescreen section">
+<section class="container is-widescreen section" *ngIf='loading_state ==="loaded"'>
+
   <app-account [activeAccounts]="activeAccounts"></app-account>
 
   <article class="dashboard-filter hidden border-modifier" #dashboardFilter id="dashboard-filter">
@@ -81,3 +82,16 @@
   <app-transaction-list [accounts]="activeAccounts" [selectedTimes]="selectedTime"></app-transaction-list>
 
 </section>
+
+<section class="section" *ngIf='loading_state === "nodata"'>
+  <article class="card mt-5">
+    <div class="card-content" *ngIf='loading_state ==="nodata"'>
+      <p class="title">Accounts</p>
+      <p class="subtitle mt-3 mb-5">No registered Account go to <a href="/configuration">CONFIGURATION</a> to start</p>
+    </div>
+  </article>
+</section>
+
+<div class="has-text-centered" *ngIf='loading_state === "isloading"'>
+  <button class="button is-loading m-6">Loading</button>
+</div>

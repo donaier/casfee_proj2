@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
 import { FluxStore } from 'src/app/model/flux-store';
@@ -13,13 +13,16 @@ import { ManualTransactionFormComponent } from './manual-transaction-form/manual
   styleUrls: ['./account.component.scss']
 })
 export class AccountComponent implements OnInit, OnDestroy {
+
+
   @ViewChild('manualTransactionModal') manualTransactionModal!: ManualTransactionFormComponent
   @ViewChild('csvTransactionModal') csvTransactionModal!: CsvTransactionFormComponent
   @Input() activeAccounts: Account[] = []
 
+
   accounts: Account[] = []
   selectedAccount?: Account
-  data : string = 'noentry'
+
   private subscription: Subscription[] = []
 
   constructor(@Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>, public store: FluxStore){}
@@ -28,15 +31,7 @@ export class AccountComponent implements OnInit, OnDestroy {
     this.dispatcher.next(new FluxAction(FluxActionTypes.Load))
     this.subscription.push(this.store.Accounts.subscribe((data) => {
       if (data.length > 0) {
-        this.data = 'data'
         this.accounts = data;
-      }
-      if (data.length === undefined) {
-        this.data = 'isloading'
-      }
-      if (data.length === 0) {
-        this.data = 'nodata'
-        this.accounts = [];
       }
     }))
   }
