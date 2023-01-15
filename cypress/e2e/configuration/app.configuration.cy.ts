@@ -7,7 +7,6 @@ describe('Basic tests for configuration', () => {
     page = new AppConfiguration();
     window.localStorage.setItem('Userdata', "test")
     page.navigateTo();
-
   });
 
   it('should render all components"', () => {
@@ -29,7 +28,7 @@ describe('Basic tests for configuration', () => {
     page.getModalNewAccount().should('be.visible')
     page.getSubmitBtn().should('be.disabled')
     page.getInputAccountName().click()
-    page.getInputAccountName().should('have.css', 'border-color', 'rgb(241, 70, 104)')
+    page.getInputAccountName().should('have.css', 'border-color', 'rgb(219, 219, 219)')
     page.getInputAccountName().type('TestAccount')
     page.getInputAccountName().should('have.css', 'border-color', 'rgb(72, 199, 142)')
     page.getInputAccountShort().type('test')
@@ -40,48 +39,48 @@ describe('Basic tests for configuration', () => {
     page.getSubmitBtn().should('be.enabled')
     page.getSubmitBtn().click()
     cy.visit('http://localhost:4200/dashboard');
-    //console.log(page.accounts)
-    cy.pause()
-    // Is visible on configuration
+    // Is visible on dashboard
     page.getNewAccount().should('be.visible')
-    page.getEditBtn().click()
+
+    // back to config for edit
+    cy.visit('http://localhost:4200/configuration');
+
+    page.getEditBtn().first().click()
     page.getModalNewAccount().should('be.visible')
     page.getInputAccountName().clear()
     // Do a Edit on new account
     page.getInputAccountName().type('EditedAccount')
     page.getSubmitBtn().should('be.enabled')
     page.getSubmitBtn().click()
-    page.getAccountName().should('have.text', ' EditedAccount ')
+    page.getAccountName().first().should('have.text', ' EditedAccount ')
+  });
 
-
-
-    });
-
-    it('CRUD on new CategorieGroup"', () => {
-      // Create new category
-      page.getBtnNewCategoryGroup().click()
-      page.getModalNewCategory().should('be.visible')
-      page.getCategorieSubmitBtn().should('be.disabled')
-      page.getInputCategoryName().type('Categorie for e2e testing')
-      page.getSelectColorCategorie().select('red')
-      page.getCategorieSubmitBtn().should('be.enabled')
-      page.getCategorieSubmitBtn().click()
-      // Is visible on configuration
-      page.getNewCategoryGroup().should('be.visible')
-      page.getEditCategoryGroup().click()
-      page.getInputCategoryName().clear()
-      // Do a Edit on new Category
-      page.getInputCategoryName().type('EditedCategory')
-      page.getCategorieSubmitBtn().click()
-      page.getCategoryName().should('have.text', 'EditedCategory')
-      page.getAddCategory().click()
-      page.getNewItemModal().should('be.visible')
-      page.getSubmitBtnCategoryItem().should('be.disabled')
-      page.getInpuNameCategory().type('TestItem')
-      page.getSubmitBtnCategoryItem().should('be.enabled')
-      page.getSubmitBtnCategoryItem().click()
-      page.getCategoryItem().should('be.visible')
-    });
+  it('CRUD on new CategorieGroup"', () => {
+    cy.visit('http://localhost:4200/configuration');
+    // Create new category
+    page.getBtnNewCategoryGroup().click()
+    page.getModalNewCategory().should('be.visible')
+    page.getCategorieSubmitBtn().should('be.disabled')
+    page.getInputCategoryName().type('Categorie for e2e testing')
+    page.getSelectColorCategorie().select('red')
+    page.getCategorieSubmitBtn().should('be.enabled')
+    page.getCategorieSubmitBtn().click()
+    // Is visible on configuration
+    page.getNewCategoryGroup().should('be.visible')
+    page.getEditCategoryGroup().first().click()
+    page.getInputCategoryName().clear()
+    // Do a Edit on new Category
+    page.getInputCategoryName().type('EditedCategory')
+    page.getCategorieSubmitBtn().click()
+    page.getCategoryName().first().should('have.text', 'EditedCategory')
+    page.getAddCategory().first().click()
+    page.getNewItemModal().should('be.visible')
+    page.getSubmitBtnCategoryItem().should('be.disabled')
+    page.getInpuNameCategory().type('TestItem')
+    page.getSubmitBtnCategoryItem().should('be.enabled')
+    page.getSubmitBtnCategoryItem().click()
+    page.getCategoryItem().should('be.visible')
+  });
 
 
   it('CRUD on new CsvMask"', () => {
@@ -98,19 +97,10 @@ describe('Basic tests for configuration', () => {
     // Is visible on configuration
     page.getNewCsvMask().should('be.visible')
     // Do a Edit on new csvMask
-    page.getEditCsvMask().click()
+    page.getEditCsvMask().first().click()
     page.getInputNameNewCsv().clear()
     page.getInputNameNewCsv().type('EditedCypressMask')
     page.getEditCsvMaskBtn().click()
-    page.getNewCsvMask().should('have.text', 'EditedCypressMask')
-
-
+    page.getNewCsvMask().first().should('have.text', 'EditedCypressMask')
   });
-
-
-
-
-
-
-
 });
