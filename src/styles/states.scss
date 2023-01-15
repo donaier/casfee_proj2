@@ -1,32 +1,32 @@
-.input:focus, .input--select:focus{
+.input:focus, .input--select:focus {
   outline: 0;
   box-shadow: none;
 }
-.is-success{
+.is-success {
   border-color: #48c78e !important;
 }
-.is-danger{
+.is-danger {
   border-color: #f14668 !important;
 }
-.input:active{
+.input:active {
   border-color:#f14668 !important;
   outline: 0;
   box-shadow: none !important;
 
 }
-.input:focus{
+.input:focus {
   border-color:#f14668;
   outline: 0;
   box-shadow: none !important;
 }
 
-.select select:active{
+.select select:active {
   border-color:#f14668;
   outline: 0;
   box-shadow: none !important;
 }
 
-.select select:focus{
+.select select:focus {
   border-color:#f14668;
   outline: 0;
   box-shadow: none !important;
@@ -38,18 +38,18 @@
 //  box-shadow: none !important;
 }
 
-.textfield:focus{
+.textfield:focus {
  // border-color:#f14668 !important;
  // outline: 0;
  // box-shadow: none !important;
 }
-.textfield:active{
+.textfield:active {
 //  border-color:#f14668 !important;
 //  outline: 0;
 //  box-shadow: none !important;
 }
 
-.textfield:focus-visible{
+.textfield:focus-visible {
   //  border-color:#f14668 !important;
   //  outline: 0;
   //  box-shadow: none !important;
@@ -60,37 +60,37 @@
   filter: blur(3px);
 }
 
-.scrollable{
+.scrollable {
   overflow-x: hidden;
   overflow-y: auto;
   scroll-padding-bottom: 0;
 }
 
-.add-margin{
+.add-margin {
   margin-right: 2px;
   margin-left: 2px;
 }
 
-.is-light{
+.is-light {
   border: 1px #EAF2E3 solid;
 }
 
-.is-blue{
+.is-blue {
   border: 1px #61E8E1 solid;
 }
 
-.is-red{
+.is-red {
   border: 1px #F25757 solid;
 }
 
-.is-yellow{
+.is-yellow {
   border: 1px #F2E863 solid;
 }
 
-.is-orange{
+.is-orange {
   border: 1px #F2CD60 solid;
 }
 
-.is-active{
+.is-active {
   border: 1px black solid;
 }

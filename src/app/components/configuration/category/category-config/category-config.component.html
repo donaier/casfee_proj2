@@ -3,7 +3,7 @@
     <h4 class="title is-4">
       Categories:
     </h4>
-    <a class="button new-categoryGroup" (click)="createCategoryGroup()" *ngIf='data ==="data"'>+ Create new Category</a>
+    <button class="button new-categoryGroup no-decoration" type="button" (click)="createCategoryGroup()" *ngIf='data ==="data"'>+ Create new Category</button>
   </div>
 
   <article class="card mt-5" *ngIf='data ==="isloading"'>

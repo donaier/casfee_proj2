@@ -1,6 +1,7 @@
 $mobile-small: 400px;
 $mobile: 550px;
 $tablet: 850px;
+$screen: 1024px;
 $screen-large: 1450px;
 
 @media (max-width: $mobile) {
@@ -15,6 +16,12 @@ $screen-large: 1450px;
 @media (max-width: $mobile-small) {
   .modal-card-title {
     font-size: 12px;
+  }
+}
+
+@media (min-width: $screen) {
+  .width {
+    width: 150px;
   }
 }
 
@@ -63,6 +70,9 @@ $screen-large: 1450px;
     small {
       @extend .is-responsive-20px;
     }
+  }
+  .card-header-title {
+    @extend .is-responsive-22px;
   }
 
   .modal {
