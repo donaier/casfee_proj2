@@ -66,11 +66,6 @@ export class NavigationComponent implements AfterViewInit {
     this.theme.nativeElement.classList.toggle('background')
   }
 
-  showSettings(e: Event) {
-    this.expandBurgerMenu(e)
-    this.document.getElementById('dashboard-filter')?.classList.toggle('hidden')
-  }
-
   logout(){
     this.AuthService.logout()
   }

@@ -14,12 +14,10 @@ export class GraphService {
   constructor() {}
 
   private setAccountNames(accounts: Account[]) {
-
     return accounts.map(acc => acc.name)
   }
 
   private setAccountSeries(accounts: Account[], selectedMonths: string[]) {
-
     let accGraphObjects: any = accounts.map(acc => {return {
       name: acc.name,
       type: 'line',
@@ -196,7 +194,6 @@ export class GraphService {
     let accSeries: object[] = this.setAccountSeries(accounts, selectedTimes)
 
     return {
-      title: { text: 'Total' },
       legend: {
         data: [...accNames, 'Total'],
         selectedMode: false

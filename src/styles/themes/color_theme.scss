@@ -117,6 +117,7 @@ $c5: #041440;
       color: $c4;
     }
   }
+
   .dashboard-filter {
     background-color: $c2;
     &.border-modifier {
@@ -129,5 +130,9 @@ $c5: #041440;
     .modal-card-title {
       color: $c5
     }
+  }
+
+  button.filter-toggle {
+    color: $c3;
   }
 }

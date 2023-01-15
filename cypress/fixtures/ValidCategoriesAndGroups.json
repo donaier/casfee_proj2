@@ -1,0 +1,18 @@
+{
+  "groups": [
+    {
+      "id": "nochild",
+      "name": "hasNoChildren"
+    },
+    {
+      "id": "haschild",
+      "name": "hasChildren"
+    }
+  ],
+  "categories": [
+    {
+      "group_id": "haschild",
+      "name": "isChild"
+    }
+  ]
+}
