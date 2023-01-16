@@ -1,5 +1,4 @@
 import { UtilityService } from 'src/app/shared/services/utility.service'
-
 import { Account } from 'src/app/shared/types/account'
 import { CategoryGroup, Category } from 'src/app/shared/types/category'
 

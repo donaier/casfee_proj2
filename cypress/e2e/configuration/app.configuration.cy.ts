@@ -21,7 +21,6 @@ describe('Basic tests for configuration', () => {
     page.getCsvWarning().should('be.visible')
   });
 
-
   it('CRUD on new Account"', () => {
     // Create new account
     page.getBtnNewModal().click()
@@ -41,10 +40,8 @@ describe('Basic tests for configuration', () => {
     cy.visit('http://localhost:4200/dashboard');
     // Is visible on dashboard
     page.getNewAccount().should('be.visible')
-
     // back to config for edit
     cy.visit('http://localhost:4200/configuration');
-
     page.getEditBtn().first().click()
     page.getModalNewAccount().should('be.visible')
     page.getInputAccountName().clear()
@@ -81,7 +78,6 @@ describe('Basic tests for configuration', () => {
     page.getSubmitBtnCategoryItem().click()
     page.getCategoryItem().should('be.visible')
   });
-
 
   it('CRUD on new CsvMask"', () => {
     // Create new csvMask

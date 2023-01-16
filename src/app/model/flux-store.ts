@@ -13,7 +13,6 @@ import { Firestore, onSnapshot, query } from '@angular/fire/firestore'
 import { collection } from '@firebase/firestore'
 import { UtilityService } from '../shared/services/utility.service'
 
-
 @Injectable()
 
 export class FluxStore {
@@ -84,5 +83,4 @@ export class FluxStore {
       this.CsvMasks.next(CsvMasks_all)
     })
   }
-
 }

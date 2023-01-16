@@ -7,9 +7,9 @@ import { AccountFormComponent } from '../account-form/account-form.component';
 
 @Component({
   selector: 'app-account-config',
-  templateUrl: './account-config.component.html',
-  styleUrls: ['./account-config.component.scss']
+  templateUrl: './account-config.component.html'
 })
+
 export class AccountConfigComponent implements OnInit, OnDestroy {
   @ViewChild('accountModal') accountModal!: AccountFormComponent
 

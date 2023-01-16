@@ -83,5 +83,4 @@ export class TransactionService {
 
     return groupedMonths
   }
-
 }

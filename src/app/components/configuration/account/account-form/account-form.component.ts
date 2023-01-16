@@ -10,9 +10,9 @@ import { UtilityService } from 'src/app/shared/services/utility.service';
 
 @Component({
   selector: 'app-account-form',
-  templateUrl: './account-form.component.html',
-  styleUrls: ['./account-form.component.scss']
+  templateUrl: './account-form.component.html'
 })
+
 export class AccountFormComponent implements OnInit, OnChanges {
   @ViewChild('modal', { static: false }) modal!: ElementRef
 

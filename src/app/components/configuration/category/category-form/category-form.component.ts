@@ -8,9 +8,9 @@ import { Category, CategoryGroup, CategoryGroupColors } from 'src/app/shared/typ
 
 @Component({
   selector: 'app-category-form',
-  templateUrl: './category-form.component.html',
-  styleUrls: ['./category-form.component.scss']
+  templateUrl: './category-form.component.html'
 })
+
 export class CategoryFormComponent implements OnInit {
 
   @ViewChild('modal', { static: false }) modal!: ElementRef

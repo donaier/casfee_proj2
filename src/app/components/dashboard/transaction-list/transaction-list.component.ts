@@ -1,9 +1,8 @@
-import { Component, ElementRef, Inject, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, Inject, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import * as moment from 'moment';
 import { Subject, Subscription } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
 import { FluxStore } from 'src/app/model/flux-store';
-import { UtilityService } from 'src/app/shared/services/utility.service';
 import { Account } from 'src/app/shared/types/account';
 import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
 import { Category, CategoryGroup } from 'src/app/shared/types/category';
@@ -15,19 +14,18 @@ import { TransactionFormComponent } from './transaction-form/transaction-form.co
   templateUrl: './transaction-list.component.html',
   styleUrls: ['./transaction-list.component.scss']
 })
+
 export class TransactionListComponent implements OnInit, OnChanges, OnDestroy {
   @ViewChild('DetailTransactionModal') DetailTransactionModal!: TransactionFormComponent
   @Input() accounts: Account[] = []
   @Input() selectedTimes: string[] = []
 
   private subscriptions: Subscription[] = [];
-
   allTransactions: Transaction[] = []
   allCategories: Category[] = []
   allCategoryGroups: CategoryGroup[] = []
   allAccounts: Account[] = []
   selectedtransaction: Transaction | undefined
-
   activeMonths: Set<string> = new Set
 
   constructor(@Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>, public store: FluxStore) {}
@@ -57,11 +55,8 @@ export class TransactionListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   categoryNameFor(transaction: Transaction) {
-
-
     if (transaction.categoryId !== 'ACCOUNT_TRANSFER') {
       return this.allCategories.find(cat => cat.id === transaction.categoryId)?.name
-
     } else {
       let transferIndicator: string = ''
       if (transaction.amount > 0) {
@@ -70,10 +65,8 @@ export class TransactionListComponent implements OnInit, OnChanges, OnDestroy {
         transferIndicator += 'to '
       }
       transferIndicator += this.allAccounts.find(acc => acc.id === transaction.fromAccount)?.name
-
       return transferIndicator
     }
-
   }
 
   colorFor(transaction: Transaction) {

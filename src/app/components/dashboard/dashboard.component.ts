@@ -12,20 +12,19 @@ import { Category, CategoryGroup } from 'src/app/shared/types/category';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
+
 export class DashboardComponent implements OnInit, OnDestroy {
   @ViewChild('dashboardFilter') dashboardFilter!: ElementRef
 
+  private subscription: Subscription[] = []
   accounts: Account[] = []
   categoryGroups: CategoryGroup[] = []
   categories: Category[] = []
   activeAccounts: Account[] = []
   loading_state: string | undefined
-
   groupedMonths: any[] = []
   selectedTimeframe: string = 'months'
   selectedTime: any[] = []
-
-  private subscription: Subscription[] = [];
 
   constructor(
     @Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>,

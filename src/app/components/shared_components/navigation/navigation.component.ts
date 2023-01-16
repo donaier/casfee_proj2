@@ -17,7 +17,6 @@ export class NavigationComponent implements AfterViewInit {
   @ViewChild('theme_select') theme!: ElementRef
   @ViewChild('hamburgerBtn') hamburgerBtn!: ElementRef
 
-
   classlist : DOMTokenList | undefined
   router: Router
 

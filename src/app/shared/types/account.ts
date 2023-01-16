@@ -1,4 +1,3 @@
-import { FormControl, Validators } from '@angular/forms';
 import { Transaction } from './transaction'
 
 export interface Account {
@@ -12,16 +11,6 @@ export interface Account {
   id: string,
   transactions: Transaction[],
 }
-/*
-export const AccountForm = {
-  name: new FormControl('', [Validators.required]),
-  shortName: new FormControl(''),
-  description: new FormControl(''),
-  initialValue: new FormControl(''),
-  color: new FormControl(''),
-  csv: new FormControl('', [Validators.required]),
-};
-*/
 
 export const AccountColors = [
   { name: 'blue', value: 'hsl(217, 71%, 53%)'},
@@ -30,13 +19,3 @@ export const AccountColors = [
   { name: 'yellow', value: 'hsl(48, 100%, 67%)'},
   { name: 'red', value: 'hsl(348, 100%, 61%)'},
 ]
-
-
-/*
-export const CsvMaskForm = {
-  name: new FormControl('', [Validators.required]),
-  delimiter: new FormControl('', [Validators.required]),
-  mask: new FormControl('', [Validators.required]),
-};
-*/
-

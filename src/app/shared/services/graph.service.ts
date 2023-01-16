@@ -5,12 +5,9 @@ import * as moment from 'moment';
 import { reduce } from 'rxjs';
 import { Category, CategoryGroup } from '../types/category';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({providedIn: 'root'})
 
 export class GraphService {
-
   constructor() {}
 
   private setAccountNames(accounts: Account[]) {
