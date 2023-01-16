@@ -6,7 +6,8 @@ import { CsvFormComponent } from '../csv-form/csv-form.component';
 
 @Component({
   selector: 'app-csv-config',
-  templateUrl: './csv-config.component.html'
+  templateUrl: './csv-config.component.html',
+  styleUrls: ['./csv-config.component.scss']
 })
 
 export class CsvConfigComponent implements OnInit, OnDestroy {
