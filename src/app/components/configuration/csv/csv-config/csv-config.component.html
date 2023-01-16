@@ -1,9 +1,10 @@
+
 <section data-cy="CsvComponent">
   <div class="is-flex is-justify-content-space-between heading">
     <h4 class="title is-4">
       Csv:
     </h4>
-    <a class="button new-csvMask" (click)="createCsv()" *ngIf='data ==="data"'>+ Create new CsvMask</a>
+    <button class="button new-csvMask no-decoration" type="button" (click)="createCsv()" *ngIf='data ==="data"'>+ Create new CsvMask</button>
   </div>
 
   <article class="card mt-5" *ngIf='data ==="isloading"'>
@@ -15,7 +16,7 @@
   <article class="card mt-5" *ngIf='data ==="nodata"'>
     <div class="card-content">
       <p class="title">Please add csv to start</p>
-      <a class="button new-csvMask" (click)="createCsv()">+ Create new csvMask</a>
+      <button class="button new-csvMask no-decoration" type="button" (click)="createCsv()">+ Create new csvMask</button>
     </div>
   </article>
 

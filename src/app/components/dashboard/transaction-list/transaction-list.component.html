@@ -1,12 +1,12 @@
-<div class="card mt-5">
+<article class="card mt-5">
   <header class="card-header">
-    <p class="card-header-title">
+    <p class="card-header-title is-responsive-24px">
       Transactions
     </p>
   </header>
   <div class="card-content height">
     <ng-container *ngFor="let month of activeMonths">
-      <h4 class="title is-4 has-text-centered">{{month}}</h4>
+      <h4 class="title is-4 has-text-centered table-title is-responsive-22px">{{month}}</h4>
       <table class="table is-fullwidth transaction-table">
         <colgroup class="is-widescreen">
           <col class="col-account" />
@@ -19,11 +19,15 @@
         <tbody>
           <ng-container *ngFor="let transaction of allTransactions">
             <div class="is-transaction is-mobile" *ngIf="transaction.date.includes(month)" (click)="openModal(transaction)">
-              <tr class="col-date-short-category">
+              <tr class="col-date-short">
                 <td>
                   <span class="tag">{{transaction.accountShortName}}</span>
                 </td>
                 <td>{{transaction.date}}</td>
+
+              </tr>
+
+              <tr class="col-category">
                 <td class="has-text-left">
                   {{categoryNameFor(transaction)}}
                   <div class="category-indicator" [ngStyle]="{'background': colorFor(transaction)}"></div>
@@ -65,6 +69,6 @@
       </table>
     </ng-container>
   </div>
-</div>
+</article>
 
 <app-transaction-form #DetailTransactionModal [transaction]="selectedtransaction" [categoryGroups]="allCategoryGroups" [categories]="allCategories"></app-transaction-form>

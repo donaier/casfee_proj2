@@ -6,12 +6,11 @@ import { fluxDispatcherToken } from '../shared/helpers/flux.configuration'
 import { Account } from '../shared/types/account'
 import { csvMask } from '../shared/types/csvMask'
 import { Category, CategoryGroup } from '../shared/types/category'
-import { Transaction } from '../shared/types/transaction'
 import { FluxAction, FluxActionTypes } from '../shared/types/actions.type'
 
 // Firestore
 import { Firestore, onSnapshot, query } from '@angular/fire/firestore'
-import { collection, QuerySnapshot } from '@firebase/firestore'
+import { collection } from '@firebase/firestore'
 import { UtilityService } from '../shared/services/utility.service'
 
 
@@ -20,7 +19,6 @@ import { UtilityService } from '../shared/services/utility.service'
 export class FluxStore {
 
   Accounts: BehaviorSubject<Account[]> = new BehaviorSubject<Account[] | any>({})
- // Transactions: BehaviorSubject<Transaction[]> = new BehaviorSubject<Transaction[] | any>({info: "init"})
   CategoryGroups: BehaviorSubject<CategoryGroup[]> = new BehaviorSubject<CategoryGroup[] | any>({info: "init"})
   Categories: BehaviorSubject<Category[]> = new BehaviorSubject<Category[] | any>({info: "init"})
   CsvMasks: BehaviorSubject<csvMask[]> = new BehaviorSubject<csvMask[] | any>({info: "init"})
@@ -32,14 +30,13 @@ export class FluxStore {
         case FluxActionTypes.Load:
           this.listener_accounts()
           this.listener_categories()
-       //   this.listener_transactions()
           this.listener_csvMasks()
           break
       }
     })
   }
 
-  listener_accounts(){
+  listener_accounts() {
     const q_accounts = query(collection(this.firestore, 'accounts'))
     const listener_accounts = onSnapshot(q_accounts, (querySnapshot) => {
       let Accounts_all : Account[]  = []
@@ -52,7 +49,7 @@ export class FluxStore {
     })
   }
 
-  listener_categories(){
+  listener_categories() {
     const q_categoryGroups = query(collection(this.firestore, 'categoryGroups'))
     const listener_categoryGroups = onSnapshot(q_categoryGroups, (querySnapshot) => {
       let CategoryGroups_all : CategoryGroup[]  = []
@@ -75,23 +72,7 @@ export class FluxStore {
     })
   }
 
-  /*
-   listener_transactions(){
-     const q_transactions = query(collection(this.firestore, 'transactions'))
-     const listener_transactions = onSnapshot(q_transactions, (querySnapshot) => {
-       let Transactions_all : Transaction[] = []
-       querySnapshot.forEach((doc) => {
-         let data_copy : Transaction = Object.assign(doc.data())
-         data_copy.id = doc.id
-         Transactions_all.push(data_copy)
-       })
-       this.utilityService.setTransactionstoAccount(Transactions_all, this.Accounts.value)
-
-     })
-   }
-*/
-
-  listener_csvMasks(){
+  listener_csvMasks() {
     const q_csvMasks = query(collection(this.firestore, 'csvMasks'))
     const listener_csvMasks = onSnapshot(q_csvMasks, (querySnapshot) => {
       let CsvMasks_all : csvMask[] = []

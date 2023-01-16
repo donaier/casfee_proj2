@@ -1,6 +1,6 @@
-$tablet: 850px;
-$mobile: 550px;
-$mobile-small: 400px;
+body {
+  min-height: 100vh;
+}
 
 .category-indicator {
   display: inline-block;
@@ -26,37 +26,20 @@ $mobile-small: 400px;
   visibility: hidden;
 }
 
-.no-decoration{
+.no-decoration {
   outline: none;
   border: none;
   box-shadow: none;
 }
 
-.validation{
+.validation {
   color : red !important;
   font-weight: 600;
   font-size: 0.875em;
 }
 
-.box-margin{
+.box-margin {
   margin-left: 1px;
   margin-right: 1px;
 }
-
-
-@media (max-width: $mobile){
-  .modal-card-title{
-    font-size: 16px;
-  }
-  .heading{
-    flex-direction: column;
-  }
-}
-
-@media (max-width: $mobile-small){
-  .modal-card-title{
-    font-size: 12px;
-  }
-}
-
 

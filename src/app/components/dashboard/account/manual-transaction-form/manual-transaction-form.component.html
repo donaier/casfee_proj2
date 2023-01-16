@@ -17,7 +17,7 @@
                 <input class="input"
                   id="input-amount"
                   type="number"
-                  placeholder="amount"
+                  placeholder="Amount"
                   formControlName="amount"
                   [ngClass]="{
                     'is-danger': amount.invalid && (amount.dirty || amount.touched),
@@ -39,7 +39,7 @@
               <input class="input"
               id="input-date"
               type="date"
-              placeholder="date"
+              placeholder="Date"
               formControlName="date"
               [ngClass]="{
                 'is-danger': date.invalid && (date.dirty || date.touched),
@@ -55,7 +55,7 @@
             <input class="input"
             id="input-description"
             type="text"
-            placeholder="description"
+            placeholder="Description"
             formControlName="description"
             [ngClass]="{
               'is-danger': description.invalid && (description.dirty || description.touched),
@@ -78,7 +78,7 @@
               'is-orange': categoryGroup.color === '#F2CD60'}"
             >
               <p class="is-flex is-justify-content-space-between">
-                <strong class="pb-3">{{categoryGroup.name}}</strong>
+                <strong class="pb-3 is-responsive-18px">{{categoryGroup.name}}</strong>
               </p>
               <div class="field is-grouped is-grouped-multiline">
                 <ng-container *ngFor="let category of categories" >

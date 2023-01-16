@@ -3,7 +3,7 @@
     <h4 class="title is-4">
       Registered Accounts:
     </h4>
-    <a class="button new-account" (click)="createAccount()" *ngIf='data ==="data"'>+ Create new Account</a>
+    <button class="button new-account no-decoration" type="button" (click)="createAccount()" *ngIf='data ==="data"'>+ Create new Account</button>
   </div>
 
   <article class="card mt-5" *ngIf='data ==="isloading"'>
@@ -15,11 +15,11 @@
   <article class="card mt-5" *ngIf='data ==="nodata"'>
     <div class="card-content">
       <p class="title">Please create account to start</p>
-      <a class="button new-account" (click)="createAccount()">+ Create new account</a>
+      <button class="button new-account no-decoration" type="button" (click)="createAccount()">+ Create new account</button>
     </div>
   </article>
 
-  <div class="columns is-flex-wrap-wrap account " *ngIf='data ==="data"'>
+  <div class="columns is-flex-wrap-wrap account" *ngIf='data ==="data"'>
     <div class="column is-one-third" *ngFor="let account of accounts">
       <div class="card">
         <header class="card-header">
@@ -49,8 +49,8 @@
           </div>
         </div>
         <footer class="card-footer">
-          <a class="card-footer-item edit-account" (click)="editAccount(account)">Edit</a>
-          <a class="card-footer-item" (click)="deleteAccount(account)">Delete</a>
+          <button class="card-footer-item edit-account no-decoration is-responsive-20px" type="button" (click)="editAccount(account)">Edit</button>
+          <button class="card-footer-item no-decoration is-responsive-20px" type="button" (click)="deleteAccount(account)">Delete</button>
         </footer>
       </div>
     </div>

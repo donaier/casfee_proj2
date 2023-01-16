@@ -1,12 +1,12 @@
-<section class="container is-widescreen section">
+<section class="container is-widescreen section" *ngIf='loading_state ==="loaded"'>
   <button class="button filter-toggle" #filterToggle (click)="showFilter($event)">
     <span class="icon is-small">
       <i class="fas fa-filter"></i>
     </span>
   </button>
-  <article class="dashboard-filter hidden border-modifier" #dashboardFilter id="dashboard-filter">
+  <article class="dashboard-filter hidden border-modifier scrollable" #dashboardFilter id="dashboard-filter">
     <div class="container is-widescreen my-5">
-      <p class="modal-card-title mb-5 is-inline-block">Dashboard Settings</p>
+      <p class="modal-card-title mb-5 is-inline-block margin-mobile">Dashboard Settings</p>
       <button class="button is-pulled-right mr-4" (click)="closeFilter()">
         <span class="icon is-small">
           <i class="fas fa-times"></i>
@@ -84,3 +84,16 @@
   <app-graph [accounts]="activeAccounts" [selectedTimes]="selectedTime" [categoryGroups]="categoryGroups" [categories]="categories"></app-graph>
   <app-transaction-list [accounts]="activeAccounts" [selectedTimes]="selectedTime"></app-transaction-list>
 </section>
+
+<section class="section" *ngIf='loading_state === "nodata"'>
+  <article class="card mt-5">
+    <div class="card-content" *ngIf='loading_state ==="nodata"'>
+      <p class="title">Accounts</p>
+      <p class="subtitle mt-3 mb-5">No registered Account go to <a href="/configuration">CONFIGURATION</a> to start</p>
+    </div>
+  </article>
+</section>
+
+<div class="has-text-centered" *ngIf='loading_state === "isloading"'>
+  <button class="button is-loading m-6">Loading</button>
+</div>

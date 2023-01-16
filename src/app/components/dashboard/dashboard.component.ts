@@ -7,7 +7,6 @@ import { Account } from 'src/app/shared/types/account';
 import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
 import { Category, CategoryGroup } from 'src/app/shared/types/category';
 
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -15,10 +14,12 @@ import { Category, CategoryGroup } from 'src/app/shared/types/category';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   @ViewChild('dashboardFilter') dashboardFilter!: ElementRef
+
   accounts: Account[] = []
   categoryGroups: CategoryGroup[] = []
   categories: Category[] = []
   activeAccounts: Account[] = []
+  loading_state: string | undefined
 
   groupedMonths: any[] = []
   selectedTimeframe: string = 'months'
@@ -36,10 +37,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.dispatcher.next(new FluxAction(FluxActionTypes.Load))
     this.subscription.push(this.store.Accounts.subscribe((data) => {
       if (data.length > 0) {
+        this.loading_state = 'loaded'
         this.accounts = data
         this.activeAccounts = data
         this.groupedMonths = this.transactionService.extractMonths(this.activeAccounts)
         this.toggleTimeframe(true)
+      }
+      if (data.length === undefined) {
+         this.loading_state = 'isloading'
+      }
+      if(data.length === 0){
+        this.loading_state = 'nodata'
+        this.accounts = []
       }
     }))
     this.subscription.push(this.store.CategoryGroups.subscribe((data) => {

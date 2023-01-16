@@ -10,11 +10,18 @@
       <button class="delete" aria-label="close" (click)="hideModal()"></button>
     </header>
 
-    <article class="modal-card-body">
+    <div class="modal-card-body" *ngIf="selector ==='delete'">
+      <p>Are you sure to Delete Account: <span class="is-size-4">{{account!.name}}</span></p>
+    </div>
+
+    <div class="modal-card-body" *ngIf="selector ==='warning'">
+      <p>Maximum accounts reached!</p>
+    </div>
+
+    <article class="modal-card-body" *ngIf="selector ==='create' || selector === 'edit'">
       <form class="form"
       [formGroup]="accountForm"
       #formDirective="ngForm"
-      *ngIf="selector ==='create' || selector === 'edit'"
       novalidate>
         <div class="modal-card-body">
           <div class="columns mb-0">
@@ -98,9 +105,9 @@
                   required>
               </p>
               <p class="control">
-                <a class="button is-static is-outlined control-modifier">
+                <span class="button is-static is-outlined control-modifier">
                   Fr.
-                </a>
+                </span>
               </p>
             </div>
             <div *ngIf="(initialValue.invalid && initialValue.touched) || initialValue.dirty">
@@ -126,14 +133,6 @@
         </div>
       </form>
     </article>
-
-    <div class="modal-card-body" *ngIf="selector ==='delete'">
-      <p>Are you sure to Delete Account: <span class="is-size-4">{{account!.name}}</span></p>
-    </div>
-
-    <div class="modal-card-body" *ngIf="selector ==='warning'">
-      <p>Maximum accounts reached!</p>
-    </div>
 
     <footer class="modal-card-foot is-flex is-justify-content-center">
       <button
