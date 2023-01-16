@@ -12,7 +12,6 @@
   border-color:#f14668 !important;
   outline: 0;
   box-shadow: none !important;
-
 }
 .input:focus {
   border-color:#f14668;
@@ -61,14 +60,9 @@
 }
 
 .scrollable {
-  overflow-x: hidden;
+  overflow-x: auto;
   overflow-y: auto;
   scroll-padding-bottom: 0;
-}
-
-.add-margin {
-  margin-right: 2px;
-  margin-left: 2px;
 }
 
 .is-light {

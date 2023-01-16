@@ -41,25 +41,5 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
-import { AppConfiguration } from '../e2e/configuration/app.configuration.po';
 
-
-declare namespace Cypress {
-     interface Chainable<Subject = any> {
-      createAccount(param: any): void;
-     }
-  }
-
-
-
-
-
-
-function customCommand(page: any): void {
-
-  //   console.warn(param);
-   }
-
-
-Cypress.Commands.add('createAccount', customCommand)
 
