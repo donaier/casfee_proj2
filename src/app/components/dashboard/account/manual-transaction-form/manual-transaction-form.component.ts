@@ -11,17 +11,16 @@ import { Category, CategoryGroup } from 'src/app/shared/types/category';
 import { DATE_FORMAT, Transaction } from 'src/app/shared/types/transaction';
 import { v4 as uuidv4 } from 'uuid';
 
-
 @Component({
   selector: 'app-manual-transaction-form',
   templateUrl: './manual-transaction-form.component.html',
   styleUrls: ['./manual-transaction-form.component.scss']
 })
+
 export class ManualTransactionFormComponent implements OnInit, OnDestroy {
   @ViewChild('modal') modal!: ElementRef
   @ViewChild('manualtransactionform', { static: false }) manualtransactionform!: ElementRef
   @ViewChildren('tags') tags!: QueryList<ElementRef>
-
 
   @Input() account?: Account;
 
@@ -100,15 +99,11 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
     this.seTag(e)
   }
 
-
   setTransferCategory(e: Event, transferAcc: Account) {
     this.removeActiveTag()
     this.transactionForm.get('fromAccount')?.setValue(transferAcc.id);
     this.transactionForm.get('categoryId')?.setValue('ACCOUNT_TRANSFER');
     this.seTag(e)
-
-// Eine transaktion auf einen Account braucht trotzdem eine Category, und theoretisch muesste
-// man 2 Updates durchfuehren , weil es entstehen ja 2 Transaktionen so ??
   }
 
   submitTransactionForm(e: Event) {

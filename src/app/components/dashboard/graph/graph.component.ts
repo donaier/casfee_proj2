@@ -14,6 +14,7 @@ import { Category, CategoryGroup } from 'src/app/shared/types/category';
   templateUrl: './graph.component.html',
   styleUrls: ['./graph.component.scss']
 })
+
 export class GraphComponent implements OnChanges, AfterViewInit, OnDestroy {
   @Input() accounts: Account[] = []
   @Input() selectedTimes: string[] = []
@@ -25,11 +26,9 @@ export class GraphComponent implements OnChanges, AfterViewInit, OnDestroy {
   @ViewChild('categorized') catElement!: ElementRef
 
   private subscriptions: Subscription[] = [];
-
   graph: echarts.ECharts | null = null
   inout: echarts.ECharts | null = null
   categorized: echarts.ECharts | null = null
-
   activeMonths: Set<string> = new Set
 
   constructor(

@@ -59,6 +59,4 @@ export class AppNavigation {
   getDarkTheme(){
     return cy.get('.navbar-item').eq(9);
   }
-
-
 }

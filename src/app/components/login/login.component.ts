@@ -18,7 +18,6 @@ export class LoginComponent implements OnInit {
   password!: FormControl
   authorisation : boolean = true
 
-
   constructor(private AuthService: AuthentificationService, private router: Router, @Inject(DOCUMENT) private document: Document) {}
 
   ngOnInit() {
@@ -47,5 +46,4 @@ export class LoginComponent implements OnInit {
       this.signinButton.nativeElement.classList.remove('is-loading')
     }
   }
-
 }

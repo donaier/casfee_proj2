@@ -5,8 +5,8 @@ import { User } from '../types/user';
 import { User as FirebaseUser } from "firebase/auth";
 import { Router } from '@angular/router';
 
-
 @Injectable({providedIn: 'root'})
+
 export class AuthentificationService {
   constructor(private StorageService: StorageService, private auth: Auth, private router: Router) {}
 
@@ -48,5 +48,4 @@ export class AuthentificationService {
     }
     return false
   }
-
 }

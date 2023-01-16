@@ -1,28 +1,21 @@
 import { Component, ElementRef, Inject, Input, OnChanges, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
-
 import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
-
 import { Subject, Subscription } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
-
 import { FluxStore } from 'src/app/model/flux-store';
 import { UtilityService } from 'src/app/shared/services/utility.service';
 import { Account } from 'src/app/shared/types/account';
-
 import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
 import { Category, CategoryGroup } from 'src/app/shared/types/category';
 import { Transaction } from 'src/app/shared/types/transaction';
-
 import * as moment from 'moment';
-import { DATE_FORMAT } from 'src/app/shared/types/transaction';
-
-
 
 @Component({
   selector: 'app-transaction-form',
   templateUrl: './transaction-form.component.html',
   styleUrls: ['./transaction-form.component.scss']
 })
+
 export class TransactionFormComponent implements OnInit, OnChanges{
   @ViewChild('modaltransaction') modaltransaction!: ElementRef
   @ViewChild('CategoryName') CategoryName!: ElementRef
@@ -34,7 +27,6 @@ export class TransactionFormComponent implements OnInit, OnChanges{
 
   showCategoriesFlag : boolean = false
   account : Account | undefined
-
   transactionForm!: FormGroup
   id!: FormControl
   description!: FormControl
@@ -43,8 +35,11 @@ export class TransactionFormComponent implements OnInit, OnChanges{
   amount!: FormControl
   categoryId!: FormControl
 
-  constructor(public store: FluxStore,
-  @Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>, private utilityService: UtilityService) {}
+  constructor(
+    @Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>, 
+    public store: FluxStore,
+    private utilityService: UtilityService
+  ) {}
 
   ngOnInit(){
     this.transactionForm = new FormGroup({
@@ -133,5 +128,4 @@ export class TransactionFormComponent implements OnInit, OnChanges{
       this.dateinput.nativeElement.value = moment(this.transaction!.date, "DD.MM.YYYY").format('YYYY-MM-DD')
     }
   }
-
 }

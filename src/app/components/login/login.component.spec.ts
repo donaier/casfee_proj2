@@ -65,52 +65,5 @@ describe("LoginComponent", () => {
    //   expect(component.signinButton.nativeElement.classList).toContain('is-loading');
 
     });
-
-
-
-    /*
-    it('email invalid when empty', () => {
-      expect(email.valid).toBeFalsy(); (2)
-    });
-
-    it('password invalid when empty', () => {
-      expect(password.valid).toBeFalsy(); (2)
-    });
-
-    it('email valid if entry', () => {
-      email.setValue("admin@admin.ch");
-      expect(email.valid).toBeTruthy(); (2)
-    });
-
-    it('password valid if entry', () => {
-      password.setValue("123456");
-      expect(password.valid).toBeTruthy(); (2)
-    }); */
-
-
   });
-
-
-
-
-
-
-
-
-/*
-  describe('method1', () => {
-
-
-    it('should ...', () => {
-      expect(component).toBeTruthy();
-    });
-
-
-
-
-
-  });
-*/
-
-
 })

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core'
 import { User as FirebaseUser } from "firebase/auth";
 
 @Injectable({ providedIn: 'root' })
+
 export class StorageService {
 
     constructor() {}

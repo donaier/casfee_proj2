@@ -6,9 +6,9 @@ import { CsvFormComponent } from '../csv-form/csv-form.component';
 
 @Component({
   selector: 'app-csv-config',
-  templateUrl: './csv-config.component.html',
-  styleUrls: ['./csv-config.component.scss']
+  templateUrl: './csv-config.component.html'
 })
+
 export class CsvConfigComponent implements OnInit, OnDestroy {
   @ViewChild('csvModal') csvModal!: CsvFormComponent
 

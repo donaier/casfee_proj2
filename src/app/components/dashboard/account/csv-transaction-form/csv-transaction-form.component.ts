@@ -17,6 +17,7 @@ import { v4 as uuidv4 } from 'uuid';
   templateUrl: './csv-transaction-form.component.html',
   styleUrls: ['./csv-transaction-form.component.scss']
 })
+
 export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges {
   @ViewChild('modal') modal!: ElementRef
   @ViewChild('subcategoryModal') subcategoryModal!: ElementRef
@@ -145,8 +146,6 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
     target.classList.add('selected')
   }
 
-
-
   setCategoryForActiveTransaction(category: Category, e: Event) {
     this.removeSelectedTags()
     this.transactionsToCategorize[this.activeTransactionIndex].categoryId = category.id
@@ -156,8 +155,6 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
       this.setTransaction()
     }
   }
-
-
 
   setTransferCategoryForActiveTransaction(transferAcc: Account, e: Event) {
 
@@ -170,8 +167,6 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
       this.setTransaction()
     }
   }
-
-
 
   setTransaction() {
     if (this.activeTransactionIndex >= this.transactionsToCategorize.length-1) {

@@ -59,7 +59,4 @@ describe('Basic tests for login', () => {
   // Should check validity
 
   // Check Security - URLs should do a redirect , redirect to login if logged out
-
-
-
 });

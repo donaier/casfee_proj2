@@ -9,9 +9,9 @@ import { UploadService } from 'src/app/shared/services/upload.service';
 
 @Component({
   selector: 'app-csv-form',
-  templateUrl: './csv-form.component.html',
-  styleUrls: ['./csv-form.component.scss']
+  templateUrl: './csv-form.component.html'
 })
+
 export class CsvFormComponent implements OnChanges {
   @ViewChild('modal', { static: false }) modal!: ElementRef
   @Input() csv?: csvMask
@@ -66,5 +66,4 @@ export class CsvFormComponent implements OnChanges {
       this.csvForm.patchValue(this.csv!);
     }
   }
-
 }

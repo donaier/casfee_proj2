@@ -3,7 +3,7 @@ export class AppConfiguration {
     return cy.visit('http://localhost:4200/configuration');
   }
 
-// Account Component
+  // Account Component
   getAccountComponent(){
     return cy.get('[data-cy="AccountComponent"]')
   }
@@ -64,7 +64,7 @@ export class AppConfiguration {
     return cy.get('[data-cy="account-name"]');
   }
 
-// Category Component
+  // Category Component
   getCategoryComponent() {
     return cy.get('[data-cy="CategoryComponent"]');
   }
@@ -125,8 +125,7 @@ export class AppConfiguration {
     return cy.get('.category-item')
   }
 
-
-// Csv Component
+  // Csv Component
   getCsvComponent(){
     return cy.get('[data-cy="CsvComponent"]');
   }
@@ -174,5 +173,4 @@ export class AppConfiguration {
   getEditCsvMaskBtn(){
     return cy.get('.button-edit')
   }
-
 }

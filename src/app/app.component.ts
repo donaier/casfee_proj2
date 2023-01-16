@@ -4,13 +4,11 @@ import { UploadService } from 'src/app/shared/services/upload.service';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  templateUrl: './app.component.html'
 })
 
 export class AppComponent {
   title = 'FinanceApp';
 
-  constructor(public router: Router, private UploadService: UploadService) {}
-
+  constructor(public router: Router) {}
 }

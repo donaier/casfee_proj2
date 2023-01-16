@@ -10,7 +10,6 @@ describe('Basic Tests Navigation', () => {
   });
 
   describe('Test Navigation', () => {
-
     it('should render Navigation"', () => {
       cy.viewport(1200, 1200)
       page.getNavigation().should('be.visible')
@@ -60,7 +59,5 @@ describe('Basic Tests Navigation', () => {
       page.getBody().should('have.class', 'dark-theme')
       page.getNavHamburger().click()
     });
-
   })
-
 });

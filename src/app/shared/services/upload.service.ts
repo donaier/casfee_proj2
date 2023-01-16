@@ -4,7 +4,7 @@ import { Subject } from 'rxjs'
 import { FluxAction, FluxActionTypes } from '../types/actions.type'
 
 
-import { addDoc, collection, deleteDoc, doc, Firestore, setDoc, updateDoc } from '@angular/fire/firestore'
+import { addDoc, collection, deleteDoc, doc, Firestore, updateDoc } from '@angular/fire/firestore'
 
 @Injectable()
 

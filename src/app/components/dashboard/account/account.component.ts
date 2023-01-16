@@ -12,18 +12,15 @@ import { ManualTransactionFormComponent } from './manual-transaction-form/manual
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.scss']
 })
+
 export class AccountComponent implements OnInit, OnDestroy {
-
-
   @ViewChild('manualTransactionModal') manualTransactionModal!: ManualTransactionFormComponent
   @ViewChild('csvTransactionModal') csvTransactionModal!: CsvTransactionFormComponent
   @Input() activeAccounts: Account[] = []
 
-
+  private subscription: Subscription[] = []
   accounts: Account[] = []
   selectedAccount?: Account
-
-  private subscription: Subscription[] = []
 
   constructor(@Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>, public store: FluxStore){}
 
