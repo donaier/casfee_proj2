@@ -8,7 +8,6 @@
 
     &.selected {
       opacity: 1;
-      border-color: var(--color-3);
     }
   }
 }
@@ -16,7 +15,7 @@
   background-color: unset;
 
   th, td {
-    border-color: var(--color-2);
+    border-color: black;
   }
 
   .is-current {
@@ -24,9 +23,6 @@
   }
   .is-done {
     opacity: .5;
-  }
-  .is-incoming {
-    // next transactions
   }
 }
 .subcategory-modal {
