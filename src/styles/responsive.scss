@@ -6,6 +6,10 @@
     overflow: scroll;
     overflow-y: auto;
   }
+  .dashboard-filter.border-modifier{
+    overflow-x: scroll;
+    scrollbar-color: black white;
+  }
 }
 
 @media (max-width: $mobile) {
