@@ -14,11 +14,11 @@ table.transaction-table {
   .is-mobile {
     display: none;
   }
-  .col-account {
+  .col-account, .col-amount {
     width: 10%;
   }
-  .col-date, .col-amount {
-    width: 10%;
+  .col-date {
+    width: 15%;
   }
   .col-category {
     width: 15%;
@@ -38,27 +38,7 @@ table.transaction-table {
   cursor: pointer;
 }
 
-
-
 @media (max-width: $tablet){
-  table.transaction-table {
-    .col-account {
-      width: 10%;
-    }
-    .col-date, .col-amount {
-      width: 10%;
-    }
-    .col-category {
-      width: 8%;
-    }
-    .col-description {
-      width: 20%;
-    }
-  }
-}
-
-
-@media (max-width: $mobile){
   table.transaction-table {
     .is-widescreen{
       display: none;
@@ -80,7 +60,7 @@ table.transaction-table {
         width: 50%;
       }
     }
-    tr.col-category {
+    tr.col-category, tr.col-description {
       width: 100%;
       td {
         width: 100%;

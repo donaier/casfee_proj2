@@ -16,7 +16,7 @@
       </button>
       <table class="table is-narrow">
         <tr>
-          <th class="has-text-right">Enable/Disable Accounts:</th>
+          <th class="has-text-right">Accounts:</th>
           <td>
             <div class="field is-grouped is-grouped-multiline">
               <div class="control" *ngFor="let account of accounts">
@@ -34,7 +34,7 @@
           </td>
         </tr>
         <tr>
-          <th class="has-text-right">Select Timeframe:</th>
+          <th class="has-text-right">Timeframe:</th>
           <td>
             <div class="field is-grouped is-grouped-multiline">
               <div class="tags has-addons timeframe-select-tag" (click)="toggleTimeframe()">
@@ -45,7 +45,7 @@
           </td>
         </tr>
         <tr>
-          <th class="has-text-right">Choose Periods to display:</th>
+          <th class="has-text-right">Periods:</th>
           <td>
             <div class="field is-grouped is-grouped-multiline">
               <ng-container *ngIf="selectedTimeframe === 'months'">
