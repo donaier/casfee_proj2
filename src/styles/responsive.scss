@@ -26,6 +26,9 @@
     margin-left: 15px;
     font-weight: 600;
   }
+  .card-content .content {
+    margin-bottom: 0;
+  }
 }
 
 @media (min-width: $screen) {

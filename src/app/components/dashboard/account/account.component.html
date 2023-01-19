@@ -13,10 +13,10 @@
       </header>
       <div class="card-content">
         <div class="content has-text-centered">
-          <p>{{account.description}}</p>
-          <p class="title">Fr. {{account.currentValue}}</p>
+          <p class="is-hidden-mobile">{{account.description}}</p>
+          <h4 class="title is-4 mb-0">Fr. {{account.currentValue}}</h4>
         </div>
-        <div class="field is-grouped is-justify-content-center">
+        <div class="field is-grouped is-justify-content-center is-hidden-mobile">
           <button class="button is-small is-rounded mx-1 no-decoration" (click)="openManualTransactionModal(account)">
             <span class="icon is-small">
               <i class="fas fa-plus"></i>
