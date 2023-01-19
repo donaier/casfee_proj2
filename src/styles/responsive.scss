@@ -1,3 +1,17 @@
+@media (max-width: $mobile-small) {
+  .modal-card-title {
+    font-size: 18px;
+  }
+  .scrollable {
+    overflow: scroll;
+    overflow-y: auto;
+  }
+  .dashboard-filter.border-modifier{
+    overflow-x: scroll;
+    scrollbar-color: black white;
+  }
+}
+
 @media (max-width: $mobile) {
   .modal-card-title {
     font-size: 18px;
@@ -7,16 +21,10 @@
   }
 }
 
-@media (max-width: $mobile-small) {
-  .modal-card-title {
-    font-size: 16px;
-  }
+@media (max-width: $tablet) {
   .margin-mobile {
     margin-left: 15px;
-  }
-  .scrollable {
-    overflow: scroll;
-    overflow-y: auto;
+    font-weight: 600;
   }
 }
 
@@ -44,6 +52,14 @@
   }
   .is-responsive-28px {
     font-size: 28px;
+  }
+  .accounts-margin.columns.mb-3{
+    margin-top: 0rem ;
+  }
+
+  button.button.filter-toggle {
+    margin-top: 1rem;
+    margin-left: -4rem;
   }
 
   nav.navbar {

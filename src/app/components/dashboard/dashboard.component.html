@@ -1,13 +1,15 @@
 <section class="container is-widescreen section" *ngIf='loading_state ==="loaded"'>
-  <button class="button filter-toggle" #filterToggle (click)="showFilter($event)">
+
+  <button class="button filter-toggle" #filterToggle (click)="toggleFilter($event)">
     <span class="icon is-small">
       <i class="fas fa-filter"></i>
     </span>
   </button>
-  <article class="dashboard-filter hidden border-modifier scrollable" #dashboardFilter id="dashboard-filter">
+
+  <article class="dashboard-filter hidden border-modifier" #dashboardFilter id="dashboard-filter">
     <div class="container is-widescreen my-5">
       <p class="modal-card-title mb-5 is-inline-block margin-mobile">Dashboard Settings</p>
-      <button class="button is-pulled-right mr-4" (click)="closeFilter()">
+      <button class="button is-pulled-right mr-4" (click)="toggleFilter($event)">
         <span class="icon is-small">
           <i class="fas fa-times"></i>
         </span>
@@ -83,6 +85,7 @@
   <app-account [activeAccounts]="activeAccounts"></app-account>
   <app-graph [accounts]="activeAccounts" [selectedTimes]="selectedTime" [categoryGroups]="categoryGroups" [categories]="categories"></app-graph>
   <app-transaction-list [accounts]="activeAccounts" [selectedTimes]="selectedTime"></app-transaction-list>
+
 </section>
 
 <section class="section" *ngIf='loading_state === "nodata"'>

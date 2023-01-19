@@ -1,16 +1,12 @@
-@import "src/styles/variables.scss";
-
 .account-select-tag {
   cursor: pointer;
 }
 
 .time-select-tag {
   cursor: pointer;
-
   span:hover {
     font-weight: 500;
   }
-
   .inactive {
     opacity: .4;
   }
@@ -18,11 +14,12 @@
 
 .timeframe-select-tag {
   cursor: pointer;
-
   .selected {
     font-weight: 700;
   }
 }
+
+
 
 .dashboard-filter {
   position: fixed;
@@ -36,12 +33,8 @@
 .filter-toggle {
   border-radius: 50%;
   position: fixed;
-  margin-top: 3rem;
-  margin-left: -5rem;
-
-  @media (max-width: $screen-large) {
-    margin-top: -3rem;
-    margin-left: -1rem;
-    z-index: 31;
-  }
+  border: 1px black solid;
+  margin-top: -1.7rem;
+  margin-left: 0.3rem;
+  z-index: 31;
 }

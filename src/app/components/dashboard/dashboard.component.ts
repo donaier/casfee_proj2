@@ -15,6 +15,7 @@ import { Category, CategoryGroup } from 'src/app/shared/types/category';
 
 export class DashboardComponent implements OnInit, OnDestroy {
   @ViewChild('dashboardFilter') dashboardFilter!: ElementRef
+  @ViewChild('filterToggle') settingsBtn!: ElementRef
 
   private subscription: Subscription[] = []
   accounts: Account[] = []
@@ -62,9 +63,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }))
   }
 
-  showFilter(e: Event) {
+  toggleFilter(e: Event) {
     e.preventDefault()
-    this.dashboardFilter.nativeElement.classList.remove('hidden')
+    this.dashboardFilter.nativeElement.classList.toggle('hidden')
+    this.settingsBtn.nativeElement.classList.toggle('hidden')
   }
 
   toggleAccount(account: Account) {
@@ -104,10 +106,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.selectedTimeframe = 'months'
       this.selectedTime = this.groupedMonths.flat()
     }
-  }
-
-  closeFilter() {
-    this.dashboardFilter.nativeElement.classList.add('hidden')
   }
 
   ngOnDestroy() {
