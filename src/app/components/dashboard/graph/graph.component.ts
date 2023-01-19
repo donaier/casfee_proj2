@@ -23,11 +23,13 @@ export class GraphComponent implements OnChanges, AfterViewInit, OnDestroy {
 
   @ViewChild('graph') graphElement!: ElementRef
   @ViewChild('inout') inoutElement!: ElementRef
+  @ViewChild('inoutmobile') inoutMobileElement!: ElementRef
   @ViewChild('categorized') catElement!: ElementRef
 
   private subscriptions: Subscription[] = [];
   graph: echarts.ECharts | null = null
   inout: echarts.ECharts | null = null
+  inoutmobile: echarts.ECharts | null = null
   categorized: echarts.ECharts | null = null
   activeMonths: Set<string> = new Set
 
@@ -41,21 +43,25 @@ export class GraphComponent implements OnChanges, AfterViewInit, OnDestroy {
     this.graph?.resize()
     this.inout?.resize()
     this.categorized?.resize()
+    this.inoutmobile?.resize()
   }
 
   ngAfterViewInit() {
     this.graph = echarts.init(this.graphElement.nativeElement)
     this.inout = echarts.init(this.inoutElement.nativeElement)
+    this.inoutmobile = echarts.init(this.inoutMobileElement.nativeElement)
     this.categorized = echarts.init(this.catElement.nativeElement)
   }
 
   ngOnChanges() {
     let graphOptions = this.graphService.composeOptionsTotal(this.accounts, this.selectedTimes)
     let inoutOptions = this.graphService.composeOptionsInOut(this.accounts, this.selectedTimes)
+    let inoutMobileOptions = this.graphService.composeOptionsInOut(this.accounts, this.selectedTimes, true)
     let categorizedOptions = this.graphService.composeOptionsCategorized(this.accounts, this.selectedTimes, this.categoryGroups, this.categories)
 
     this.graph?.setOption(graphOptions, true)
     this.inout?.setOption(inoutOptions, true)
+    this.inoutmobile?.setOption(inoutMobileOptions, true)
     this.categorized?.setOption(categorizedOptions, true)
   }
 
