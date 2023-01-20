@@ -28,6 +28,7 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
   @ViewChild('categoryColumns') categoryColumns!: ElementRef
   @ViewChild('csvInfo') csvInfo!: ElementRef
   @ViewChild('csvReset') csvReset!: ElementRef
+  @ViewChild('invalidInfo') invalidInfo!: ElementRef
   @ViewChildren('tags') tags!: QueryList<ElementRef>
 
   @ViewChild('accountIsReady') accountIsReadyElement!: ElementRef
@@ -92,6 +93,7 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
     this.csvInputControl.nativeElement.classList.remove('is-loading')
     this.csvInputControl.nativeElement.classList.remove('is-hidden')
     this.csvReset.nativeElement.classList.add('is-hidden')
+    this.invalidInfo.nativeElement.classList.add('is-hidden')
     this.categoryColumns.nativeElement.classList.add('is-hidden')
   }
 
@@ -111,6 +113,7 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
       this.categoryColumns.nativeElement.classList.remove('is-hidden')
     } else {
       this.csvReset.nativeElement.classList.remove('is-hidden')
+      this.invalidInfo.nativeElement.classList.remove('is-hidden')
     }
   }
 
