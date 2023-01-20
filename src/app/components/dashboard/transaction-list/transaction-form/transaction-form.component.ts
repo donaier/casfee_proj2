@@ -36,7 +36,7 @@ export class TransactionFormComponent implements OnInit, OnChanges{
   categoryId!: FormControl
 
   constructor(
-    @Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>, 
+    @Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>,
     public store: FluxStore,
     private utilityService: UtilityService
   ) {}
@@ -124,8 +124,10 @@ export class TransactionFormComponent implements OnInit, OnChanges{
   ngOnChanges() {
     if (this.transaction) {
       this.CategoryName.nativeElement.value = this.transaction.categoryName
+      this.transactionForm.markAllAsTouched()
       this.transactionForm?.patchValue(this.transaction)
       this.dateinput.nativeElement.value = moment(this.transaction!.date, "DD.MM.YYYY").format('YYYY-MM-DD')
+
     }
   }
 }

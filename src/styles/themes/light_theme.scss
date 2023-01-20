@@ -4,6 +4,7 @@ $c12: #CCCCCC;
 $c21: #DEF6FB;
 $c3: #a870ab;
 $c4: #413e9f;
+$c41: #b1cefc;
 $c5: #041440;
 $c6: #000000;
 
@@ -79,7 +80,14 @@ $c6: #000000;
     }
   }
   .dashboard-filter {
-    background-color: $c00;
+    background-color: $c41;
+    &.border-modifier {
+      border-top-left-radius : 0px;
+      border-top-right-radius: 0px;
+    }
+    table {
+      background-color: $c41;
+    }
   }
   .card {
     background-color: $c11;

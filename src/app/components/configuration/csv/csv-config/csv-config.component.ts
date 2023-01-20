@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { FluxStore } from 'src/app/model/flux-store';
 import { csvMask } from 'src/app/shared/types/csvMask';
@@ -30,7 +30,7 @@ export class CsvConfigComponent implements OnInit, OnDestroy {
       if (data.length === undefined) {
         this.data = 'isloading'
       }
-      if(data.length === 0){
+      if (data.length === 0) {
         this.data = 'nodata'
         this.csvMasks = []
       }
@@ -39,10 +39,10 @@ export class CsvConfigComponent implements OnInit, OnDestroy {
 
   createCsv() {
     this.csvForForm = undefined
-    if(this.csvMasks.length > 9){
+    if (this.csvMasks.length > 9) {
       this.selector = "warning"
     }
-    if(this.csvMasks.length < 10){
+    if (this.csvMasks.length < 10) {
       this.selector = "create"
     }
     this.csvModal.modal.nativeElement.classList.add('is-active')

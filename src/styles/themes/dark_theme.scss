@@ -171,7 +171,10 @@ $c12: #CCCCCC;
   }
   .dashboard-filter {
     background-color: $c12;
-    border: 1px $c6 solid;
+    &.border-modifier {
+      border-top-left-radius : 0px;
+      border-top-right-radius: 0px;
+    }
     table{
       background-color: $c12;
     }

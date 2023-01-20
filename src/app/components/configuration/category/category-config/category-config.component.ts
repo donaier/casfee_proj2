@@ -24,7 +24,7 @@ export class CategoryConfigComponent implements OnInit, OnDestroy {
 
   constructor(public store: FluxStore, @Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.subscriptions.push(this.store.CategoryGroups.subscribe((data) => {
       if (data.length > 0) {
         this.data = "data"
@@ -33,7 +33,7 @@ export class CategoryConfigComponent implements OnInit, OnDestroy {
       if (data.length === undefined) {
         this.data = 'isloading'
       }
-      if(data.length === 0){
+      if (data.length === 0) {
         this.data = "nodata"
         this.categoryGroups = []
       }
@@ -45,9 +45,9 @@ export class CategoryConfigComponent implements OnInit, OnDestroy {
     }))
   }
 
-  countCategories(CategoryGroup : CategoryGroup): number{
+  countCategories(CategoryGroup : CategoryGroup): number {
     let categories = 0
-    this.categories.forEach(category =>{
+    this.categories.forEach(category => {
       if(category.group_id === CategoryGroup.id){
         categories++
       }
@@ -57,12 +57,11 @@ export class CategoryConfigComponent implements OnInit, OnDestroy {
 
   createCategoryGroup() {
     this.categoryGroupForForm = undefined
-    if(this.categoryGroups.length > 9){
+    if (this.categoryGroups.length > 9) {
       this.selector = "warning"
     }
-    if(this.categoryGroups.length < 10){
+    if (this.categoryGroups.length < 10) {
       this.selector = "create"
-
     }
     this.categoryModal.modal.nativeElement.classList.add('is-active')
   }
@@ -70,17 +69,16 @@ export class CategoryConfigComponent implements OnInit, OnDestroy {
   editCategoryGroup(categoryGroup: CategoryGroup) {
     this.categoryGroupForForm = categoryGroup
     this.selector = "edit"
-    this.categoryModal.categoryGroupForm.patchValue(categoryGroup)
     this.categoryModal.modal.nativeElement.classList.add('is-active')
   }
 
   addCategory(categoryGroup: CategoryGroup) {
     this.categoryForForm = undefined
     this.categoryGroupForForm = categoryGroup
-    if(this.countCategories(categoryGroup) > 14){
+    if (this.countCategories(categoryGroup) > 14) {
       this.selector = "warning-category"
     }
-    if(this.countCategories(categoryGroup) < 15){
+    if (this.countCategories(categoryGroup) < 15) {
       this.selector = "addCategory"
     }
     this.categoryModal.modal.nativeElement.classList.add('is-active')
@@ -90,7 +88,7 @@ export class CategoryConfigComponent implements OnInit, OnDestroy {
     this.dispatcher.next(new FluxAction(FluxActionTypes.Delete, 'category', null, null, category))
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.subscriptions?.forEach((subscription) => {subscription.unsubscribe()})
   }
 

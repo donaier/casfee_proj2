@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
     if(this.login.valid){
       this.signinButton.nativeElement.classList.add('is-loading')
       if(await this.AuthService.login_firebase(this.login.value)){
-        this.router.navigate(['/dashboard'])
+        this.router.navigate(['/home'])
         this.login.reset()
       }else{
         this.authorisation = false
