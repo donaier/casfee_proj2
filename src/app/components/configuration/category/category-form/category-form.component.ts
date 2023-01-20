@@ -1,5 +1,5 @@
-import { Component, ElementRef, Inject, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, FormGroupDirective } from '@angular/forms';
+import { Component, ElementRef, Inject, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
 import { FluxStore } from 'src/app/model/flux-store';
@@ -11,7 +11,7 @@ import { Category, CategoryGroup, CategoryGroupColors } from 'src/app/shared/typ
   templateUrl: './category-form.component.html'
 })
 
-export class CategoryFormComponent implements OnInit {
+export class CategoryFormComponent implements OnInit, OnChanges {
 
   @ViewChild('modal', { static: false }) modal!: ElementRef
   @ViewChild('categoryIdInput') categoryIdInput!: ElementRef
@@ -33,9 +33,9 @@ export class CategoryFormComponent implements OnInit {
   categoryColors = CategoryGroupColors
   equality_flag : boolean = false
 
-  constructor(@Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>, public store: FluxStore) { }
+  constructor(@Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>, public store: FluxStore) {}
 
-  ngOnInit(){
+  ngOnInit() {
     this.categoryGroupForm = new FormGroup({
       id: this.id = new FormControl(''),
       name: this.name = new FormControl(''),
@@ -48,13 +48,13 @@ export class CategoryFormComponent implements OnInit {
     })
   }
 
-  checkCategoryGroupForm(){
-    if(this.categoryGroupForm.valid && this.categoryGroupForm.dirty) {
+  checkCategoryGroupForm() {
+    if (this.categoryGroupForm.valid && this.categoryGroupForm.dirty) {
       let categoryGroup : CategoryGroup = this.categoryGroupForm.value
-      if(this.selector === 'create'){
+      if (this.selector === 'create') {
         this.dispatcher.next(new FluxAction(FluxActionTypes.Create,'categoryGroup', null, categoryGroup))
       }
-      if(this.selector === 'edit'){
+      if (this.selector === 'edit') {
         this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'categoryGroup', null, categoryGroup))
       }
     }
@@ -68,7 +68,7 @@ export class CategoryFormComponent implements OnInit {
 
   submitCategoryForm(e: Event) {
     e.preventDefault();
-    if(this.categoryForm.valid && this.categoryForm.dirty) {
+    if (this.categoryForm.valid && this.categoryForm.dirty) {
       let category : Category = {name : this.categoryForm.value.name_category, group_id : this.categoryGroup!.id, id: ""}
       this.dispatcher.next(new FluxAction(FluxActionTypes.Create, 'category', null, null, category))
       this.hideModal();
@@ -88,4 +88,12 @@ export class CategoryFormComponent implements OnInit {
     this.categoryGroupForm.reset();
     this.categoryForm.reset();
   }
+
+  ngOnChanges() {
+    if (this.categoryGroup) {
+      this.categoryGroupForm.markAllAsTouched()
+      this.categoryGroupForm.patchValue(this.categoryGroup)
+    }
+  }
+
 }

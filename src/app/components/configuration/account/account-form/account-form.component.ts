@@ -31,9 +31,9 @@ export class AccountFormComponent implements OnInit, OnChanges {
   csv!: FormControl
 
   constructor(@Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>,
-   public store: FluxStore, private utilityService: UtilityService) { }
+   public store: FluxStore, private utilityService: UtilityService) {}
 
-  ngOnInit(){
+  ngOnInit() {
     this.accountForm = new FormGroup({
       name: this.name = new FormControl(''),
       shortName: this.shortName = new FormControl('', [
@@ -62,7 +62,7 @@ export class AccountFormComponent implements OnInit, OnChanges {
 
   submitAccountForm(e: Event) {
     e.preventDefault();
-    if(this.accountForm.valid) {
+    if (this.accountForm.valid) {
       let account : Account = this.accountForm.value
       if (this.account) {
         account.id = this.account.id
@@ -70,7 +70,7 @@ export class AccountFormComponent implements OnInit, OnChanges {
         account.currentValue = Number(this.utilityService.calculateCurrentValue(account))
         this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'account', null, null, null, account))
       }
-      if(!this.account) {
+      if (!this.account) {
         account.currentValue = this.initialValue.value
         account.transactions = []
         this.dispatcher.next(new FluxAction(FluxActionTypes.Create,'account', null, null, null, account))
@@ -85,10 +85,11 @@ export class AccountFormComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    if(this.account) {
+    if (this.account) {
+      this.accountForm.markAllAsTouched()
       this.accountForm?.patchValue(this.account!)
     }
-    if(!this.account) {
+    if (!this.account) {
       this.accountForm?.reset()
     }
   }

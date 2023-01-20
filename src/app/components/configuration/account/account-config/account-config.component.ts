@@ -31,7 +31,7 @@ export class AccountConfigComponent implements OnInit, OnDestroy {
       if (data.length === undefined) {
         this.data = 'isloading'
       }
-      if(data.length === 0){
+      if (data.length === 0){
         this.data = 'nodata'
         this.accounts = []
       }
@@ -45,10 +45,10 @@ export class AccountConfigComponent implements OnInit, OnDestroy {
 
   createAccount() {
     this.accountForForm = undefined
-    if(this.accounts.length > 7){
+    if (this.accounts.length > 7) {
       this.selector = "warning"
     }
-    if(this.accounts.length < 8){
+    if (this.accounts.length < 8) {
       this.selector = "create"
     }
     this.accountModal.modal.nativeElement.classList.add('is-active')
@@ -70,7 +70,7 @@ export class AccountConfigComponent implements OnInit, OnDestroy {
     return this.csvMasks.find(csv => csv.id === account.csv)?.name
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.subscriptions?.forEach((subscription) => {subscription.unsubscribe()})
   }
 }

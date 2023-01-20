@@ -19,8 +19,6 @@
   }
 }
 
-
-
 .dashboard-filter {
   position: fixed;
   width: 100%;
@@ -36,5 +34,5 @@
   border: 1px black solid;
   margin-top: -1.7rem;
   margin-left: 0.3rem;
-  z-index: 31;
+  z-index: 10;
 }

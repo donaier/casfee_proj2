@@ -1,10 +1,9 @@
-import { Component, ElementRef, Inject, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { Component, ElementRef, Inject, Input, OnChanges, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
 import { csvMask } from 'src/app/shared/types/csvMask';
 import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
-
 import { UploadService } from 'src/app/shared/services/upload.service';
 
 @Component({
@@ -47,23 +46,24 @@ export class CsvFormComponent implements OnChanges {
     }
   }
 
-  UpdateCsv(e: Event){
+  UpdateCsv(e: Event) {
     e.preventDefault()
-    if(this.csvForm.valid && this.csvForm.dirty) {
+    if (this.csvForm.valid && this.csvForm.dirty) {
       this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'csvMask', null, null, null, null, this.csvForm.value))
     }
     this.hideModal()
   }
 
-  deleteCsvMask(e: Event){
+  deleteCsvMask(e: Event) {
     e.preventDefault()
     this.dispatcher.next(new FluxAction(FluxActionTypes.Delete,'csvMask', null, null, null, null, this.csv))
     this.hideModal()
   }
 
-  ngOnChanges(changes: SimpleChanges){
-    if (changes['csv']?.currentValue?.name) {
-      this.csvForm.patchValue(this.csv!);
+  ngOnChanges() {
+    if (this.csv) {
+      this.csvForm.markAllAsTouched()
+      this.csvForm.patchValue(this.csv)
     }
   }
 }

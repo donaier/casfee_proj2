@@ -21,7 +21,6 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
   @ViewChild('modal') modal!: ElementRef
   @ViewChild('manualtransactionform', { static: false }) manualtransactionform!: ElementRef
   @ViewChildren('tags') tags!: QueryList<ElementRef>
-
   @Input() account?: Account;
 
   transactionForm!: FormGroup
@@ -48,7 +47,7 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
       if (data.length > 0) {
         this.categoryGroups = data;
       }
-      if(data.length === 0){
+      if(data.length === 0) {
         this.categoryGroups = []
       }
     }))
@@ -83,11 +82,11 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
     this.transactionForm.reset();
   }
 
-  removeActiveTag(){
+  removeActiveTag() {
     this.tags.forEach(tag => { tag.nativeElement.classList.remove('selected')});
   }
 
-  seTag(e: Event){
+  seTag(e: Event) {
     let target = e.target as HTMLElement
     target.classList.add('selected')
   }
