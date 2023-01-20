@@ -22,9 +22,26 @@
 }
 
 @media (max-width: $tablet) {
+  .has-navbar-fixed-top {
+    margin-top: 1rem;
+  }
   .margin-mobile {
     margin-left: 15px;
     font-weight: 600;
+  }
+  .card-content .content {
+    margin-bottom: 0;
+  }
+  section.section {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+}
+
+@media (max-width: $screen) {
+  button.button.filter-toggle {
+    margin-top: -1rem;
+    margin-left: 0;
   }
 }
 
@@ -55,11 +72,6 @@
   }
   .accounts-margin.columns.mb-3{
     margin-top: 0rem ;
-  }
-
-  button.button.filter-toggle {
-    margin-top: 1rem;
-    margin-left: -4rem;
   }
 
   nav.navbar {

@@ -10,8 +10,12 @@ import { Category, CategoryGroup } from '../types/category';
 export class GraphService {
   constructor() {}
 
-  private setAccountNames(accounts: Account[]) {
-    return accounts.map(acc => acc.name)
+  private setAccountNames(accounts: Account[], mobile: boolean = false) {
+    if (mobile) {
+      return accounts.map(acc => acc.shortName)
+    } else {
+      return accounts.map(acc => acc.name)
+    }
   }
 
   private setAccountSeries(accounts: Account[], selectedMonths: string[]) {
@@ -221,12 +225,14 @@ export class GraphService {
     };
   }
 
-  composeOptionsInOut(accounts: Account[], selectedTimes: string[]) {
-    let accNames: string[] = this.setAccountNames(accounts).reverse()
+  composeOptionsInOut(accounts: Account[], selectedTimes: string[], mobile: boolean = false) {
+    let accNames: string[] = this.setAccountNames(accounts, mobile).reverse()
     let accSeries: object[] = this.setAccountInOut(accounts, selectedTimes)
 
     return {
-      title: { text: 'In/Out' },
+      title: {
+        text: 'In/Out',
+      },
       legend: {
         show: false,
       },
@@ -238,6 +244,9 @@ export class GraphService {
       },
       xAxis: [
         {
+          axisLabel: {
+            rotate: mobile ? 90 : 0
+          },
           type: 'value'
         }
       ],
