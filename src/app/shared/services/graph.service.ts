@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Account } from '../types/account';
-import { DATE_FORMAT, Transaction } from '../types/transaction';
+import { DATE_FORMAT } from '../types/transaction';
 import * as moment from 'moment';
 import { Category, CategoryGroup } from '../types/category';
 
@@ -135,10 +135,8 @@ export class GraphService {
       acc.transactions.forEach(trans => {
         if (selectedMonths.some(times => trans.date.includes(times)) && trans.categoryId) {
           let catGroup = categoryGroups.find(catGroup => catGroup.id === (categories.find(cat => cat.id === trans.categoryId)?.group_id))
-
           if (catGroup) {
             let catIndex = catNames.indexOf(catGroup.name)
-
             if (catIndex >= 0) {
               catSeries[catIndex].value += trans.amount
             } else {

@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core'
 import { User as FirebaseUser } from "firebase/auth";
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 
 export class StorageService {
 
     constructor() {}
 
     set_localStorage(data: FirebaseUser | boolean) {
-      if(data){
+      if (data) {
         localStorage.setItem('Userdata', JSON.stringify(data))
       }
     }
@@ -21,7 +21,7 @@ export class StorageService {
       localStorage.setItem('theme-preference', theme)
     }
 
-    getUserdata() : null | boolean | string  {
+    getUserdata() : null | boolean | string {
       if (localStorage.getItem('Userdata') !== null) {
         return localStorage.getItem('Userdata')
       }

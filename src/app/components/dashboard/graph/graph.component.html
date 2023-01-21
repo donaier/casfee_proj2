@@ -1,4 +1,4 @@
-<div class="card" (window:resize)="resizeGraphs()">
+<article class="card" (window:resize)="resizeGraphs()" *ngIf='transactions_flag'>
   <div class="card-content is-hidden-mobile">
     <div class="graph" #graph></div>
     <div class="inout mt-5" #inout></div>
@@ -7,4 +7,4 @@
   <div class="card-content is-hidden-tablet">
     <div class="inoutmobile" #inoutmobile></div>
   </div>
-</div>
+</article>

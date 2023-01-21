@@ -1,5 +1,5 @@
-<article class="columns mb-3" *ngIf='accounts'>
-  <div class="column" *ngFor="let account of accounts" class="{{activeAccounts.includes(account) ? '' : 'muted'}}">
+<article class="columns mb-3 accounts-margin" *ngIf='accounts'>
+  <div class="column account" *ngFor="let account of accounts" class="{{activeAccounts.includes(account) ? '' : 'muted'}}">
     <div class="card account-card" [ngStyle]="{'border-bottom-color': account.color}">
       <header class="card-header">
         <p class="card-header-title is-flex is-justify-content-space-between">

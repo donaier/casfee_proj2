@@ -27,7 +27,7 @@ describe('Basic tests for configuration', () => {
     page.getModalNewAccount().should('be.visible')
     page.getSubmitBtn().should('be.disabled')
     page.getInputAccountName().click()
-    page.getInputAccountName().should('have.css', 'border-color', 'rgb(219, 219, 219)')
+    page.getInputAccountName().should('have.css', 'border-color', 'rgb(241, 70, 104)')
     page.getInputAccountName().type('TestAccount')
     page.getInputAccountName().should('have.css', 'border-color', 'rgb(72, 199, 142)')
     page.getInputAccountShort().type('test')
@@ -37,12 +37,8 @@ describe('Basic tests for configuration', () => {
     page.getInputCsv().select('No CsvMask')
     page.getSubmitBtn().should('be.enabled')
     page.getSubmitBtn().click()
-    cy.visit('http://localhost:4200/dashboard');
-    // Is visible on dashboard
-    page.getNewAccount().should('be.visible')
-    // back to config for edit
-    cy.visit('http://localhost:4200/configuration');
     page.getEditBtn().first().click()
+    // should be visible on configuration
     page.getModalNewAccount().should('be.visible')
     page.getInputAccountName().clear()
     // Do a Edit on new account
@@ -52,7 +48,7 @@ describe('Basic tests for configuration', () => {
     page.getAccountName().first().should('have.text', ' EditedAccount ')
   });
 
-  it('CRUD on new CategorieGroup"', () => {
+  it('CRUD on new CategoryGroup"', () => {
     cy.visit('http://localhost:4200/configuration');
     // Create new category
     page.getBtnNewCategoryGroup().click()

@@ -107,7 +107,6 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
 
   submitTransactionForm(e: Event) {
     e.preventDefault();
-
     if(this.transactionForm.valid && this.transactionForm.dirty) {
       let account = this.account!
       let transaction: Transaction = this.transactionForm.value
