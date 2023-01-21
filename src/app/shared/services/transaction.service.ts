@@ -19,22 +19,30 @@ export class TransactionService {
 
         // lets set 3 as min since there is info, amount and date
         if (tArray.length >= 3) {
-          // mask can have multiple 'amount' fields for pos/neg values, usually only one contains data
-          setPositions?.amountPos.forEach(ap => {
-            if (ap && tArray[ap] != '' && !isNaN(parseFloat(tArray[ap]))) {
-              readyTransactions.push({
-                description: setPositions?.descriptionPos ? tArray[setPositions.descriptionPos].replace(/\"/gi, '').trim() : 'error',
-                fromAccount: '',
-                amount: parseFloat(tArray[ap]),
-                date: setPositions?.datePos != undefined ?
-                  moment(tArray[setPositions.datePos], csvMask.dateMask.toUpperCase()).format(DATE_FORMAT)
-                  :
-                  moment(new Date()).format(DATE_FORMAT),
-                categoryId: '',
-                id: ''
-              })
-            }
-          })
+          let transactionDate: any = setPositions?.datePos != undefined ?
+            moment(tArray[setPositions.datePos], csvMask.dateMask.toUpperCase())
+            :
+            moment(new Date())
+
+          if (transactionDate._isValid) {
+            // mask can have multiple 'amount' fields for pos/neg values, usually only one contains data
+            setPositions?.amountPos.forEach(ap => {
+              if (
+                ap &&
+                tArray[ap] != '' &&
+                !isNaN(parseFloat(tArray[ap]))
+              ) {
+                readyTransactions.push({
+                  description: setPositions?.descriptionPos ? tArray[setPositions.descriptionPos].replace(/\"/gi, '').trim() : 'error',
+                  fromAccount: '',
+                  amount: parseFloat(tArray[ap]),
+                  date: transactionDate.format(DATE_FORMAT),
+                  categoryId: '',
+                  id: ''
+                })
+              }
+            })
+          }
         }
       });
     }

@@ -29,6 +29,7 @@
             <div #csvInputControl class="control">
               <p>csvMask used here: {{activeCsvMask?.name}}: {{activeCsvMask?.mask}}</p><br>
               <textarea #csvInput class="textarea" placeholder="paste csv here" (input)="computeCsvData($event)"></textarea>
+              <p #invalidInfo class="is-hidden"><br>No valid transactions found. Do you have the right csv/date-Mask?</p>
             </div>
           </div>
         </div>
