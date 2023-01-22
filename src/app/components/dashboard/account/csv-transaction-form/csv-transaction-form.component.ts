@@ -194,10 +194,6 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
     }
   }
 
-  toggleAutoAdvance() {
-    this.autoAdvance = !this.autoAdvance
-  }
-
   getCategoryName(transaction: Transaction) {
     if (transaction.categoryId !== 'ACCOUNT_TRANSFER') {
       return this.categories.find(c => c.id === transaction.categoryId)?.name

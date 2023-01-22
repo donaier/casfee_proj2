@@ -38,6 +38,10 @@ table.transaction-table {
   cursor: pointer;
 }
 
+.hidden {
+  visibility: none;
+}
+
 @media (max-width: $tablet){
   table.transaction-table {
     .is-widescreen{

@@ -65,6 +65,9 @@ export class GraphComponent implements OnChanges, AfterViewInit, OnDestroy {
   }
 
   ngOnChanges() {
+     if (this.accounts.length === 0 ){
+      this.transactions_flag = false
+    }
     this.transactionsAvailable()
     let graphOptions = this.graphService.composeOptionsTotal(this.accounts, this.selectedTimes)
     let inoutOptions = this.graphService.composeOptionsInOut(this.accounts, this.selectedTimes)
