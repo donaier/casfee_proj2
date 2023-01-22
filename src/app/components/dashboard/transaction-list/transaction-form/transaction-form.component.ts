@@ -1,6 +1,6 @@
 import { Component, ElementRef, Inject, Input, OnChanges, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
-import { Subject, Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
 import { FluxStore } from 'src/app/model/flux-store';
 import { UtilityService } from 'src/app/shared/services/utility.service';
@@ -96,7 +96,6 @@ export class TransactionFormComponent implements OnInit, OnChanges{
   }
 
   updateTransaction(){
-    console.log("hello")
     if(this.transactionForm.valid){
       if(this.transactionForm.value.categoryName === undefined){
         this.transactionForm.value.categoryName = null
