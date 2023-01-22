@@ -49,7 +49,6 @@ export class GraphComponent implements OnChanges, AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     if (this.transactions_flag) {
-      this.graph = echarts.init(this.graphElement.nativeElement)
       this.inout = echarts.init(this.inoutElement.nativeElement)
       this.inoutmobile = echarts.init(this.inoutMobileElement.nativeElement)
       this.categorized = echarts.init(this.catElement.nativeElement)
