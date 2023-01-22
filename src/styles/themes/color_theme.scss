@@ -70,6 +70,20 @@ $c5: #041440;
       .color-modifier:hover {
         background-color: $c3;
       }
+      .btn-modifier {
+        background-color: $c1;
+        box-shadow: none;
+        border: none;
+      }
+      .btn-modifier:hover {
+        background-color: $c3;
+      }
+      .tag.csv-tag:hover {
+        color: $c5;
+      }
+      .tag.addItem:hover {
+        background-color: $c3;
+      }
     }
     .modal-card-foot {
       background-color: $c1;

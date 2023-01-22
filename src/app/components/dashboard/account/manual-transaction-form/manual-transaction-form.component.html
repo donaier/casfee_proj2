@@ -26,7 +26,7 @@
                   required>
               </div>
               <p class="control">
-                <a class="button is-static is-outlined control-modifier">Fr.</a>
+                <span class="button is-static is-outlined control-modifier">Fr.</span>
               </p>
             </div>
             <div *ngIf="(amount.invalid && amount.touched) || amount.dirty">
@@ -104,6 +104,7 @@
         </div>
       </form>
     </article>
+
     <footer class="modal-card-foot is-flex is-justify-content-center">
       <button class="button is-success"
       type="button"
@@ -111,5 +112,6 @@
       [disabled]="transactionForm.invalid">Save</button>
       <button class="button" type="button" (click)="hideModal()">Cancel</button>
     </footer>
+
   </div>
 </section>

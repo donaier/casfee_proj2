@@ -26,6 +26,8 @@ describe('Basic tests for login', () => {
   });
 
   it('should do a correct redirect"', () => {
+    cy.visit('http://localhost:4200/home');
+    cy.url().should('include', '/login');
     cy.visit('http://localhost:4200/dashboard');
     cy.url().should('include', '/login');
     cy.visit('http://localhost:4200/configuration');
@@ -45,14 +47,13 @@ describe('Basic tests for login', () => {
     page.getSubmitBtn().should('be.enabled')
   });
 
-  it('should do a succesfull Login"', () => {
+  it('should show wrong credentials"', () => {
     page.getInputEmail().type('admin@admin.ch')
     page.getSubmitBtn().should('be.disabled')
     page.getInputPassword().type('123456')
     page.getSubmitBtn().should('be.enabled')
     page.getSubmitBtn().click()
-    cy.pause()
-    cy.url().should('include', '/dashboard'); // Anmerkung wurde bei mir durch AntiVirus blockiert, erlauben dann funktionnierts
+    page.getCredentialsFail().should('be.visible')
   });
 
 });

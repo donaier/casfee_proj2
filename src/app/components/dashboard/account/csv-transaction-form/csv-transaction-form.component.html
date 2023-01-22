@@ -60,9 +60,7 @@
                   >
                   <p class="is-flex is-justify-content-space-between">
                     <strong class="pb-3">{{categoryGroup.name}}</strong>
-                    <span>
-                      <a class="tag" (click)="addCategory(categoryGroup)">+</a>
-                    </span>
+                    <span class="tag addItem" (click)="addCategory(categoryGroup)">+</span>
                   </p>
                   <div class="field is-grouped is-grouped-multiline">
                     <ng-container *ngFor="let category of categories">
@@ -126,7 +124,6 @@
           <div>
             <p class="subtitle is-size-4 has-text-weight-medium">Transaction overview</p>
             <p class="">Total {{transactionsToCategorize.length}} Transactions</p>
-           <!-- <small #csvInfo></small> -->
           </div>
 
           <table class="table is-fullwidth">

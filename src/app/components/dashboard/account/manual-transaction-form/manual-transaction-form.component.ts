@@ -42,7 +42,7 @@ export class ManualTransactionFormComponent implements OnInit, OnDestroy {
    @Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>,
    private utilityService: UtilityService) {}
 
-  ngOnInit(){
+  ngOnInit() {
     this.subscriptions.push(this.store.CategoryGroups.subscribe((data) => {
       if (data.length > 0) {
         this.categoryGroups = data;

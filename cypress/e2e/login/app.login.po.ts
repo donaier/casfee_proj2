@@ -7,59 +7,32 @@ export class AppLogin {
     return cy.get('.section')
   }
 
-  getInputEmail(){
+  getInputEmail() {
     return cy.get('[data-cy="Email"]')
   }
 
-  getInputPassword(){
+  getInputPassword() {
     return cy.get('[data-cy="Password"]')
   }
 
-  getSubmitBtn(){
+  getSubmitBtn() {
     return cy.get('.button')
   }
 
-  getTitle(){
+  getTitle() {
     return cy.get('.title')
   }
 
-  getEmailTitle(){
+  getEmailTitle() {
     return cy.get('.label_email')
   }
 
-  getPasswordTitle(){
+  getPasswordTitle() {
     return cy.get('.label_password')
   }
 
-  /*
-
-  getFirstTodo() {
-    return cy.get('mat-list-item').first();
+  getCredentialsFail() {
+    return cy.get('.validation')
   }
-
-  getLastTodo() {
-    return cy.get('mat-list-item').last();
-  }
-
-  getAddTodo() {
-    return cy.get('.mat-input-element').first();
-  }
-
-  getAddTodoButton() {
-    return cy.get('.mat-button').first();
-  }
-
-  getFirstTodoCheckbox() {
-    return cy.get('mat-checkbox').first();
-  }
-
-  getNavBtn(){
-    return cy.get('[data-cy="testbtn"]');
-  }
-
-  getSidebar(){
-    return cy.get('[data-cy="sidenav"]');
-  }
-   */
 }
 

@@ -7,44 +7,47 @@ describe('Basic Tests Navigation', () => {
     page = new AppNavigation();
     window.localStorage.setItem('Userdata', "test")
     page.navigateTo()
+    cy.viewport(1200, 1200)
   });
 
   describe('Test Navigation', () => {
     it('should render Navigation"', () => {
-      cy.viewport(1200, 1200)
       page.getNavigation().should('be.visible')
     });
 
+    it('should Navigate to Home"', () => {
+      page.getNavHome().click()
+      cy.url().should('include', '/home')
+    });
+
     it('should Navigate to Configuration"', () => {
-      cy.viewport(1200, 1200)
       page.getNavConfiguration().click()
       cy.url().should('include', '/configuration')
     });
 
     it('should Navigate to Dashboard"', () => {
-      cy.viewport(1200, 1200)
       page.getNavDashboard().click()
       cy.url().should('include', '/dashboard')
     });
 
-    it('should open settings"', () => {
-      cy.viewport(1200, 1200)
-      page.getNavDashboardSettings().click()
-      page.getSettingsModal().should('be.visible')
+    it('should Navigate to Manual"', () => {
+      page.getNavManual().click()
+      cy.url().should('include', '/manual')
     });
 
     it('should do successful Logout"', () => {
-      cy.viewport(1200, 1200)
       page.getNavLogout().click()
       page.getNavigation().should('not.exist')
       cy.url().should('include', '/login')
     });
 
     it('should render Hamburger"', () => {
+      cy.viewport(800, 800)
       page.getNavHamburger().should('be.visible')
     });
 
     it('should open and close menu"', () => {
+      cy.viewport(800, 800)
       page.getNavHamburger().click()
       page.getNavMenu().should('have.class', 'is-active')
       page.getNavHamburger().click()
@@ -59,5 +62,6 @@ describe('Basic Tests Navigation', () => {
       page.getBody().should('have.class', 'dark-theme')
       page.getNavHamburger().click()
     });
+
   })
 });

@@ -12,11 +12,10 @@
     overflow: scroll;
     overflow-y: auto;
   }
-  .dashboard-filter.border-modifier{
+  .dashboard-filter.border-modifier {
     overflow-x: scroll;
     scrollbar-color: black white;
   }
-
 }
 
 @media (max-width: $mobile) {
@@ -26,7 +25,6 @@
   .heading {
     flex-direction: column;
   }
-
 }
 
 @media (max-width: $tablet) {
@@ -47,16 +45,23 @@
   .accounts-margin {
     margin-top: 3rem;
   }
-
+  .home {
+    h1.title.is-1 {
+      font-size: 2rem;
+    }
+    .has-sizes {
+      width: 80%;
+    }
+  }
 }
 
-@media (max-width: $screen) {
+@media (max-width: $screen-extended) {
   button.button.filter-toggle {
-    margin-top: -1rem;
-    margin-left: 0;
+    margin-top: -0.2rem;
+    margin-left: 1rem;
   }
-  .accounts-margin {
-    margin-top: 0rem;
+  .accounts-margin.columns.mb-3 {
+    margin-top: 3rem;
   }
 }
 
@@ -85,8 +90,8 @@
   .is-responsive-28px {
     font-size: 28px;
   }
-  .accounts-margin.columns.mb-3{
-    margin-top: 0rem ;
+  .accounts-margin.columns.mb-3 {
+    margin-top: 0rem;
   }
 
   nav.navbar {
@@ -136,7 +141,7 @@
   }
   tr.is-widescreen {
     td:nth-child(1) {
-      span{
+      span {
         @extend .is-responsive-18px;
       }
     }

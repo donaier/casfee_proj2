@@ -126,12 +126,10 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
 
   submitCategoryForm(e: Event) {
     e.preventDefault();
-
     if (this.subcategoryInput.nativeElement.value &&  this.categoryInput.nativeElement.value) {
       let category: Category = {name : this.subcategoryInput.nativeElement.value, group_id: this.categoryInput.nativeElement.value, id: ""}
       this.dispatcher.next(new FluxAction(FluxActionTypes.Create, 'category', null, null, category))
     }
-
     this.subcategoryModal.nativeElement.classList.remove('is-active')
   }
 
@@ -140,11 +138,11 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
     this.subcategoryModal.nativeElement.classList.remove('is-active')
   }
 
-  removeSelectedTags(){
+  removeSelectedTags() {
     this.tags.forEach(tag => { tag.nativeElement.classList.remove('selected')});
   }
 
-  SetTag(e: Event){
+  SetTag(e: Event) {
     let target = e.target as HTMLElement
     target.classList.add('selected')
   }
@@ -160,7 +158,6 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
   }
 
   setTransferCategoryForActiveTransaction(transferAcc: Account, e: Event) {
-
     this.removeSelectedTags()
     this.transactionsToCategorize[this.activeTransactionIndex].fromAccount = transferAcc.id
     this.transactionsToCategorize[this.activeTransactionIndex].categoryId = "ACCOUNT_TRANSFER"
@@ -180,7 +177,7 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
     }
   }
 
-  deleteTransaction(){
+  deleteTransaction() {
     this.transactionsToCategorize.splice(this.activeTransactionIndex, 1);
     if (this.transactionsToCategorize.length === 0) {
       this.doneCategorizing = true
@@ -215,7 +212,7 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
     if (changes['account'].currentValue) {
       this.activeCsvMask = this.csvMasks.find(m => m.id === this.account?.csv)
 
-      if(this.activeCsvMask !== undefined && this.transactionService.resolveCsvMask(this.activeCsvMask!)) {
+      if (this.activeCsvMask !== undefined && this.transactionService.resolveCsvMask(this.activeCsvMask!)) {
         this.accountIsReadyElement.nativeElement.classList.remove('is-hidden')
         this.accountNotReadyElement.nativeElement.classList.add('is-hidden')
       } else {

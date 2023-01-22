@@ -4,7 +4,7 @@ $c12: #CCCCCC;
 $c21: #DEF6FB;
 $c3: #a870ab;
 $c4: #413e9f;
-$c41: #b1cefc;
+$c41: #d9e4f8;
 $c5: #041440;
 $c6: #000000;
 
@@ -116,6 +116,9 @@ $c6: #000000;
       }
       .button:hover {
         background-color: $c12;
+      }
+      .tag.addItem:hover {
+        background-color: $c41;
       }
     }
     .modal-card-foot {

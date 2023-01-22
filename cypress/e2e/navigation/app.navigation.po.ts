@@ -8,55 +8,51 @@ export class AppNavigation {
     return cy.get('body');
   }
 
-  getNavigation(){
+  getNavigation() {
     return cy.get('.navbar');
   }
 
-  getNavMenu(){
+  getNavMenu() {
     return cy.get('.navbar-menu');
   }
 
-  getNavHamburger(){
+  getNavHamburger() {
     return cy.get('.navbar-burger').first();
   }
 
-  getNavDashboard(){
+  getNavDashboard() {
     return cy.get('.navbar-item').eq(2)
   }
 
-  getNavDashboardSettings(){
-    return cy.get('.navbar-item').eq(3)
+  getNavConfiguration() {
+    return cy.get('.navbar-item').eq(3);
   }
 
-  getSettingsModal(){
-    return cy.get('.dashboard-filter');
+  getNavHome() {
+    return cy.get('.navbar-item').eq(1);
   }
 
-  getNavConfiguration(){
+  getNavManual() {
     return cy.get('.navbar-item').eq(4);
   }
 
-  getNavManual(){
+  getNavLogout() {
     return cy.get('.navbar-item').eq(5);
   }
 
-  getNavLogout(){
-    return cy.get('.navbar-item').eq(6);
-  }
-
-  getNavThemes(){
+  getNavThemes() {
     return cy.get('.navbar-item').eq(7);
   }
 
-  getNavThemeContent(){
+  getNavThemeContent() {
     return cy.get('[data-cy="theme_content"]');
   }
 
-  getDropdown(){
+  getDropdown() {
     return cy.get('.navbar-dropdown')
   }
 
-  getDarkTheme(){
-    return cy.get('.navbar-item').eq(9);
+  getDarkTheme() {
+    return cy.get('.navbar-item').eq(8);
   }
 }

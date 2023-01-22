@@ -1,5 +1,5 @@
 import { Component, ElementRef, Inject, Input, OnChanges, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
 import { FluxStore } from 'src/app/model/flux-store';
@@ -16,7 +16,7 @@ import * as moment from 'moment';
   styleUrls: ['./transaction-form.component.scss']
 })
 
-export class TransactionFormComponent implements OnInit, OnChanges{
+export class TransactionFormComponent implements OnInit, OnChanges {
   @ViewChild('modaltransaction') modaltransaction!: ElementRef
   @ViewChild('CategoryName') CategoryName!: ElementRef
   @ViewChild('dateinput') dateinput!: ElementRef
@@ -63,15 +63,15 @@ export class TransactionFormComponent implements OnInit, OnChanges{
     })
   }
 
-  UpdateAccount(){
+  UpdateAccount() {
     this.dispatcher.next(new FluxAction(FluxActionTypes.Update,'account', null, null, null, this.account!))
   }
 
-  filterchangedTransaction(){
+  filterchangedTransaction() {
     this.account!.transactions = this.account!.transactions.filter(tran => tran.id !== this.transaction!.id)
   }
 
-  deletetransaction(){
+  deletetransaction() {
     this.getAccountforTransaction()
     this.filterchangedTransaction()
     this.account!.currentValue = Number(this.utilityService.calculateCurrentValue(this.account!))
@@ -79,11 +79,11 @@ export class TransactionFormComponent implements OnInit, OnChanges{
     this.hideModal()
   }
 
-  showCategories(){
+  showCategories() {
     this.showCategoriesFlag = !this.showCategoriesFlag
   }
 
-  setCategory(category : Category, e:Event){
+  setCategory(category : Category, e:Event) {
     this.removeActiveTag()
     this.transactionForm.value.categoryId = category.id
     this.CategoryName.nativeElement.value = category.name;
@@ -91,11 +91,11 @@ export class TransactionFormComponent implements OnInit, OnChanges{
     target.classList.add('selected')
   }
 
-  removeActiveTag(){
+  removeActiveTag() {
     this.selectabletags.forEach(tag => { tag.nativeElement.classList.remove('selected')});
   }
 
-  updateTransaction(){
+  updateTransaction() {
     if(this.transactionForm.valid){
       if(this.transactionForm.value.categoryName === undefined){
         this.transactionForm.value.categoryName = null
@@ -103,11 +103,11 @@ export class TransactionFormComponent implements OnInit, OnChanges{
       this.getAccountforTransaction()
       this.filterchangedTransaction()
       let transaction : Transaction = this.transactionForm.value
-      if(this.transaction!.date !== this.transactionForm.value.date){
+      if (this.transaction!.date !== this.transactionForm.value.date) {
         transaction.date = moment(this.transactionForm.value.date, "YYYY-MM-DD").format('DD.MM.YYYY')
       }
       this.account!.transactions.push(transaction)
-      if(this.transaction?.amount !== this.transactionForm.value.amount){
+      if (this.transaction?.amount !== this.transactionForm.value.amount) {
         this.account!.currentValue = Number(this.utilityService.calculateCurrentValue(this.account!))
       }
       this.UpdateAccount()

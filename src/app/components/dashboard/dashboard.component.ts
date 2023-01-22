@@ -46,7 +46,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       if (data.length === undefined) {
          this.loading_state = 'isloading'
       }
-      if(data.length === 0){
+      if (data.length === 0){
         this.loading_state = 'nodata'
         this.accounts = []
       }
