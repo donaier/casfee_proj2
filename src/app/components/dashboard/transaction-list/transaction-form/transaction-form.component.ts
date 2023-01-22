@@ -96,6 +96,7 @@ export class TransactionFormComponent implements OnInit, OnChanges{
   }
 
   updateTransaction(){
+    console.log("hello")
     if(this.transactionForm.valid){
       if(this.transactionForm.value.categoryName === undefined){
         this.transactionForm.value.categoryName = null

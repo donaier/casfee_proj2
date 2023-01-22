@@ -25,6 +25,7 @@ export class FluxStore {
   constructor(@Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>,
    private firestore: Firestore, private utilityService: UtilityService) {
     this.dispatcher.subscribe(async (action: FluxAction) => {
+      console.log("hello world")
       switch (action.type) {
         case FluxActionTypes.Load:
           this.listener_accounts()
@@ -42,6 +43,7 @@ export class FluxStore {
       querySnapshot.forEach((doc) => {
         let data_copy : Account = Object.assign(doc.data())
         data_copy.id = doc.id
+      //  data_copy.transactions = []
         Accounts_all.push(data_copy)
       })
       this.Accounts.next(Accounts_all)

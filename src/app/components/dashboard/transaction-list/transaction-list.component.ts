@@ -49,7 +49,7 @@ export class TransactionListComponent implements OnInit, OnChanges, OnDestroy {
     }))
   }
 
-  openModal(transaction : Transaction){
+  openModal(transaction : Transaction) {
     this.selectedtransaction = transaction
     this.selectedtransaction.categoryName = this.categoryNameFor(this.selectedtransaction)
     this.DetailTransactionModal.modaltransaction.nativeElement.classList.add('is-active')
@@ -83,7 +83,7 @@ export class TransactionListComponent implements OnInit, OnChanges, OnDestroy {
   ngOnChanges(changes: SimpleChanges) {
     this.allTransactions = []
     this.accounts.forEach(account => {
-      if(account.transactions) {
+      if (account.transactions) {
         this.transactions_flag = true
         let tempTransactions: Transaction[] = [...account.transactions];
         tempTransactions.map(t => {

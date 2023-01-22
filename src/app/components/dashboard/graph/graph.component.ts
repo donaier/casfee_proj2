@@ -32,7 +32,7 @@ export class GraphComponent implements OnChanges, AfterViewInit, OnDestroy {
   inoutmobile: echarts.ECharts | null = null
   categorized: echarts.ECharts | null = null
   activeMonths: Set<string> = new Set
-  transactions_flag: boolean = false
+  transactions_flag: boolean = true
 
   constructor(
     @Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>,
@@ -48,12 +48,12 @@ export class GraphComponent implements OnChanges, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    if (this.transactions_flag) {
+    if (this.transactions_flag) {  }
       this.graph = echarts.init(this.graphElement.nativeElement)
       this.inout = echarts.init(this.inoutElement.nativeElement)
-      this.inoutmobile = echarts.init(this.inoutMobileElement.nativeElement)
+     this.inoutmobile = echarts.init(this.inoutMobileElement.nativeElement)
       this.categorized = echarts.init(this.catElement.nativeElement)
-    }
+
   }
 
   transactionsAvailable() {

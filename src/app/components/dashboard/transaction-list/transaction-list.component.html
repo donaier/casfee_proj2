@@ -1,4 +1,6 @@
-<article class="card mt-5" *ngIf='transactions_flag'>
+<article class="card mt-5" [ngClass]="{
+  'hidden': transactions_flag === false
+  }">
   <header class="card-header">
     <p class="card-header-title is-responsive-24px">
       Transactions
@@ -15,7 +17,6 @@
           <col class="col-category" />
           <col class="col-amount" />
         </colgroup>
-
         <tbody>
           <ng-container *ngFor="let transaction of allTransactions">
             <div class="is-transaction is-mobile" *ngIf="transaction.date.includes(month)" (click)="openModal(transaction)">
