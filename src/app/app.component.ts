@@ -10,5 +10,5 @@ import { UploadService } from 'src/app/shared/services/upload.service';
 export class AppComponent {
   title = 'FinanceApp';
 
-  constructor(public router: Router, public UploadService: UploadService) {}
+  constructor(public router: Router, private UploadService: UploadService) {}
 }

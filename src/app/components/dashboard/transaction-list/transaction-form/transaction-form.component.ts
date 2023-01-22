@@ -128,7 +128,6 @@ export class TransactionFormComponent implements OnInit, OnChanges{
       this.transactionForm.markAllAsTouched()
       this.transactionForm?.patchValue(this.transaction)
       this.dateinput.nativeElement.value = moment(this.transaction!.date, "DD.MM.YYYY").format('YYYY-MM-DD')
-
     }
   }
 }
