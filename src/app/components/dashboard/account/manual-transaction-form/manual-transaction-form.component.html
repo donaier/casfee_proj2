@@ -30,7 +30,7 @@
               </p>
             </div>
             <div *ngIf="(amount.invalid && amount.touched) || amount.dirty">
-              <p *ngIf="amount.invalid" class="validation">Must be a number with maximum length 10 digits</p>
+              <p *ngIf="amount.invalid" class="validation">Is required and must be a number</p>
             </div>
           </div>
           <div class="column">
