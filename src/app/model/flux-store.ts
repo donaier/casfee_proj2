@@ -25,7 +25,6 @@ export class FluxStore {
   constructor(@Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>,
    private firestore: Firestore, private utilityService: UtilityService) {
     this.dispatcher.subscribe(async (action: FluxAction) => {
-      console.log("hello world")
       switch (action.type) {
         case FluxActionTypes.Load:
           this.listener_accounts()

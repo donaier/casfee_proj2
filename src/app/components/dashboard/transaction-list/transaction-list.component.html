@@ -1,6 +1,4 @@
-<article class="card mt-5" [ngClass]="{
-  'hidden': transactions_flag === false
-  }">
+<article class="card mt-5" *ngIf='transactions_flag'>
   <header class="card-header">
     <p class="card-header-title is-responsive-24px">
       Transactions
