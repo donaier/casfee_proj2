@@ -21,7 +21,6 @@ export class GraphComponent implements OnChanges, AfterViewInit, OnDestroy {
   @Input() categoryGroups: CategoryGroup[] = []
   @Input() categories: Category[] = []
 
-  @ViewChild('graph') graphElement!: ElementRef
   @ViewChild('inout') inoutElement!: ElementRef
   @ViewChild('inoutmobile') inoutMobileElement!: ElementRef
   @ViewChild('categorized') catElement!: ElementRef
@@ -68,11 +67,9 @@ export class GraphComponent implements OnChanges, AfterViewInit, OnDestroy {
       this.transactions_flag = false
     }
     this.transactionsAvailable()
-    let graphOptions = this.graphService.composeOptionsTotal(this.accounts, this.selectedTimes)
     let inoutOptions = this.graphService.composeOptionsInOut(this.accounts, this.selectedTimes)
     let inoutMobileOptions = this.graphService.composeOptionsInOut(this.accounts, this.selectedTimes, true)
     let categorizedOptions = this.graphService.composeOptionsCategorized(this.accounts, this.selectedTimes, this.categoryGroups, this.categories)
-    this.graph?.setOption(graphOptions, true)
     this.inout?.setOption(inoutOptions, true)
     this.inoutmobile?.setOption(inoutMobileOptions, true)
     this.categorized?.setOption(categorizedOptions, true)
