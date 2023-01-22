@@ -7,10 +7,12 @@ describe('Basic Tests Dashboard', () => {
     page = new AppDashboard();
     window.localStorage.setItem('Userdata', "test")
     page.navigateTo()
-    cy.fixture('example.json').as('accounts')
+    cy.fixture('AccountWithTransactions.json').as('activeAccounts')
+
   });
 
   it('should render all components', () => {
+    cy.pause()
     page.getAccountComponent().should('be.visible')
     page.getGraphComopnent().should('be.visible')
     page.getSettingsKomponent().should('not.be.visible')

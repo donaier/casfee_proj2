@@ -51,12 +51,8 @@ describe('Basic tests for login', () => {
     page.getInputPassword().type('123456')
     page.getSubmitBtn().should('be.enabled')
     page.getSubmitBtn().click()
+    cy.pause()
     cy.url().should('include', '/dashboard'); // Anmerkung wurde bei mir durch AntiVirus blockiert, erlauben dann funktionnierts
   });
 
-  // Should reject a login with wrong data
-
-  // Should check validity
-
-  // Check Security - URLs should do a redirect , redirect to login if logged out
 });

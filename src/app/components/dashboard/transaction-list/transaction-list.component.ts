@@ -4,7 +4,7 @@ import { Subject, Subscription } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
 import { FluxStore } from 'src/app/model/flux-store';
 import { Account } from 'src/app/shared/types/account';
-import { FluxAction, FluxActionTypes } from 'src/app/shared/types/actions.type';
+import { FluxAction } from 'src/app/shared/types/actions.type';
 import { Category, CategoryGroup } from 'src/app/shared/types/category';
 import { DATE_FORMAT, Transaction } from 'src/app/shared/types/transaction';
 import { TransactionFormComponent } from './transaction-form/transaction-form.component';
@@ -27,6 +27,7 @@ export class TransactionListComponent implements OnInit, OnChanges, OnDestroy {
   allAccounts: Account[] = []
   selectedtransaction: Transaction | undefined
   activeMonths: Set<string> = new Set
+  transactions_flag: boolean = false
 
   constructor(@Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>, public store: FluxStore) {}
 
@@ -79,19 +80,20 @@ export class TransactionListComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-
   ngOnChanges(changes: SimpleChanges) {
     this.allTransactions = []
     this.accounts.forEach(account => {
-      let tempTransactions: Transaction[] = [...account.transactions];
-      tempTransactions.map(t => {
-        t.accountName = account.name
-        t.accountShortName = account.shortName
-        t.date = t.date
-      })
-      this.allTransactions.push(...tempTransactions)
+      if(account.transactions) {
+        this.transactions_flag = true
+        let tempTransactions: Transaction[] = [...account.transactions];
+        tempTransactions.map(t => {
+          t.accountName = account.name
+          t.accountShortName = account.shortName
+          t.date = t.date
+        })
+        this.allTransactions.push(...tempTransactions)
+      }
     })
-
     this.allTransactions = this.allTransactions.filter(t => this.selectedTimes.some((times => t.date.includes(times))))
     this.allTransactions.sort((a,b) => Date.parse(moment(b.date, DATE_FORMAT).toString()) - Date.parse(moment(a.date, DATE_FORMAT).toString()))
     this.activeMonths = new Set(this.allTransactions.map(t => moment(t.date, DATE_FORMAT).format('M.Y')))

@@ -1,4 +1,4 @@
-<article class="card mt-5">
+<article class="card mt-5" *ngIf='transactions_flag'>
   <header class="card-header">
     <p class="card-header-title is-responsive-24px">
       Transactions
@@ -24,20 +24,16 @@
                   <span class="tag">{{transaction.accountShortName}}</span>
                 </td>
                 <td>{{transaction.date}}</td>
-
               </tr>
-
               <tr class="col-category">
                 <td class="has-text-left">
                   {{categoryNameFor(transaction)}}
                   <div class="category-indicator" [ngStyle]="{'background': colorFor(transaction)}"></div>
                 </td>
               </tr>
-
               <tr class="col-description">
                 <td>{{transaction.description}}</td>
               </tr>
-
               <tr class="col-amount">
                 <td class="has-text-right">
                   <span class="{{transaction.amount > 0 ? 'has-text-success' : 'has-text-danger'}}">
@@ -46,7 +42,6 @@
                 </td>
               </tr>
             </div>
-
             <tr class="is-transaction is-widescreen" *ngIf="transaction.date.includes(month)" (click)="openModal(transaction)">
               <td>
                 <span class="tag">{{transaction.accountShortName}}</span>
@@ -63,7 +58,6 @@
                 </span>
               </td>
             </tr>
-
           </ng-container>
         </tbody>
       </table>

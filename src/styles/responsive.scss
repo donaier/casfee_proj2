@@ -1,4 +1,10 @@
 @media (max-width: $mobile-small) {
+  .section {
+    padding: 0 0;
+  }
+  .column {
+    margin: 0.75em;
+  }
   .modal-card-title {
     font-size: 18px;
   }
@@ -10,6 +16,7 @@
     overflow-x: scroll;
     scrollbar-color: black white;
   }
+
 }
 
 @media (max-width: $mobile) {
@@ -19,6 +26,7 @@
   .heading {
     flex-direction: column;
   }
+
 }
 
 @media (max-width: $tablet) {
@@ -36,12 +44,19 @@
     padding-top: 1rem;
     padding-bottom: 1rem;
   }
+  .accounts-margin {
+    margin-top: 3rem;
+  }
+
 }
 
 @media (max-width: $screen) {
   button.button.filter-toggle {
     margin-top: -1rem;
     margin-left: 0;
+  }
+  .accounts-margin {
+    margin-top: 0rem;
   }
 }
 

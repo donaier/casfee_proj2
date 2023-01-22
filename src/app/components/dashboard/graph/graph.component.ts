@@ -32,6 +32,7 @@ export class GraphComponent implements OnChanges, AfterViewInit, OnDestroy {
   inoutmobile: echarts.ECharts | null = null
   categorized: echarts.ECharts | null = null
   activeMonths: Set<string> = new Set
+  transactions_flag: boolean = false
 
   constructor(
     @Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>,
@@ -47,18 +48,28 @@ export class GraphComponent implements OnChanges, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    this.graph = echarts.init(this.graphElement.nativeElement)
-    this.inout = echarts.init(this.inoutElement.nativeElement)
-    this.inoutmobile = echarts.init(this.inoutMobileElement.nativeElement)
-    this.categorized = echarts.init(this.catElement.nativeElement)
+    if (this.transactions_flag) {
+      this.graph = echarts.init(this.graphElement.nativeElement)
+      this.inout = echarts.init(this.inoutElement.nativeElement)
+      this.inoutmobile = echarts.init(this.inoutMobileElement.nativeElement)
+      this.categorized = echarts.init(this.catElement.nativeElement)
+    }
+  }
+
+  transactionsAvailable() {
+    this.accounts.forEach( account => {
+      if (account.transactions.length > 0){
+        this.transactions_flag = true
+      }
+    })
   }
 
   ngOnChanges() {
+    this.transactionsAvailable()
     let graphOptions = this.graphService.composeOptionsTotal(this.accounts, this.selectedTimes)
     let inoutOptions = this.graphService.composeOptionsInOut(this.accounts, this.selectedTimes)
     let inoutMobileOptions = this.graphService.composeOptionsInOut(this.accounts, this.selectedTimes, true)
     let categorizedOptions = this.graphService.composeOptionsCategorized(this.accounts, this.selectedTimes, this.categoryGroups, this.categories)
-
     this.graph?.setOption(graphOptions, true)
     this.inout?.setOption(inoutOptions, true)
     this.inoutmobile?.setOption(inoutMobileOptions, true)

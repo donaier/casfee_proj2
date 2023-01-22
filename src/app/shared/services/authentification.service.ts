@@ -22,12 +22,25 @@ export class AuthentificationService {
   }
 
   get_currentUser(): FirebaseUser | boolean {
-    const currentUser = this.auth.currentUser
-    if(currentUser != null){
-      return currentUser
+    console.log(this.auth.currentUser)
+    if(this.auth.currentUser != null){
+      return true
+    //  return currentUser
     }
     return false
   }
+
+
+
+/*
+  isLoggedin(): FirebaseUser | boolean {
+    console.log(this.auth.currentUser)
+    if(this.auth.currentUser != null){
+      return true
+    //  return currentUser
+    }
+    return false
+  } */
 
   logout() {
     this.StorageService.delete_localStorage()
@@ -38,7 +51,7 @@ export class AuthentificationService {
   logout_firebase() {
     this.auth.signOut()
   }
-
+/* */
   isLoggedin(): boolean {
     if(this.StorageService.getUserdata()) {
       return true

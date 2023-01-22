@@ -7,13 +7,13 @@ export class AuthGuard implements CanActivate {
   constructor(private AuthService: AuthentificationService, private router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) : boolean {
+   // console.log(this.AuthService.get_currentUser())
     if (route.data['role'] === 'login') {
       if (this.AuthService.isLoggedin()) {
         this.router.navigate(['/home'])
-       // this.router.navigate(['/dashboard'])
         return false
       }
-      if (!this.AuthService.isLoggedin()) {
+      else {
         return true
       }
     }
@@ -21,7 +21,7 @@ export class AuthGuard implements CanActivate {
       if (this.AuthService.isLoggedin()) {
         return true
       }
-      if (!this.AuthService.isLoggedin()) {
+      else {
         this.router.navigate(['/login'])
         return false
       }
