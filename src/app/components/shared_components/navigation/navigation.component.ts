@@ -3,7 +3,6 @@ import { AfterViewInit, Component, ElementRef, Inject, NgModule, OnInit, ViewChi
 import { AuthentificationService } from 'src/app/shared/services/authentification.service';
 import { StorageService } from 'src/app/model/storage.service';
 import { Router } from '@angular/router';
-import { UploadService } from 'src/app/shared/services/upload.service'
 
 @Component({
   selector: 'app-navigation',
@@ -25,7 +24,6 @@ export class NavigationComponent implements AfterViewInit {
     @Inject(DOCUMENT) private document: Document,
     private AuthService: AuthentificationService,
     private StorageService: StorageService,
-    public UploadService: UploadService,
     router: Router
   ) {
     this.router = router

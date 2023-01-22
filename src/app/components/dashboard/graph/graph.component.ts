@@ -32,7 +32,7 @@ export class GraphComponent implements OnChanges, AfterViewInit, OnDestroy {
   inoutmobile: echarts.ECharts | null = null
   categorized: echarts.ECharts | null = null
   activeMonths: Set<string> = new Set
-  transactions_flag: boolean = true
+  transactions_flag: boolean = false
 
   constructor(
     @Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>,
