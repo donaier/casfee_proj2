@@ -1,5 +1,9 @@
 <article class="columns mb-3 accounts-margin is-flex-wrap-wrap" *ngIf='accounts'>
-  <div class="column is-one-quarter account" *ngFor="let account of accounts" class="{{activeAccounts.includes(account) ? '' : 'muted'}}">
+  <div class="column account" *ngFor="let account of accounts"
+  [ngClass]="{
+    'is-one-quarter': accounts_flag,
+    'muted': !activeAccounts.includes(account)
+  }">
     <div class="card account-card" [ngStyle]="{'border-bottom-color': account.color}">
       <header class="card-header">
         <p class="card-header-title is-flex is-justify-content-space-between">

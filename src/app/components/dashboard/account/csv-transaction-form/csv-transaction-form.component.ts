@@ -99,15 +99,12 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
 
   computeCsvData(e: Event) {
     let msgEvent = e as MessageEvent;
-    let transactions = msgEvent.data.split(/\r?\n/);
-
+    let transactions = msgEvent.data.split(/\r?\n/)
     this.csvInputControl.nativeElement.classList.add('is-loading')
     this.csvInput.nativeElement.setAttribute('disabled', 'disabled')
-
     this.transactionsToCategorize = this.transactionService.cookTransactions(transactions, this.activeCsvMask!)
     this.activeTransactionIndex = 0
     this.doneCategorizing = false
-
     if (this.transactionsToCategorize.length) {
       this.csvInputControl.nativeElement.classList.add('is-hidden')
       this.categoryColumns.nativeElement.classList.remove('is-hidden')
@@ -171,7 +168,8 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
   setTransaction() {
     if (this.activeTransactionIndex >= this.transactionsToCategorize.length-1) {
       this.doneCategorizing = true
-    } if (this.activeTransactionIndex < this.transactionsToCategorize.length-1) {
+    }
+    if (this.activeTransactionIndex < this.transactionsToCategorize.length-1) {
       this.activeTransactionIndex++
       this.setCategory = false
     }
@@ -211,7 +209,6 @@ export class CsvTransactionFormComponent implements OnInit, OnDestroy, OnChanges
   ngOnChanges(changes: SimpleChanges) {
     if (changes['account'].currentValue) {
       this.activeCsvMask = this.csvMasks.find(m => m.id === this.account?.csv)
-
       if (this.activeCsvMask !== undefined && this.transactionService.resolveCsvMask(this.activeCsvMask!)) {
         this.accountIsReadyElement.nativeElement.classList.remove('is-hidden')
         this.accountNotReadyElement.nativeElement.classList.add('is-hidden')

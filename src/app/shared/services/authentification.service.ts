@@ -22,25 +22,12 @@ export class AuthentificationService {
   }
 
   get_currentUser(): FirebaseUser | boolean {
-    console.log(this.auth.currentUser)
-    if(this.auth.currentUser != null){
-      return true
-    //  return currentUser
+    const currentUser = this.auth.currentUser
+    if(currentUser != null){
+      return currentUser
     }
     return false
   }
-
-
-
-/*
-  isLoggedin(): FirebaseUser | boolean {
-    console.log(this.auth.currentUser)
-    if(this.auth.currentUser != null){
-      return true
-    //  return currentUser
-    }
-    return false
-  } */
 
   logout() {
     this.StorageService.delete_localStorage()
@@ -51,7 +38,7 @@ export class AuthentificationService {
   logout_firebase() {
     this.auth.signOut()
   }
-/* */
+
   isLoggedin(): boolean {
     if(this.StorageService.getUserdata()) {
       return true
@@ -61,4 +48,21 @@ export class AuthentificationService {
     }
     return false
   }
+
+ /*
+Function isLoggedin(), ist nicht sicher (Security) wurde fürs Testing so belassen.
+Bei einem Öffentlichen Release wird die Funktion durch folgende ersetzt, und der
+localStorage wird nicht verwendet.
+
+  isLoggedin(): boolean {
+      if(this.auth.currentUser != null) {
+        return true
+      }
+      if(this.auth.currentUser === null) {
+        return false
+      }
+      return false
+    }
+*/
+
 }

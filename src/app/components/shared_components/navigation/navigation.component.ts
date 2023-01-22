@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, Inject, NgModule, OnInit, ViewChild } from '@angular/core'
+import { AfterViewInit, Component, ElementRef, Inject, ViewChild } from '@angular/core';
 import { AuthentificationService } from 'src/app/shared/services/authentification.service';
 import { StorageService } from 'src/app/model/storage.service';
 import { Router } from '@angular/router';
@@ -44,28 +44,28 @@ export class NavigationComponent implements AfterViewInit {
     this.navMenu.nativeElement.classList.toggle('is-active')
   }
 
-  set_theme(theme : string){
+  set_theme(theme : string) {
     this.StorageService.set_theme_preference(theme)
     this.document.body.classList.remove('light-theme', 'dark-theme', 'color-theme')
-    if(theme === "light-theme"){
+    if (theme === "light-theme") {
       this.theme.nativeElement.innerText = "Light Theme"
       this.document.body.classList.add('light-theme')
     }
-    if(theme === "dark-theme"){
+    if (theme === "dark-theme") {
       this.theme.nativeElement.innerText = "Dark Theme"
       this.document.body.classList.add('dark-theme')
     }
-    if(theme === "color-theme"){
+    if (theme === "color-theme") {
       this.theme.nativeElement.innerText = "Color Theme"
       this.document.body.classList.add('color-theme')
     }
   }
 
-  change_color(){
+  change_color() {
     this.theme.nativeElement.classList.toggle('background')
   }
 
-  logout(){
+  logout() {
     this.AuthService.logout()
   }
 }

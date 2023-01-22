@@ -7,7 +7,6 @@ export class AuthGuard implements CanActivate {
   constructor(private AuthService: AuthentificationService, private router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) : boolean {
-   // console.log(this.AuthService.get_currentUser())
     if (route.data['role'] === 'login') {
       if (this.AuthService.isLoggedin()) {
         this.router.navigate(['/home'])

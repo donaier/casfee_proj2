@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, Input, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { fluxDispatcherToken } from 'src/app/shared/helpers/flux.configuration';
 import { FluxStore } from 'src/app/model/flux-store';
@@ -21,6 +21,7 @@ export class AccountComponent implements OnInit, OnDestroy {
   private subscription: Subscription[] = []
   accounts: Account[] = []
   selectedAccount?: Account
+  accounts_flag: boolean = false
 
   constructor(@Inject(fluxDispatcherToken) private dispatcher: Subject<FluxAction>, public store: FluxStore){}
 
@@ -29,6 +30,12 @@ export class AccountComponent implements OnInit, OnDestroy {
     this.subscription.push(this.store.Accounts.subscribe((data) => {
       if (data.length > 0) {
         this.accounts = data;
+        if (data.length > 3){
+          this.accounts_flag = true
+        }
+        if (data.length <= 3) {
+          this.accounts_flag = false
+        }
       }
     }))
   }

@@ -26,7 +26,6 @@ export class GraphService {
       data: this.setMonthlyTotals(acc, selectedMonths),
       color: acc.color,
     }})
-
     accGraphObjects.push({
       name: 'Total',
       type: 'line',
@@ -35,7 +34,6 @@ export class GraphService {
       data: this.setMonthlyGrandTotal(accGraphObjects),
       color: 'black',
     })
-
     return accGraphObjects
   }
 
@@ -47,7 +45,6 @@ export class GraphService {
       [key: string]: number,
     } = {}
     let flatMonthlyTotals: number[] = []
-
     availableMonths.forEach((month, i) => {
       monthlyTotals[month] = sortedTransactions.reduce(
         (accumulator, currentValue) => accumulator + (currentValue.date.includes(month) ? currentValue.amount : 0),
@@ -55,13 +52,11 @@ export class GraphService {
       )
       runningTotal = monthlyTotals[month]
     });
-
     let lastMonth: number = 0
     selectedMonths.forEach(month => {
       flatMonthlyTotals.push(monthlyTotals[month] || lastMonth)
       lastMonth = flatMonthlyTotals.at(-1) || 0
     })
-
     return flatMonthlyTotals
   }
 
@@ -147,7 +142,6 @@ export class GraphService {
         }
       });
     })
-
     return {
       catNames: catNames,
       catSeries: catSeries
@@ -156,7 +150,6 @@ export class GraphService {
 
   composeOptionsCategorized(accounts: Account[], selectedTimes: string[], categoryGroups: CategoryGroup[], categories: Category[]) {
     let catData: {catNames: (string|undefined)[], catSeries: {value: number, itemStyle: {color: string}}[]} = this.setCategorizedData(accounts, selectedTimes, categoryGroups, categories)
-
     return {
       title: { text: 'Categorized' },
       legend: {
@@ -190,7 +183,6 @@ export class GraphService {
     let accNames: string[] = this.setAccountNames(accounts)
     let timeSteps: string[] = selectedTimes
     let accSeries: object[] = this.setAccountSeries(accounts, selectedTimes)
-
     return {
       legend: {
         data: [...accNames, 'Total'],
@@ -225,7 +217,6 @@ export class GraphService {
   composeOptionsInOut(accounts: Account[], selectedTimes: string[], mobile: boolean = false) {
     let accNames: string[] = this.setAccountNames(accounts, mobile).reverse()
     let accSeries: object[] = this.setAccountInOut(accounts, selectedTimes)
-
     return {
       title: {
         text: 'In/Out',

@@ -1,17 +1,13 @@
-import { Inject, Injectable } from '@angular/core'
-import { BehaviorSubject, Subject } from 'rxjs'
-import { fluxDispatcherToken } from '../shared/helpers/flux.configuration'
-
-// types
-import { Account } from '../shared/types/account'
-import { csvMask } from '../shared/types/csvMask'
-import { Category, CategoryGroup } from '../shared/types/category'
-import { FluxAction, FluxActionTypes } from '../shared/types/actions.type'
-
-// Firestore
-import { Firestore, onSnapshot, query } from '@angular/fire/firestore'
-import { collection } from '@firebase/firestore'
-import { UtilityService } from '../shared/services/utility.service'
+import { Inject, Injectable } from '@angular/core';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { fluxDispatcherToken } from '../shared/helpers/flux.configuration';
+import { Account } from '../shared/types/account';
+import { csvMask } from '../shared/types/csvMask';
+import { Category, CategoryGroup } from '../shared/types/category';
+import { FluxAction, FluxActionTypes } from '../shared/types/actions.type';
+import { Firestore, onSnapshot, query } from '@angular/fire/firestore';
+import { collection } from '@firebase/firestore';
+import { UtilityService } from '../shared/services/utility.service';
 
 @Injectable()
 
@@ -42,7 +38,6 @@ export class FluxStore {
       querySnapshot.forEach((doc) => {
         let data_copy : Account = Object.assign(doc.data())
         data_copy.id = doc.id
-      //  data_copy.transactions = []
         Accounts_all.push(data_copy)
       })
       this.Accounts.next(Accounts_all)
