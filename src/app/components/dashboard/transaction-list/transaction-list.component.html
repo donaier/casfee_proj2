@@ -15,7 +15,6 @@
           <col class="col-category" />
           <col class="col-amount" />
         </colgroup>
-
         <tbody>
           <ng-container *ngFor="let transaction of allTransactions">
             <div class="is-transaction is-mobile" *ngIf="transaction.date.includes(month)" (click)="openModal(transaction)">

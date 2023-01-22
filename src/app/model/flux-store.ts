@@ -42,6 +42,7 @@ export class FluxStore {
       querySnapshot.forEach((doc) => {
         let data_copy : Account = Object.assign(doc.data())
         data_copy.id = doc.id
+      //  data_copy.transactions = []
         Accounts_all.push(data_copy)
       })
       this.Accounts.next(Accounts_all)
